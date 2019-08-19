@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  
+  web:
+    build: .
+    command: npm start
+    volumes:
+      - .:/code
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://postgres@postgres/modos
+    
+  postgres:
+    image: postgres:11.5-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: modos
