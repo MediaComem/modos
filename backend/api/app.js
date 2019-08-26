@@ -4,6 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// /!\ development only, drop all the tables from the database and recreate them
+// to keep the database in sync with the models. you might want to use
+// migrations in a production environment.
+const db = require('./models/index');
+db.sequelize.sync({ force: true });
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
