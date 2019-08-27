@@ -24,7 +24,8 @@ var server = http.createServer(app);
 
 // /!\ not for production, drop all tables and recreate them in order to
 // keep the database in sync with our models.
-models.sequelize.sync({ force: true }).then(() => {
+// models.sequelize.sync({ force: true }).then(() => {
+  models.sequelize.sync().then(() => {
   /**
    * Listen on provided port, on all network interfaces.
    */
