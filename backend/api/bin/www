@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const env = process.env.NODE_ENV || 'development';
+
 /**
  * Module dependencies.
  */
@@ -22,10 +24,9 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-// /!\ not for production, drop all tables and recreate them in order to
-// keep the database in sync with our models.
+// /!\ not for production, drop all tables and recreate them
+// production should use migration !
 models.sequelize.sync({ force: true }).then(() => {
-  // models.sequelize.sync().then(() => {
   /**
    * Listen on provided port, on all network interfaces.
    */

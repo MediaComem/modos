@@ -28,6 +28,23 @@ exports.new_event_should_add_its_owner_as_a_participant = function(done) {
   });
 };
 
+exports.all_events_should_be_searchable = function(done) {
+  supertest(app)
+  .get('/events')
+  .set('Content-Type', 'application/json')
+  .send()
+  .expect(200, done);
+};
+
+exports.event_should_give_its_details = function(done)  {
+  const pk = 1;
+  supertest(app)
+  .get('/events/' + pk)
+  .set('Content-Type', 'application/json')
+  .send()
+  .expect(200, done);
+}
+
 exports.event_should_be_updated_according_to_the_given_fields = function(done) {
   const eventUpdate = { 
     'password': '12345',
@@ -68,5 +85,17 @@ exports.given_pk_should_delete_its_event = function(done) {
         done(err);
       }
     });
+  });
+};
+
+exports.given_user_should_join_given_event = function(done) {
+  const userEventModel = models.sequelize.model('userEvent');
+  const pk = 1;
+
+  supertest(app)
+  .post('/events/' + pk + '/join')
+  .expect(200)
+  .then(res => {
+    userEventModel.findByPk(pk)
   });
 };

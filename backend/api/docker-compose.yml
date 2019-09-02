@@ -12,10 +12,11 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgres://postgres@postgres/modos
+      DATABASE_URL: ${DATABASE_URL}
+      NODE_ENV: ${NODE_ENV}
     
   postgres:
     image: postgres:11.5-alpine
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_DB: modos
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
