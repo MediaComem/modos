@@ -34,4 +34,20 @@ router.get('/:eventId', function(req, res, next) {
   });
 });
 
+router.put('/:eventId', function(req, res, next) {
+  eventModel.update(req.body, { where: { id: req.params.eventId } }).then(function() {
+    res.status(204).send();
+  }).catch(function(err) {
+    next(err);
+  });
+});
+
+router.delete('/:eventId', function(req, res, next) {
+  eventModel.destroy({ where: { id: req.params.eventId } }).then(function() {
+    res.status(204).send();
+  }).catch(function(err) {
+    next(err);
+  });
+});
+
 module.exports = router;
