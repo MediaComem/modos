@@ -32,3 +32,12 @@ exports.all_observations_should_be_searchable = function(done) {
   .send()
   .expect(200, done);
 };
+
+exports.observation_should_give_its_details = function(done) {
+  const pk = 1;
+  supertest(app)
+  .get('/observations/' + pk)
+  .set('Content-Type', 'application/json')
+  .send()
+  .expect(200, done)
+};
