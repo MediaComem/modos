@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const models = require('../models')
+const models = require('../models');
 
 const eventModel = models.sequelize.model('event');
 const userEventModel = models.sequelize.model('userEvent');
@@ -45,6 +45,23 @@ router.put('/:eventId', function(req, res, next) {
 router.delete('/:eventId', function(req, res, next) {
   eventModel.destroy({ where: { id: req.params.eventId } }).then(function() {
     res.status(204).send();
+  }).catch(function(err) {
+    next(err);
+  });
+});
+
+router.get('/:eventId/users', function(req, res, next) {
+  userEventModel.findAll({ where: { eventId: req.params.eventId }}).then(function(users) {
+    res.status(200).json(users);
+  }).catch(function(err) {
+    next(err);
+  });
+});
+
+router.get('/:eventId/observations', function(req, res, next) {
+  const observationModel = models.sequelize.model('observation');
+  observationModel.findAll({ where: { eventId: req.params.eventId }}).then(function(observations) {
+    res.status(200).json(observations);
   }).catch(function(err) {
     next(err);
   });

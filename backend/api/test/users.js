@@ -6,9 +6,9 @@ const models = require('../models');
 exports.new_user_should_be_returned_after_being_created = function(done) {
   const userModel = models.sequelize.model('user');
   const newUser = {
-    'pseudonym': 'testUser',
-    'email': 'test@user.com',
-    'password': 'test-password',
+    pseudonym: 'testUser',
+    email: 'test@user.com',
+    password: 'test-password',
     age: 42,
     gender: null,
     mobility: 1
@@ -46,8 +46,8 @@ exports.user_should_be_returned_according_to_given_id = function(done) {
 
 exports.user_should_be_updated_according_to_the_given_fields = function(done) {
   const userUpdate = {
-    'pseudonym': 'myTestPseudo',
-    'password': '12345'
+    pseudonym: 'myTestPseudo',
+    password: '12345'
   };
   const userModel = models.sequelize.model('user');
   const pk = 1;
@@ -74,6 +74,8 @@ exports.given_pk_should_delete_its_user = function(done) {
 
   supertest(app)
   .delete('/users/' + pk)
+  .set('Content-Type', 'application/json')
+  .send()
   .expect(204)
   .then(res => {
     userModel.findByPk(pk, { rejectOnEmpty: true }).then(function() {
@@ -93,6 +95,8 @@ exports.user_should_have_access_to_the_events_he_takes_part = function(done) {
 
   supertest(app)
   .get('/users/' + pk + '/events')
+  .set('Content-Type', 'application/json')
+  .send()
   .expect(200, done);
 };
 
@@ -101,5 +105,18 @@ exports.user_should_have_access_to_its_observations = function(done) {
 
   supertest(app)
   .get('/users/' + pk + '/observations')
-  
+  .set('Content-Type', 'application/json')
+  .send()
+  .expect(200, done);
+};
+
+exports.given_user_should_join_given_event = function(done) {
+  const pk = 1;
+  const eventId = 3;
+
+  supertest(app)
+  .post('/users/' + pk + '/join/' + eventId)
+  .set('Content-Type', 'application/json')
+  .send({})
+  .expect(201, done);
 };

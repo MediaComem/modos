@@ -7,10 +7,10 @@ const models = require('../models');
 exports.new_event_should_add_its_owner_as_a_participant = function(done) {
   const userEventModel = models.sequelize.model('userEvent');
   const newEvent = {
-    'userId': 1,
-    'beginning': new Date(),
-    'ending': new Date(),
-    'objective': 'testing the creation of a new event'
+    userId: 1,
+    beginning: new Date(),
+    ending: new Date(),
+    objective: 'testing the creation of a new event'
   };
 
   supertest(app)
@@ -47,8 +47,8 @@ exports.event_should_give_its_details = function(done)  {
 
 exports.event_should_be_updated_according_to_the_given_fields = function(done) {
   const eventUpdate = { 
-    'password': '12345',
-    'objective': 'updating an event'
+    password: '12345',
+    objective: 'updating an event'
   };
   const eventModel = models.sequelize.model('event');
   const pk = 1;
@@ -74,6 +74,8 @@ exports.given_pk_should_delete_its_event = function(done) {
 
   supertest(app)
   .delete('/events/' + pk)
+  .set('Content-Type', 'application/json')
+  .send()
   .expect(204)
   .then(res => {
     eventModel.findByPk(pk, { rejectOnEmpty: true }).then(function(event) {
@@ -88,14 +90,20 @@ exports.given_pk_should_delete_its_event = function(done) {
   });
 };
 
-exports.given_user_should_join_given_event = function(done) {
-  const userEventModel = models.sequelize.model('userEvent');
+exports.given_event_should_return_all_its_participants = function(done) {
   const pk = 1;
-
   supertest(app)
-  .post('/events/' + pk + '/join')
-  .expect(200)
-  .then(res => {
-    userEventModel.findByPk(pk)
-  });
+  .get('/events/' + pk + '/users')
+  .set('Content-Type', 'application/json')
+  .send()
+  .expect(200, done)
+};
+
+exports.given_event_should_return_all_its_observations = function(done) {
+  const pk = 1;
+  supertest(app)
+  .get('/events/' + pk + '/observations')
+  .set('Content-Type', 'application/json')
+  .send()
+  .expect(200, done);
 };
