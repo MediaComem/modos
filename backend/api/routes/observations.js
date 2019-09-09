@@ -58,4 +58,4 @@ router.get('/:observationId', getObservationById);
 router.put('/:observationId', updateObservation);
 router.delete('/:observationId', deleteObservation);
 
-module.exports = router; 
+module.exports = router;

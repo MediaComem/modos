@@ -9,7 +9,8 @@ var usersRouter = require('./routes/users');
 var eventsRouter = require('./routes/events');
 var observationRouter = require('./routes/observations');
 
-const models = require('./models')
+
+const errors = require('./errors/errors');
 
 var app = express();
 
@@ -17,43 +18,24 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// middleware
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// router
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
 app.use('/observations', observationRouter);
 
-// catch Sequelize related errors
-app.use(function(err, req, res, next) {
-  if (err instanceof models.Sequelize.DatabaseError) {
-    next(createError(400));
-  } else if (err instanceof models.Sequelize.EmptyResultError) {
-    next(createError(404));
-  } else if (err instanceof models.Sequelize.ValidationError) {
-    next(createError(422));
-  } 
-  next()
-});
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+// errors
+app.use(errors.databaseError);
+app.use(errors.emptyResultError);
+app.use(errors.validationError);
+app.use(errors.notFound);
+app.use(errors.internalServerError);
 
 module.exports = app;
