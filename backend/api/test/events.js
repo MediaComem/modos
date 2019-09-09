@@ -33,7 +33,13 @@ exports.all_events_should_be_searchable = function(done) {
   .get('/events')
   .set('Content-Type', 'application/json')
   .send()
-  .expect(200, done);
+  .expect(200)
+  .then(res => {
+    assert(res.body.length !== 0);
+    done()
+  }).catch(function(err) {
+    done(err);
+  });
 };
 
 exports.event_should_give_its_details = function(done)  {
@@ -42,7 +48,11 @@ exports.event_should_give_its_details = function(done)  {
   .get('/events/' + pk)
   .set('Content-Type', 'application/json')
   .send()
-  .expect(200, done);
+  .expect(200)
+  .then(res => {
+    assert(res.body.id, pk); 
+    done();
+  });
 }
 
 exports.event_should_be_updated_according_to_the_given_fields = function(done) {
@@ -96,7 +106,13 @@ exports.given_event_should_return_all_its_participants = function(done) {
   .get('/events/' + pk + '/users')
   .set('Content-Type', 'application/json')
   .send()
-  .expect(200, done)
+  .expect(200)
+  .then(res => {
+    assert(res.body.length !== 0);
+    done();
+  }).catch(function(err) {
+    done(err);
+  });
 };
 
 exports.given_event_should_return_all_its_observations = function(done) {
@@ -105,5 +121,11 @@ exports.given_event_should_return_all_its_observations = function(done) {
   .get('/events/' + pk + '/observations')
   .set('Content-Type', 'application/json')
   .send()
-  .expect(200, done);
+  .expect(200)
+  .then(res => {
+    assert(res.body.length !== 0);
+    done();
+  }).catch(function(err) {
+    done(err);
+  });
 };

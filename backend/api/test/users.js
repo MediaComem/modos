@@ -30,9 +30,7 @@ exports.new_user_should_be_returned_after_being_created = function(done) {
 };
 
 exports.user_should_be_returned_according_to_given_id = function(done) {
-  const userModel = models.sequelize.model('user');
   const pk = 1;
-
   supertest(app)
   .get('/users/' + pk)
   .set('Content-Type', 'application/json')
@@ -41,7 +39,7 @@ exports.user_should_be_returned_according_to_given_id = function(done) {
   .then(res => {
     assert(res.body.id, pk); 
     done();
-  })
+  });
 };
 
 exports.user_should_be_updated_according_to_the_given_fields = function(done) {
@@ -91,26 +89,39 @@ exports.given_pk_should_delete_its_user = function(done) {
 };
 
 exports.user_should_have_access_to_the_events_he_takes_part = function(done) {
+  const eventModel = models.sequelize.model('event');
   const pk = 1;
 
   supertest(app)
   .get('/users/' + pk + '/events')
   .set('Content-Type', 'application/json')
   .send()
-  .expect(200, done);
+  .expect(200)
+  .then(res => {
+    assert(res.body.length !== 0);
+    done();
+  }).catch(function(err) {
+    done(err);
+  });
 };
 
 exports.user_should_have_access_to_its_observations = function(done) {
   const pk = 1;
-
   supertest(app)
   .get('/users/' + pk + '/observations')
   .set('Content-Type', 'application/json')
   .send()
-  .expect(200, done);
+  .expect(200)
+  .then(res => {
+    assert(res.body.length !== 0);
+    done();
+  }).catch(function(err) {
+    done(err);
+  });
 };
 
 exports.given_user_should_join_given_event = function(done) {
+  const userEventModel = models.sequelize.model('userEvent');
   const pk = 1;
   const eventId = 3;
 
@@ -118,5 +129,14 @@ exports.given_user_should_join_given_event = function(done) {
   .post('/users/' + pk + '/join/' + eventId)
   .set('Content-Type', 'application/json')
   .send({})
-  .expect(201, done);
+  .expect(201)
+  .then(res => {
+    userEventModel.findOne(
+      { where: { userId: pk, eventId: eventId }, rejectOnEmpty: true }).then(function(userEvent){
+        assert(userEvent.eventId, eventId);
+        done();
+    });
+  }).catch(function(err) {
+    done(err);
+  })
 };

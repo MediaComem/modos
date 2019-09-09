@@ -29,7 +29,13 @@ exports.all_observations_should_be_searchable = function(done) {
   .get('/observations')
   .set('Content-Type', 'application/json')
   .send()
-  .expect(200, done);
+  .expect(200)
+  .then(res => {
+    assert(res.body.length !== 0);
+    done()
+  }).catch(function(err) {
+    done(err);
+  });
 };
 
 exports.observation_should_give_its_details = function(done) {
@@ -38,10 +44,15 @@ exports.observation_should_give_its_details = function(done) {
   .get('/observations/' + pk)
   .set('Content-Type', 'application/json')
   .send()
-  .expect(200, done);
+  .expect(200)
+  .then(res => {
+    assert(res.body.id, pk); 
+    done();
+  });
 };
 
 exports.observation_should_be_updated_according_to_given_fields = function(done) {
+  const observationModel = models.sequelize.model('observation');
   const observationUpdate = {
     eventId: 1
   };
@@ -51,7 +62,15 @@ exports.observation_should_be_updated_according_to_given_fields = function(done)
   .put('/observations/' + pk)
   .set('Content-Type', 'application/json')
   .send(observationUpdate)
-  .expect(204, done);
+  .expect(204)
+  .then(res => {
+    observationModel.findByPk(pk).then(function(observation) {
+      assert(observation.eventId, observationUpdate.eventId);
+      done();
+    }).catch(function(err) {
+      done(err);
+    });
+  })
 };
 
 exports.given_pk_should_delete_its_observation = function(done) {
