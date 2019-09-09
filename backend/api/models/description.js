@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  
+
   const Description = sequelize.define('description', {
-    
+
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     },
 
     obstacle: {
-        type: DataTypes.ENUM,
-        values: [ 'sidewalk', 'crosswalk', 'pavement', 'slope', 'accessibility', 'other' ],
-        allowNull: false
+      type: DataTypes.ENUM,
+      values: ['sidewalk', 'crosswalk', 'pavement', 'slope', 'accessibility', 'other'],
+      allowNull: false
     },
 
     freeText: DataTypes.STRING,
@@ -22,12 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     }
-    
+
   }, {});
-  
-  Description.associate = function(models) {
-      Description.belongsTo(models.observation);
+
+  Description.associate = function (models) {
+    Description.belongsTo(models.observation);
   };
-  
+
   return Description;
 };

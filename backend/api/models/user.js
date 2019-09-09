@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  
+
   const User = sequelize.define('user', {
-    
+
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
 
     helper: {
       type: DataTypes.ENUM,
-      values: [ 'white cane', 'walker', 'wheelchair' ],
+      values: ['white cane', 'walker', 'wheelchair'],
       defaultValue: null
     },
 
@@ -60,11 +60,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     sequelize
   });
-  
-  User.associate = function(models) {
+
+  User.associate = function (models) {
     User.belongsToMany(models.event, { through: 'userEvent' });
     User.hasMany(models.observation);
   };
-  
+
   return User;
 };

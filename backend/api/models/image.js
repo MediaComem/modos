@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  
+
   const Image = sequelize.define('image', {
-    
+
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -44,12 +44,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     }
-    
+
   }, {});
-  
-  Image.associate = function(models) {
-      Image.belongsTo(models.observation);
+
+  Image.associate = function (models) {
+    Image.belongsTo(models.observation);
   };
-  
+
   return Image;
 };
