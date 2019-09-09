@@ -1,6 +1,7 @@
 # MoDoS - Early app - Backend
 
-This is the root of the MoDoS's early app backend.
+The MoDoS's early app backend is mainly a REST API which is intended to be used
+by various front-end (mobile, web, etc...).
 
 ## Getting started
 
@@ -27,9 +28,6 @@ Note that, each time you restart the containers, every table is dropped and
 recreated. Therefore this command should be rerun if you still want some records.
 
 ## Running the tests
-
-The test are using some of the records of the seeders, so don't forget to run
-the previous command before trying to launch them.
 
 ```bash
 $ docker-compose run web npm test
