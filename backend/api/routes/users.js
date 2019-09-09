@@ -25,7 +25,7 @@ router.get('/:userId', function(req, res, next) {
 
 router.put('/:userId', function(req, res, next) {
   const userModel = models.sequelize.model('user');
-  userModel.update(req.body, { where: { id: req.params.userId } }).then(function() {
+  userModel.update(req.body, { where: { id: req.params.userId }}).then(function() {
     res.status(204).send();
   }).catch(function(err) {
     next(err);

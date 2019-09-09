@@ -29,6 +29,9 @@ recreated. Therefore this command should be rerun if you still want some records
 
 ## Running the tests
 
+There is nothing to worry about the database since the tests are run with a
+test database, which is populated and cleaned on the fly when the tests start/stop.
+
 ```bash
 $ docker-compose run web npm test
 ```

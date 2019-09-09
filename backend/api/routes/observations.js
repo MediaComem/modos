@@ -21,4 +21,31 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/:observationId', function(req, res, next) {
+  const observationModel = models.sequelize.model('observation');
+  observationModel.findByPk(req.params.observationId, { rejectOnEmpty: true }).then(function(observation) {
+    res.status(200).json(observation);
+  }).catch(function(err) {
+    next(err);
+  });
+});
+
+router.put('/:observationId', function(req, res, next) {
+  const observationModel = models.sequelize.model('observation');
+  observationModel.update(req.body, { where: { id: req.params.observationId }}).then(function() {
+    res.status(204).send();
+  }).catch(function(err) {
+    next(err);
+  });
+});
+
+router.delete('/:observationId', function(req, res, next) {
+  const observationModel = models.sequelize.model('observation');
+  observationModel.destroy({ where: { id: req.params.observationId } }).then(function() {
+    res.status(204).send();
+  }).catch(function(err) {
+    next(err);
+  });
+});
+ 
 module.exports = router; 
