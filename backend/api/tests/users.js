@@ -8,10 +8,7 @@ exports.new_user_should_be_returned_after_being_created = function (done) {
   const newUser = {
     pseudonym: 'testUser',
     email: 'test@user.com',
-    password: 'test-password',
-    age: 42,
-    gender: null,
-    mobility: 1
+    password: 'test-password'
   };
   supertest(app)
     .post('/users')
