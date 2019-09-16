@@ -31,24 +31,8 @@ const createEvent = async (req, res, next) => {
             return error.createError(res, 404, 'Owner does not exist');
         }
 
-        if (newEvent.beginning === undefined) {
-            return error.createError(res, 422, 'Beginning date is required');
-        }
-
-        if (newEvent.ending === undefined) {
-            return error.createError(res, 422, 'Ending date is required');
-        }
-
-        if (newEvent.objective === undefined || newEvent.objective === '') {
-            return error.createError(res, 422, 'Objective is required');
-        }
-
-        if (newEvent.numberOfImages === undefined || newEvent.numberOfImages <= 0) {
-            return error.createError(res, 422, 'Number of images must be > 0');
-        }
-
         Event.create(newEvent, (err, newEvent) => {
-            if (err) return error.internalServerError(res, err);
+            if (err) return error.mongooseValidationErrorHandler(err, res);
             return res.status(201)
                 .location(`api/v1/events/${newEvent._id}`)
                 .json(newEvent);
@@ -60,7 +44,7 @@ const updateEvent = async (req, res, next) => {
     const eventId = req.params.id;
     const updatedEvent = req.body;
 
-    
+
 
     Event.findByIdAndUpdate(eventId, updatedEvent, {
         new: true

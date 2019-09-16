@@ -7,6 +7,9 @@ const mongooseValidationErrorHandler = (err, res) => {
             });
             return createError(res, 422, message);
         }
+        // unique constraint violation 
+        // (which is not considered as a validation error by mongo)
+        if (err.code === 11000) return createError(res, 409, err.errmsg);
         return internalServerError(res, err);
     }
 }

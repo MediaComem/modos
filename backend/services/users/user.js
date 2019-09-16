@@ -27,31 +27,12 @@ const getUserById = async (req, res, next) => {
 const createUser = async (req, res, next) => {
     const newUser = req.body;
 
-    if (newUser.pseudonym === undefined || newUser.pseudonym === '') {
-        return error.createError(res, 422, 'Pseudonym is required');
-    }
-
-    if (newUser.email === undefined || newUser.email === '') {
-        return error.createError(res, 422, 'Email is required');
-    }
-
-    if (newUser.password === undefined || newUser.password === '') {
-        return error.createError(res, 422, 'Password is required');
-    }
-
-    User.findOne({ 'email': newUser.email }, (err, isEmailExists) => {
-        if (err) return error.internalServerError(res, err);
-        if (isEmailExists) {
-            return error.createError(res, 409, 'Email already exists');
-        }
-
-        User.create(newUser, (err, newUser) => {
-            if (err) return error.internalServerError(res, err);
-            return res.status(201)
-                .location(`api/v1/users/${newUser._id}`)
-                .json(newUser);
-        });
-    });
+    User.create(newUser, (err, newUser) => {
+        if (err) return error.mongooseValidationErrorHandler(err, res);
+        return res.status(201)
+            .location(`api/v1/users/${newUser._id}`)
+            .json(newUser);
+    })
 };
 
 const updateUser = async (req, res, next) => {

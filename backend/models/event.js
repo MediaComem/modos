@@ -18,17 +18,22 @@ var Event = new Schema({
     },
     beginning: {
         type: Date,
-        min: new Date()
+        min: new Date(),
+        required: [ true, 'beginning date is required' ]
     },
     ending: {
         type: Date,
-        min: new Date()
+        min: new Date(),
+        required: [ true, 'ending date is required' ]
     },
     objective: {
-        type: String
+        type: String,
+        required: [ true, 'objective is required' ]
     },
     numberOfImages: {
-        type: Number
+        type: Number,
+        min: [ 1, 'at least one image is required' ],
+        required: [ true, 'number of images is required' ]
     },
     observations: {
         type: [ObjectId],

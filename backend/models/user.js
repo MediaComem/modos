@@ -19,7 +19,8 @@ var Profile = new Schema({
         type: Number
     },
     mobility: {
-        type: Number
+        type: Number,
+        required: [ true, 'mobility is required' ]
     }
 });
 
