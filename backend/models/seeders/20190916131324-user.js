@@ -1,20 +1,21 @@
 const User = require('../user');
+const Event = require('../event');
 
 const up = () => {
     User.countDocuments({}, (err, usersCount) => {
         if (usersCount === 0) {
             User.create({
-                pseudonym: 'kjvui',
-                email: 'kjuvi@dlc.com',
+                _id: '5d7f91c5bc704d0283ad7a87',
+                pseudonym: 'john',
+                email: 'john@doe.com',
                 password: 'secretkey',
-                events: [],
             });
         }
     });
 };
 
 const down = () => {
-    User.deleteMany({}, (err) => {
+    User.remove({}, (err) => {
         console.log('All users have been removed from the database successfully');
     });
 };

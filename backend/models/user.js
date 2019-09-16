@@ -24,9 +24,13 @@ var Profile = new Schema({
 });
 
 var User = new Schema({
+    _id: {
+        type: ObjectId,
+        auto: true
+    },
     pseudonym: {
         type: String,
-        required: [ true, 'name is required' ],
+        required: [ true, 'pseudonym is required' ],
         lowercase: true
     },
     email: {

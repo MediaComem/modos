@@ -1,13 +1,12 @@
 const User = require('../../models/user');
 const Event = require('../../models/event');
 const Observation = require('../../models/observation');
-const helper = require('./helper');
 const error = require('../error');
 
 
 const getUsers = async (req, res, next) => {
     User.find({}, (err, users) => {
-        if (err) return error.internalServerError(res);
+        if (err) return error.internalServerError(res, err);
         if (users.length > 0) {
             return res.status(200).json(users);
         }
@@ -17,7 +16,7 @@ const getUsers = async (req, res, next) => {
 
 const getUserById = async (req, res, next) => {
     User.findById(req.params.id, (err, user) => {
-        if (err) return error.internalServerError(res);
+        if (err) return error.internalServerError(res, err);
         if (user) {
             return res.status(200).json(user);
         }
@@ -41,14 +40,16 @@ const createUser = async (req, res, next) => {
     }
 
     User.findOne({ 'email': newUser.email }, (err, isEmailExists) => {
-        if (err) return error.internalServerError(res);
+        if (err) return error.internalServerError(res, err);
         if (isEmailExists) {
             return error.createError(res, 409, 'Email already exists');
         }
 
         User.create(newUser, (err, newUser) => {
-            if (err) return error.internalServerError(res);
-            return res.status(201).json(newUser);
+            if (err) return error.internalServerError(res, err);
+            return res.status(201)
+                .location(`api/v1/users/${newUser._id}`)
+                .json(newUser);
         });
     });
 };
@@ -57,28 +58,13 @@ const updateUser = async (req, res, next) => {
     const userId = req.params.id;
     const updatedUser = req.body;
 
-    User.findById(userId, (err, user) => {
-        if (err) return error.internalServerError(res);
-        if (!user) {
-            return error.createError(res, 404, 'User does not exist');
-        }
-
-        User.findOne({ 'email': updatedUser.email }, (err, isEmailExists) => {
-            if (err) return error.internalServerError(res);
-            if (isEmailExists && isEmailExists._id.toString() !== userId) {
-                return error.createError(res, 409, 'Email already exists');
-            }
-
-            User.findByIdAndUpdate(userId, updatedUser, {
-                new: true,
-                omitUndefined: true
-            }, (err, updateUser) => {
-                if (err) return error.internalServerError(res);
-                return res.status(200).json(updateUser);
-            });
-        });
+    User.findByIdAndUpdate(userId, updatedUser, {
+        new: true,
+        runValidators: true
+    }, (err, updateUser) => {
+        error.mongooseValidationErrorHandler(err, res);
+        return res.status(200).json(updateUser);
     });
-    // }
 };
 
 
@@ -124,7 +110,7 @@ const joinEvent = async (req, res, next) => {
         Event.findById(req.params.eventId, (err, event) => {
             if (err) return error.internalServerError(res);
             if (event) {
-                user.events.append(event._id);
+                user.events.push(event._id);
                 user.save();
 
                 return res.status(201).json(user.events);

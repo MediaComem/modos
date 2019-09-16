@@ -32,11 +32,13 @@ module.exports = function () {
             {
                 useNewUrlParser: true,
                 useCreateIndex: true,
-                useFindAndModify: false
+                useFindAndModify: false,
+                useUnifiedTopology: true
             }
         );
 
-        seeders.seedAll();
+        seeders.undoAll(); // wipe out the database
+        seeders.seedAll(); // populate the database with fake records
 
         // set up routes
         routes.init(server);
