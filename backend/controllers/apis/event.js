@@ -12,4 +12,8 @@ router.put('/:id', eventService.updateEvent);
 
 router.delete('/:id', eventService.deleteEvent);
 
+router.get('/:id/users', eventService.getParticipants);
+
+router.get('/:id/observations', eventService.getObservations);
+
 module.exports = router;

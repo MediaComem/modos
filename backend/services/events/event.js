@@ -62,10 +62,32 @@ const deleteEvent = async (req, res, next) => {
     }
 };
 
+const getParticipants = async (req, res, next) => {
+    try {
+        const participants = await User.find({ events: req.params.id });
+        if (participants.length > 0) return res.status(200).json(participants);
+        return error.createError(res, 404, 'No participants to this event');
+    } catch (err) {
+        return error.handleError(err, res);
+    }
+};
+
+const getObservations = async (req, res, next) => {
+    try {
+        const observations = await Event.findById(req.params.id, 'observations');
+        if (observations.length > 0) return res.status(200).json(observations);
+        return error.createError(res, 404, 'This event has no observations');
+    } catch (err) {
+        return error.handleError(err, res);
+    }
+};
+
 module.exports = {
     getEvents: getEvents,
     getEventById: getEventById,
     createEvent: createEvent,
     updateEvent: updateEvent,
-    deleteEvent: deleteEvent
+    deleteEvent: deleteEvent,
+    getParticipants: getParticipants,
+    getObservations: getObservations
 }
