@@ -32,6 +32,7 @@ var User = new Schema({
     pseudonym: {
         type: String,
         required: [ true, 'pseudonym is required' ],
+        unique: true,
         lowercase: true
     },
     email: {

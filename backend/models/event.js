@@ -19,21 +19,21 @@ var Event = new Schema({
     beginning: {
         type: Date,
         min: new Date(),
-        required: [ true, 'beginning date is required' ]
+        required: [true, 'beginning date is required']
     },
     ending: {
         type: Date,
         min: new Date(),
-        required: [ true, 'ending date is required' ]
+        required: [true, 'ending date is required']
     },
     objective: {
         type: String,
-        required: [ true, 'objective is required' ]
+        required: [true, 'objective is required']
     },
     numberOfImages: {
         type: Number,
-        min: [ 1, 'at least one image is required' ],
-        required: [ true, 'number of images is required' ]
+        min: [1, 'at least one image is required'],
+        required: [true, 'number of images is required']
     },
     observations: {
         type: [ObjectId],
@@ -47,6 +47,12 @@ Event.post('save', function (event) {
         user.events.push(event._id);
         user.save();
     });
+});
+
+Event.post('findOneAndRemove', function (event) {
+    User.updateMany(
+        { events: event._id }, { $pullAll: { events: [ event._id ] }}
+    ).exec();
 });
 
 module.exports = mongoose.model('Event', Event);

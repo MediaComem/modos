@@ -5,101 +5,101 @@ const error = require('../error');
 
 
 const getUsers = async (req, res, next) => {
-    User.find({}, (err, users) => {
-        if (err) return error.internalServerError(res, err);
-        if (users.length > 0) {
-            return res.status(200).json(users);
-        }
+    try {
+        const users = await User.find({});
+        if (users.length > 0) return res.status(200).json(users);
         return error.createError(res, 404, 'No users found in the system');
-    });
+    } catch (err) {
+        return error.handleError(err, res);
+    }
 };
 
 const getUserById = async (req, res, next) => {
-    User.findById(req.params.id, (err, user) => {
-        if (err) return error.internalServerError(res, err);
-        if (user) {
-            return res.status(200).json(user);
-        }
+    try {
+        const user = await User.findById(req.params.id);
+        if (user) return res.status(200).json(user);
         return error.createError(res, 404, 'User does not exist');
-    });
+    } catch (err) {
+        return error.handleError(err, res);
+    }
 };
 
 const createUser = async (req, res, next) => {
-    const newUser = req.body;
-
-    User.create(newUser, (err, newUser) => {
-        if (err) return error.mongooseValidationErrorHandler(err, res);
+    try {
+        const newUser = await User.create(req.body);
         return res.status(201)
             .location(`api/v1/users/${newUser._id}`)
             .json(newUser);
-    })
+    } catch (err) {
+        return error.handleError(err, res);
+    }
 };
 
 const updateUser = async (req, res, next) => {
-    const userId = req.params.id;
-    const updatedUser = req.body;
-
-    User.findByIdAndUpdate(userId, updatedUser, {
-        new: true,
-        runValidators: true
-    }, (err, updateUser) => {
-        error.mongooseValidationErrorHandler(err, res);
-        return res.status(200).json(updateUser);
-    });
+    try {
+        const userId = req.params.id;
+        const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
+            new: true,
+            runValidators: true
+        });
+        return res.status(200).json(updatedUser);
+    } catch (err) {
+        error.handleError(err, res);
+    }
 };
 
 
 const deleteUser = async (req, res, next) => {
-    User.findByIdAndRemove(req.params.id, (err, user) => {
-        if (err) return error.internalServerError(res);
-        if (user) {
-            return res.status(204).json({
-                'code': 204,
-                'message': `user with id ${req.params.id} deleted successfully`,
-            });
-        }
+    try {
+        const user = await User.findByIdAndRemove(req.params.id);
+        if (user) return res.status(204).json({
+            'code': 204,
+            'message': `user with id ${req.params.id} deleted successfully`
+        });
         return error.createError(res, 404, 'User does not exist');
-    });
+    } catch (err) {
+        return error.handleError(err, res);
+    }
 };
 
 const getUserEvents = async (req, res, next) => {
-    User.findById(req.params.id, (err, user) => {
-        if (err) return error.internalServerError(res);
-        if (user) {
-            return res.status(200).json(user.events);
-        }
+    try {
+        const userEvents = await User.findById(req.params.id, 'events');
+        if (user) return res.status(200).json(userEvents);
         return error.createError(res, 404, 'User does not exist');
-    });
+    } catch (err) {
+        return error.handleError(err, res);
+    }
 };
 
 const getUserObservations = async (req, res, next) => {
-    Observation.find({ owner: req.params.id }, (err, observations) => {
-        if (err) return error.internalServerError(res);
-        if (observations) {
-            return res.status(200).json(observations);
-        }
+    try {
+        const observations = await Observation.find({ owner: req.params.id });
+        if (observations) return res.status(200).json(observations);
         return error.createError(res, 404, 'User does not exist');
-    });
-}
+    } catch (err) {
+        return error.handleError(err, res);
+    }
+};
 
 const joinEvent = async (req, res, next) => {
-    User.findById(req.params.id, (err, user) => {
-        if (err) return error.internalServerError(res);
-        if (!user) {
-            return error.createError(res, 404, 'User does not exist');
-        }
-        Event.findById(req.params.eventId, (err, event) => {
-            if (err) return error.internalServerError(res);
-            if (event) {
-                user.events.push(event._id);
-                user.save();
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) return createError(res, 404, 'User does not exist');
 
-                return res.status(201).json(user.events);
-            }
-            return error.createError(res, 404, 'Event does not exist');
-        });
-    });
-}
+        const event = await Event.findById(req.params.eventId);
+        if (!event) return createError(res, 404, 'Event does not exist');
+        if (user.events.includes(event._id)) {
+            return error.createError(res, 422, 'User already joined the event');
+        }
+
+        user.events.push(event._id);
+        const updatedUser = await user.save();
+        return res.status(201).json(updatedUser);
+    } catch (err) {
+        return error.handleError(err, res);
+    }
+};
 
 module.exports = {
     getUsers: getUsers,
