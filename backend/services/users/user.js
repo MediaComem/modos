@@ -42,7 +42,8 @@ const updateUser = async (req, res, next) => {
             new: true,
             runValidators: true
         });
-        return res.status(200).json(updatedUser);
+        if (updatedUser) return res.status(200).json(updatedUser);
+        return error.createError(res, 404, 'User does not exist');
     } catch (err) {
         error.handleError(err, res);
     }

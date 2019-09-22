@@ -1,5 +1,4 @@
 const User = require('../user');
-const Event = require('../event');
 
 const up = () => {
     User.countDocuments({}, (err, usersCount) => {
