@@ -17,7 +17,7 @@ const up = () => {
                         "imagePath": "/dataset/event404",
                         "width": 1280,
                         "height": 720,
-                        "boundingBox": [20, 10, 400, 500]
+                        "boundingBox": {x: 20, y: 10, width: 400, height: 500}
                     }
                 ]
             });

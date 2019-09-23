@@ -66,7 +66,7 @@ const deleteUser = async (req, res, next) => {
 const getUserEvents = async (req, res, next) => {
     try {
         const userEvents = await User.findById(req.params.id, 'events');
-        if (user) return res.status(200).json(userEvents);
+        if (userEvents) return res.status(200).json(userEvents);
         return error.createError(res, 404, 'User does not exist');
     } catch (err) {
         return error.handleError(err, res);

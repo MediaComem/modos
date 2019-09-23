@@ -17,6 +17,27 @@ var Description = new Schema({
     }
 });
 
+var BoundingBox = new Schema({
+    x: {
+        type: Number,
+        required: [true, 'bounding box\'s x coordinate is required']
+    },
+    y: {
+        type: Number,
+        required: [true, 'bounding box\'s y coordinate is required']
+    },
+    width: {
+        type: Number,
+        required: [true, 'bounding box\'s width is required'],
+        min: [1, 'bounding box\'s width cannot be null']
+    },
+    height: {
+        type: Number,
+        required: [true, 'bounding box\'s height is required'],
+        min: [1, 'bounding box\'s height cannot be null']
+    }
+})
+
 var Image = new Schema({
     imagePath: {
         type: String,
@@ -30,10 +51,7 @@ var Image = new Schema({
         type: Number,
         required: [true, 'height is required']
     },
-    boundingBox: {
-        type: [Number],
-        required: [true, 'bounding box is required']
-    }
+    boundingBox: BoundingBox
 });
 
 // TODO

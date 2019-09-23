@@ -1,0 +1,931 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "The MoDoS API endpoints enable external applications to communicate with the MoDoS resources. It uses resource-oriented URLs and leverages various HTTP features, like authentication, verbs or response codes. All request and response bodies are JSON encoded, including error responses.",
+    "version": "1.0.0",
+    "title": "MoDoS REST API",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "quentin.vaucher@he-arc.ch"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "users",
+      "description": "Manage your profile, user accout and information about your actions"
+    },
+    {
+      "name": "events",
+      "description": "Manage the events"
+    },
+    {
+      "name": "observation",
+      "description": "Manage the observations",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create a new user",
+        "description": "Create the required credentials to connect to the application. Note that the users\\'s profile is not configured during the user\\'s creation.",
+        "operationId": "createUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New user that needs to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserReq"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/UserRes"
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "schema": {
+              "$ref": "#/definitions/Status422"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get all the users",
+        "operationId": "getUsers",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserRes"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get a single user",
+        "operationId": "getUserById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "Id of the user to get",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/UserRes"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/Status404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update the credential of a user",
+        "operationId": "updateUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "Id of the user to modify",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User that needs to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/UserRes"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/Status404"
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "schema": {
+              "$ref": "#/definitions/Status422"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Delete a single user",
+        "operationId": "deleteUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "Id of the user to delete",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "$ref": "#/definitions/Status204"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/Status404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}/events": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get all the events a user is taking part",
+        "operationId": "getUserEvents",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "Id of the user from whom to get the events",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "integer",
+                  "example": 0
+                },
+                "events": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "example": [
+                    0,
+                    1
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/Status404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}/observations": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get all the observations a user has made",
+        "operationId": "getUserObservations",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "Id of the user from whom to get the observations",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Observation"
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/Status404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}/join/{eventId}": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Join an event",
+        "operationId": "joinEvent",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "Id of the user which is joinning the event",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "eventId",
+            "type": "integer",
+            "description": "Id of the event the user is joinning",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/UserRes"
+            }
+          },
+          "404": {
+            "description": "User or Event not found",
+            "schema": {
+              "$ref": "#/definitions/Status404"
+            }
+          },
+          "422": {
+            "description": "Validaition error",
+            "schema": {
+              "$ref": "#/definitions/Status422"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      }
+    },
+    "/events": {
+      "post": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Create a new event",
+        "operationId": "createEvent",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New event that needs to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventReq"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/UserRes"
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "schema": {
+              "$ref": "#/definitions/Status422"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get all the events",
+        "operationId": "getEvents",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EventRes"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      }
+    },
+    "/event/{id}": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get a single event",
+        "operationId": "getEventById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "Id of the evnet to get",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/EventRes"
+            }
+          },
+          "404": {
+            "description": "Event not found",
+            "schema": {
+              "$ref": "#/definitions/Status404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Update the informations of an event",
+        "operationId": "updateEvent",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "Id of the event to modify",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Event that needs to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/EventRes"
+            }
+          },
+          "404": {
+            "description": "Event not found",
+            "schema": {
+              "$ref": "#/definitions/Status404"
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "schema": {
+              "$ref": "#/definitions/Status422"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Delete a single event",
+        "operationId": "deleteEvent",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "Id of the event to delete",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "$ref": "#/definitions/Status204"
+            }
+          },
+          "404": {
+            "description": "Event not found",
+            "schema": {
+              "$ref": "#/definitions/Status404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      }
+    },
+    "/events/{id}/users": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get the participants of an event",
+        "operationId": "getParticipants",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "Id of the event from which to get the participants",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found",
+            "schema": {
+              "$ref": "#/definitions/Status404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      }
+    },
+    "/events/{id}/observations": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get the observations of an event",
+        "operationId": "getObservations",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "Id of the event from which to get the observations",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Observation"
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found",
+            "schema": {
+              "$ref": "#/definitions/Status404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Status500"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UserRes": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "integer"
+        },
+        "pseudonym": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "Id of the events the user is taking part"
+        }
+      }
+    },
+    "UserReq": {
+      "type": "object",
+      "properties": {
+        "pseudonym": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "EventRes": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "integer"
+        },
+        "owner": {
+          "type": "integer"
+        },
+        "beginning": {
+          "type": "string",
+          "format": "date"
+        },
+        "ending": {
+          "type": "string",
+          "format": "date"
+        },
+        "objective": {
+          "type": "string"
+        },
+        "numberOfImages": {
+          "type": "integer"
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "EventReq": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "integer"
+        },
+        "beginning": {
+          "type": "string",
+          "format": "date"
+        },
+        "ending": {
+          "type": "string",
+          "format": "date"
+        },
+        "objective": {
+          "type": "string"
+        },
+        "numberOfImages": {
+          "type": "integer"
+        }
+      }
+    },
+    "Description": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "integer"
+        },
+        "obstacle": {
+          "type": "string",
+          "enum": [
+            "sidewalk",
+            "corsswalk",
+            "pavement",
+            "slope",
+            "accessibility",
+            "other"
+          ]
+        },
+        "impact": {
+          "type": "integer"
+        }
+      }
+    },
+    "Image": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "integer",
+          "example": 0
+        },
+        "imagePath": {
+          "type": "string",
+          "example": "/dataset/event404"
+        },
+        "width": {
+          "type": "integer",
+          "example": 1280
+        },
+        "height": {
+          "type": "integer",
+          "example": 720
+        },
+        "boundingBox": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "integer"
+            },
+            "y": {
+              "type": "integer"
+            },
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "Observation": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "integer"
+        },
+        "owner": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Description"
+          }
+        },
+        "image": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        }
+      }
+    },
+    "Status204": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "example": 204
+        },
+        "message": {
+          "type": "string",
+          "example": "user with id 0 deleted successfully"
+        }
+      }
+    },
+    "Status404": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "example": 404
+        },
+        "message": {
+          "type": "string",
+          "example": "Not Found"
+        }
+      }
+    },
+    "Status422": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "example": 422
+        },
+        "message": {
+          "type": "string",
+          "example": "Unprocessable Entity"
+        }
+      }
+    },
+    "Status500": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "example": 500
+        },
+        "message": {
+          "type": "string",
+          "example": "Internal Server Error"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about the MoDoS API",
+    "url": "https://labinfo.ing.he-arc.ch/gitlab/ticc/19ticc02-hes-so---modos/early-app/wikis/API-endpoint-reference"
+  }
+}
