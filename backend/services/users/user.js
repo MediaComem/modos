@@ -26,7 +26,13 @@ const getUserById = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
     try {
-        const newUser = await User.create(req.body);
+        // make sure the user doesn't try to modify other fields (e.g. events)
+        const temp = {
+            pseudonym: req.body.pseudonym,
+            email: req.body.email,
+            password: req.body.password
+        };
+        const newUser = await User.create(temp);
         return res.status(201)
             .location(`api/v1/users/${newUser._id}`)
             .json(newUser);
@@ -38,7 +44,12 @@ const createUser = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
     try {
         const userId = req.params.id;
-        const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
+        const temp = {
+            pseudonym: req.body.pseudonym,
+            email: req.body.email,
+            password: req.body.password
+        };
+        const updatedUser = await User.findByIdAndUpdate(userId, temp, {
             new: true,
             runValidators: true
         });

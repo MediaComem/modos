@@ -1,0 +1,1023 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "MoDoS REST API",
+    "description": "The MoDoS API endpoints enable external applications to communicate with the MoDoS resources. It uses resource-oriented URLs and leverages various HTTP features, like authentication, verbs or response codes. All request and response bodies are JSON encoded, including error responses.",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "quentin.vaucher@he-arc.ch"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Find out more about the MoDoS API",
+    "url": "https://labinfo.ing.he-arc.ch/gitlab/ticc/19ticc02-hes-so---modos/early-app/wikis/API-endpoint-reference"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "users",
+      "description": "Manage your profile, user accout and information about your actions"
+    },
+    {
+      "name": "events",
+      "description": "Manage the events"
+    },
+    {
+      "name": "observation",
+      "description": "Manage the observations",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get all the users",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create a new user",
+        "description": "Create the required credentials to connect to the application. Note that the users\\'s profile is not configured during the user\\'s creation.",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/User"
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get a single user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the user to get",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/User"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update the credential of a user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the user to modify",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/User"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/User"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Delete a single user",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the user to delete",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/Satuts204"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      }
+    },
+    "/user/{id}/events": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get all the events a user is taking part",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the user from whom to get the events",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "events": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      }
+    },
+    "/user/{id}/observations": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get all the observations a user has made",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the user from whom to get the observations",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Observation"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      }
+    },
+    "/user/{id}/join/{eventId}": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Join an event",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the user which is joinning the event",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "Id of the event the user is joinning",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      }
+    },
+    "/events": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get all the events",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Create a new event",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Event"
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      }
+    },
+    "/event/{id}": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get a single event",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the evnet to get",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Event"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Update the informations of an event",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the event to modify",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Event"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Event"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Delete a single event",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the event to delete",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/Satuts204"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      }
+    },
+    "/events/{id}/users": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get the participants of an event",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the event from which to get the participants",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      }
+    },
+    "/events/{id}/observations": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get the observations of an event",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the event from which to get the observations",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Observation"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      }
+    },
+    "/observations": {
+      "post": {
+        "tags": [
+          "observations"
+        ],
+        "summary": "Create a new observation",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Observation"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/User"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "observations"
+        ],
+        "summary": "Get all the observations",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Observation"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "observations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": [
+                    "sidewalk",
+                    "crosswalk",
+                    "pavement",
+                    "slope",
+                    "accessibility",
+                    "other"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/observations/{id}": {
+      "get": {
+        "tags": [
+          "observations"
+        ],
+        "summary": "Get a single observation",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the observation to get",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Observation"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "requestBodies": {
+      "User": {
+        "description": "Required to create or update a user",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pseudonym": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "_id",
+                "pseudonym",
+                "email",
+                "password"
+              ]
+            }
+          }
+        }
+      },
+      "Observation": {
+        "description": "Require to create or update an observation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "owner": {
+                  "type": "integer"
+                },
+                "description": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Description"
+                  }
+                },
+                "image": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Image"
+                  }
+                },
+                "event": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Event": {
+        "description": "Require to create or update an event",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "owner": {
+                  "type": "integer"
+                },
+                "beginning": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "ending": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "objective": {
+                  "type": "string"
+                },
+                "numberOfImages": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "User": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "Observation": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Observation"
+            }
+          }
+        }
+      },
+      "Event": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Event"
+            }
+          }
+        }
+      },
+      "Satuts204": {
+        "description": "No Content",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Status204"
+            }
+          }
+        }
+      },
+      "Error404": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error404"
+            }
+          }
+        }
+      },
+      "Error422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error422"
+            }
+          }
+        }
+      },
+      "Error500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error500"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "pseudonym": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "events": {
+            "type": "array",
+            "description": "Id of the events the user is taking part",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "required": [
+          "_id",
+          "pseudonym",
+          "email",
+          "password"
+        ]
+      },
+      "Observation": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "owner": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Description"
+            }
+          },
+          "image": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Image"
+            }
+          }
+        }
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "owner": {
+            "type": "integer"
+          },
+          "beginning": {
+            "type": "string",
+            "format": "date"
+          },
+          "ending": {
+            "type": "string",
+            "format": "date"
+          },
+          "objective": {
+            "type": "string"
+          },
+          "numberOfImages": {
+            "type": "integer"
+          },
+          "observations": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "Description": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "obstacle": {
+            "type": "string",
+            "enum": [
+              "sidewalk",
+              "corsswalk",
+              "pavement",
+              "slope",
+              "accessibility",
+              "other"
+            ]
+          },
+          "impact": {
+            "type": "integer"
+          }
+        }
+      },
+      "Image": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "imagePath": {
+            "type": "string"
+          },
+          "width": {
+            "type": "integer"
+          },
+          "height": {
+            "type": "integer"
+          },
+          "boundingBox": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "integer"
+              },
+              "width": {
+                "type": "integer"
+              },
+              "y": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "Status204": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "example": 204
+          },
+          "message": {
+            "type": "string",
+            "example": "No Content"
+          }
+        }
+      },
+      "Error404": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "example": 404
+          },
+          "message": {
+            "type": "string",
+            "example": "Not Found"
+          }
+        }
+      },
+      "Error422": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "example": 422
+          },
+          "message": {
+            "type": "string",
+            "example": "Unprocessable Entity"
+          }
+        }
+      },
+      "Error500": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "example": 500
+          },
+          "message": {
+            "type": "string",
+            "example": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

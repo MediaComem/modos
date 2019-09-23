@@ -3,7 +3,7 @@ const userController = require('../../controllers/apis/user');
 const eventController = require('../../controllers/apis/event');
 const observationController = require('../../controllers/apis/observation');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('../../swagger.json');
+const swaggerDocument = require('../../openapi.json');
 
 let router = express.Router();
 
