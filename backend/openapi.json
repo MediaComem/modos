@@ -33,11 +33,7 @@
     },
     {
       "name": "observation",
-      "description": "Manage the observations",
-      "externalDocs": {
-        "description": "Find out more about our store",
-        "url": "http://swagger.io"
-      }
+      "description": "Manage the observations"
     }
   ],
   "paths": {
@@ -180,7 +176,7 @@
         ],
         "responses": {
           "204": {
-            "$ref": "#/components/responses/Satuts204"
+            "$ref": "#/components/responses/status204"
           },
           "404": {
             "$ref": "#/components/responses/Error404"
@@ -464,7 +460,7 @@
         ],
         "responses": {
           "204": {
-            "$ref": "#/components/responses/Satuts204"
+            "$ref": "#/components/responses/status204"
           },
           "404": {
             "$ref": "#/components/responses/Error404"
@@ -567,7 +563,7 @@
         },
         "responses": {
           "201": {
-            "$ref": "#/components/responses/User"
+            "$ref": "#/components/responses/Observation"
           },
           "422": {
             "$ref": "#/components/responses/Error422"
@@ -655,6 +651,34 @@
             "$ref": "#/components/responses/Error500"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "observations"
+        ],
+        "summary": "Delete a single observation",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the observation to delete",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/status204"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
       }
     }
   },
@@ -678,7 +702,6 @@
                 }
               },
               "required": [
-                "_id",
                 "pseudonym",
                 "email",
                 "password"
@@ -688,7 +711,7 @@
         }
       },
       "Observation": {
-        "description": "Require to create or update an observation",
+        "description": "Required to create or update an observation. If the event field (which is optional) is set, the observation will be added to the event.",
         "content": {
           "application/json": {
             "schema": {
@@ -712,13 +735,18 @@
                 "event": {
                   "type": "integer"
                 }
-              }
+              },
+              "required": [
+                "owner",
+                "description",
+                "image"
+              ]
             }
           }
         }
       },
       "Event": {
-        "description": "Require to create or update an event",
+        "description": "Required to create or update an event",
         "content": {
           "application/json": {
             "schema": {
@@ -741,7 +769,14 @@
                 "numberOfImages": {
                   "type": "integer"
                 }
-              }
+              },
+              "required": [
+                "owner",
+                "beginning",
+                "ending",
+                "objective",
+                "numberOfImages"
+              ]
             }
           }
         }
@@ -778,7 +813,7 @@
           }
         }
       },
-      "Satuts204": {
+      "status204": {
         "description": "No Content",
         "content": {
           "application/json": {

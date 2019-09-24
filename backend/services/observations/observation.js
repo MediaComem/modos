@@ -1,5 +1,6 @@
 const Observation = require('../../models/observation');
 const User = require('../../models/user');
+const Event = require('../../models/event');
 const error = require('../error');
 
 const getObservations = async (req, res, next) => {
@@ -28,10 +29,21 @@ const createObservation = async (req, res, next) => {
         if (!owner) return error.createError(res, 404, 'Observation\'s owner does not exist');
 
         const newObservation = await Observation.create(req.body);
+
+        // if the request has an event field, add the observation to the referenced event
+        if (req.body.event) {
+            const event = await Event.findById(req.body.event);
+            if (!event) return error.createError(res, 404, 'event does not exist');
+            console.log(event);
+            event.observations.push(newObservation._id);
+            event.save();
+        }
+
         return res.status(201)
             .location(`api/v1/observations/${newObservation._id}`)
             .json(newObservation);
     } catch (err) {
+        console.log(err);
         return error.handleError(err, res);
     }
 };
@@ -52,10 +64,7 @@ const updateObservation = async (req, res, next) => {
 const deleteObservation = async (req, res, next) => {
     try {
         const observation = await Observation.findByIdAndRemove(req.params.id);
-        if (observation) return res.status(204).json({
-            'code': 204,
-            'message': `observation with id ${req.params.id} deleted successfully`
-        });
+        if (observation) return res.status(204).json({});
         return error.createError(res, 404, 'Observation does not exist');
     } catch (err) {
         return error.handleError(err, res);

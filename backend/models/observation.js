@@ -1,6 +1,7 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 let ObjectId = Schema.Types.ObjectId;
+const Event = require('./event');
 
 var Description = new Schema({
     obstacle: {
@@ -70,6 +71,5 @@ var Observation = new Schema({
 }, {
     timestamps: true
 });
-
 
 module.exports = mongoose.model('Observation', Observation);
