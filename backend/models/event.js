@@ -46,8 +46,10 @@ var Event = new Schema({
 Event.post('save', function (event) {
     // automatically adds the owner of an event as participant
     User.findById(event.owner, (err, user) => {
-        user.events.push(event._id);
-        user.save();
+        if (user) {
+            user.events.push(event._id);
+            user.save();
+        }
     });
 });
 
