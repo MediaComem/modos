@@ -39,6 +39,8 @@ var Event = new Schema({
         type: [ObjectId],
         ref: 'Observation'
     }
+}, {
+    timestamps: true
 });
 
 Event.post('save', function (event) {
@@ -50,9 +52,11 @@ Event.post('save', function (event) {
 });
 
 Event.post('findOneAndRemove', function (event) {
-    User.updateMany(
-        { events: event._id }, { $pullAll: { events: [ event._id ] }}
-    ).exec();
+    if (event) {
+        User.updateMany(
+            { events: event._id }, { $pullAll: { events: [event._id] } }
+        ).exec();
+    }
 });
 
 module.exports = mongoose.model('Event', Event);

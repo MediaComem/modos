@@ -64,10 +64,8 @@ const updateUser = async (req, res, next) => {
 const deleteUser = async (req, res, next) => {
     try {
         const user = await User.findByIdAndRemove(req.params.id);
-        if (user) return res.status(204).json({
-            'code': 204,
-            'message': `user with id ${req.params.id} deleted successfully`
-        });
+        console.log(user);
+        if (user) return res.status(204).json({});
         return error.createError(res, 404, 'User does not exist');
     } catch (err) {
         return error.handleError(err, res);

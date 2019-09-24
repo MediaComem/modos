@@ -67,6 +67,8 @@ var Observation = new Schema({
     },
     description: [Description],
     image: [Image]
+}, {
+    timestamps: true
 });
 
 

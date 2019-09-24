@@ -52,10 +52,7 @@ const updateEvent = async (req, res, next) => {
 const deleteEvent = async (req, res, next) => {
     try {
         const event = await Event.findByIdAndRemove(req.params.id);
-        if (event) return res.status(204).json({
-            'code': 204,
-            'message': `event with id ${req.params.id} deleted successfully`
-        });
+        if (event) return res.status(204).json({});
         return error.createError(res, 404, 'Event does not exist');
     } catch (err) {
         return error.handleError(err, res);
