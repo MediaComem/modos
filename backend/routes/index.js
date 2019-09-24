@@ -13,7 +13,7 @@ const init = (server) => {
             return res.status(415).json({
                 'code': 415,
                 'message': 'Unsupported Media Type',
-                'description': 'All request must have a content type of application/json'
+                'description': 'All POST/PUT request must have a content type of application/json'
             });
         }
         return next();

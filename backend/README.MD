@@ -17,21 +17,18 @@ and everything should be fine.
 
 ## Populate the database with the seeders
 
-If you want to have some example records in the database, simply run the
-following command:
-
-```bash
-$ docker-compose run web npx sequelize-cli db:seed:all
-```
+Some example values are inserted into the database by default. Currently,
+it happens to fail sometimes (see #12). If that's the case, simple relaunch the
+containers until everything's fine.
 
 Note that, each time you restart the containers, every table is dropped and
-recreated. Therefore this command should be rerun if you still want some records.
+recreated for now.
 
-## Running the tests
+<!-- ## Running the tests
 
 There is nothing to worry about the database since the tests are run with a
 test database, which is populated and cleaned on the fly when the tests start/stop.
 
 ```bash
 $ docker-compose run web npm test
-```
+``` -->

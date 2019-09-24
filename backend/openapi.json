@@ -85,6 +85,9 @@
               }
             }
           },
+          "415": {
+            "$ref": "#/components/responses/Error415"
+          },
           "422": {
             "$ref": "#/components/responses/Error422"
           },
@@ -148,6 +151,9 @@
           },
           "404": {
             "$ref": "#/components/responses/Error404"
+          },
+          "415": {
+            "$ref": "#/components/responses/Error415"
           },
           "422": {
             "$ref": "#/components/responses/Error422"
@@ -317,6 +323,9 @@
           "404": {
             "$ref": "#/components/responses/Error404"
           },
+          "415": {
+            "$ref": "#/components/responses/Error415"
+          },
           "422": {
             "$ref": "#/components/responses/Error422"
           },
@@ -372,6 +381,9 @@
           },
           "422": {
             "$ref": "#/components/responses/Error422"
+          },
+          "415": {
+            "$ref": "#/components/responses/Error415"
           },
           "500": {
             "$ref": "#/components/responses/Error500"
@@ -433,6 +445,9 @@
           },
           "404": {
             "$ref": "#/components/responses/Error404"
+          },
+          "415": {
+            "$ref": "#/components/responses/Error415"
           },
           "422": {
             "$ref": "#/components/responses/Error422"
@@ -564,6 +579,9 @@
         "responses": {
           "201": {
             "$ref": "#/components/responses/Observation"
+          },
+          "415": {
+            "$ref": "#/components/responses/Error415"
           },
           "422": {
             "$ref": "#/components/responses/Error422"
@@ -833,6 +851,16 @@
           }
         }
       },
+      "Error415": {
+        "description": "Unsupported Media Type",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error415"
+            }
+          }
+        }
+      },
       "Error422": {
         "description": "Unprocessable Entity",
         "content": {
@@ -1024,6 +1052,19 @@
           "message": {
             "type": "string",
             "example": "Not Found"
+          }
+        }
+      },
+      "Error415": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "example": 415
+          },
+          "message": {
+            "type": "string",
+            "example": "Unsupported Media Type"
           }
         }
       },
