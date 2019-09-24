@@ -500,7 +500,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "integer",
+                    "type": "string",
                     "format": "uuid"
                   }
                 }

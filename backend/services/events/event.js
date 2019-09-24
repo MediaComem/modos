@@ -61,7 +61,8 @@ const deleteEvent = async (req, res, next) => {
 
 const getParticipants = async (req, res, next) => {
     try {
-        const participants = await User.find({ events: req.params.id });
+        const participantsRaw = await User.find({ events: req.params.id }, '_id');
+        const participants = participantsRaw.map(user => user._id);
         if (participants.length > 0) return res.status(200).json(participants);
         return error.createError(res, 404, 'No participants to this event');
     } catch (err) {
