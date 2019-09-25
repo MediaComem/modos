@@ -9,12 +9,11 @@ module.exports = function () {
         create,
         start;
 
-    create = (config, db) => {
+    create = (config) => {
         let routes = require('../routes');
         //set all the server things
         server.set('env', config.env);
         server.set('port', config.port);
-        server.set('hostname', config.hostname);
 
         // view engine setup
         server.set('views', path.join(__dirname, '../views'));
@@ -28,7 +27,7 @@ module.exports = function () {
 
         // connect the database
         mongoose.connect(
-            db.database,
+            config.databaseUrl,
             {
                 useNewUrlParser: true,
                 useCreateIndex: true,
@@ -54,10 +53,9 @@ module.exports = function () {
     };
 
     start = () => {
-        let hostname = server.get('hostname'),
-            port = server.get('port');
+        const port = server.get('port');
         server.listen(port, function () {
-            console.log('Express server listening on - http://' + hostname + ':' + port);
+            console.log('Express server listening on - http://localhost:' + port);
         });
     };
 
