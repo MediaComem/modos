@@ -10,7 +10,8 @@ var Description = new Schema({
         required: [true, 'obstacle is required']
     },
     freeText: {
-        type: String
+        type: String,
+        trim: true
     },
     impact: {
         type: Number,

@@ -3,7 +3,7 @@ const User = require('../../models/user');
 const Event = require('../../models/event');
 const error = require('../error');
 
-const getObservations = async (req, res, next) => {
+const getObservations = async (req, res) => {
     try {
         const observations = await Observation.find({});
         if (observations.length > 0) return res.status(200).json(observations);
@@ -13,7 +13,7 @@ const getObservations = async (req, res, next) => {
     }
 };
 
-const getObservationsById = async (req, res, next) => {
+const getObservationsById = async (req, res) => {
     try {
         const observation = await Observation.findById(req.params.id);
         if (observation) return res.status(200).json(observation);
@@ -23,7 +23,7 @@ const getObservationsById = async (req, res, next) => {
     }
 };
 
-const createObservation = async (req, res, next) => {
+const createObservation = async (req, res) => {
     try {
         const owner = await User.findById(req.body.owner);
         if (!owner) return error.createError(res, 404, 'Observation\'s owner does not exist');
@@ -48,7 +48,7 @@ const createObservation = async (req, res, next) => {
     }
 };
 
-const updateObservation = async (req, res, next) => {
+const updateObservation = async (req, res) => {
     try {
         const observationId = req.params.id;
         const updatedObservation = await Observation.findByIdAndUpdate(observationId, req.body, {
@@ -61,7 +61,7 @@ const updateObservation = async (req, res, next) => {
     }
 };
 
-const deleteObservation = async (req, res, next) => {
+const deleteObservation = async (req, res) => {
     try {
         const observation = await Observation.findByIdAndRemove(req.params.id);
         if (observation) return res.status(204).json({});
@@ -71,7 +71,7 @@ const deleteObservation = async (req, res, next) => {
     }
 };
 
-const getObstacles = async (req, res, next) => {
+const getObstacles = async (req, res) => {
     try {
         const obstacles = await Observation.schema.obj.description[0].obj.obstacle.enum;
         if (obstacles) return res.status(200).json(obstacles);

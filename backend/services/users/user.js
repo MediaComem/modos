@@ -4,7 +4,7 @@ const Observation = require('../../models/observation');
 const error = require('../error');
 
 
-const getUsers = async (req, res, next) => {
+const getUsers = async (req, res) => {
     try {
         const users = await User.find({});
         if (users.length > 0) return res.status(200).json(users);
@@ -14,7 +14,7 @@ const getUsers = async (req, res, next) => {
     }
 };
 
-const getUserById = async (req, res, next) => {
+const getUserById = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (user) return res.status(200).json(user);
@@ -24,7 +24,7 @@ const getUserById = async (req, res, next) => {
     }
 };
 
-const createUser = async (req, res, next) => {
+const createUser = async (req, res) => {
     try {
         // Make sure the user doesn't try to modify other fields (e.g. events).
         const temp = {
@@ -41,7 +41,7 @@ const createUser = async (req, res, next) => {
     }
 };
 
-const updateUser = async (req, res, next) => {
+const updateUser = async (req, res) => {
     try {
         const userId = req.params.id;
         const temp = {
@@ -61,7 +61,7 @@ const updateUser = async (req, res, next) => {
 };
 
 
-const deleteUser = async (req, res, next) => {
+const deleteUser = async (req, res) => {
     try {
         const user = await User.findByIdAndRemove(req.params.id);
         console.log(user);
@@ -72,7 +72,7 @@ const deleteUser = async (req, res, next) => {
     }
 };
 
-const getUserEvents = async (req, res, next) => {
+const getUserEvents = async (req, res) => {
     try {
         const userEvents = await User.findById(req.params.id, 'events');
         if (userEvents) return res.status(200).json(userEvents);
@@ -82,7 +82,7 @@ const getUserEvents = async (req, res, next) => {
     }
 };
 
-const getUserObservations = async (req, res, next) => {
+const getUserObservations = async (req, res) => {
     try {
         const observations = await Observation.find({ owner: req.params.id });
         if (observations) return res.status(200).json(observations);
@@ -92,12 +92,12 @@ const getUserObservations = async (req, res, next) => {
     }
 };
 
-const joinEvent = async (req, res, next) => {
+const joinEvent = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) return createError(res, 404, 'User does not exist');
 
-        const event = await Event.findById(req.params.eventId);
+        const event = await Event.findById(req.params.eventId, '_id');
         if (!event) return createError(res, 404, 'Event does not exist');
         if (user.events.includes(event._id)) {
             return error.createError(res, 422, 'User already joined the event');
