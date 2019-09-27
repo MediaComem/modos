@@ -26,7 +26,7 @@ const getUserById = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
     try {
-        // make sure the user doesn't try to modify other fields (e.g. events)
+        // Make sure the user doesn't try to modify other fields (e.g. events).
         const temp = {
             pseudonym: req.body.pseudonym,
             email: req.body.email,

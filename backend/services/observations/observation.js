@@ -30,7 +30,7 @@ const createObservation = async (req, res, next) => {
 
         const newObservation = await Observation.create(req.body);
 
-        // if the request has an event field, add the observation to the referenced event
+        // If the request has an event field, add the observation to the referenced event.
         if (req.body.event) {
             const event = await Event.findById(req.body.event);
             if (!event) return error.createError(res, 404, 'event does not exist');

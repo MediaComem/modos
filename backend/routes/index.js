@@ -6,7 +6,7 @@ const init = (server) => {
         return next();
     });
 
-    // POST and PUT must have a content type of application/json
+    // POST and PUT must have a content type of application/json.
     server.use(function (req, res, next) {
         const contentType = req.get('Content-Type');
         if (['POST', 'PUT'].includes(req.method) && contentType !== 'application/json') {

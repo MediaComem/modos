@@ -11,21 +11,21 @@ module.exports = function () {
 
     create = (config) => {
         let routes = require('../routes');
-        //set all the server things
+        // Set all the server things.
         server.set('env', config.env);
         server.set('port', config.port);
 
-        // view engine setup
+        // View engine setup.
         server.set('views', path.join(__dirname, '../views'));
         server.set('view engine', 'pug');
 
-        // add middleware to parse the json
+        // Add middleware to parse the json.
         server.use(bodyParser.json({ type: 'application/json' }));
         server.use(bodyParser.urlencoded({
             extended: false
         }));
 
-        // connect the database
+        // Connect the database.
         mongoose.connect(
             config.databaseUrl,
             {
@@ -36,16 +36,17 @@ module.exports = function () {
             }
         );
 
-        seeders.undoAll(); // wipe out the database
-        seeders.seedAll(); // populate the database with fake records
+        // Wipe out the database and repopulate it with fake records.
+        seeders.undoAll();
+        seeders.seedAll();
 
-        // set up routes
+        // Set up routes.
         routes.init(server);
 
         server.use(function (err, req, res, next) {
-            // set locals, only providing error in development
+            // Set locals, only providing error in development.
             res.locals.message = err.message;
-            res.locals.error = req.app.get('env') === 'local' ? err : {};
+            res.locals.error = config.env === 'development' ? err : {};
 
             res.status(err.status || 500);
             res.json();
