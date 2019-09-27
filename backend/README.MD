@@ -24,6 +24,14 @@ containers until everything's fine.
 Note that, each time you restart the containers, every table is dropped and
 recreated for now.
 
+## Configuration
+
+To use a custom configuration, copy `backend/.env.sample` to `backend/.env`,
+then uncomment and change the relevant properties. This new file will be ignored
+in the repository.
+
+> See https://www.npmjs.com/package/dotenv.
+
 <!-- ## Running the tests
 
 There is nothing to worry about the database since the tests are run with a

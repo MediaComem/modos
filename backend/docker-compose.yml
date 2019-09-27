@@ -1,16 +1,19 @@
 version: '3'
 
 services:
-  
+
   web:
     build: .
+    environment:
+      MODOS_DATABASE_URL: mongodb://mongo/restAPI
+      MODOS_PORT: 3000
     volumes:
       - .:/code
     ports:
       - "3000:3000"
     depends_on:
       - mongo
-    
+
   mongo:
     image: mongo
     ports:
