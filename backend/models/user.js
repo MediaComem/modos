@@ -13,13 +13,27 @@ var Profile = new Schema({
     },
     helper: {
         type: String,
-        enum: [ 'white cane', 'walker', 'wheelchair' ]
+        enum: [ 'white cane', 'walker', 'wheelchair' ],
+        validate: {
+            validator: function(v) {
+                if (!this.helperFrequency) return false;
+            },
+            message: "Helper frequency is required if helper is defined"
+        }
     },
     helperFrequency: {
-        type: Number
+        type: String,
+        enum: [ 'rarely', 'sometimes', 'always' ],
+        validate: {
+            validator: function(v) {
+                if (!this.helper) return false;
+            },
+            message: props => "Helper frequency shouldn't be defined if helper is undefined"
+        }
     },
     mobility: {
-        type: Number,
+        type: String,
+        enum: [ 'perfect', 'good', 'reduced', 'minimal' ],
         required: [ true, 'mobility is required' ]
     }
 });
@@ -33,13 +47,15 @@ var User = new Schema({
         type: String,
         required: [ true, 'pseudonym is required' ],
         unique: true,
-        lowercase: true
+        lowercase: true,
+        trim: true
     },
     email: {
         type: String,
         required: [ true, 'email is required' ],
         unique: true,
-        lowercase: true
+        lowercase: true,
+        trim: true
     },
     password: {
         type: String,

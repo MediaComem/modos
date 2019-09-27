@@ -32,7 +32,7 @@
       "description": "Manage the events"
     },
     {
-      "name": "observation",
+      "name": "observations",
       "description": "Manage the observations"
     }
   ],
@@ -186,6 +186,103 @@
           },
           "404": {
             "$ref": "#/components/responses/Error404"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      }
+    },
+    "/users{id}/profile": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get a single user profile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the user from whom to get the profile",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Profile"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create a new profile",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Profile"
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          },
+          "415": {
+            "$ref": "#/components/responses/Error415"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update the profile of a user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the user from whom to modify the profile",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Profile"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Profile"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "415": {
+            "$ref": "#/components/responses/Error415"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
           },
           "500": {
             "$ref": "#/components/responses/Error500"
@@ -728,6 +825,16 @@
           }
         }
       },
+      "Profile": {
+        "description": "Required to create or update a profile",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Profile"
+            }
+          }
+        }
+      },
       "Observation": {
         "description": "Required to create or update an observation. If the event field (which is optional) is set, the observation will be added to the event.",
         "content": {
@@ -807,6 +914,16 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "Profile": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Profile"
             }
           }
         }
@@ -906,6 +1023,9 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
           }
         },
         "required": [
@@ -938,6 +1058,55 @@
             }
           }
         }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "m",
+              "f"
+            ]
+          },
+          "helper": {
+            "type": "string",
+            "enum": [
+              "white cane",
+              "walker",
+              "wheelchair"
+            ]
+          },
+          "helperFrequency": {
+            "type": "string",
+            "enum": [
+              "rarely",
+              "sometimes",
+              "always"
+            ]
+          },
+          "mobility": {
+            "type": "string",
+            "enum": [
+              "perfect",
+              "good",
+              "reduced",
+              "minimal"
+            ]
+          }
+        },
+        "required": [
+          "_id",
+          "age",
+          "mobility"
+        ]
       },
       "Event": {
         "type": "object",

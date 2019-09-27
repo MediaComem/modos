@@ -28,7 +28,8 @@ var Event = new Schema({
     },
     objective: {
         type: String,
-        required: [true, 'objective is required']
+        required: [true, 'objective is required'],
+        trim: true
     },
     numberOfImages: {
         type: Number,

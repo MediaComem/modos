@@ -2,7 +2,7 @@ const Event = require('../../models/event');
 const User = require('../../models/user');
 const error = require('../error');
 
-const getEvents = async (req, res, next) => {
+const getEvents = async (req, res) => {
     try {
         const events = await Event.find({});
         if (events.length > 0) return res.status(200).json(events);
@@ -12,7 +12,7 @@ const getEvents = async (req, res, next) => {
     }
 };
 
-const getEventById = async (req, res, next) => {
+const getEventById = async (req, res) => {
     try {
         const event = await Event.findById(req.params.id);
         if (event) return res.status(200).json(event);
@@ -22,7 +22,7 @@ const getEventById = async (req, res, next) => {
     }
 };
 
-const createEvent = async (req, res, next) => {
+const createEvent = async (req, res) => {
     try {
         const owner = await User.findById(req.body.owner);
         if (!owner) return error.createError(res, 404, 'Event\'s owner does not exist');
@@ -36,11 +36,12 @@ const createEvent = async (req, res, next) => {
     }
 };
 
-const updateEvent = async (req, res, next) => {
+const updateEvent = async (req, res) => {
     try {
         const eventId = req.params.id;
         const updatedEvent = await Event.findByIdAndUpdate(eventId, req.body, {
-            new: true
+            new: true,
+            runValidators: true
         });
         if (updateEvent) res.status(200).json(updatedEvent);
         return error.createError(res, 404, 'Event does not exist');
@@ -49,7 +50,7 @@ const updateEvent = async (req, res, next) => {
     }
 };
 
-const deleteEvent = async (req, res, next) => {
+const deleteEvent = async (req, res) => {
     try {
         const event = await Event.findByIdAndRemove(req.params.id);
         if (event) return res.status(204).json({});
@@ -59,7 +60,7 @@ const deleteEvent = async (req, res, next) => {
     }
 };
 
-const getParticipants = async (req, res, next) => {
+const getParticipants = async (req, res) => {
     try {
         const participantsRaw = await User.find({ events: req.params.id }, '_id');
         const participants = participantsRaw.map(user => user._id);
@@ -70,7 +71,7 @@ const getParticipants = async (req, res, next) => {
     }
 };
 
-const getObservations = async (req, res, next) => {
+const getObservations = async (req, res) => {
     try {
         const observations = await Event.findById(req.params.id, 'observations');
         if (observations.length > 0) return res.status(200).json(observations);
