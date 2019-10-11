@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const seeders = require('../models/seeders');
 
 module.exports = function () {
     let server = express(),
@@ -35,10 +34,6 @@ module.exports = function () {
                 useUnifiedTopology: true
             }
         );
-
-        // Wipe out the database and repopulate it with fake records.
-        seeders.undoAll();
-        seeders.seedAll();
 
         // Set up routes.
         routes.init(server);
