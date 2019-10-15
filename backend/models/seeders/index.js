@@ -13,16 +13,16 @@ const seeders = fs
         return require(path.join(__dirname, file));
     });
 
-const seedAll = () => {
-    seeders.forEach(seeder => {
-        seeder.up();
-    });
+const seedAll = async () => {
+    for (const seeder of seeders) {
+        await seeder.up();
+    }
 }
 
-const undoAll = () => {
-    seeders.forEach(seeder => {
-        seeder.down();
-    })
+const undoAll = async () => {
+    for (const seeder of seeders) {
+        await seeder.down();
+    }
 }
 
 module.exports = {
