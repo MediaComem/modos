@@ -830,7 +830,43 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/Profile"
+              "properties": {
+                "age": {
+                  "type": "integer"
+                },
+                "gender": {
+                  "type": "string",
+                  "enum": [
+                    "m",
+                    "f"
+                  ]
+                },
+                "helper": {
+                  "type": "string",
+                  "enum": [
+                    "white cane",
+                    "walker",
+                    "wheelchair"
+                  ]
+                },
+                "helperFrequency": {
+                  "type": "string",
+                  "enum": [
+                    "rarely",
+                    "sometimes",
+                    "always"
+                  ]
+                },
+                "mobility": {
+                  "type": "string",
+                  "enum": [
+                    "perfect",
+                    "good",
+                    "reduced",
+                    "minimal"
+                  ]
+                }
+              }
             }
           }
         }
@@ -848,13 +884,55 @@
                 "description": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Description"
+                    "properties": {
+                      "obstacle": {
+                        "type": "string",
+                        "enum": [
+                          "sidewalk",
+                          "crosswalk",
+                          "pavement",
+                          "slope",
+                          "accessibility",
+                          "other"
+                        ]
+                      },
+                      "impact": {
+                        "type": "integer"
+                      }
+                    }
                   }
                 },
                 "image": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Image"
+                    "properties": {
+                      "imageBase64": {
+                        "type": "string"
+                      },
+                      "width": {
+                        "type": "integer"
+                      },
+                      "height": {
+                        "type": "integer"
+                      },
+                      "boundingBox": {
+                        "type": "object",
+                        "properties": {
+                          "x": {
+                            "type": "integer"
+                          },
+                          "width": {
+                            "type": "integer"
+                          },
+                          "y": {
+                            "type": "integer"
+                          },
+                          "height": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
                   }
                 },
                 "event": {
