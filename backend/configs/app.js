@@ -19,8 +19,12 @@ module.exports = function () {
         server.set('view engine', 'pug');
 
         // Add middleware to parse the json.
-        server.use(bodyParser.json({ type: 'application/json' }));
+        server.use(bodyParser.json({ 
+            limit: config.payloadLimit,
+            type: 'application/json' 
+        }));
         server.use(bodyParser.urlencoded({
+            limit: config.payloadLimit,
             extended: false
         }));
 

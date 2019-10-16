@@ -2,6 +2,7 @@ const Observation = require('../../models/observation');
 const User = require('../../models/user');
 const Event = require('../../models/event');
 const error = require('../error');
+const config = require('../../configs/config')
 
 const getObservations = async (req, res) => {
     try {
@@ -28,13 +29,21 @@ const createObservation = async (req, res) => {
         const owner = await User.findById(req.body.owner);
         if (!owner) return error.createError(res, 404, 'Observation\'s owner does not exist');
 
+        // Decode base64 images and write them to disk
+        req.body.images.forEach(image => {
+            const imagePath = config.storageDirectory + Date.now() + config.imageFormat;
+            image.imagePath = imagePath
+
+            const decodedData = Buffer.from(image.base64image, 'base64'); 
+            require('fs').writeFileSync(imagePath, decodedData);
+        });
+
         const newObservation = await Observation.create(req.body);
 
         // If the request has an event field, add the observation to the referenced event.
         if (req.body.event) {
             const event = await Event.findById(req.body.event);
             if (!event) return error.createError(res, 404, 'event does not exist');
-            console.log(event);
             event.observations.push(newObservation._id);
             event.save();
         }
@@ -43,7 +52,6 @@ const createObservation = async (req, res) => {
             .location(`api/v1/observations/${newObservation._id}`)
             .json(newObservation);
     } catch (err) {
-        console.log(err);
         return error.handleError(err, res);
     }
 };
@@ -77,7 +85,6 @@ const getObstacles = async (req, res) => {
         if (obstacles) return res.status(200).json(obstacles);
         return error.createError(res, 404, 'Obstacles does not exist');
     } catch (err) {
-        console.log(err);
         return error.handleError(err, res);
     }
 };

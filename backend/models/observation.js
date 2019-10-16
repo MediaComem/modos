@@ -68,7 +68,7 @@ var Observation = new Schema({
         required: [true, 'owner is required']
     },
     description: [Description],
-    image: [Image]
+    images: [Image]
 }, {
     timestamps: true
 });

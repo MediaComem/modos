@@ -902,11 +902,11 @@
                     }
                   }
                 },
-                "image": {
+                "images": {
                   "type": "array",
                   "items": {
                     "properties": {
-                      "imageBase64": {
+                      "base64image": {
                         "type": "string"
                       },
                       "width": {
@@ -942,7 +942,7 @@
               "required": [
                 "owner",
                 "description",
-                "image"
+                "images"
               ]
             }
           }
@@ -1129,7 +1129,7 @@
               "$ref": "#/components/schemas/Description"
             }
           },
-          "image": {
+          "images": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Image"

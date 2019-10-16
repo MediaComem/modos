@@ -7,6 +7,7 @@ services:
     environment:
       MODOS_DATABASE_URL: mongodb://mongo/restAPI
       MODOS_PORT: 3000
+      TZ: Europe/Zurich
     volumes:
       - .:/code
     ports:
@@ -16,5 +17,7 @@ services:
 
   mongo:
     image: mongo
+    environment:
+      TZ: Europe/Zurich
     ports:
       - "27017:27017"

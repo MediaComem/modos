@@ -22,4 +22,10 @@ exports.port = process.env.MODOS_PORT || process.env.PORT || 3000;
 exports.secretBase = process.env.MODOS_SECRET || 'changeme';
 
 // Configurable directory in which to store data that does not go into the database (e.g. images).
-exports.storageDirectory = process.env.MODOS_STORAGE_DIRECTORY || path.join(root, 'data');
+exports.storageDirectory = process.env.MODOS_STORAGE_DIRECTORY || path.join(root, 'data/');
+
+// Format in which the images are saved
+exports.imageFormat = process.env.MODOS_IMAGE_FORMAT || '.png'
+
+// Payload max size
+exports.payloadLimit = process.env.MODOS_PAYLOAD_LIMIT || '25mb'

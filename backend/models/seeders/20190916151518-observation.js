@@ -12,7 +12,7 @@ const up = async () => {
                     impact: 2
                 }
             ],
-            image: [
+            images: [
                 {
                     imagePath: "/dataset/event404",
                     width: 1280,
