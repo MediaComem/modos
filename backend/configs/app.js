@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 module.exports = function () {
@@ -17,6 +18,9 @@ module.exports = function () {
         // View engine setup.
         server.set('views', path.join(__dirname, '../views'));
         server.set('view engine', 'pug');
+
+        // Allow CORS.
+        server.use(cors());
 
         // Add middleware to parse the json.
         server.use(bodyParser.json({ 

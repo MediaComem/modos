@@ -471,7 +471,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/Event"
                 }
               }
             }
@@ -958,6 +958,12 @@
                 "owner": {
                   "type": "integer"
                 },
+                "title": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
                 "beginning": {
                   "type": "string",
                   "format": "date"
@@ -975,6 +981,7 @@
               },
               "required": [
                 "owner",
+                "title",
                 "beginning",
                 "ending",
                 "objective",
@@ -1121,9 +1128,10 @@
             "format": "uuid"
           },
           "owner": {
-            "type": "integer"
+            "type": "string",
+            "format": "uuid"
           },
-          "description": {
+          "descriptions": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Description"
@@ -1194,7 +1202,14 @@
             "format": "uuid"
           },
           "owner": {
-            "type": "integer"
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
           },
           "beginning": {
             "type": "string",

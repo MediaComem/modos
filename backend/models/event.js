@@ -13,6 +13,10 @@ var Event = new Schema({
         ref: 'User',
         required: [true, 'owner is required']
     },
+    title: {
+        type: String,
+        required: [true, 'title is required']
+    },
     password: {
         type: String
     },

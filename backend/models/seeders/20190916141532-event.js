@@ -6,9 +6,20 @@ const up = async () => {
         await Event.create({
             _id: '5d7f90bd348ea6025b32ee82',
             owner: '5d7f91c5bc704d0283ad7a87',
+            title: 'My super event',
+            password: 'My secret pa$$w0rd',
             beginning: new Date(),
             ending: new Date(),
-            objective: 'this is an event',
+            objective: 'this is my super event objective',
+            numberOfImages: 42
+        });
+        await Event.create({
+            owner: '5d7f91c5bc704d0283ad7a87',
+            title: 'My super event II',
+            password: 'My secret pa$$w0rd',
+            beginning: new Date(),
+            ending: new Date(),
+            objective: 'this is another super event objective',
             numberOfImages: 42
         });
         console.log('Event seeds have been inserted successfully')
