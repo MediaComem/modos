@@ -4,14 +4,16 @@ let router = express.Router();
 
 router.get('/', observationService.getObservations);
 
-router.get('/:id', observationService.getObservationsById);
-
 router.post('/', observationService.createObservation);
+
+router.options('/', observationService.getObstacles);
+
+router.get('/:id', observationService.getObservationById);
 
 router.put('/:id', observationService.updateObservation);
 
 router.delete('/:id', observationService.deleteObservation);
 
-router.options('/obstacles', observationService.getObstacles);
+
 
 module.exports = router;

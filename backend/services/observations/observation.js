@@ -14,7 +14,7 @@ const getObservations = async (req, res) => {
     }
 };
 
-const getObservationsById = async (req, res) => {
+const getObservationById = async (req, res) => {
     try {
         const observation = await Observation.findById(req.params.id);
         if (observation) return res.status(200).json(observation);
@@ -34,7 +34,7 @@ const createObservation = async (req, res) => {
             const imagePath = config.storageDirectory + Date.now() + config.imageFormat;
             image.imagePath = imagePath
 
-            const decodedData = Buffer.from(image.base64image, 'base64'); 
+            const decodedData = Buffer.from(image.base64image, 'base64');
             require('fs').writeFileSync(imagePath, decodedData);
         });
 
@@ -81,7 +81,7 @@ const deleteObservation = async (req, res) => {
 
 const getObstacles = async (req, res) => {
     try {
-        const obstacles = await Observation.schema.obj.description[0].obj.obstacle.enum;
+        const obstacles = await Observation.schema.obj.descriptions[0].obj.obstacle.enum;
         if (obstacles) return res.status(200).json(obstacles);
         return error.createError(res, 404, 'Obstacles does not exist');
     } catch (err) {
@@ -91,7 +91,7 @@ const getObstacles = async (req, res) => {
 
 module.exports = {
     getObservations: getObservations,
-    getObservationsById: getObservationsById,
+    getObservationById: getObservationById,
     createObservation: createObservation,
     updateObservation: updateObservation,
     deleteObservation: deleteObservation,

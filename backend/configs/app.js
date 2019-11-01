@@ -19,17 +19,20 @@ module.exports = function () {
         server.set('views', path.join(__dirname, '../views'));
         server.set('view engine', 'pug');
 
-        // Allow CORS.
-        server.use(cors());
-
         // Add middleware to parse the json.
-        server.use(bodyParser.json({ 
+        server.use(bodyParser.json({
             limit: config.payloadLimit,
-            type: 'application/json' 
+            type: 'application/json'
         }));
         server.use(bodyParser.urlencoded({
             limit: config.payloadLimit,
             extended: false
+        }));
+
+        // Allow CORS.
+        server.use(cors({
+            methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+            preflightContinue: true
         }));
 
         // Connect the database.
