@@ -313,19 +313,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "string",
-                      "format": "uuid"
-                    },
-                    "events": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "format": "uuid"
-                      }
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
                   }
                 }
               }
