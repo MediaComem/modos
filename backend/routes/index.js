@@ -1,3 +1,4 @@
+const express = require('express');
 const apiRoute = require('./apis');
 
 const init = (server) => {
@@ -20,6 +21,7 @@ const init = (server) => {
     });
 
     server.use('/api', apiRoute);
+    server.use('/landing-page', express.static('public'));
 }
 
 module.exports = {
