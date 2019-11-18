@@ -20,8 +20,8 @@ Your server should be up and running, Yay!
 
 Once your server is running, you can access:
 
-- ![API reference](http://localhost:3000/api/v1/doc/)
-- ![MoDoS landing page](http://localhost:3000/landing-page/index.html)
+- [API reference](http://localhost:3000/api/v1/doc/)
+- [MoDoS landing page](http://localhost:3000/landing-page/index.html)
 
 ## Manipulating the database with fake records
 
