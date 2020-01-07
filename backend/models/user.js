@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 let ObjectId = Schema.Types.ObjectId;
@@ -66,5 +67,31 @@ var User = new Schema({
 }, {
     timestamps: true
 });
+
+User.pre('save', function(next) {
+    this.password = bcrypt.hashSync(this.password, 10);
+    next();
+});
+
+User.methods.toResponseJSON = function() {
+    return {
+        pseudonym: this.pseudonym,
+        email: this.email,
+        profile: this.profile.toResponseJSON(),
+        events: this.events,
+        createdAt: this.createdAt,
+        updatedAt: this.updatedAt
+    };
+};
+
+Profile.methods.toResponseJSON = function() {
+    return {
+        age: this.age,
+        gender: this.gender,
+        helper: this.helper,
+        helperFrequency: this.helperFrequency,
+        mobility: this.mobility
+    };
+};
 
 module.exports = mongoose.model('User', User);

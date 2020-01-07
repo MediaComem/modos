@@ -20,8 +20,7 @@ const getObservationById = createAsyncRoute(async (req, res) => {
 });
 
 const createObservation = createAsyncRoute(async (req, res) => {
-    const owner = await User.findById(req.body.owner);
-    if (!owner) return error.createError(res, 404, 'Observation\'s owner does not exist');
+    req.body.owner = req.body.userId;
 
     // Decode base64 images and write them to disk
     for (const image of req.body.images) {
