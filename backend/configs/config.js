@@ -21,6 +21,9 @@ exports.port = process.env.MODOS_PORT || process.env.PORT || 3000;
 // To sign JWTs, session cookies, etc.
 exports.secretBase = process.env.MODOS_SECRET || 'changeme';
 
+// Expiration time for JWT
+exports.expirationTime = process.env.MODOS_JWT_EXPIRATION || '1h';
+
 // Configurable directory in which to store data that does not go into the database (e.g. images).
 exports.storageDirectory = process.env.MODOS_STORAGE_DIRECTORY || path.join(root, 'data/');
 

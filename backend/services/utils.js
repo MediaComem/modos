@@ -1,4 +1,6 @@
+const jwt = require('jsonwebtoken');
 const error = require('./error');
+const { secretBase, expirationTime } = require('../configs/config');
 
 /**
  * Creates an Express route from an async function, automatically handling
@@ -14,6 +16,11 @@ const createAsyncRoute = (asyncFunction) => {
     };
 };
 
+const signToken = function(userId) {
+    return jwt.sign({ id: userId }, secretBase, { expiresIn: expirationTime });
+};
+
 module.exports = {
-    createAsyncRoute: createAsyncRoute
-}
+    createAsyncRoute: createAsyncRoute,
+    signToken: signToken
+};

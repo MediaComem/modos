@@ -1,19 +1,18 @@
 const express = require('express');
 const observationService = require('../../services/observations/observation');
+const { authentifyUser } = require('../../configs/middlewares');
 let router = express.Router();
 
-router.get('/', observationService.getObservations);
+router.get('/', authentifyUser, observationService.getObservations);
 
-router.post('/', observationService.createObservation);
+router.post('/', authentifyUser, observationService.createObservation);
 
-router.options('/', observationService.getObstacles);
+router.options('/', authentifyUser, observationService.getObstacles);
 
-router.get('/:id', observationService.getObservationById);
+router.get('/:id', authentifyUser, observationService.getObservationById);
 
-router.put('/:id', observationService.updateObservation);
+router.put('/:id', authentifyUser, observationService.updateObservation);
 
-router.delete('/:id', observationService.deleteObservation);
-
-
+router.delete('/:id', authentifyUser, observationService.deleteObservation);
 
 module.exports = router;

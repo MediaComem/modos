@@ -1,19 +1,20 @@
 const express = require('express');
 const eventService = require('../../services/events/event');
+const { authentifyUser } = require('../../configs/middlewares');
 let router = express.Router();
 
-router.get('/', eventService.getEvents);
+router.get('/', authentifyUser, eventService.getEvents);
 
-router.get('/:id', eventService.getEventById);
+router.get('/:id', authentifyUser, eventService.getEventById);
 
-router.post('/', eventService.createEvent);
+router.post('/', authentifyUser, eventService.createEvent);
 
-router.put('/:id', eventService.updateEvent);
+router.put('/:id', authentifyUser, eventService.updateEvent);
 
-router.delete('/:id', eventService.deleteEvent);
+router.delete('/:id', authentifyUser, eventService.deleteEvent);
 
-router.get('/:id/users', eventService.getParticipants);
+router.get('/:id/users', authentifyUser, eventService.getParticipants);
 
-router.get('/:id/observations', eventService.getObservations);
+router.get('/:id/observations', authentifyUser, eventService.getObservations);
 
 module.exports = router;

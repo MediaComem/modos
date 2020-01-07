@@ -4,7 +4,7 @@ const error = require('../error');
 const { createAsyncRoute } = require('../utils');
 
 const getEvents = createAsyncRoute(async (req, res) => {
-    const events = await Event.find({});
+    let events = await Event.find({});
     if (events.length > 0) return res.status(200).json(events);
     return error.createError(res, 404, 'No events found in the system');
 });
@@ -16,9 +16,7 @@ const getEventById = createAsyncRoute(async (req, res) => {
 });
 
 const createEvent = createAsyncRoute(async (req, res) => {
-    const owner = await User.findById(req.body.owner);
-    if (!owner) return error.createError(res, 404, 'Event\'s owner does not exist');
-
+    req.body.owner = req.body.userId;
     const newEvent = await Event.create(req.body);
     return res.status(201)
         .location(`api/v1/events/${newEvent._id}`)
@@ -42,8 +40,8 @@ const deleteEvent = createAsyncRoute(async (req, res) => {
 });
 
 const getParticipants = createAsyncRoute(async (req, res) => {
-    const participantsRaw = await User.find({ events: req.params.id }, '_id');
-    const participants = participantsRaw.map(user => user._id);
+    const participantsRaw = await User.find({ events: req.params.id }, 'pseudonym');
+    const participants = participantsRaw.map(user => user.pseudonym);
     if (participants.length > 0) return res.status(200).json(participants);
     return error.createError(res, 404, 'No participants to this event');
 });
