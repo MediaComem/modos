@@ -1,5 +1,5 @@
-const server = require('./configs/app')();
-const config = require('./configs/config');
+const server = require('./app/configs/app')();
+const config = require('./app/configs/config');
 
 // basic server setup
 server.create(config);

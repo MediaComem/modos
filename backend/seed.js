@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const seeders = require('./models/seeders')
-const config = require('./configs/config');
+const seeders = require('./app/models/seeders')
+const config = require('./app/configs/config');
 
 Promise.resolve().then(seed).catch(err => {
     console.error('Database seed failed');
