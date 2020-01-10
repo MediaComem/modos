@@ -1,6 +1,7 @@
 # Backend
 backend/.env*
 !backend/.env.sample
+backend/docker/*
 
 # Created by https://www.gitignore.io/api/git,node,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=git,node,visualstudiocode
