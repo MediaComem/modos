@@ -1,9 +1,9 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
-let ObjectId = Schema.Types.ObjectId;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const ObjectId = Schema.Types.ObjectId;
 const Event = require('./events');
 
-var Description = new Schema({
+const Description = new Schema({
     obstacle: {
         type: String,
         enum: ['sidewalk', 'crosswalk', 'pavement', 'slope', 'accessibility', 'other'],
@@ -19,7 +19,7 @@ var Description = new Schema({
     }
 });
 
-var BoundingBox = new Schema({
+const BoundingBox = new Schema({
     x: {
         type: Number,
         required: [true, 'bounding box\'s x coordinate is required']
@@ -40,7 +40,7 @@ var BoundingBox = new Schema({
     }
 })
 
-var Image = new Schema({
+const Image = new Schema({
     imagePath: {
         type: String,
         required: [true, 'image path is required']
@@ -61,7 +61,7 @@ var Image = new Schema({
 
 // });
 
-var Observation = new Schema({
+const Observation = new Schema({
     owner: {
         type: ObjectId,
         ref: 'User',

@@ -6,7 +6,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../../../openapi.json');
 const { authenticate } = require('../../services/users/users');
 
-let router = express.Router();
+const router = express.Router();
 
 router.post('/authenticate', authenticate);
 router.use('/users', userController);

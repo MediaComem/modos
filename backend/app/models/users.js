@@ -1,9 +1,9 @@
 const bcrypt = require('bcrypt');
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
-let ObjectId = Schema.Types.ObjectId;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const ObjectId = Schema.Types.ObjectId;
 
-var Profile = new Schema({
+const Profile = new Schema({
     age: {
         type: Number,
         required: [ true, 'age is required' ]
@@ -39,7 +39,7 @@ var Profile = new Schema({
     }
 });
 
-var User = new Schema({
+const User = new Schema({
     _id: {
         type: ObjectId,
         auto: true
