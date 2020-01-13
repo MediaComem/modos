@@ -1,9 +1,9 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
-let ObjectId = Schema.Types.ObjectId;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const ObjectId = Schema.Types.ObjectId;
 const User = require('./users');
 
-var Event = new Schema({
+const Event = new Schema({
     _id: {
         type: ObjectId,
         auto: true

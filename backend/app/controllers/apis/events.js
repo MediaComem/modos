@@ -1,7 +1,7 @@
 const express = require('express');
 const eventService = require('../../services/events/events');
 const { authentifyUser } = require('../../configs/middlewares');
-let router = express.Router();
+const router = express.Router();
 
 router.get('/', authentifyUser, eventService.getEvents);
 

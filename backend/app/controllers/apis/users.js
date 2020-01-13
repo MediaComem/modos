@@ -2,7 +2,7 @@ const express = require('express');
 const userService = require('../../services/users/users');
 const profileService = require('../../services/users/profile');
 const { authentifyUser } = require('../../configs/middlewares');
-let router = express.Router();
+const router = express.Router();
 
 
 router.get('/', authentifyUser, userService.getUser);

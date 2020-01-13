@@ -1,7 +1,7 @@
 const express = require('express');
 const observationService = require('../../services/observations/observations');
 const { authentifyUser } = require('../../configs/middlewares');
-let router = express.Router();
+const router = express.Router();
 
 router.get('/', authentifyUser, observationService.getObservations);
 
