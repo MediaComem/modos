@@ -17,7 +17,7 @@ const createAsyncRoute = (asyncFunction) => {
 };
 
 const signToken = function(userId) {
-    return jwt.sign({ id: userId }, secretBase, { expiresIn: expirationTime });
+    return jwt.sign({ sub: userId }, secretBase, { expiresIn: expirationTime });
 };
 
 module.exports = {

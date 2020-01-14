@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
+const config = require('../configs/config');
 
 const Profile = new Schema({
     age: {
@@ -70,7 +71,7 @@ const User = new Schema({
 
 
 User.methods.encryptPassword = async function(plainTextPassword) {
-    this.passwordHash = await bcrypt.hash(plainTextPassword, 10);
+    this.passwordHash = await bcrypt.hash(plainTextPassword, config.costFactor);
 };
 
 if (!User.options.toObject) User.options.toObject = {};

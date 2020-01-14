@@ -10,10 +10,12 @@ error = require('../services/errors');
 const authenticateUser = (req, res, next) => {
     const authorization = req.headers['authorization'];
     if (!authorization) return error.sendError(res, 401, 'Unauthorized');
-    const token = authorization.split(' ')[1];
+    const match = authorization.match(/^Bearer (.+)$/);
+    if (!match) return error.sendError(res, 401, 'Unauthorized');
+    const token = match[1];
     jwt.verify(token, config.secretBase, function (err, decoded) {
         if (err) return error.sendError(res, 401, 'Unauthorized');
-        req.body.userId = decoded.id;
+        req.body.userId = decoded.sub;
         next();
     });
 };

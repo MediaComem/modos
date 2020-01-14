@@ -42,7 +42,7 @@ const BoundingBox = new Schema({
     }
 })
 
-var Image = new Schema({
+const Image = new Schema({
     imageURL: {
         type: String,
         required: [true, 'image path is required']
@@ -58,7 +58,7 @@ var Image = new Schema({
     boundingBox: BoundingBox
 });
 
-var Location = new Schema({
+const Location = new Schema({
     latitude: {
         type: Number,
     },
@@ -118,6 +118,11 @@ if (!Image.options.toObject) Image.options.toObject = {};
 Image.options.toObject.transform = function (image, imageResponse, options) {
     delete imageResponse._id;
 };
+
+if (!BoundingBox.options.toObject) BoundingBox.options.toObject = {};
+BoundingBox.options.toObject.transform = function (boundingBox, boundingBoxResponse, options) {
+    delete boundingBoxResponse._id;
+}
 
 if (!Location.options.toObject) Location.options.toObject = {};
 Location.options.toObject.transform = function (location, locationResponse, options) {
