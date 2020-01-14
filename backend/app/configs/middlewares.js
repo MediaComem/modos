@@ -7,17 +7,17 @@ error = require('../services/errors');
  * Authorization header field. If that is the case, extract the userId 
  * from the token.
  */
-const authentifyUser = (req, res, next) => {
+const authenticateUser = (req, res, next) => {
     const authorization = req.headers['authorization'];
-    if (!authorization) return error.createError(res, 403, 'Unauthorized');
+    if (!authorization) return error.sendError(res, 401, 'Unauthorized');
     const token = authorization.split(' ')[1];
     jwt.verify(token, config.secretBase, function (err, decoded) {
-        if (err) return error.createError(res, 403, 'Unauthorized');
+        if (err) return error.sendError(res, 401, 'Unauthorized');
         req.body.userId = decoded.id;
         next();
     });
 };
 
 module.exports = {
-    authentifyUser: authentifyUser
+    authenticateUser: authenticateUser
 };

@@ -1105,20 +1105,24 @@
             "format" : "uuid"
           },
           "owner" : {
-            "type" : "string"
+            "type" : "string",
+            "format" : "uuid"
           },
           "description" : {
             "$ref" : "#/components/schemas/Description"
           },
-          "images" : {
+          "imageURL" : {
             "type" : "string"
+          },
+          "location" : {
+            "$ref" : "#/components/schemas/Location"
           }
         }
       },
       "Description" : {
         "type" : "object",
         "properties" : {
-          "obstacles" : {
+          "obstacle" : {
             "type" : "string",
             "enum" : [ "sidewalk", "crosswalk", "pavement", "slope", "accessibility", "other" ]
           },
@@ -1128,6 +1132,17 @@
           "impact" : {
             "type" : "integer"
           }
+        }
+      },
+      "Location" : {
+        "type" : "object",
+        "properties" : {
+            "latitude" : {
+                "type" : "number"
+            },
+            "longitude" : {
+                "type" : "number"
+            }
         }
       },
       "body" : {
@@ -1320,8 +1335,11 @@
                 "description" : {
                   "$ref" : "#/components/schemas/Description"
                 },
-                "image" : {
+                "imageData" : {
                   "type" : "string"
+                },
+                "location" : {
+                    "$ref" : "#/components/schemas/Location"
                 }
               }
             }

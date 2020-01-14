@@ -3,12 +3,13 @@ const User = require('../users');
 const up = async () => {
     const userCount = await User.countDocuments({});
     if (userCount === 0) {
-        await User.create({
-            _id: '5d7f91c5bc704d0283ad7a87',
-            pseudonym: 'john',
-            email: 'john@doe.com',
-            password: 'secretkey'
-        });
+        const user = User()
+        user._id = '5d7f91c5bc704d0283ad7a87';
+        user.pseudonym = 'admin';
+        user.email = 'admin@mail.com';
+        await user.encryptPassword('12345678');
+        await User.create(user);
+
         console.log('User seeds have been inserted successfully')
     }
 };

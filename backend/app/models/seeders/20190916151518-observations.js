@@ -6,20 +6,16 @@ const up = async () => {
         await Observation.create({
             _id: "5d84ac1c9d4c1603538e7999",
             owner: "5d7f91c5bc704d0283ad7a87",
-            description: [
-                {
+            description: {
                     obstacle: "sidewalk",
                     impact: 2
-                }
-            ],
-            images: [
-                {
-                    imagePath: "/dataset/event404",
-                    width: 1280,
-                    height: 720,
-                    boundingBox: { x: 20, y: 10, width: 400, height: 500 }
-                }
-            ]
+            },
+            image: {
+                imageURL: "/dataset/event404",
+                width: 1280,
+                height: 720,
+                boundingBox: { x: 20, y: 10, width: 400, height: 500 }
+            }
         });
         console.log('Observation seeds have been inserted successfully')
     }
