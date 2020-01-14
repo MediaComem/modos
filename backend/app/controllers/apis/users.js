@@ -1,28 +1,28 @@
 const express = require('express');
 const userService = require('../../services/users/users');
 const profileService = require('../../services/users/profile');
-const { authentifyUser } = require('../../configs/middlewares');
+const { authenticateUser } = require('../../configs/middlewares');
 const router = express.Router();
 
 
-router.get('/', authentifyUser, userService.getUser);
+router.get('/', authenticateUser, userService.getUser);
 
 router.post('/', userService.createUser);
 
-router.put('/', authentifyUser, userService.updateUser);
+router.put('/', authenticateUser, userService.updateUser);
 
-router.delete('/', authentifyUser, userService.deleteUser);
+router.delete('/', authenticateUser, userService.deleteUser);
 
-router.get('/events', authentifyUser, userService.getUserEvents);
+router.get('/events', authenticateUser, userService.getUserEvents);
 
-router.get('/observations', authentifyUser, userService.getUserObservations);
+router.get('/observations', authenticateUser, userService.getUserObservations);
 
-router.post('/join/:eventId', authentifyUser, userService.joinEvent);
+router.post('/join/:eventId', authenticateUser, userService.joinEvent);
 
-router.get('/profile', authentifyUser, profileService.getProfile);
+router.get('/profile', authenticateUser, profileService.getProfile);
 
-router.post('/profile', authentifyUser, profileService.createProfile);
+router.post('/profile', authenticateUser, profileService.createProfile);
 
-router.put('/profile', authentifyUser, profileService.updateProfile);
+router.put('/profile', authenticateUser, profileService.updateProfile);
 
 module.exports = router;

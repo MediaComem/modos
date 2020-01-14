@@ -1,7 +1,9 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const ObjectId = Schema.Types.ObjectId;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
+let ObjectId = Schema.Types.ObjectId;
 const Event = require('./events');
+const fs = require('fs');
+const path = require('path');
 
 const Description = new Schema({
     obstacle: {
@@ -26,7 +28,7 @@ const BoundingBox = new Schema({
     },
     y: {
         type: Number,
-        required: [true, 'bounding box\'s y coordinate is required']
+    required: [true, 'bounding box\'s y coordinate is required']
     },
     width: {
         type: Number,
@@ -40,26 +42,30 @@ const BoundingBox = new Schema({
     }
 })
 
-const Image = new Schema({
-    imagePath: {
+var Image = new Schema({
+    imageURL: {
         type: String,
         required: [true, 'image path is required']
     },
     width: {
         type: Number,
-        required: [true, 'width is required']
+        //required: [true, 'width is required']
     },
     height: {
         type: Number,
-        required: [true, 'height is required']
+        //required: [true, 'height is required']
     },
     boundingBox: BoundingBox
 });
 
-// TODO
-// var Location = new Schema({
-
-// });
+var Location = new Schema({
+    latitude: {
+        type: Number,
+    },
+    longitude: {
+        type: Number,
+    }
+});
 
 const Observation = new Schema({
     owner: {
@@ -67,10 +73,55 @@ const Observation = new Schema({
         ref: 'User',
         required: [true, 'owner is required']
     },
-    descriptions: [Description],
-    images: [Image]
+    description: Description,
+    image: Image,
+    location: Location
 }, {
     timestamps: true
 });
+
+
+ Observation.methods.saveImage = async function(imageData) {
+     try {
+        const imagePath = path.join(config.storageDirectory, String(Date.now()) + config.imageFormat);
+        this.image = {};
+        this.image.imageURL = path.join(config.baseUrl, imagePath);
+
+        const decodedData = Buffer.from(imageData, 'base64');
+        await fs.promises.writeFile(imagePath, decodedData);
+     } catch (error) {
+         console.log(error);
+        throw error;
+     }
+ };
+
+Observation.methods.loadImage = async function(imageURL) {
+    // TODO: load the imageURL, and return it encoded to base64
+    decodedData = await fs.promises.readFile(imageURL);
+    const imageData = new Buffer(decodedData).toString('base64');
+    return imageData;
+};
+
+if (!Observation.options.toObject) Observation.options.toObject = {};
+Observation.options.toObject.transform = function (observation, observationRespnse, options) {
+    delete observationRespnse.createdAt;
+    delete observationRespnse.updatedAt;
+    delete observationRespnse.__v;
+};
+
+if (!Description.options.toObject) Description.options.toObject = {};
+Description.options.toObject.transform = function (description, descriptionResponse, options) {
+    delete descriptionResponse._id;
+};
+
+if (!Image.options.toObject) Image.options.toObject = {};
+Image.options.toObject.transform = function (image, imageResponse, options) {
+    delete imageResponse._id;
+};
+
+if (!Location.options.toObject) Location.options.toObject = {};
+Location.options.toObject.transform = function (location, locationResponse, options) {
+    delete locationResponse._id;
+};
 
 module.exports = mongoose.model('Observation', Observation);

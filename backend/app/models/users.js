@@ -58,7 +58,7 @@ const User = new Schema({
         lowercase: true,
         trim: true
     },
-    password: {
+    passwordHash: {
         type: String,
         required: [ true, 'password is required' ]
     },
@@ -68,30 +68,22 @@ const User = new Schema({
     timestamps: true
 });
 
-User.pre('save', function(next) {
-    this.password = bcrypt.hashSync(this.password, 10);
-    next();
-});
 
-User.methods.toResponseJSON = function() {
-    return {
-        pseudonym: this.pseudonym,
-        email: this.email,
-        profile: this.profile.toResponseJSON(),
-        events: this.events,
-        createdAt: this.createdAt,
-        updatedAt: this.updatedAt
-    };
+User.methods.encryptPassword = async function(plainTextPassword) {
+    this.passwordHash = await bcrypt.hash(plainTextPassword, 10);
 };
 
-Profile.methods.toResponseJSON = function() {
-    return {
-        age: this.age,
-        gender: this.gender,
-        helper: this.helper,
-        helperFrequency: this.helperFrequency,
-        mobility: this.mobility
-    };
+if (!User.options.toObject) User.options.toObject = {};
+User.options.toObject.transform = function (user, userResponse, options) {
+    delete userResponse._id;
+    delete userResponse.createdAt;
+    delete userResponse.updatedAt;
+    delete userResponse.__v;
+};
+
+if (!Profile.options.toObject) Profile.options.toObject = {};
+Profile.options.toObject.transform = function (profile, profileResponse, options) {
+    delete profileResponse._id;
 };
 
 module.exports = mongoose.model('User', User);
