@@ -66,4 +66,10 @@ Event.post('findOneAndRemove', function (event) {
     }
 });
 
+if (!Event.options.toObject) Event.options.toObject = {};
+Event.options.toObject.transform = function(event, eventResponse, options) {
+    delete event.createdAt;
+    delete event.updatedAt;
+};
+
 module.exports = mongoose.model('Event', Event);

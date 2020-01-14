@@ -24,7 +24,7 @@
     "description" : "MoDoS REST API Base URL"
   } ],
   "tags" : [ {
-    "name" : "authentication",
+    "name" : "authenticate",
     "description" : "Manage your JWT"
   }, {
     "name" : "users",
@@ -37,9 +37,9 @@
     "description" : "Manage the observations"
   } ],
   "paths" : {
-    "/authentication" : {
+    "/authenticate" : {
       "post" : {
-        "tags" : [ "authentication" ],
+        "tags" : [ "authenticate" ],
         "summary" : "retrieve a JWT",
         "description" : "Return a JWT which contains the user id in exange of valid credentials (email, password)\n",
         "operationId" : "authenticate",

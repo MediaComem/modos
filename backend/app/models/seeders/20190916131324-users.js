@@ -7,7 +7,7 @@ const up = async () => {
         user._id = '5d7f91c5bc704d0283ad7a87';
         user.pseudonym = 'admin';
         user.email = 'admin@mail.com';
-        await user.encryptPassword('12345678');
+        await user.encryptPassword('1234');
         await User.create(user);
 
         console.log('User seeds have been inserted successfully')
