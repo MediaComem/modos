@@ -12,13 +12,13 @@ const getObservations = createAsyncRoute(async (req, res) => {
     const observations = await Observation.find({});
     const observationsResponse = observations.map(observation => observation.toObject());
     if (observations.length > 0) return res.status(200).json(observationsResponse);
-    return error.sendErrorr(res, 404, 'No observations found in the system');
+    return error.sendError(res, 404, 'No observations found in the system');
 });
 
 const getObservationById = createAsyncRoute(async (req, res) => {
     const observation = await Observation.findById(req.params.id);
     if (observation) return res.status(200).json(observation.toObject());
-    return error.sendErrorr(res, 404, 'Observation does not exist');
+    return error.sendError(res, 404, 'Observation does not exist');
 });
 
 const createObservation = createAsyncRoute(async (req, res) => {
@@ -33,7 +33,7 @@ const createObservation = createAsyncRoute(async (req, res) => {
     // If the request has an event field, add the observation to the referenced event.
     if (req.body.event) {
         const event = await Event.findById(req.body.event);
-        if (!event) return error.sendErrorr(res, 404, 'event does not exist');
+        if (!event) return error.sendError(res, 404, 'event does not exist');
         event.observations.push(newObservation._id);
         event.save();
     }
@@ -49,19 +49,20 @@ const updateObservation = createAsyncRoute(async (req, res) => {
         new: true
     });
     if (updatedObservation) res.status(200).json(updatedObservation.toObject());
-    return error.sendErrorr(res, 404, 'Observation does not exist');
+    return error.sendError(res, 404, 'Observation does not exist');
 });
 
 const deleteObservation = createAsyncRoute(async (req, res) => {
     const observation = await Observation.findByIdAndRemove(req.params.id);
     if (observation) return res.status(204).json({});
-    return error.sendErrorr(res, 404, 'Observation does not exist');
+    return error.sendError(res, 404, 'Observation does not exist');
 });
 
 const getObstacles = createAsyncRoute(async (req, res) => {
-    const obstacles = await Observation.schema.obj.descriptions[0].obj.obstacle.enum;
+    const obstacles = await Observation.schema.obj.description.obj.obstacle.enum;
+    console.log(obstacles);
     if (obstacles) return res.status(200).json(obstacles);
-    return error.sendErrorr(res, 404, 'Obstacles does not exist');
+    return error.sendError(res, 404, 'Obstacles does not exist');
 });
 
 module.exports = {
