@@ -7,7 +7,7 @@ router.get('/', authenticateUser, observationService.getObservations);
 
 router.post('/', authenticateUser, observationService.createObservation);
 
-router.options('/', authenticateUser, observationService.getObstacles);
+router.get('/obstacles', authenticateUser, observationService.getObstacles);
 
 router.get('/:id', authenticateUser, observationService.getObservationById);
 

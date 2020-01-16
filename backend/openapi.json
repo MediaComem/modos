@@ -841,8 +841,10 @@
         "security" : [ {
           "bearerAuth" : [ ]
         } ]
-      },
-      "options" : {
+      }
+    },
+    "/observations/obstacles" : {
+      "get" : {
         "tags" : [ "observations" ],
         "summary" : "get the obstacles list",
         "operationId" : "getObstacles",
