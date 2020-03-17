@@ -1,16 +1,9 @@
-import Head from 'next/head'
-
 import {Header} from './index';
 
 
 const Layout = props => (
   <div className="layout">
-    <Head>
-      <title>Create Next App</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-
-    <Header />
+    <Header lang={props.lang}/>
 
     <main>
       
