@@ -1,0 +1,76 @@
+.navbar {
+  width: 96%;
+  padding: 0 2%;
+  height: 50px;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+
+  .navbar-title {
+    @include vertical-center;
+    width: 80%;
+  }
+
+  .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 1);
+    
+    @include vertical-center;
+
+    z-index: 1;
+
+    button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: none;
+      background: none;
+      line-height: 100%;
+    }
+
+    a {
+      margin-bottom: 1%;
+      margin-top: 1%;
+      font-size: 2em;
+      color: black;
+      text-transform: uppercase;
+      text-decoration: underline;
+      text-align: center;
+    }
+  }
+
+  .language {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+
+    height: 100%;
+    .languageList {
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 2%;
+      font-weight: bold;
+      font-size: larger;
+
+      // desactivate the arrow btn
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+  }
+
+  .navMenuIcon {
+    height: 100%;
+    button {
+      border: none;
+      background: none;
+      height: 100%;
+      line-height: 100%;
+    }
+  }
+}

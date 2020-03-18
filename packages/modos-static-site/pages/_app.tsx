@@ -1,4 +1,4 @@
-import '../style/main.scss'
+import '../style/index.scss'
 
 import { useGetLanguage } from '../libs/index';
 

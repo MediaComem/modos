@@ -1,4 +1,4 @@
-import {Header} from './index';
+import {Header, Footer} from './index';
 
 
 const Layout = props => (
@@ -9,9 +9,9 @@ const Layout = props => (
       {props.children}
     </main>
 
-    <footer>
+    <Footer lang={props.lang}>
       
-    </footer>
+    </Footer>
 
   </div>
 );

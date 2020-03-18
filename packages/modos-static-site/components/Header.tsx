@@ -1,16 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
-import { i18n } from '../libs';
+import { i18n, Page } from '../libs';
 
-class Page {
-  name;
-  link;
-
-  constructor(name, link) {
-    this.name = name;
-    this.link = link;
-  }
-}
 
 const PAGE_LIST: Page[] = [
   new Page('homepage', '/'),

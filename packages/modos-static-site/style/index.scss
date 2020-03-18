@@ -1,0 +1,16 @@
+// 3p
+@import 'node_modules/normalize.css/normalize';
+@import './reset.scss';
+
+// local
+@import './utils.scss';
+@import './material-icons.scss';
+
+// fonts
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
+
+@import './main.scss';
+
+@import './header.scss';
+
+@import './footer.scss';

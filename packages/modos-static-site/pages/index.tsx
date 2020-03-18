@@ -19,7 +19,7 @@ const Home = () => (
       <section className="section">
         <h2>Nos valeurs</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed mauris turpis. Praesent est magna, fringilla id magna vitae, congue convallis metus. Integer pellentesque, nulla vel malesuada posuere, est urna blandit lectus, quis pulvinar quam ipsum sit amet quam. Suspendisse arcu enim, tincidunt eu nulla fermentum, lacinia fringilla nibh. Mauris arcu quam, tempor ut eleifend vel, iaculis a magna. Donec luctus mauris eget tempor mattis. Nam pharetra ultricies orci eu semper. Etiam ultricies auctor justo. Pellentesque elementum tincidunt facilisis. </p>
-        <button>call to action</button>
+        <button className="button">call to action</button>
         <img src="zeit.svg" width="300" height="400"></img>
       </section>
       <section className="section">
