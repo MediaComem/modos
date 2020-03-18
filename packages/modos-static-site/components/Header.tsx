@@ -22,22 +22,31 @@ interface Props {
 }
 interface State {
   changeLanguage;
+  displayMenu;
+  selectedLanguage;
 }
 
 class Header extends React.Component<Props, State> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      changeLanguage: undefined,
+      displayMenu: false,
+      selectedLanguage: 'en'
+    };
+  }
+
   componentDidMount() {
+    let selectedLanguage = localStorage.getItem('lang');
+
     this.setState({
       changeLanguage: lang => {
         console.log(lang);
         localStorage.setItem('lang', lang);
         window.location.reload();
-      }
+      },
+      selectedLanguage: selectedLanguage ? selectedLanguage : 'en'
     });
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = { changeLanguage: undefined };
   }
 
   render() {
@@ -45,7 +54,18 @@ class Header extends React.Component<Props, State> {
 
     return (
       <header className="navbar">
-        <div className="menu">
+        <div className="navbar-title">
+          <h1>MoDos</h1>
+        </div>
+        <div className={`menu ${this.state.displayMenu ? '' : 'hidden'}`}>
+          <button
+            onClick={e =>
+              this.setState({ displayMenu: !this.state.displayMenu })
+            }
+          >
+            <i className="material-icons md-36">close</i>
+          </button>
+
           {PAGE_LIST.map(page => (
             <Link href={page.link}>
               <a>{i18n('header', page.name, this.props.lang)}</a>
@@ -54,21 +74,27 @@ class Header extends React.Component<Props, State> {
         </div>
 
         <div className="language">
-          <button>EN \/</button>
-          <ul className="languageList">
-            <li>
-              <button onClick={e => this.state.changeLanguage('en')}>en</button>
-            </li>
-            <li>
-              <button onClick={e => this.state.changeLanguage('fr')}>fr</button>
-            </li>
-          </ul>
+          <select
+            className="languageList"
+            onChange={e => this.state.changeLanguage(e.target.value)}
+          >
+            <option value="en" selected={this.state.selectedLanguage === 'en'}>
+              en
+            </option>
+            <option value="fr" selected={this.state.selectedLanguage === 'fr'}>
+              fr
+            </option>
+          </select>
         </div>
 
         <div className="navMenuIcon">
-          <a>
+          <button
+            onClick={e =>
+              this.setState({ displayMenu: !this.state.displayMenu })
+            }
+          >
             <i className="material-icons md-36">menu</i>
-          </a>
+          </button>
         </div>
       </header>
     );

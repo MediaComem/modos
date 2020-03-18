@@ -5,15 +5,14 @@ const Layout = props => (
   <div className="layout">
     <Header lang={props.lang}/>
 
-    <main>
-      
+    <main>      
+      {props.children}
     </main>
 
     <footer>
       
     </footer>
 
-    {props.children}
   </div>
 );
 
