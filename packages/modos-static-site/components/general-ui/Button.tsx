@@ -5,13 +5,13 @@ export const Button = props => {
       <style jsx>
         {`
           button {
-            border-radius: 5px;
-            background: tomato;
+            border-radius: 3px;
+            background: transparent;
+            border: 2px solid tomato;
             font-size: 1.1em;
-            color: white;
-            border: none;
-            min-height: 37px;
-            min-width: 100px;
+            color: tomato;
+            margin: 0 1em;
+            padding: 0.25em 1em;
           }
         `}
       </style>

@@ -1,4 +1,4 @@
-import { Layout, Leaflet, Section, Button } from '../components/index';
+import { Layout, Leaflet, Section, Button, Grid, Cell } from '../components/index';
 
 const Home = () => (
   <>
@@ -49,11 +49,11 @@ const Home = () => (
           semper. Etiam ultricies auctor justo. Pellentesque elementum tincidunt
           facilisis.{' '}
         </p>
-        <div>
-          <img src="zeit.svg" width="200" height="50"></img>
-          <img src="zeit.svg" width="200" height="50"></img>
-          <img src="zeit.svg" width="200" height="50"></img>
-        </div>
+        <Grid gap="0" columns={2} rows={2} >
+          <Cell >A</Cell>
+          <Cell >B</Cell>
+          <Cell >C</Cell>
+        </Grid>
       </Section>
       <Section>
         <Leaflet id="leaflet-map"></Leaflet>
