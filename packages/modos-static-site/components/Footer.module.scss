@@ -1,3 +1,5 @@
+@import '../style/utils.scss';
+
 .main-footer {
   display: flex;
   flex-direction: column;
@@ -17,7 +19,7 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-        margin: 5% 0;
+      margin: 5% 0;
 
       a {
         margin-bottom: 1%;
@@ -29,16 +31,16 @@
       }
     }
     .subscribe {
-        
-        > *,> div > * {
-            padding-bottom: 3%;
-        }
+      > *,
+      > div > * {
+        padding-bottom: 3%;
+      }
 
-        form{
-            display:flex;
-            justify-content: space-evenly;
-            flex-flow: row;
-        }
+      form {
+        display: flex;
+        justify-content: space-evenly;
+        flex-flow: row;
+      }
     }
   }
 
@@ -54,7 +56,7 @@
     justify-content: space-between;
     border-top: 1px solid black;
     height: 50px;
-    
+
     width: 96%;
     padding: 0 2%;
 
@@ -64,7 +66,7 @@
       flex-flow: row;
       flex-wrap: nowrap;
     }
-    div:last-child{
+    div:last-child {
       text-align: right;
     }
 

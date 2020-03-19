@@ -11,20 +11,10 @@ body {
   }
 }
 
-.section {
-  min-height: 650px;
-  height: 100vh;
-  width: 96%;
-  padding: 2px 2%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
 p {
   font-family: 'Fira Sans', sans-serif;
-  font-weight: lighter;
-  font-size: 0.9em;
+  font-weight: 100;
+  font-size: 1em;
   text-align: justify;
 }
 
@@ -36,33 +26,14 @@ h3 {
 }
 
 h1 {
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 h2 {
-  font-size: 1.4em;
+  font-size: 1.8em;
 }
 
 h3 {
-  font-size: 1.2em;
-  color:gray;
-}
-
-.button {
-  border-radius: 5px;
-  background: tomato;
-  font-size: 1.1em;
-  color:white;
-  border:none;
-  min-height: 37px;
-  min-width: 100px;
-}
-
-.input {  
-  font-size: 1.1em;
-  border-radius: 5px;
-  min-height: 35px;
-  min-width: 100px;
-  border:1px solid lightgrey;
-
+  font-size: 1.5em;
+  color: gray;
 }

@@ -1,15 +1,15 @@
-import { Layout, Leaflet } from '../components/index';
+import { Layout, Leaflet, Section, Button } from '../components/index';
 
 const Home = () => (
   <>
     <Layout>
-      <section className="section">
+      <Section>
         <p>
           "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
           consectetur, adipisci velit..."
         </p>
-      </section>
-      <section className="section">
+      </Section>
+      <Section>
         <h2>Nos valeurs</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed
@@ -20,12 +20,12 @@ const Home = () => (
           nibh. Mauris arcu quam, tempor ut eleifend vel, iaculis a magna. Donec
           luctus mauris eget tempor mattis. Nam pharetra ultricies orci eu
           semper. Etiam ultricies auctor justo. Pellentesque elementum tincidunt
-          facilisis.{' '}
+          facilisis.
         </p>
-        <button className="button">call to action</button>
+        <Button>call to action</Button>
         <img src="zeit.svg" width="300" height="400"></img>
-      </section>
-      <section className="section">
+      </Section>
+      <Section>
         <h2>Pourquoi Contribuer</h2>
         <div>
           <span>1</span>
@@ -35,8 +35,8 @@ const Home = () => (
           <span>2</span>
           <h3>Raison 2</h3>
         </div>
-      </section>
-      <section className="section">
+      </Section>
+      <Section>
         <h3>Codac</h3>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed
@@ -54,10 +54,10 @@ const Home = () => (
           <img src="zeit.svg" width="200" height="50"></img>
           <img src="zeit.svg" width="200" height="50"></img>
         </div>
-      </section>
-      <section className="section">
+      </Section>
+      <Section>
         <Leaflet id="leaflet-map"></Leaflet>
-      </section>
+      </Section>
     </Layout>
   </>
 );

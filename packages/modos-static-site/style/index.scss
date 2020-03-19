@@ -1,5 +1,5 @@
 // 3p
-@import 'node_modules/normalize.css/normalize';
+@import '../node_modules/normalize.css/normalize';
 @import './reset.scss';
 @import '../node_modules/leaflet/dist/leaflet.css';
 
@@ -11,7 +11,3 @@
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
 
 @import './main.scss';
-
-@import './header.scss';
-
-@import './footer.scss';

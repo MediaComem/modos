@@ -3,6 +3,8 @@ import React from 'react';
 import Head from 'next/head';
 import { i18n, Page } from '../libs';
 
+import styles from './Header.module.scss'
+
 const PAGE_LIST: Page[] = [
   new Page('homepage', '/'),
   new Page('about', '/about'),
@@ -64,12 +66,12 @@ class Header extends React.Component<Props, State> {
           />
         </Head>
 
-        <header className="navbar">
-          <div className="navbar-title">
+        <header className={styles['navbar']}>
+          <div className={styles['navbar-title']}>
             <h1>MoDos</h1>
           </div>
 
-          <div className={`menu ${this.state.displayMenu ? '' : 'hidden'}`}>
+          <div className={`${styles['menu']} ${this.state.displayMenu ? '' : 'hidden'}`}>
             <button
               onClick={e =>
                 this.setState({ displayMenu: !this.state.displayMenu })
@@ -85,9 +87,9 @@ class Header extends React.Component<Props, State> {
             ))}
           </div>
 
-          <div className="language">
+          <div className={styles['language']}>
             <select
-              className="languageList"
+              className={styles['languageList']}
               onChange={e => this.state.changeLanguage(e.target.value)}
               value={this.state.selectedLanguage}
             >
@@ -96,7 +98,7 @@ class Header extends React.Component<Props, State> {
             </select>
           </div>
 
-          <div className="navMenuIcon">
+          <div className={styles['navMenuIcon']}>
             <button
               onClick={e =>
                 this.setState({ displayMenu: !this.state.displayMenu })
