@@ -1,11 +1,14 @@
 import Link from 'next/link';
 import React from 'react';
+import Head from 'next/head';
 import { i18n, Page } from '../libs';
-
 
 const PAGE_LIST: Page[] = [
   new Page('homepage', '/'),
-  new Page('about', '/about')
+  new Page('about', '/about'),
+  new Page('mapping-party', '/mapping-party'),
+  new Page('contribute', '/contribute'),
+  new Page('contact', '/contact')
 ];
 
 interface Props {
@@ -44,50 +47,69 @@ class Header extends React.Component<Props, State> {
     if (!this.state.changeLanguage) return <div>loading...</div>;
 
     return (
-      <header className="navbar">
-        <div className="navbar-title">
-          <h1>MoDos</h1>
-        </div>
-        <div className={`menu ${this.state.displayMenu ? '' : 'hidden'}`}>
-          <button
-            onClick={e =>
-              this.setState({ displayMenu: !this.state.displayMenu })
-            }
-          >
-            <i className="material-icons md-36">close</i>
-          </button>
+      <>
+        <Head>
+          <title>MoDos</title>
+          <link rel="icon" href="/favicon.ico" />
 
-          {PAGE_LIST.map(page => (
-            <Link href={page.link}>
-              <a>{i18n('header', page.name, this.props.lang)}</a>
-            </Link>
-          ))}
-        </div>
+          <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+          ></link>
+        </Head>
 
-        <div className="language">
-          <select
-            className="languageList"
-            onChange={e => this.state.changeLanguage(e.target.value)}
-          >
-            <option value="en" selected={this.state.selectedLanguage === 'en'}>
-              en
-            </option>
-            <option value="fr" selected={this.state.selectedLanguage === 'fr'}>
-              fr
-            </option>
-          </select>
-        </div>
+        <header className="navbar">
+          <div className="navbar-title">
+            <h1>MoDos</h1>
+          </div>
+          
+          <div className={`menu ${this.state.displayMenu ? '' : 'hidden'}`}>
+            <button
+              onClick={e =>
+                this.setState({ displayMenu: !this.state.displayMenu })
+              }
+            >
+              <i className="material-icons md-36">close</i>
+            </button>
 
-        <div className="navMenuIcon">
-          <button
-            onClick={e =>
-              this.setState({ displayMenu: !this.state.displayMenu })
-            }
-          >
-            <i className="material-icons md-36">menu</i>
-          </button>
-        </div>
-      </header>
+            {PAGE_LIST.map(page => (
+              <Link href={page.link}>
+                <a>{i18n('header', page.name, this.props.lang)}</a>
+              </Link>
+            ))}
+          </div>
+
+          <div className="language">
+            <select
+              className="languageList"
+              onChange={e => this.state.changeLanguage(e.target.value)}
+            >
+              <option
+                value="en"
+                selected={this.state.selectedLanguage === 'en'}
+              >
+                en
+              </option>
+              <option
+                value="fr"
+                selected={this.state.selectedLanguage === 'fr'}
+              >
+                fr
+              </option>
+            </select>
+          </div>
+
+          <div className="navMenuIcon">
+            <button
+              onClick={e =>
+                this.setState({ displayMenu: !this.state.displayMenu })
+              }
+            >
+              <i className="material-icons md-36">menu</i>
+            </button>
+          </div>
+        </header>
+      </>
     );
   }
 }
