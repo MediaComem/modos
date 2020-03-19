@@ -28,7 +28,7 @@ class Footer extends React.Component<Props, State> {
         <div className="general-info">
           <div className="links">
             {PAGE_LIST.map(page => (
-              <Link href={page.link}>
+              <Link href={page.link} key={page.name}>
                 <a>{this.i18n(page.name)}</a>
               </Link>
             ))}

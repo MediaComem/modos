@@ -1,4 +1,4 @@
-import { Layout } from '../components/index';
+import { Layout, Leaflet } from '../components/index';
 
 const Home = () => (
   <>
@@ -56,7 +56,7 @@ const Home = () => (
         </div>
       </section>
       <section className="section">
-        <p>Here there will be a map</p>
+        <Leaflet id="leaflet-map"></Leaflet>
       </section>
     </Layout>
   </>

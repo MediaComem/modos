@@ -56,13 +56,19 @@ class Header extends React.Component<Props, State> {
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
           ></link>
+          <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+            integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+            crossOrigin=""
+          />
         </Head>
 
         <header className="navbar">
           <div className="navbar-title">
             <h1>MoDos</h1>
           </div>
-          
+
           <div className={`menu ${this.state.displayMenu ? '' : 'hidden'}`}>
             <button
               onClick={e =>
@@ -73,7 +79,7 @@ class Header extends React.Component<Props, State> {
             </button>
 
             {PAGE_LIST.map(page => (
-              <Link href={page.link}>
+              <Link href={page.link} key={page.name}>
                 <a>{i18n('header', page.name, this.props.lang)}</a>
               </Link>
             ))}
@@ -83,19 +89,10 @@ class Header extends React.Component<Props, State> {
             <select
               className="languageList"
               onChange={e => this.state.changeLanguage(e.target.value)}
+              value={this.state.selectedLanguage}
             >
-              <option
-                value="en"
-                selected={this.state.selectedLanguage === 'en'}
-              >
-                en
-              </option>
-              <option
-                value="fr"
-                selected={this.state.selectedLanguage === 'fr'}
-              >
-                fr
-              </option>
+              <option value="en">en</option>
+              <option value="fr">fr</option>
             </select>
           </div>
 
