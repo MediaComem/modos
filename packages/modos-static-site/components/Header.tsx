@@ -3,7 +3,7 @@ import React from 'react';
 import Head from 'next/head';
 import { i18n, Page } from '../libs';
 
-import styles from './Header.module.scss'
+import styles from './Header.module.scss';
 
 const PAGE_LIST: Page[] = [
   new Page('homepage', '/'),
@@ -20,6 +20,7 @@ interface State {
   changeLanguage;
   displayMenu;
   selectedLanguage;
+  displayAnimMenu;
 }
 
 class Header extends React.Component<Props, State> {
@@ -28,7 +29,8 @@ class Header extends React.Component<Props, State> {
     this.state = {
       changeLanguage: undefined,
       displayMenu: false,
-      selectedLanguage: 'en'
+      selectedLanguage: 'en',
+      displayAnimMenu: true
     };
   }
 
@@ -58,12 +60,6 @@ class Header extends React.Component<Props, State> {
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
           ></link>
-          <link
-            rel="stylesheet"
-            href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-            integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-            crossOrigin=""
-          />
         </Head>
 
         <header className={styles['navbar']}>
@@ -71,10 +67,19 @@ class Header extends React.Component<Props, State> {
             <h1>MoDos</h1>
           </div>
 
-          <div className={`${styles['menu']} ${this.state.displayMenu ? '' : 'hidden'}`}>
+          <div
+            className={`
+            ${styles['menu']} 
+            ${this.state.displayAnimMenu ? styles['fade'] : ''} 
+            ${this.state.displayMenu ? '' : 'hidden'}`}
+            onAnimationEnd={() => this.setState({ displayAnimMenu: false })}
+          >
             <button
               onClick={e =>
-                this.setState({ displayMenu: !this.state.displayMenu })
+                this.setState({
+                  displayMenu: !this.state.displayMenu,
+                  displayAnimMenu: true
+                })
               }
             >
               <i className="material-icons md-36">close</i>
@@ -82,7 +87,16 @@ class Header extends React.Component<Props, State> {
 
             {PAGE_LIST.map(page => (
               <Link href={page.link} key={page.name}>
-                <a>{i18n('header', page.name, this.props.lang)}</a>
+                <a
+                  onClick={e =>
+                    this.setState({
+                      displayMenu: !this.state.displayMenu,
+                      displayAnimMenu: false
+                    })
+                  }
+                >
+                  {i18n('header', page.name, this.props.lang)}
+                </a>
               </Link>
             ))}
           </div>

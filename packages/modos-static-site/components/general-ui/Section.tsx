@@ -8,7 +8,7 @@ export const Section = props => {
             min-height: 650px;
             height: 100vh;
             width: 96%;
-            padding: 2px 2%;
+            padding: 20px 2%;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;

@@ -1,5 +1,13 @@
 @import '../style/utils.scss';
 
+.fade {
+  animation: fade-in-keyframes 1s;
+}
+@keyframes fade-in-keyframes {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
 .navbar {
   width: 96%;
   padding: 0 2%;
@@ -55,8 +63,9 @@
     height: 100%;
     .languageList {
       border: 1px solid black;
-      border-radius: 5px;
-      padding: 2%;
+      border-radius: 3px;
+      text-transform: uppercase;
+      padding: 3px;
       font-weight: bold;
       font-size: larger;
 

@@ -55,7 +55,7 @@ class Footer extends React.Component<Props, State> {
           </div>
         </div>
         <div className={styles["partners"]}>
-          <h2>{this.i18n('parnters')}</h2>
+          <h2>{this.i18n('partners')}</h2>
           <div>
             <div></div>
             <div></div>

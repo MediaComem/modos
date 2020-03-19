@@ -1,3 +1,17 @@
 {
-    
+    "header":{
+        "homepage":"Homepage",
+        "about":"About",
+        "mapping-party":"Mapping Party",
+        "contribute":"Contribute",
+        "contact":"Contact"
+    },
+    "footer":{
+        "homepage":"Homepage",
+        "about":"About",
+        "subscribe":"Subscribe !",
+        "join-newsletter":"Join our newsletter !",
+        "follow-us":"Follow us on Social Network",
+        "partners":"Our Partners"
+    }
 }

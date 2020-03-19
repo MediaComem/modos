@@ -5,6 +5,7 @@ interface PropsGrid {
   gap?: string;
   columns?: number;
   rows?: number;
+  className?:string;
 }
 
 interface PropsCell {
@@ -12,13 +13,14 @@ interface PropsCell {
   height?: number;
   left?: number;
   top?: number;
+  className?:string;
 }
 
 const frGetter = value =>
   typeof value === 'number' ? `repeat(${value}, 1fr)` : value;
 
 const Grid: FunctionComponent<PropsGrid> = props => {
-  let { rows, columns, gap, isInline } = props;
+  let { rows, columns, gap, isInline, className } = props;
   return (
     <>
       <style jsx>
@@ -34,13 +36,13 @@ const Grid: FunctionComponent<PropsGrid> = props => {
         `}
       </style>
 
-      <div>{props.children}</div>
+      <div className={className}>{props.children}</div>
     </>
   );
 };
 
 const Cell: FunctionComponent<PropsCell> = props => {
-  let { width, height, left, top } = props;
+  let { width, height, left, top, className } = props;
   return (
     <>
       <style jsx>
@@ -56,7 +58,7 @@ const Cell: FunctionComponent<PropsCell> = props => {
         `}
       </style>
 
-      <div>{props.children}</div>
+      <div className={className}>{props.children}</div>
     </>
   );
 };
