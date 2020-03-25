@@ -24,6 +24,9 @@
     "description" : "MoDoS REST API Base URL"
   } ],
   "tags" : [ {
+    "name" : "root",
+    "description" : "Information about the API"
+  }, {
     "name" : "authenticate",
     "description" : "Manage your JWT"
   }, {
@@ -37,11 +40,37 @@
     "description" : "Manage the observations"
   } ],
   "paths" : {
+    "/api" : {
+      "get" : {
+        "tags" : [ "root" ],
+        "summary" : "API status",
+        "description" : "Be careful, this endpoint is at the root URL of MoDoS API (`https://modos.heig-vd.ch/api`), and therefore does not respect the baseurl specified above",
+        "operationId" : "root",
+        "responses" : {
+          "200" : {
+            "description" : "API status",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "version" : {
+                      "type" : "string",
+                      "example" : "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/authenticate" : {
       "post" : {
         "tags" : [ "authenticate" ],
         "summary" : "retrieve a JWT",
-        "description" : "Return a JWT which contains the user id in exange of valid credentials (email, password)\n",
+        "description" : "Return a JWT which contains the user id in exchange of valid credentials (email, password)\n",
         "operationId" : "authenticate",
         "requestBody" : {
           "description" : "credentials",
