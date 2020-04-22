@@ -17,9 +17,8 @@ import requests
 #################################################
 #  Global variables
 #################################################
-BASE_URL = 'https://modos.heig-vd.ch/api/v1'
+BASE_URL = 'http://localhost:3000/api/v1'
 HEADERS = {'Content-Type': 'application/json'}
-EVENT_ID: str = None
 
 
 #################################################
@@ -140,7 +139,7 @@ class User(JSONDataclass):
         regex = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
         return True if re.search(regex, self.email) else False
 
-    def insert(self):
+    def insert(self, event_id=None):
         """Insert the user into the database."""
         try:
             print(f'inserting {self.pseudonym}...', end='')
@@ -149,9 +148,10 @@ class User(JSONDataclass):
             if r.status_code != 201:
                 raise AssertionError(f'insertion error: {r.json()}')
 
-            if EVENT_ID is not None:
-                r = requests.post(BASE_URL + '/users/join/' +
-                                  EVENT_ID, headers=HEADERS)
+            if event_id is not None:
+                Credentials(self.email, self.password).authentify()
+                r = requests.post(BASE_URL + '/users/join/' + event_id, 
+                                  headers=HEADERS)
                 if r.status_code != 200:
                     raise AssertionError(
                         f'error while joining event: {r.json()}')
@@ -204,9 +204,9 @@ class UserProfile(JSONDataclass):
         except AssertionError as bad_status_code:
             sys.exit(bad_status_code)
 
-    def insert_user_and_profile(self):
+    def insert_user_and_profile(self, event_id=None):
         """Insert the user and his profile into the database."""
-        self.user.insert()
+        self.user.insert(event_id)
         self.insert_profile()
 
 
@@ -228,7 +228,7 @@ class Event(JSONDataclass):
         self.objective = csv['objective']
         self.numberOfImages = csv['numberOfImages']
 
-    def insert(self, credentials: Credentials):
+    def insert(self, credentials: Credentials) -> str:
         """Insert the event into the database."""
         try:
             print(f'inserting event {self.title}...', end='')
@@ -238,8 +238,9 @@ class Event(JSONDataclass):
                               data=self.to_json(), headers=HEADERS)
             if r.status_code != 201:
                 raise AssertionError(f'insertion error: {r.json()}')
-            EVENT_ID = r.json()['_id']
+            event_id = r.json()['_id']
             print(' ok')
+            return event_id
         except AssertionError as bad_status_code:
             sys.exit(bad_status_code)
 
@@ -273,12 +274,12 @@ if __name__ == "__main__":
         email = input('Enter your email: ')
         password = getpass('Enter your password: ')
         credentials = Credentials(email, password)
-        event.insert(credentials)
+        event_id = event.insert(credentials)
     except FileNotFoundError:
         pass  # no event for this bootstraping session...
 
     users_profiles: List[UserProfile] = load_users_profiles(
         './data/users_profiles.csv')
 
-    [up.insert_user_and_profile() for up in users_profiles]
+    [up.insert_user_and_profile(event_id) for up in users_profiles]
     # [up.user.delete() for up in users_profiles]
