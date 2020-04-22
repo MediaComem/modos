@@ -73,3 +73,9 @@ The header is the following:
 |-------|----------|-----------|--------|-----------|----------------|
 
 All the fields are required, except for `password` which is optional.
+
+beginning and ending fields must be defined with the following format : 
+
+`YYYY.MM.DD hh:mm (UTC ISO8601)`
+
+NB : Be careful if editing CSV files with Microsoft Excel the date format will automatically change depending on your regional settings. 
