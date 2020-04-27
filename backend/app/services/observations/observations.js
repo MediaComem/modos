@@ -1,10 +1,6 @@
-const fs = require('fs');
-const path = require('path');
 const Observation = require('../../models/observations');
-const User = require('../../models/users');
 const Event = require('../../models/events');
 const error = require('../errors');
-const config = require('../../configs/config')
 const { createAsyncRoute } = require('../utils');
 
 

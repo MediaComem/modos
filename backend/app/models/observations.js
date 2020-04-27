@@ -28,7 +28,7 @@ const BoundingBox = new Schema({
     },
     y: {
         type: Number,
-    required: [true, 'bounding box\'s y coordinate is required']
+        required: [true, 'bounding box\'s y coordinate is required']
     },
     width: {
         type: Number,
@@ -81,19 +81,20 @@ const Observation = new Schema({
 });
 
 
- Observation.methods.saveImage = async function(imageData) {
-     try {
+Observation.methods.saveImage = async function(imageData) {
+    try {
         const imagePath = path.join(config.storageDirectory, String(Date.now()) + config.imageFormat);
         this.image = {};
         this.image.imageURL = path.join(config.baseUrl, imagePath);
 
-        const decodedData = Buffer.from(imageData, 'base64');
+        const imageWithoudMetadata = imageData.split(',')[1];
+        const decodedData = Buffer.from(imageWithoudMetadata, 'base64');
         await fs.promises.writeFile(imagePath, decodedData);
-     } catch (error) {
-         console.log(error);
+    } catch (error) {
+        console.log(error);
         throw error;
-     }
- };
+    }
+};
 
 Observation.methods.loadImage = async function(imageURL) {
     // TODO: load the imageURL, and return it encoded to base64
@@ -103,29 +104,29 @@ Observation.methods.loadImage = async function(imageURL) {
 };
 
 if (!Observation.options.toObject) Observation.options.toObject = {};
-Observation.options.toObject.transform = function (observation, observationRespnse, options) {
+Observation.options.toObject.transform = function(observation, observationRespnse, options) {
     delete observationRespnse.createdAt;
     delete observationRespnse.updatedAt;
     delete observationRespnse.__v;
 };
 
 if (!Description.options.toObject) Description.options.toObject = {};
-Description.options.toObject.transform = function (description, descriptionResponse, options) {
+Description.options.toObject.transform = function(description, descriptionResponse, options) {
     delete descriptionResponse._id;
 };
 
 if (!Image.options.toObject) Image.options.toObject = {};
-Image.options.toObject.transform = function (image, imageResponse, options) {
+Image.options.toObject.transform = function(image, imageResponse, options) {
     delete imageResponse._id;
 };
 
 if (!BoundingBox.options.toObject) BoundingBox.options.toObject = {};
-BoundingBox.options.toObject.transform = function (boundingBox, boundingBoxResponse, options) {
+BoundingBox.options.toObject.transform = function(boundingBox, boundingBoxResponse, options) {
     delete boundingBoxResponse._id;
 }
 
 if (!Location.options.toObject) Location.options.toObject = {};
-Location.options.toObject.transform = function (location, locationResponse, options) {
+Location.options.toObject.transform = function(location, locationResponse, options) {
     delete locationResponse._id;
 };
 
