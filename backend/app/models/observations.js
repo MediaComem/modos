@@ -87,8 +87,8 @@ Observation.methods.saveImage = async function(imageData) {
         this.image = {};
         this.image.imageURL = path.join(config.baseUrl, imagePath);
 
-        const imageWithoudMetadata = imageData.split(',')[1];
-        const decodedData = Buffer.from(imageWithoudMetadata, 'base64');
+        const imageWithoutMetadata = imageData.split(',')[1];
+        const decodedData = Buffer.from(imageWithoutMetadata, 'base64');
         await fs.promises.writeFile(imagePath, decodedData);
     } catch (error) {
         console.log(error);
