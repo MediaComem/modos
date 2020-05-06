@@ -1,0 +1,14 @@
+events
+users
+cameras
+edges
+ploscategories
+observations
+images
+externimages
+internimages
+descriptions
+edges_images
+user_images
+users_events
+nodes

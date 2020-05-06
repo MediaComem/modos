@@ -1,0 +1,6 @@
+events
+observations
+users
+event_observations
+user_observations
+users_events
