@@ -2,7 +2,7 @@
 <database name="modos_db" schema="modos" type="PostgreSQL - 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1)">
    <tables>
       <table name="cameras" numRows="0" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('cameras_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4">
             <child column="cam_id" foreignKey="images_cam_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="images"/>
          </column>
          <column autoUpdated="false" digits="0" id="1" name="cam_make" nullable="false" remarks="" size="255" type="varchar"/>
@@ -21,7 +21,7 @@
          </index>
       </table>
       <table name="descriptions" numRows="0" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('descriptions_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4"/>
          <column autoUpdated="false" digits="0" id="1" name="class_label" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="descriptions_class_label_fkey" implied="false" onDeleteCascade="false" schema="modos" table="ploscategories"/>
          </column>
@@ -35,62 +35,71 @@
          </index>
       </table>
       <table name="edges" numRows="22523" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('edges_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4">
             <child column="edge_id" foreignKey="edges_images_edge_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="edges_images"/>
+            <child column="eid" foreignKey="images_eid_fkey" implied="false" onDeleteCascade="false" schema="modos" table="images"/>
+            <child column="eid" foreignKey="observations_eid_fkey" implied="false" onDeleteCascade="false" schema="modos" table="observations"/>
          </column>
          <column autoUpdated="false" digits="0" id="1" name="source" nullable="false" remarks="" size="19" type="int8"/>
          <column autoUpdated="false" digits="0" id="2" name="target" nullable="false" remarks="" size="19" type="int8"/>
-         <column autoUpdated="false" digits="0" id="3" name="osmid" nullable="true" remarks="" size="19" type="int8"/>
-         <column autoUpdated="false" defaultValue="1.0" digits="8" id="4" name="plos" nullable="false" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" defaultValue="1.0" digits="8" id="5" name="avg_curb_ramps" nullable="false" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" defaultValue="1.0" digits="8" id="6" name="avg_crosswalks" nullable="false" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" defaultValue="1.0" digits="8" id="7" name="avg_coatings" nullable="false" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" defaultValue="1.0" digits="8" id="8" name="avg_slopes" nullable="false" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" defaultValue="1.0" digits="8" id="9" name="avg_widths" nullable="false" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" digits="0" id="10" name="name" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="8" id="11" name="length" nullable="true" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" digits="8" id="12" name="width" nullable="true" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" digits="0" id="13" name="surface" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="14" name="incline" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="15" name="smoothness" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="16" name="crossing" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="17" name="lit" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="18" name="tactile_paving" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="19" name="wheelchair" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="20" name="handrail" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="21" name="description" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="22" name="step_count" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="23" name="sidewalk" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="24" name="footway" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="25" name="foot" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="26" name="kerb" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="27" name="bicycle" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="28" name="cycleway" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="29" name="highway" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="30" name="access" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="31" name="oneway" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="32" name="service" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="33" name="maxspeed" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="34" name="noexit" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="35" name="horse" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="36" name="tracktype" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="37" name="bridge" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="38" name="tunnel" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="39" name="layer" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="40" name="vehicle" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="41" name="motor_vehicle" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="42" name="motorcycle" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="43" name="railway" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="44" name="train" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" defaultValue="'osm'::text" digits="0" id="45" name="data_source" nullable="false" remarks="" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="46" name="geom" nullable="false" remarks="" size="2147483647" type="geometry"/>
+         <column autoUpdated="false" digits="0" id="3" name="key" nullable="false" remarks="" size="5" type="int2"/>
+         <column autoUpdated="false" digits="0" id="4" name="osmid" nullable="false" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="5" name="wplos" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="6" name="plos" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="7" name="avg_obstacle" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="8" name="avg_curb_ramps" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="9" name="avg_crosswalks" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="10" name="avg_coatings" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="11" name="avg_slopes" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="12" name="avg_widths" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="0" id="13" name="name" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="8" id="14" name="length" nullable="true" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="8" id="15" name="width" nullable="true" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="0" id="16" name="surface" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="17" name="incline" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="18" name="smoothness" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="19" name="crossing" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="20" name="lit" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="21" name="tactile_paving" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="22" name="wheelchair" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="23" name="handrail" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="24" name="description" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="25" name="step_count" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="26" name="sidewalk" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="27" name="footway" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="28" name="foot" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="29" name="kerb" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="30" name="bicycle" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="31" name="cycleway" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="32" name="highway" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="33" name="access" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="34" name="oneway" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="35" name="service" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="36" name="maxspeed" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="37" name="noexit" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="38" name="horse" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="39" name="tracktype" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="40" name="bridge" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="41" name="tunnel" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="42" name="layer" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="43" name="vehicle" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="44" name="motor_vehicle" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="45" name="motorcycle" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="46" name="railway" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="47" name="train" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" defaultValue="'osm'::text" digits="0" id="48" name="data_source" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="49" name="uuid" nullable="false" remarks="" size="2147483647" type="uuid"/>
+         <column autoUpdated="false" digits="0" id="50" name="geom" nullable="false" remarks="" size="2147483647" type="geometry"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="edges_pkey" unique="true">
             <column ascending="true" name="id"/>
          </index>
+         <index name="modos_edges_geom_idx" unique="false">
+            <column ascending="true" name="geom"/>
+         </index>
       </table>
       <table name="edges_images" numRows="0" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('edges_images_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4"/>
          <column autoUpdated="false" digits="0" id="1" name="edge_id" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="edges_images_edge_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="edges"/>
          </column>
@@ -107,7 +116,7 @@
          </index>
       </table>
       <table name="events" numRows="0" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('events_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4">
             <child column="event_id" foreignKey="images_event_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="images"/>
             <child column="event_id" foreignKey="observations_event_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="observations"/>
             <child column="event_id" foreignKey="users_events_event_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="users_events"/>
@@ -124,21 +133,10 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
-      <table name="externimages" numRows="0" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('externimages_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial"/>
-         <column autoUpdated="false" digits="0" id="1" name="image_id" nullable="true" remarks="" size="10" type="int4">
-            <parent column="id" foreignKey="externimages_image_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="images"/>
-         </column>
-         <primaryKey column="id" sequenceNumberInPK="1"/>
-         <index name="externimages_pkey" unique="true">
-            <column ascending="true" name="id"/>
-         </index>
-      </table>
       <table name="images" numRows="0" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('images_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4">
             <child column="image_id" foreignKey="edges_images_image_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="edges_images"/>
-            <child column="image_id" foreignKey="externimages_image_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="externimages"/>
-            <child column="image_id" foreignKey="internimages_image_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="internimages"/>
+            <child column="image_id" foreignKey="observations_images_image_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="observations_images"/>
             <child column="image_id" foreignKey="user_images_image_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="user_images"/>
          </column>
          <column autoUpdated="false" digits="0" id="1" name="px_w" nullable="false" remarks="" size="10" type="int4"/>
@@ -148,13 +146,25 @@
          <column autoUpdated="false" digits="17" id="5" name="azim" nullable="false" remarks="" size="17" type="float8"/>
          <column autoUpdated="false" digits="17" id="6" name="tilt" nullable="false" remarks="" size="17" type="float8"/>
          <column autoUpdated="false" defaultValue="0.0" digits="17" id="7" name="roll" nullable="false" remarks="" size="17" type="float8"/>
-         <column autoUpdated="false" digits="0" id="8" name="cam_id" nullable="true" remarks="" size="10" type="int4">
+         <column autoUpdated="false" defaultValue="'mobapp'::character varying" digits="0" id="8" name="data_source" nullable="false" remarks="" size="255" type="varchar"/>
+         <column autoUpdated="false" defaultValue="'copyright'::character varying" digits="0" id="9" name="license" nullable="false" remarks="" size="255" type="varchar"/>
+         <column autoUpdated="false" defaultValue="'uploaded'::character varying" digits="0" id="10" name="state" nullable="false" remarks="" size="255" type="varchar"/>
+         <column autoUpdated="false" defaultValue="'privately-available'::character varying" digits="0" id="11" name="availability" nullable="false" remarks="" size="255" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="12" name="eid" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="images_eid_fkey" implied="false" onDeleteCascade="false" schema="modos" table="edges"/>
+         </column>
+         <column autoUpdated="false" digits="8" id="13" name="edist" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="0" id="14" name="snap_geom" nullable="false" remarks="" size="2147483647" type="geometry"/>
+         <column autoUpdated="false" digits="0" id="15" name="user_id" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="images_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="users"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="16" name="cam_id" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="images_cam_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="cameras"/>
          </column>
-         <column autoUpdated="false" digits="0" id="9" name="obs_id" nullable="true" remarks="" size="10" type="int4">
+         <column autoUpdated="false" digits="0" id="17" name="obs_id" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="images_obs_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="observations"/>
          </column>
-         <column autoUpdated="false" digits="0" id="10" name="event_id" nullable="true" remarks="" size="10" type="int4">
+         <column autoUpdated="false" digits="0" id="18" name="event_id" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="images_event_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="events"/>
          </column>
          <primaryKey column="id" sequenceNumberInPK="1"/>
@@ -162,32 +172,34 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
-      <table name="internimages" numRows="0" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('internimages_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial"/>
-         <column autoUpdated="false" digits="0" id="1" name="image_id" nullable="true" remarks="" size="10" type="int4">
-            <parent column="id" foreignKey="internimages_image_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="images"/>
-         </column>
-         <primaryKey column="id" sequenceNumberInPK="1"/>
-         <index name="internimages_pkey" unique="true">
-            <column ascending="true" name="id"/>
-         </index>
-      </table>
       <table name="nodes" numRows="21261" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('nodes_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4"/>
          <column autoUpdated="false" digits="17" id="1" name="lat" nullable="false" remarks="" size="17" type="float8"/>
          <column autoUpdated="false" digits="17" id="2" name="lon" nullable="false" remarks="" size="17" type="float8"/>
          <column autoUpdated="false" digits="0" id="3" name="osmid" nullable="false" remarks="" size="19" type="int8"/>
          <column autoUpdated="false" digits="0" id="4" name="highway" nullable="true" remarks="" size="2147483647" type="varchar"/>
          <column autoUpdated="false" defaultValue="'osm'::text" digits="0" id="5" name="data_source" nullable="false" remarks="" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="6" name="geom" nullable="false" remarks="" size="2147483647" type="geometry"/>
-         <index name="nodes_id_key" unique="true">
+         <column autoUpdated="false" digits="0" id="7" name="uuid" nullable="false" remarks="" size="2147483647" type="uuid"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="nodes_pkey" unique="true">
             <column ascending="true" name="id"/>
+         </index>
+         <index name="modos_nodes_geom_idx" unique="false">
+            <column ascending="true" name="geom"/>
+         </index>
+         <index name="nodes_osmid_key" unique="true">
+            <column ascending="true" name="osmid"/>
+         </index>
+         <index name="nodes_uuid_key" unique="true">
+            <column ascending="true" name="uuid"/>
          </index>
       </table>
       <table name="observations" numRows="0" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('observations_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4">
             <child column="obs_id" foreignKey="descriptions_obs_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="descriptions"/>
             <child column="obs_id" foreignKey="images_obs_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="images"/>
+            <child column="observation_id" foreignKey="observations_images_observation_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="observations_images"/>
          </column>
          <column autoUpdated="false" digits="0" id="1" name="user_id" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="observations_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="users"/>
@@ -195,17 +207,40 @@
          <column autoUpdated="false" digits="0" id="2" name="event_id" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="observations_event_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="events"/>
          </column>
-         <column autoUpdated="false" defaultValue="true" digits="0" id="3" name="has_image" nullable="false" remarks="" size="1" type="bool"/>
-         <column autoUpdated="false" digits="0" id="4" name="has_description" nullable="false" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" defaultValue="false" digits="0" id="3" name="has_image" nullable="false" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" defaultValue="false" digits="0" id="4" name="has_description" nullable="false" remarks="" size="1" type="bool"/>
          <column autoUpdated="false" digits="0" id="5" name="position" nullable="false" remarks="" size="2147483647" type="geometry"/>
-         <column autoUpdated="false" digits="6" id="6" name="created_at" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" defaultValue="false" digits="0" id="6" name="in_range" nullable="false" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="7" name="eid" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="observations_eid_fkey" implied="false" onDeleteCascade="false" schema="modos" table="edges"/>
+         </column>
+         <column autoUpdated="false" digits="8" id="8" name="edist" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="0" id="9" name="snap_geom" nullable="false" remarks="" size="2147483647" type="geometry"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="10" name="created_at" nullable="true" remarks="" size="35" type="timestamptz"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="observations_pkey" unique="true">
             <column ascending="true" name="id"/>
          </index>
       </table>
+      <table name="observations_images" numRows="0" remarks="" schema="modos" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="observation_id" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="observations_images_observation_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="observations"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="image_id" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="observations_images_image_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="images"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="observations_images_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="observations_images_unique" unique="true">
+            <column ascending="true" name="observation_id"/>
+            <column ascending="true" name="image_id"/>
+         </index>
+      </table>
       <table name="ploscategories" numRows="0" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('ploscategories_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4">
             <child column="class_label" foreignKey="descriptions_class_label_fkey" implied="false" onDeleteCascade="false" schema="modos" table="descriptions"/>
          </column>
          <column autoUpdated="false" digits="0" id="1" name="category" nullable="false" remarks="" size="2147483647" type="text"/>
@@ -216,8 +251,20 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
+      <table name="routes" numRows="0" remarks="" schema="modos" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="description" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="17" id="2" name="route_wplos" nullable="false" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="17" id="3" name="route_plos" nullable="false" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="0" id="4" name="geom" nullable="false" remarks="" size="2147483647" type="geometry"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="5" name="created_at" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="routes_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
       <table name="user_images" numRows="0" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('user_images_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4"/>
          <column autoUpdated="false" digits="0" id="1" name="user_id" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="user_images_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="users"/>
          </column>
@@ -234,7 +281,8 @@
          </index>
       </table>
       <table name="users" numRows="0" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('users_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4">
+            <child column="user_id" foreignKey="images_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="images"/>
             <child column="user_id" foreignKey="observations_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="observations"/>
             <child column="user_id" foreignKey="user_images_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="user_images"/>
             <child column="user_id" foreignKey="users_events_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="users_events"/>
@@ -274,7 +322,7 @@
          </index>
       </table>
       <table name="users_events" numRows="0" remarks="" schema="modos" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('users_events_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4"/>
          <column autoUpdated="false" digits="0" id="1" name="user_id" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="users_events_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="users"/>
          </column>

@@ -5,8 +5,7 @@ module.exports = function(sequelize, DataTypes) {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 'nextval(nodes_id_seq::regclass)',
-      unique: true
+      primaryKey: true
     },
     lat: {
       type: DataTypes.DOUBLE,
@@ -18,7 +17,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     osmid: {
       type: DataTypes.BIGINT,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     highway: {
       type: DataTypes.STRING,
@@ -32,6 +32,11 @@ module.exports = function(sequelize, DataTypes) {
     geom: {
       type: DataTypes.ENUM(),
       allowNull: false
+    },
+    uuid: {
+      type: DataTypes.UUIDV4,
+      allowNull: false,
+      unique: true
     }
   }, {
     tableName: 'nodes'

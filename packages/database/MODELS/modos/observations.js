@@ -5,8 +5,7 @@ module.exports = function(sequelize, DataTypes) {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      primaryKey: true
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -27,19 +26,42 @@ module.exports = function(sequelize, DataTypes) {
     has_image: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: true
+      defaultValue: false
     },
     has_description: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: false,
+      defaultValue: false
     },
     position: {
       type: DataTypes.ENUM(),
       allowNull: false
     },
+    in_range: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    eid: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'edges',
+        key: 'id'
+      }
+    },
+    edist: {
+      type: DataTypes.REAL,
+      allowNull: false
+    },
+    snap_geom: {
+      type: DataTypes.ENUM(),
+      allowNull: false
+    },
     created_at: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: true,
+      defaultValue: sequelize.fn('now')
     }
   }, {
     tableName: 'observations'

@@ -5,8 +5,7 @@ module.exports = function(sequelize, DataTypes) {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      primaryKey: true
     },
     _mobapp_id: {
       type: DataTypes.TEXT,
@@ -31,17 +30,35 @@ module.exports = function(sequelize, DataTypes) {
     },
     _mobapp_location_latitude: {
       type: DataTypes.DOUBLE,
-      allowNull: true
+      allowNull: false,
+      defaultValue: '0.0'
     },
     _mobapp_location_longitude: {
       type: DataTypes.DOUBLE,
-      allowNull: true
+      allowNull: false,
+      defaultValue: '0.0'
     },
     _mobapp_image_imageurl: {
       type: DataTypes.TEXT,
       allowNull: true
     },
+    eid: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'edges',
+        key: 'id'
+      }
+    },
+    edist: {
+      type: DataTypes.REAL,
+      allowNull: true
+    },
     geom: {
+      type: DataTypes.ENUM(),
+      allowNull: true
+    },
+    snap_geom: {
       type: DataTypes.ENUM(),
       allowNull: true
     }

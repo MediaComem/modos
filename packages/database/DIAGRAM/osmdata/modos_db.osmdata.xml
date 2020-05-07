@@ -52,6 +52,9 @@
          <index name="osm_edges_geom_geom_idx" unique="false">
             <column ascending="true" name="geom"/>
          </index>
+         <index name="osmdata_edges_geom_idx" unique="false">
+            <column ascending="true" name="geom"/>
+         </index>
       </table>
       <table name="osm_nodes" numRows="21261" remarks="" schema="osmdata" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('osm_nodes_ogc_fid_seq'::regclass)" digits="0" id="0" name="ogc_fid" nullable="false" remarks="" size="10" type="serial"/>
@@ -65,6 +68,9 @@
             <column ascending="true" name="ogc_fid"/>
          </index>
          <index name="osm_nodes_geom_geom_idx" unique="false">
+            <column ascending="true" name="geom"/>
+         </index>
+         <index name="osmdata_nodes_geom_idx" unique="false">
             <column ascending="true" name="geom"/>
          </index>
       </table>

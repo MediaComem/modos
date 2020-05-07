@@ -112,11 +112,11 @@
 				<tbody>
 				<tr>
 				 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="id">id</span></td>
-				 <td>serial</td>
+				 <td>int4</td>
 				 <td>10</td>
 				 <td title=''></td>
-				 <td title='Automatically updated by the database'>√</td>
-				 <td>nextval(&#39;edges_id_seq&#39;::regclass)</td>
+				 <td title=''></td>
+				 <td>null</td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				   <tr>
@@ -125,6 +125,22 @@
 					</td>
 					<td class="constraint detail">
 						edges_images_edge_id_fkey <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
+				   <tr>
+					<td title="images.eid references edges.id via images_eid_fkey">
+						<a href='images.html'>images</a><span class='relatedKey'>.eid</span>
+					</td>
+					<td class="constraint detail">
+						images_eid_fkey <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
+				   <tr>
+					<td title="observations.eid references edges.id via observations_eid_fkey">
+						<a href='observations.html'>observations</a><span class='relatedKey'>.eid</span>
+					</td>
+					<td class="constraint detail">
+						observations_eid_fkey <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
 					</td>
 				   </tr>
 				  </table>				 
@@ -170,10 +186,10 @@
 				 <td></td>
 				</tr>
 				<tr>
-				 <td><span id="osmid">osmid</span></td>
-				 <td>int8</td>
-				 <td>19</td>
-				 <td title='nullable'>√</td>
+				 <td><span id="key">key</span></td>
+				 <td>int2</td>
+				 <td>5</td>
+				 <td title=''></td>
 				 <td title=''></td>
 				 <td>null</td>
 				 <td>
@@ -187,7 +203,58 @@
 				 <td></td>
 				</tr>
 				<tr>
+				 <td><span id="osmid">osmid</span></td>
+				 <td>int8</td>
+				 <td>19</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="wplos">wplos</span></td>
+				 <td>float4</td>
+				 <td>8,8</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>1.0</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
 				 <td><span id="plos">plos</span></td>
+				 <td>float4</td>
+				 <td>8,8</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>1.0</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="avg_obstacle">avg_obstacle</span></td>
 				 <td>float4</td>
 				 <td>8,8</td>
 				 <td title=''></td>
@@ -901,7 +968,24 @@
 				 <td></td>
 				</tr>
 				<tr>
-				 <td><span id="geom">geom</span></td>
+				 <td><span id="uuid">uuid</span></td>
+				 <td>uuid</td>
+				 <td>2147483647</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="geom">geom</span></td>
 				 <td>geometry</td>
 				 <td>2147483647</td>
 				 <td title=''></td>
@@ -919,7 +1003,7 @@
 				</tr>
 								</tbody>
 				</table>
-				<p title='47 columns'>Table contained <span id="recordNumber">22523</span> rows<p/>
+				<p title='51 columns'>Table contained <span id="recordNumber">22523</span> rows<p/>
 			</div>
 		</div>
 		<div class="box box-primary">		
@@ -951,6 +1035,12 @@
 				  <td><span title='Ascending'>Asc</span></td>
 				  <td>id</td>
 				 </tr>				 
+				 <tr>
+				  <td title='Indexed'>modos_edges_geom_idx</td>
+				  <td>Performance</td>
+				  <td><span title='Ascending'>Asc</span></td>
+				  <td>geom</td>
+				 </tr>				 
 				</tbody>
 				</table>   			  
 			</div><!-- /.box-body -->
@@ -978,17 +1068,26 @@
             <div class="tab-content no-padding">            
 				<div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="edges_images.html" title="edges_images" alt="" coords="405,5,587,157">
-<area shape="rect" id="node2" href="edges.html" title="edges" alt="" coords="5,32,361,1480">
+<area shape="rect" id="node1" href="edges_images.html" title="edges_images" alt="" coords="841,5,1023,157">
+<area shape="rect" id="node2" href="edges.html" title="edges" alt="" coords="5,113,361,1679">
+<area shape="rect" id="node3" href="images.html" title="images" alt="" coords="640,87,797,351">
+<area shape="rect" id="node4" href="observations.html" title="observations" alt="" coords="405,197,596,403">
 </map>
 
 					<a name='diagram'><img id='oneDegreeImg' src='../diagrams/edges.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
 				</div>
 				<div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="edges_images.html" title="edges_images" alt="" coords="405,695,587,847">
-<area shape="rect" id="node2" href="edges.html" title="edges" alt="" coords="5,5,361,1453">
-<area shape="rect" id="node3" href="images.html" title="images" alt="" coords="117,1471,249,1559">
+<area shape="rect" id="node1" href="descriptions.html" title="descriptions" alt="" coords="640,1567,808,1655">
+<area shape="rect" id="node2" href="observations.html" title="observations" alt="" coords="405,1544,596,1749">
+<area shape="rect" id="node4" href="edges.html" title="edges" alt="" coords="5,5,361,1571">
+<area shape="rect" id="node7" href="events.html" title="events" alt="" coords="120,1705,247,1793">
+<area shape="rect" id="node8" href="users.html" title="users" alt="" coords="123,1588,243,1676">
+<area shape="rect" id="node3" href="edges_images.html" title="edges_images" alt="" coords="876,520,1057,672">
+<area shape="rect" id="node5" href="images.html" title="images" alt="" coords="645,1285,803,1549">
+<area shape="rect" id="node6" href="cameras.html" title="cameras" alt="" coords="431,1420,571,1508">
+<area shape="rect" id="node9" href="observations_images.html" title="observations_images" alt="" coords="852,1496,1081,1584">
+<area shape="rect" id="node10" href="user_images.html" title="user_images" alt="" coords="882,1251,1051,1339">
 </map>
 
 					<a name='diagram'><img id='twodegreesDegreeImg' src='../diagrams/edges.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							

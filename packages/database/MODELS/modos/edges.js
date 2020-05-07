@@ -5,8 +5,7 @@ module.exports = function(sequelize, DataTypes) {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      primaryKey: true
     },
     source: {
       type: DataTypes.BIGINT,
@@ -16,11 +15,25 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BIGINT,
       allowNull: false
     },
+    key: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     osmid: {
       type: DataTypes.BIGINT,
-      allowNull: true
+      allowNull: false
+    },
+    wplos: {
+      type: DataTypes.REAL,
+      allowNull: false,
+      defaultValue: '1.0'
     },
     plos: {
+      type: DataTypes.REAL,
+      allowNull: false,
+      defaultValue: '1.0'
+    },
+    avg_obstacle: {
       type: DataTypes.REAL,
       allowNull: false,
       defaultValue: '1.0'
@@ -194,6 +207,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false,
       defaultValue: 'osm'
+    },
+    uuid: {
+      type: DataTypes.UUIDV4,
+      allowNull: false
     },
     geom: {
       type: DataTypes.ENUM(),

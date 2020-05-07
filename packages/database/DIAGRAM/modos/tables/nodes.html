@@ -111,12 +111,12 @@
 				</thead>
 				<tbody>
 				<tr>
-				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="id">id</span></td>
-				 <td>serial</td>
+				 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="id">id</span></td>
+				 <td>int4</td>
 				 <td>10</td>
 				 <td title=''></td>
-				 <td title='Automatically updated by the database'>√</td>
-				 <td>nextval(&#39;nodes_id_seq&#39;::regclass)</td>
+				 <td title=''></td>
+				 <td>null</td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				  </table>				 
@@ -162,7 +162,7 @@
 				 <td></td>
 				</tr>
 				<tr>
-				 <td><span id="osmid">osmid</span></td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="osmid">osmid</span></td>
 				 <td>int8</td>
 				 <td>19</td>
 				 <td title=''></td>
@@ -213,8 +213,25 @@
 				 <td></td>
 				</tr>
 				<tr>
-				 <td><span id="geom">geom</span></td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="geom">geom</span></td>
 				 <td>geometry</td>
+				 <td>2147483647</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="uuid">uuid</span></td>
+				 <td>uuid</td>
 				 <td>2147483647</td>
 				 <td title=''></td>
 				 <td title=''></td>
@@ -231,7 +248,7 @@
 				</tr>
 								</tbody>
 				</table>
-				<p title='7 columns'>Table contained <span id="recordNumber">21261</span> rows<p/>
+				<p title='8 columns'>Table contained <span id="recordNumber">21261</span> rows<p/>
 			</div>
 		</div>
 		<div class="box box-primary">		
@@ -258,10 +275,28 @@
 				</thead>
 				<tbody>
 				 <tr>
-				  <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> nodes_id_key</td>
-				  <td>Must be unique</td>
+				  <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> nodes_pkey</td>
+				  <td>Primary key</td>
 				  <td><span title='Ascending'>Asc</span></td>
 				  <td>id</td>
+				 </tr>				 
+				 <tr>
+				  <td title='Indexed'>modos_nodes_geom_idx</td>
+				  <td>Performance</td>
+				  <td><span title='Ascending'>Asc</span></td>
+				  <td>geom</td>
+				 </tr>				 
+				 <tr>
+				  <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> nodes_osmid_key</td>
+				  <td>Must be unique</td>
+				  <td><span title='Ascending'>Asc</span></td>
+				  <td>osmid</td>
+				 </tr>				 
+				 <tr>
+				  <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> nodes_uuid_key</td>
+				  <td>Must be unique</td>
+				  <td><span title='Ascending'>Asc</span></td>
+				  <td>uuid</td>
 				 </tr>				 
 				</tbody>
 				</table>   			  
