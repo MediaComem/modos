@@ -2,7 +2,7 @@
 set -e
 USE_PG=true
 
-eval $(egrep -v '^#' .env | xargs)
+source .env
 
 if [ ${ENV} = 'DEV' ]
 then
