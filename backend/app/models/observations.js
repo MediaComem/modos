@@ -4,11 +4,12 @@ let ObjectId = Schema.Types.ObjectId;
 const Event = require('./events');
 const fs = require('fs');
 const path = require('path');
+const config = require('../configs/config');
 
 const Description = new Schema({
     obstacle: {
         type: String,
-        enum: ['sidewalk', 'crosswalk', 'pavement', 'slope', 'accessibility', 'other'],
+        enum: ['curb ramp', 'missing curb ramp', 'surface problem', 'obstacle', 'width', 'security', 'slope', 'no problem', 'bonus'],
         required: [true, 'obstacle is required']
     },
     freeText: {
@@ -43,9 +44,9 @@ const BoundingBox = new Schema({
 })
 
 const Image = new Schema({
-    imageURL: {
+    basename: {
         type: String,
-        required: [true, 'image path is required']
+        required: [true, 'image name is required']
     },
     width: {
         type: Number,
@@ -56,6 +57,10 @@ const Image = new Schema({
         //required: [true, 'height is required']
     },
     boundingBox: BoundingBox
+});
+
+Image.virtual('imageURL').get(function () {
+    return config.baseUrl + config.storageDirectory + "/" + this.basename;
 });
 
 const Location = new Schema({
@@ -83,9 +88,9 @@ const Observation = new Schema({
 
 Observation.methods.saveImage = async function(imageData) {
     try {
-        const imagePath = path.join(config.storageDirectory, String(Date.now()) + config.imageFormat);
         this.image = {};
-        this.image.imageURL = path.join(config.baseUrl, imagePath);
+        this.image.basename = String(Date.now()) + config.imageFormat;
+        const imagePath = path.join(config.storageDirectory, this.image.basename);
 
         const imageWithoutMetadata = imageData.split(',')[1];
         const decodedData = Buffer.from(imageWithoutMetadata, 'base64');
@@ -97,7 +102,6 @@ Observation.methods.saveImage = async function(imageData) {
 };
 
 Observation.methods.loadImage = async function(imageURL) {
-    // TODO: load the imageURL, and return it encoded to base64
     decodedData = await fs.promises.readFile(imageURL);
     const imageData = new Buffer(decodedData).toString('base64');
     return imageData;
