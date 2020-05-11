@@ -1150,8 +1150,8 @@
           "description" : {
             "$ref" : "#/components/schemas/Description"
           },
-          "imageURL" : {
-            "type" : "string"
+          "image" : {
+              "$ref" : "#/components/schemas/Image"
           },
           "location" : {
             "$ref" : "#/components/schemas/Location"
@@ -1163,7 +1163,7 @@
         "properties" : {
           "obstacle" : {
             "type" : "string",
-            "enum" : [ "sidewalk", "crosswalk", "pavement", "slope", "accessibility", "other" ]
+            "enum" : [ "curb ramp", "missing curb ramp", "surface problem", "obstacle", "width", "security", "slope", "no problem", "bonus" ]
           },
           "freeText" : {
             "type" : "string"
@@ -1183,6 +1183,15 @@
                 "type" : "number"
             }
         }
+      },
+      "Image" : {
+          "type" : "object",
+          "properties" : {
+              "basename" : {
+                  "type" : "string",
+                  "example" : "1589189004789.png"
+              }
+          }
       },
       "body" : {
         "type" : "object",
