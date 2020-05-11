@@ -5,10 +5,11 @@ const Event = require('./events');
 const fs = require('fs');
 const path = require('path');
 
+
 const Description = new Schema({
     obstacle: {
         type: String,
-        enum: ['sidewalk', 'crosswalk', 'pavement', 'slope', 'accessibility', 'other'],
+        enum: ['curb ramp', 'missing curb ramp', 'surface problem', 'obstacle', 'width', 'security', 'slope', 'no problem', 'bonus'],
         required: [true, 'obstacle is required']
     },
     freeText: {

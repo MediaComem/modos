@@ -56,8 +56,14 @@ const deleteObservation = createAsyncRoute(async (req, res) => {
 
 const getObstacles = createAsyncRoute(async (req, res) => {
     const obstacles = await Observation.schema.obj.description.obj.obstacle.enum;
-    console.log(obstacles);
-    if (obstacles) return res.status(200).json(obstacles);
+    if (obstacles) {
+        let isFrontend = req.query.frontend;
+        if (isFrontend) {
+            const obstaclesForFrontend = obstacles.slice(0, 7);
+            return res.status(200).json(obstaclesForFrontend);
+        }
+        return res.status(200).json(obstacles);
+    }
     return error.sendError(res, 404, 'Obstacles does not exist');
 });
 

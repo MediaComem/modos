@@ -877,6 +877,14 @@
         "tags" : [ "observations" ],
         "summary" : "get the obstacles list",
         "operationId" : "getObstacles",
+        "parameters" : [ {
+            "name" : "frontend",
+            "in" : "query",
+            "schema" : {
+                "type" : "boolean"
+            },
+            "description" : "True to only have the frontend related obstacles"
+        } ],
         "responses" : {
           "200" : {
             "description" : "obstacles list",
@@ -884,7 +892,7 @@
               "application/json" : {
                 "schema" : {
                   "type" : "object",
-                  "example" : [ "sidewalk", "crosswalk", "pavement", "slope", "accessibility", "other" ]
+                  "example" : ["curb ramp", "missing curb ramp", "surface problem", "obstacle", "width", "security", "slope", "no problem", "bonus"]
                 }
               }
             }
