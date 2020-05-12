@@ -1181,6 +1181,9 @@
             },
             "longitude" : {
                 "type" : "number"
+            },
+            "altitude" : {
+              "type" : "number"
             }
         }
       },
