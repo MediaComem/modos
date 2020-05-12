@@ -7,6 +7,7 @@ from dataclasses import dataclass
 import pandas as pd
 import requests
 
+
 #################################################
 #  Global variables
 #################################################
@@ -17,15 +18,15 @@ EMAIL="modos@mail.com"
 PASSWORD="modos1234"
 
 categories = [
-    'curb ramp',
-    'missing curb ramp',
-    'surface problem',
+    'coating',
     'obstacle',
-    'width',
     'security',
+    'passability',
     'slope',
-    'bonus',
-    'no problem'
+    'width',
+    'other',
+    'noproblem',
+    'unlabelled',
 ]
 
 

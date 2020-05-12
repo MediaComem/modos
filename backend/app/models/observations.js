@@ -1,7 +1,6 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 let ObjectId = Schema.Types.ObjectId;
-const Event = require('./events');
 const fs = require('fs');
 const path = require('path');
 const config = require('../configs/config');
@@ -9,7 +8,7 @@ const config = require('../configs/config');
 const Description = new Schema({
     obstacle: {
         type: String,
-        enum: ['curb ramp', 'missing curb ramp', 'surface problem', 'obstacle', 'width', 'security', 'slope', 'no problem', 'bonus'],
+        enum: ['coating', 'obstacle', 'security', 'passability', 'slope', 'width', 'other', 'noproblem', 'unlabelled'],
         required: [true, 'obstacle is required']
     },
     freeText: {
