@@ -14,8 +14,8 @@ import requests
 BASE_URL = 'https://modos.heig-vd.ch/api/v1'
 HEADERS = {'Content-Type': 'application/json'}
 
-EMAIL="modos@mail.com"
-PASSWORD="modos1234"
+EMAIL="gopro@mail.com"
+PASSWORD="gopro1234"
 
 categories = [
     'coating',
@@ -85,12 +85,14 @@ if __name__ == '__main__':
         print(f'Inserting observation [{i+1}/{num_observations}]')
         with open(observations_path + '/' + row['FILE'], 'rb') as img:
             imageData = base64.b64encode(img.read())
+            # dirty hack to insert fake metadata (but since the backend is 
+            # dropping them...)
             imageData = "data:image/png;base64," + imageData.decode()
 
         data = {
             'description': {
                 'obstacle': categories[row['Category'] - 1],
-                'freeText': row['Commentary'],
+                'freeText': row['Commentaire'],
                 'impact': row['Severity']
             },
             "imageData": imageData,
