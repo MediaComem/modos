@@ -49,7 +49,7 @@ class Credentials(JSONDataclass):
 
     def authentify(self):
         """
-        Authentify with the setted credentials and update `HEADER` by adding
+        Authentify with the set credentials and update `HEADER` by adding
         an Authorization header.
         """
         try:

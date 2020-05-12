@@ -68,6 +68,9 @@ const Location = new Schema({
     },
     longitude: {
         type: Number,
+    },
+    altitude: {
+        type: Number,
     }
 });
 
