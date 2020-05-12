@@ -72,9 +72,7 @@ The header is the following:
 | title | password | beginning | ending | objective | numberOfImages |
 |-------|----------|-----------|--------|-----------|----------------|
 
-<<<<<<< HEAD
-All the fields are required, except for `password` which is optional.
-=======
+
 All the fields are required, except for `password` which is optional.
 
 beginning and ending fields must be defined with the following format : 
@@ -82,4 +80,3 @@ beginning and ending fields must be defined with the following format :
 `YYYY.MM.DD hh:mm (UTC ISO8601)`
 
 NB : Be careful if editing CSV files with Microsoft Excel the date format will automatically change depending on your regional settings. 
->>>>>>> 550e39ffc2d666109b0a96b39e78cec4df10073b
