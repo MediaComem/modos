@@ -169,10 +169,10 @@
 				 <td></td>
 				</tr>
 				<tr>
-				 <td><span id="owner">owner</span></td>
+				 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="creator">creator</span></td>
 				 <td>text</td>
 				 <td>2147483647</td>
-				 <td title=''></td>
+				 <td title='nullable'>√</td>
 				 <td title=''></td>
 				 <td>null</td>
 				 <td>
@@ -181,6 +181,39 @@
 				 </td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
+				   <tr>
+					<td title="events.creator references users.username via events_creator_fkey">
+						<a href='users.html'>users</a><span class='relatedKey'>.username</span>
+					</td>
+					<td class="constraint detail">
+						events_creator_fkey <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="user_id">user_id</span></td>
+				 <td>int4</td>
+				 <td>10</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				   <tr>
+					<td title="events.user_id references users.id via events_user_id_fkey">
+						<a href='users.html'>users</a><span class='relatedKey'>.id</span>
+					</td>
+					<td class="constraint detail">
+						events_user_id_fkey <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
 				  </table>					 
 				 </td>
 				 <td></td>
@@ -272,7 +305,7 @@
 				</tr>
 								</tbody>
 				</table>
-				<p title='8 columns'>Table contained <span id="recordNumber">0</span> rows<p/>
+				<p title='9 columns'>Table contained <span id="recordNumber">0</span> rows<p/>
 			</div>
 		</div>
 		<div class="box box-primary">		
@@ -331,27 +364,28 @@
             <div class="tab-content no-padding">            
 				<div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="images.html" title="images" alt="" coords="561,5,719,269">
-<area shape="rect" id="node2" href="events.html" title="events" alt="" coords="5,225,283,529">
-<area shape="rect" id="node3" href="observations.html" title="observations" alt="" coords="327,45,517,251">
-<area shape="rect" id="node4" href="users_events.html" title="users_events" alt="" coords="335,304,509,456">
+<area shape="rect" id="node1" href="events.html" title="events" alt="" coords="255,367,532,700">
+<area shape="rect" id="node2" href="users.html" title="users" alt="" coords="5,291,211,525">
+<area shape="rect" id="node3" href="images.html" title="images" alt="" coords="811,5,1075,269">
+<area shape="rect" id="node4" href="observations.html" title="observations" alt="" coords="576,123,767,328">
+<area shape="rect" id="node5" href="users_events.html" title="users_events" alt="" coords="585,345,758,497">
 </map>
 
 					<a name='diagram'><img id='oneDegreeImg' src='../diagrams/events.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
 				</div>
 				<div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="descriptions.html" title="descriptions" alt="" coords="561,393,729,481">
-<area shape="rect" id="node2" href="observations.html" title="observations" alt="" coords="327,308,517,513">
-<area shape="rect" id="node4" href="edges.html" title="edges" alt="" coords="66,93,222,181">
-<area shape="rect" id="node7" href="events.html" title="events" alt="" coords="5,587,283,891">
-<area shape="rect" id="node8" href="users.html" title="users" alt="" coords="84,269,204,357">
-<area shape="rect" id="node3" href="edges_images.html" title="edges_images" alt="" coords="797,5,979,93">
-<area shape="rect" id="node5" href="images.html" title="images" alt="" coords="567,112,724,376">
-<area shape="rect" id="node6" href="cameras.html" title="cameras" alt="" coords="352,203,492,291">
-<area shape="rect" id="node9" href="observations_images.html" title="observations_images" alt="" coords="773,337,1003,425">
-<area shape="rect" id="node10" href="user_images.html" title="user_images" alt="" coords="803,112,973,200">
-<area shape="rect" id="node11" href="users_events.html" title="users_events" alt="" coords="335,531,509,683">
+<area shape="rect" id="node1" href="descriptions.html" title="descriptions" alt="" coords="859,373,1027,461">
+<area shape="rect" id="node2" href="observations.html" title="observations" alt="" coords="576,252,767,457">
+<area shape="rect" id="node4" href="edges.html" title="edges" alt="" coords="315,5,471,93">
+<area shape="rect" id="node6" href="events.html" title="events" alt="" coords="255,393,532,727">
+<area shape="rect" id="node7" href="users.html" title="users" alt="" coords="5,372,211,607">
+<area shape="rect" id="node3" href="edges_images.html" title="edges_images" alt="" coords="1143,21,1324,109">
+<area shape="rect" id="node5" href="images.html" title="images" alt="" coords="811,56,1075,320">
+<area shape="rect" id="node8" href="cameras.html" title="cameras" alt="" coords="601,147,741,235">
+<area shape="rect" id="node9" href="observations_images.html" title="observations_images" alt="" coords="1119,195,1348,283">
+<area shape="rect" id="node10" href="user_images.html" title="user_images" alt="" coords="1149,488,1318,576">
+<area shape="rect" id="node11" href="users_events.html" title="users_events" alt="" coords="585,475,758,627">
 </map>
 
 					<a name='diagram'><img id='twodegreesDegreeImg' src='../diagrams/events.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							

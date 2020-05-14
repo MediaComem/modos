@@ -7,8 +7,8 @@ edges_images
 descriptions
 images
 observations
+events
 ploscategories
 cameras
-events
 edges
 users

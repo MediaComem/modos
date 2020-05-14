@@ -33,22 +33,22 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: '1.0'
     },
-    avg_obstacle: {
+    avg_obstacles: {
       type: DataTypes.REAL,
       allowNull: false,
       defaultValue: '1.0'
     },
-    avg_curb_ramps: {
-      type: DataTypes.REAL,
-      allowNull: false,
-      defaultValue: '1.0'
-    },
-    avg_crosswalks: {
+    avg_steps: {
       type: DataTypes.REAL,
       allowNull: false,
       defaultValue: '1.0'
     },
     avg_coatings: {
+      type: DataTypes.REAL,
+      allowNull: false,
+      defaultValue: '1.0'
+    },
+    avg_security: {
       type: DataTypes.REAL,
       allowNull: false,
       defaultValue: '1.0'
@@ -59,6 +59,16 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: '1.0'
     },
     avg_widths: {
+      type: DataTypes.REAL,
+      allowNull: false,
+      defaultValue: '1.0'
+    },
+    avg_other-negatives: {
+      type: DataTypes.REAL,
+      allowNull: false,
+      defaultValue: '1.0'
+    },
+    avg_positives: {
       type: DataTypes.REAL,
       allowNull: false,
       defaultValue: '1.0'

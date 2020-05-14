@@ -106,9 +106,273 @@
 				</thead>
 				<tbody>
 					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>gps_map_datum</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;WGS-84&#39;::text</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>cameras</td>
+					 <td>Table</td>
+					 <td>cam_d3</td>
+					 <td>float8</td>
+					 <td>17</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>events</td>
+					 <td>Table</td>
+					 <td>title</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>exif_model</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>horse</td>
+					 <td>footway</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>users</td>
+					 <td>Table</td>
+					 <td>user_privileges</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;restricted&#39;::character varying</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>event_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>key</td>
+					 <td>int2</td>
+					 <td>5</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>observations</td>
+					 <td>Table</td>
+					 <td>edist</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>source</td>
+					 <td>int8</td>
+					 <td>19</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>gps_latitude</td>
+					 <td>float8</td>
+					 <td>17</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>nodes</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>osmid</td>
+					 <td>int8</td>
+					 <td>19</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>events</td>
+					 <td>Table</td>
+					 <td>updated_at</td>
+					 <td>timestamptz</td>
+					 <td>35</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>nodes</td>
+					 <td>Table</td>
+					 <td>lon</td>
+					 <td>float8</td>
+					 <td>17</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>availability</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;privately-available&#39;::character varying</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>exif_make</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ploscategories</td>
+					 <td>Table</td>
+					 <td>category</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>events</td>
+					 <td>Table</td>
+					 <td>ending</td>
+					 <td>timestamptz</td>
+					 <td>35</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>nodes</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>geom</td>
+					 <td>geometry</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges_images</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>edge_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>uri</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>avg_slopes</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>1.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>nodes</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>cameras</td>
+					 <td>Table</td>
+					 <td>cam_d4</td>
+					 <td>float8</td>
+					 <td>17</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>foot</td>
 					 <td>varchar</td>
 					 <td>2147483647</td>
 					 <td title='nullable'>√</td>
@@ -119,9 +383,119 @@
 					<tr>
 					 <td>images</td>
 					 <td>Table</td>
-					 <td>uri</td>
+					 <td>gps_longitude</td>
+					 <td>float8</td>
+					 <td>17</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ploscategories</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>bicycle</td>
 					 <td>varchar</td>
-					 <td>2048</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>users</td>
+					 <td>Table</td>
+					 <td>is_super_admin</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>false</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>events</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>user_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>observations</td>
+					 <td>Table</td>
+					 <td>position</td>
+					 <td>geometry</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>cam_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>events</td>
+					 <td>Table</td>
+					 <td>objective</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>gps_timestamp</td>
+					 <td>timetz</td>
+					 <td>21</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>length</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>nodes</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>uuid</td>
+					 <td>uuid</td>
+					 <td>2147483647</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
@@ -141,7 +515,18 @@
 					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>tactile_paving</td>
+					 <td>avg_obstacles</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>1.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>layer</td>
 					 <td>varchar</td>
 					 <td>2147483647</td>
 					 <td title='nullable'>√</td>
@@ -154,52 +539,63 @@
 					 <td>Table</td>
 					 <td>last_name</td>
 					 <td>varchar</td>
-					 <td>255</td>
+					 <td>256</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>events</td>
+					 <td>routes</td>
 					 <td>Table</td>
-					 <td>beginning</td>
-					 <td>timestamptz</td>
-					 <td>35</td>
-					 <td title='nullable'>√</td>
+					 <td>route_plos</td>
+					 <td>float8</td>
+					 <td>17</td>
 					 <td title=''></td>
-					 <td>null</td>
+					 <td title=''></td>
+					 <td>1.0</td>
 					 <td></td>
 					</tr>
 					<tr>
 					 <td>users</td>
 					 <td>Table</td>
-					 <td>organization</td>
-					 <td>text</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>email</td>
+					 <td>citext</td>
 					 <td>2147483647</td>
 					 <td title=''></td>
 					 <td title=''></td>
-					 <td>&#39;private&#39;::text</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>observations_images</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>image_id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
 					 <td>null</td>
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>nodes</td>
+					 <td>users</td>
 					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>osmid</td>
-					 <td>int8</td>
-					 <td>19</td>
+					 <td>lang_iso_639_3</td>
+					 <td>varchar</td>
+					 <td>2</td>
+					 <td title='nullable'>√</td>
 					 <td title=''></td>
+					 <td>&#39;FRA&#39;::character varying</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>cameras</td>
+					 <td>Table</td>
+					 <td>cam_um_sensor_pitch_w</td>
+					 <td>float8</td>
+					 <td>17</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>surface</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
 					 <td title=''></td>
 					 <td>null</td>
 					 <td></td>
@@ -207,9 +603,20 @@
 					<tr>
 					 <td>users</td>
 					 <td>Table</td>
-					 <td>password</td>
-					 <td>varchar</td>
-					 <td>255</td>
+					 <td>letter</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>false</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>observations</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>int4</td>
+					 <td>10</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
@@ -218,10 +625,164 @@
 					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>foot</td>
+					 <td>highway</td>
 					 <td>varchar</td>
 					 <td>2147483647</td>
 					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>descriptions</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>class_label</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>motor_vehicle</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>avg_positives</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>1.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>kerb</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>wheelchair</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>horse</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>plos</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>1.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>gps_latitude_ref</td>
+					 <td>bpchar</td>
+					 <td>1</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;E&#39;::bpchar</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>avg_coatings</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>1.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>vehicle</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_images</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>routes</td>
+					 <td>Table</td>
+					 <td>route_wplos</td>
+					 <td>float8</td>
+					 <td>17</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>1.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
 					 <td></td>
@@ -238,75 +799,9 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>edges_images</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>edge_id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>routes</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>events</td>
-					 <td>Table</td>
-					 <td>owner</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>railway</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>ploscategories</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>lit</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>observations</td>
-					 <td>Table</td>
-					 <td>position</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>geom</td>
 					 <td>geometry</td>
 					 <td>2147483647</td>
 					 <td title=''></td>
@@ -326,12 +821,122 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>routes</td>
+					 <td>observations</td>
 					 <td>Table</td>
-					 <td>geom</td>
-					 <td>geometry</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>user_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>descriptions</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>obs_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>exif_image_height_px</td>
+					 <td>uint2</td>
 					 <td>2147483647</td>
 					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>events</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>users</td>
+					 <td>Table</td>
+					 <td>first_name</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>observations_images</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>observation_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>avg_steps</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>1.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>motorcycle</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ploscategories</td>
+					 <td>Table</td>
+					 <td>time_weight</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>1.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>users</td>
+					 <td>Table</td>
+					 <td>notifications</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>false</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>access</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
 					 <td title=''></td>
 					 <td>null</td>
 					 <td></td>
@@ -350,18 +955,40 @@
 					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>avg_obstacle</td>
-					 <td>float4</td>
-					 <td>8</td>
+					 <td>railway</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
 					 <td title=''></td>
-					 <td title=''></td>
-					 <td>1.0</td>
+					 <td>null</td>
 					 <td></td>
 					</tr>
 					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>avg_slopes</td>
+					 <td>smoothness</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>oneway</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>avg_security</td>
 					 <td>float4</td>
 					 <td>8</td>
 					 <td title=''></td>
@@ -370,33 +997,66 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>users</td>
+					 <td>images</td>
 					 <td>Table</td>
-					 <td>is_super_admin</td>
-					 <td>bool</td>
-					 <td>1</td>
-					 <td title='nullable'>√</td>
+					 <td>state</td>
+					 <td>varchar</td>
+					 <td>256</td>
 					 <td title=''></td>
-					 <td>false</td>
+					 <td title=''></td>
+					 <td>&#39;uploaded&#39;::character varying</td>
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>cameras</td>
+					 <td>users</td>
 					 <td>Table</td>
-					 <td>cam_d4</td>
-					 <td>float8</td>
-					 <td>17</td>
+					 <td>organization</td>
+					 <td>text</td>
+					 <td>2147483647</td>
 					 <td title=''></td>
 					 <td title=''></td>
-					 <td>0.0</td>
+					 <td>&#39;private&#39;::text</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>gps_dop</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>users_events</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>user_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>avg_widths</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>1.0</td>
 					 <td></td>
 					</tr>
 					<tr>
 					 <td>images</td>
 					 <td>Table</td>
 					 <td>azim</td>
-					 <td>float8</td>
-					 <td>17</td>
+					 <td>angle</td>
+					 <td>2147483647</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
@@ -405,7 +1065,7 @@
 					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>sidewalk</td>
+					 <td>bridge</td>
 					 <td>varchar</td>
 					 <td>2147483647</td>
 					 <td title='nullable'>√</td>
@@ -425,11 +1085,121 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>nodes</td>
+					 <td>observations</td>
 					 <td>Table</td>
-					 <td>lat</td>
+					 <td>has_image</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>false</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>name</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_images</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>user_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>observations_images</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>exif_focal_length</td>
 					 <td>float8</td>
 					 <td>17</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>exif_modify_date</td>
+					 <td>timestamptz</td>
+					 <td>35</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>cameras</td>
+					 <td>Table</td>
+					 <td>cam_d5</td>
+					 <td>float8</td>
+					 <td>17</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>step_count</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>users</td>
+					 <td>Table</td>
+					 <td>created_at</td>
+					 <td>timestamptz</td>
+					 <td>35</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>users</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>googleid</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>routes</td>
+					 <td>Table</td>
+					 <td>geom</td>
+					 <td>geometry</td>
+					 <td>2147483647</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
@@ -447,40 +1217,7 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>descriptions</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
 					 <td>images</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>event_id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>users</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>descriptions</td>
 					 <td>Table</td>
 					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>obs_id</td>
 					 <td>int4</td>
@@ -491,14 +1228,36 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>edges</td>
+					 <td>observations</td>
 					 <td>Table</td>
-					 <td>highway</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
+					 <td>created_at</td>
+					 <td>timestamptz</td>
+					 <td>35</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>now()</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>observations_images</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>image_id</td>
+					 <td>int4</td>
+					 <td>10</td>
 					 <td title='nullable'>√</td>
 					 <td title=''></td>
 					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>data_source</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;mobapp&#39;::character varying</td>
 					 <td></td>
 					</tr>
 					<tr>
@@ -513,7 +1272,106 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>edges</td>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>url</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>users</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>username</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>exif_image_width_px</td>
+					 <td>uint2</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>events</td>
+					 <td>Table</td>
+					 <td>beginning</td>
+					 <td>timestamptz</td>
+					 <td>35</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>license</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;copyright&#39;::character varying</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges_images</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>image_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>cameras</td>
+					 <td>Table</td>
+					 <td>cam_um_sensor_pitch_h</td>
+					 <td>float8</td>
+					 <td>17</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>gps_altitude</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>gps_position_error</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>50</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>descriptions</td>
 					 <td>Table</td>
 					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
 					 <td>int4</td>
@@ -526,95 +1384,40 @@
 					<tr>
 					 <td>users</td>
 					 <td>Table</td>
-					 <td>letter</td>
-					 <td>bool</td>
+					 <td>password</td>
+					 <td>varchar</td>
+					 <td>256</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>gps_longitude_ref</td>
+					 <td>bpchar</td>
 					 <td>1</td>
-					 <td title='nullable'>√</td>
 					 <td title=''></td>
-					 <td>false</td>
+					 <td title=''></td>
+					 <td>&#39;N&#39;::bpchar</td>
 					 <td></td>
 					</tr>
 					<tr>
 					 <td>images</td>
 					 <td>Table</td>
-					 <td>state</td>
-					 <td>varchar</td>
-					 <td>255</td>
+					 <td>gps_processing_method</td>
+					 <td>text</td>
+					 <td>2147483647</td>
 					 <td title=''></td>
 					 <td title=''></td>
-					 <td>&#39;uploaded&#39;::character varying</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>images</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>images</td>
-					 <td>Table</td>
-					 <td>edist</td>
-					 <td>float4</td>
-					 <td>8</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>ploscategories</td>
-					 <td>Table</td>
-					 <td>time_weight</td>
-					 <td>float4</td>
-					 <td>8</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>1.0</td>
+					 <td>&#39;GPS&#39;::text</td>
 					 <td></td>
 					</tr>
 					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>key</td>
-					 <td>int2</td>
-					 <td>5</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>avg_crosswalks</td>
-					 <td>float4</td>
-					 <td>8</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>1.0</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>users</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>facebookid</td>
-					 <td>varchar</td>
-					 <td>255</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>footway</td>
+					 <td>lit</td>
 					 <td>varchar</td>
 					 <td>2147483647</td>
 					 <td title='nullable'>√</td>
@@ -625,17 +1428,6 @@
 					<tr>
 					 <td>users</td>
 					 <td>Table</td>
-					 <td>lang</td>
-					 <td>varchar</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>&#39;FR&#39;::character varying</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>observations</td>
-					 <td>Table</td>
 					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
 					 <td>int4</td>
 					 <td>10</td>
@@ -647,18 +1439,18 @@
 					<tr>
 					 <td>images</td>
 					 <td>Table</td>
-					 <td>license</td>
-					 <td>varchar</td>
-					 <td>255</td>
+					 <td>roll</td>
+					 <td>angle</td>
+					 <td>2147483647</td>
 					 <td title=''></td>
 					 <td title=''></td>
-					 <td>&#39;copyright&#39;::character varying</td>
+					 <td>0.0</td>
 					 <td></td>
 					</tr>
 					<tr>
 					 <td>users</td>
 					 <td>Table</td>
-					 <td>mobility</td>
+					 <td>helper</td>
 					 <td>text</td>
 					 <td>2147483647</td>
 					 <td title='nullable'>√</td>
@@ -669,23 +1461,12 @@
 					<tr>
 					 <td>images</td>
 					 <td>Table</td>
-					 <td>data_source</td>
-					 <td>varchar</td>
-					 <td>255</td>
+					 <td>gps_differential</td>
+					 <td>bool</td>
+					 <td>1</td>
 					 <td title=''></td>
 					 <td title=''></td>
-					 <td>&#39;mobapp&#39;::character varying</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>osmid</td>
-					 <td>int8</td>
-					 <td>19</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
+					 <td>(0)::boolean</td>
 					 <td></td>
 					</tr>
 					<tr>
@@ -693,6 +1474,17 @@
 					 <td>Table</td>
 					 <td>snap_geom</td>
 					 <td>geometry</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>uuid</td>
+					 <td>uuid</td>
 					 <td>2147483647</td>
 					 <td title=''></td>
 					 <td title=''></td>
@@ -713,185 +1505,9 @@
 					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>incline</td>
+					 <td>handrail</td>
 					 <td>varchar</td>
 					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>observations</td>
-					 <td>Table</td>
-					 <td>edist</td>
-					 <td>float4</td>
-					 <td>8</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>users</td>
-					 <td>Table</td>
-					 <td>helper</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>users</td>
-					 <td>Table</td>
-					 <td>notifications</td>
-					 <td>bool</td>
-					 <td>1</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>false</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>observations</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>eid</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>nodes</td>
-					 <td>Table</td>
-					 <td>lon</td>
-					 <td>float8</td>
-					 <td>17</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>users_events</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>user_id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>cameras</td>
-					 <td>Table</td>
-					 <td>cam_d1</td>
-					 <td>float8</td>
-					 <td>17</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>0.0</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>users</td>
-					 <td>Table</td>
-					 <td>is_validator</td>
-					 <td>bool</td>
-					 <td>1</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>false</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>motorcycle</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>service</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>users</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>email</td>
-					 <td>citext</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>name</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>images</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>obs_id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>nodes</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>geom</td>
-					 <td>geometry</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>images</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>cam_id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>observations</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>event_id</td>
-					 <td>int4</td>
-					 <td>10</td>
 					 <td title='nullable'>√</td>
 					 <td title=''></td>
 					 <td>null</td>
@@ -909,11 +1525,22 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>user_images</td>
+					 <td>edges</td>
 					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>user_id</td>
-					 <td>int4</td>
-					 <td>10</td>
+					 <td>service</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>events</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>creator</td>
+					 <td>text</td>
+					 <td>2147483647</td>
 					 <td title='nullable'>√</td>
 					 <td title=''></td>
 					 <td>null</td>
@@ -922,40 +1549,7 @@
 					<tr>
 					 <td>nodes</td>
 					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>smoothness</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>handrail</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>images</td>
-					 <td>Table</td>
-					 <td>tilt</td>
+					 <td>lat</td>
 					 <td>float8</td>
 					 <td>17</td>
 					 <td title=''></td>
@@ -964,9 +1558,20 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>nodes</td>
+					 <td>cameras</td>
 					 <td>Table</td>
-					 <td>highway</td>
+					 <td>cam_make</td>
+					 <td>cam_make</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>incline</td>
 					 <td>varchar</td>
 					 <td>2147483647</td>
 					 <td title='nullable'>√</td>
@@ -975,29 +1580,73 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>images</td>
+					 <td>edges</td>
 					 <td>Table</td>
-					 <td>availability</td>
+					 <td>tactile_paving</td>
 					 <td>varchar</td>
-					 <td>255</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
 					 <td title=''></td>
-					 <td title=''></td>
-					 <td>&#39;privately-available&#39;::character varying</td>
+					 <td>null</td>
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>cameras</td>
+					 <td>users</td>
 					 <td>Table</td>
-					 <td>cam_make</td>
+					 <td>is_validator</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>false</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>users</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>facebookid</td>
 					 <td>varchar</td>
-					 <td>255</td>
+					 <td>256</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>exif_create_date</td>
+					 <td>timestamptz</td>
+					 <td>35</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>users_events</td>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>gps_satellites</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>events</td>
+					 <td>Table</td>
+					 <td>created_at</td>
+					 <td>timestamptz</td>
+					 <td>35</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>observations</td>
 					 <td>Table</td>
 					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>event_id</td>
 					 <td>int4</td>
@@ -1008,297 +1657,11 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>users</td>
-					 <td>Table</td>
-					 <td>first_name</td>
-					 <td>varchar</td>
-					 <td>255</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>source</td>
-					 <td>int8</td>
-					 <td>19</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>ploscategories</td>
-					 <td>Table</td>
-					 <td>weight</td>
-					 <td>float4</td>
-					 <td>8</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>0.0</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>cameras</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>users</td>
-					 <td>Table</td>
-					 <td>helper_frequency</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>vehicle</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
 					 <td>images</td>
 					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>eid</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>avg_widths</td>
-					 <td>float4</td>
-					 <td>8</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>1.0</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>events</td>
-					 <td>Table</td>
-					 <td>title</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>surface</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>descriptions</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>class_label</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>events</td>
-					 <td>Table</td>
-					 <td>ending</td>
-					 <td>timestamptz</td>
-					 <td>35</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>motor_vehicle</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>avg_curb_ramps</td>
-					 <td>float4</td>
-					 <td>8</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>1.0</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>images</td>
-					 <td>Table</td>
-					 <td>px_w</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>bicycle</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>tunnel</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>target</td>
-					 <td>int8</td>
-					 <td>19</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>user_images</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>step_count</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>tracktype</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>cameras</td>
-					 <td>Table</td>
-					 <td>cam_d3</td>
-					 <td>float8</td>
-					 <td>17</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>0.0</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>width</td>
-					 <td>float4</td>
-					 <td>8</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>events</td>
-					 <td>Table</td>
-					 <td>updated_at</td>
-					 <td>timestamptz</td>
-					 <td>35</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>bridge</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>uuid</td>
-					 <td>uuid</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>users</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>googleid</td>
-					 <td>varchar</td>
-					 <td>255</td>
+					 <td>gps_datestamp</td>
+					 <td>date</td>
+					 <td>13</td>
 					 <td title='nullable'>√</td>
 					 <td title=''></td>
 					 <td>null</td>
@@ -1316,47 +1679,14 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>user_images</td>
+					 <td>images</td>
 					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>image_id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
+					 <td>edist</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>observations</td>
-					 <td>Table</td>
-					 <td>created_at</td>
-					 <td>timestamptz</td>
-					 <td>35</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>now()</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>cameras</td>
-					 <td>Table</td>
-					 <td>cam_d5</td>
-					 <td>float8</td>
-					 <td>17</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>0.0</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>cameras</td>
-					 <td>Table</td>
-					 <td>cam_um_sensor_pitch_h</td>
-					 <td>float8</td>
-					 <td>17</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>0.0</td>
 					 <td></td>
 					</tr>
 					<tr>
@@ -1371,9 +1701,141 @@
 					 <td></td>
 					</tr>
 					<tr>
+					 <td>observations</td>
+					 <td>Table</td>
+					 <td>in_range</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>false</td>
+					 <td></td>
+					</tr>
+					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>wheelchair</td>
+					 <td>noexit</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>exif_focal_length_35mm</td>
+					 <td>float8</td>
+					 <td>17</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>users_events</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>event_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>train</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>gps_version_id</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>cameras</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>nodes</td>
+					 <td>Table</td>
+					 <td>highway</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>users</td>
+					 <td>Table</td>
+					 <td>mobility</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>gps_img_direction</td>
+					 <td>angle</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>osmid</td>
+					 <td>int8</td>
+					 <td>19</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>cameras</td>
+					 <td>Table</td>
+					 <td>cam_d1</td>
+					 <td>float8</td>
+					 <td>17</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>crossing</td>
 					 <td>varchar</td>
 					 <td>2147483647</td>
 					 <td title='nullable'>√</td>
@@ -1384,16 +1846,49 @@
 					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>access</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
+					 <td>width</td>
+					 <td>float4</td>
+					 <td>8</td>
 					 <td title='nullable'>√</td>
 					 <td title=''></td>
 					 <td>null</td>
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>edges_images</td>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>avg_other-negatives</td>
+					 <td>float4</td>
+					 <td>8</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>1.0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td>position</td>
+					 <td>geometry</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>data_source</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;osm&#39;::text</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>routes</td>
 					 <td>Table</td>
 					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
 					 <td>int4</td>
@@ -1426,40 +1921,7 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>images</td>
-					 <td>Table</td>
-					 <td>focal</td>
-					 <td>float8</td>
-					 <td>17</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>data_source</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>&#39;osm&#39;::text</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>users</td>
-					 <td>Table</td>
-					 <td>username</td>
-					 <td>varchar</td>
-					 <td>255</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>observations_images</td>
+					 <td>edges_images</td>
 					 <td>Table</td>
 					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
 					 <td>int4</td>
@@ -1470,120 +1932,10 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>crossing</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>users</td>
-					 <td>Table</td>
-					 <td>gender</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>description</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges_images</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>image_id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>routes</td>
-					 <td>Table</td>
-					 <td>route_wplos</td>
-					 <td>float8</td>
-					 <td>17</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>1.0</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>noexit</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>nodes</td>
-					 <td>Table</td>
-					 <td>data_source</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>&#39;osm&#39;::text</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>users</td>
-					 <td>Table</td>
-					 <td>user_privileges</td>
-					 <td>varchar</td>
-					 <td>255</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>&#39;restricted&#39;::character varying</td>
-					 <td></td>
-					</tr>
-					<tr>
 					 <td>images</td>
 					 <td>Table</td>
-					 <td>px_h</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>ploscategories</td>
-					 <td>Table</td>
-					 <td>category</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>nodes</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>uuid</td>
-					 <td>uuid</td>
+					 <td>tilt</td>
+					 <td>angle</td>
 					 <td>2147483647</td>
 					 <td title=''></td>
 					 <td title=''></td>
@@ -1593,84 +1945,7 @@
 					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>layer</td>
-					 <td>varchar</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>images</td>
-					 <td>Table</td>
-					 <td>roll</td>
-					 <td>float8</td>
-					 <td>17</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>0.0</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>geom</td>
-					 <td>geometry</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>plos</td>
-					 <td>float4</td>
-					 <td>8</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>1.0</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>length</td>
-					 <td>float4</td>
-					 <td>8</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>observations</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>user_id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>events</td>
-					 <td>Table</td>
-					 <td>objective</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>edges</td>
-					 <td>Table</td>
-					 <td>oneway</td>
+					 <td>tunnel</td>
 					 <td>varchar</td>
 					 <td>2147483647</td>
 					 <td title='nullable'>√</td>
@@ -1690,44 +1965,33 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>edges</td>
+					 <td>images</td>
 					 <td>Table</td>
-					 <td>avg_coatings</td>
-					 <td>float4</td>
-					 <td>8</td>
+					 <td>gps_measure_mode</td>
+					 <td>bpchar</td>
+					 <td>1</td>
 					 <td title=''></td>
 					 <td title=''></td>
-					 <td>1.0</td>
+					 <td>3</td>
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>observations_images</td>
+					 <td>images</td>
 					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>observation_id</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title='nullable'>√</td>
+					 <td>gps_img_direction_ref</td>
+					 <td>bpchar</td>
+					 <td>1</td>
+					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>routes</td>
+					 <td>images</td>
 					 <td>Table</td>
-					 <td>route_plos</td>
-					 <td>float8</td>
-					 <td>17</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>1.0</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>events</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>int4</td>
-					 <td>10</td>
+					 <td>urn</td>
+					 <td>text</td>
+					 <td>2147483647</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
@@ -1736,18 +2000,73 @@
 					<tr>
 					 <td>observations</td>
 					 <td>Table</td>
-					 <td>has_image</td>
-					 <td>bool</td>
-					 <td>1</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>eid</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>nodes</td>
+					 <td>Table</td>
+					 <td>data_source</td>
+					 <td>text</td>
+					 <td>2147483647</td>
 					 <td title=''></td>
 					 <td title=''></td>
-					 <td>false</td>
+					 <td>&#39;osm&#39;::text</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>users</td>
+					 <td>Table</td>
+					 <td>gender</td>
+					 <td>varchar</td>
+					 <td>2</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;na&#39;::character varying</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_images</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>image_id</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>images</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>eid</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
 					 <td></td>
 					</tr>
 					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>train</td>
+					 <td>target</td>
+					 <td>int8</td>
+					 <td>19</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>description</td>
 					 <td>varchar</td>
 					 <td>2147483647</td>
 					 <td title='nullable'>√</td>
@@ -1756,33 +2075,11 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>users</td>
+					 <td>ploscategories</td>
 					 <td>Table</td>
-					 <td>created_at</td>
-					 <td>timestamptz</td>
-					 <td>35</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>observations</td>
-					 <td>Table</td>
-					 <td>in_range</td>
-					 <td>bool</td>
-					 <td>1</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>false</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>cameras</td>
-					 <td>Table</td>
-					 <td>cam_um_sensor_pitch_w</td>
-					 <td>float8</td>
-					 <td>17</td>
+					 <td>weight</td>
+					 <td>float4</td>
+					 <td>8</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>0.0</td>
@@ -1791,7 +2088,7 @@
 					<tr>
 					 <td>edges</td>
 					 <td>Table</td>
-					 <td>kerb</td>
+					 <td>sidewalk</td>
 					 <td>varchar</td>
 					 <td>2147483647</td>
 					 <td title='nullable'>√</td>
@@ -1800,11 +2097,33 @@
 					 <td></td>
 					</tr>
 					<tr>
-					 <td>events</td>
+					 <td>images</td>
 					 <td>Table</td>
-					 <td>created_at</td>
-					 <td>timestamptz</td>
-					 <td>35</td>
+					 <td>gps_altitude_ref</td>
+					 <td>bool</td>
+					 <td>1</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>(0)::boolean</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>users</td>
+					 <td>Table</td>
+					 <td>helper_frequency</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>edges</td>
+					 <td>Table</td>
+					 <td>tracktype</td>
+					 <td>varchar</td>
+					 <td>2147483647</td>
 					 <td title='nullable'>√</td>
 					 <td title=''></td>
 					 <td>null</td>

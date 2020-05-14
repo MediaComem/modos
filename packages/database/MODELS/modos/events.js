@@ -11,9 +11,21 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    owner: {
+    creator: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true,
+      references: {
+        model: 'users',
+        key: 'username'
+      }
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'users',
+        key: 'id'
+      }
     },
     beginning: {
       type: DataTypes.DATE,

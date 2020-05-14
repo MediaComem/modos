@@ -1,8 +1,8 @@
 users
 edges
-events
 cameras
 ploscategories
+events
 observations
 images
 descriptions

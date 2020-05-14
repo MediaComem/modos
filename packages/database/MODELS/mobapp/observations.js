@@ -42,6 +42,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
+    _mobapp_image_basename: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
     eid: {
       type: DataTypes.INTEGER,
       allowNull: true,

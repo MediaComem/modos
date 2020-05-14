@@ -17,7 +17,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     email: {
       type: DataTypes.ENUM(),
@@ -25,8 +26,9 @@ module.exports = function(sequelize, DataTypes) {
       unique: true
     },
     gender: {
-      type: DataTypes.TEXT,
-      allowNull: true
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'na'
     },
     age: {
       type: DataTypes.INTEGER,
@@ -82,10 +84,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       defaultValue: false
     },
-    lang: {
+    lang_iso_639_3: {
       type: DataTypes.STRING,
       allowNull: true,
-      defaultValue: 'FR'
+      defaultValue: 'FRA'
     },
     is_validator: {
       type: DataTypes.BOOLEAN,

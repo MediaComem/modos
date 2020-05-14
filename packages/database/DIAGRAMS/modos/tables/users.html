@@ -120,6 +120,14 @@
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				   <tr>
+					<td title="events.user_id references users.id via events_user_id_fkey">
+						<a href='events.html'>events</a><span class='relatedKey'>.user_id</span>
+					</td>
+					<td class="constraint detail">
+						events_user_id_fkey <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
+				   <tr>
 					<td title="images.user_id references users.id via images_user_id_fkey">
 						<a href='images.html'>images</a><span class='relatedKey'>.user_id</span>
 					</td>
@@ -162,7 +170,7 @@
 				<tr>
 				 <td><span id="first_name">first_name</span></td>
 				 <td>varchar</td>
-				 <td>255</td>
+				 <td>256</td>
 				 <td title=''></td>
 				 <td title=''></td>
 				 <td>null</td>
@@ -179,7 +187,7 @@
 				<tr>
 				 <td><span id="last_name">last_name</span></td>
 				 <td>varchar</td>
-				 <td>255</td>
+				 <td>256</td>
 				 <td title=''></td>
 				 <td title=''></td>
 				 <td>null</td>
@@ -194,14 +202,22 @@
 				 <td></td>
 				</tr>
 				<tr>
-				 <td><span id="username">username</span></td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="username">username</span></td>
 				 <td>varchar</td>
-				 <td>255</td>
+				 <td>256</td>
 				 <td title=''></td>
 				 <td title=''></td>
 				 <td>null</td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
+				   <tr>
+					<td title="events.creator references users.username via events_creator_fkey">
+						<a href='events.html'>events</a><span class='relatedKey'>.creator</span>
+					</td>
+					<td class="constraint detail">
+						events_creator_fkey <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
 				  </table>				 
 				 </td>
 				 <td>
@@ -229,11 +245,11 @@
 				</tr>
 				<tr>
 				 <td><span id="gender">gender</span></td>
-				 <td>text</td>
-				 <td>2147483647</td>
-				 <td title='nullable'>√</td>
+				 <td>varchar</td>
+				 <td>2</td>
 				 <td title=''></td>
-				 <td>null</td>
+				 <td title=''></td>
+				 <td>&#39;na&#39;::character varying</td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				  </table>				 
@@ -315,7 +331,7 @@
 				<tr>
 				 <td><span id="password">password</span></td>
 				 <td>varchar</td>
-				 <td>255</td>
+				 <td>256</td>
 				 <td title=''></td>
 				 <td title=''></td>
 				 <td>null</td>
@@ -366,7 +382,7 @@
 				<tr>
 				 <td><span id="user_privileges">user_privileges</span></td>
 				 <td>varchar</td>
-				 <td>255</td>
+				 <td>256</td>
 				 <td title=''></td>
 				 <td title=''></td>
 				 <td>&#39;restricted&#39;::character varying</td>
@@ -383,7 +399,7 @@
 				<tr>
 				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="googleid">googleid</span></td>
 				 <td>varchar</td>
-				 <td>255</td>
+				 <td>256</td>
 				 <td title='nullable'>√</td>
 				 <td title=''></td>
 				 <td>null</td>
@@ -400,7 +416,7 @@
 				<tr>
 				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="facebookid">facebookid</span></td>
 				 <td>varchar</td>
-				 <td>255</td>
+				 <td>256</td>
 				 <td title='nullable'>√</td>
 				 <td title=''></td>
 				 <td>null</td>
@@ -449,12 +465,12 @@
 				 <td></td>
 				</tr>
 				<tr>
-				 <td><span id="lang">lang</span></td>
+				 <td><span id="lang_iso_639_3">lang_iso_639_3</span></td>
 				 <td>varchar</td>
-				 <td>10</td>
+				 <td>2</td>
 				 <td title='nullable'>√</td>
 				 <td title=''></td>
-				 <td>&#39;FR&#39;::character varying</td>
+				 <td>&#39;FRA&#39;::character varying</td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				  </table>				 
@@ -540,6 +556,12 @@
 				  <td>email</td>
 				 </tr>				 
 				 <tr>
+				  <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> username_unique</td>
+				  <td>Must be unique</td>
+				  <td><span title='Ascending'>Asc</span></td>
+				  <td>username</td>
+				 </tr>				 
+				 <tr>
 				  <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> users_facebookid_key</td>
 				  <td>Must be unique</td>
 				  <td><span title='Ascending'>Asc</span></td>
@@ -578,28 +600,29 @@
             <div class="tab-content no-padding">            
 				<div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="images.html" title="images" alt="" coords="624,87,781,351">
-<area shape="rect" id="node2" href="observations.html" title="observations" alt="" coords="389,204,580,409">
-<area shape="rect" id="node3" href="users.html" title="users" alt="" coords="5,177,345,863">
-<area shape="rect" id="node4" href="user_images.html" title="user_images" alt="" coords="825,5,995,157">
-<area shape="rect" id="node5" href="users_events.html" title="users_events" alt="" coords="398,427,571,579">
+<area shape="rect" id="node1" href="events.html" title="events" alt="" coords="389,243,540,419">
+<area shape="rect" id="node2" href="users.html" title="users" alt="" coords="5,145,345,831">
+<area shape="rect" id="node3" href="images.html" title="images" alt="" coords="819,109,1083,373">
+<area shape="rect" id="node4" href="observations.html" title="observations" alt="" coords="584,271,775,476">
+<area shape="rect" id="node5" href="user_images.html" title="user_images" alt="" coords="1127,5,1296,157">
+<area shape="rect" id="node6" href="users_events.html" title="users_events" alt="" coords="593,101,766,253">
 </map>
 
 					<a name='diagram'><img id='oneDegreeImg' src='../diagrams/users.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
 				</div>
 				<div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="descriptions.html" title="descriptions" alt="" coords="624,436,792,524">
-<area shape="rect" id="node2" href="observations.html" title="observations" alt="" coords="389,392,580,597">
-<area shape="rect" id="node4" href="edges.html" title="edges" alt="" coords="97,44,253,132">
-<area shape="rect" id="node7" href="events.html" title="events" alt="" coords="112,852,239,940">
-<area shape="rect" id="node8" href="users.html" title="users" alt="" coords="5,149,345,835">
-<area shape="rect" id="node3" href="edges_images.html" title="edges_images" alt="" coords="860,5,1041,93">
-<area shape="rect" id="node5" href="images.html" title="images" alt="" coords="629,155,787,419">
-<area shape="rect" id="node6" href="cameras.html" title="cameras" alt="" coords="415,245,555,333">
-<area shape="rect" id="node9" href="observations_images.html" title="observations_images" alt="" coords="836,372,1065,460">
-<area shape="rect" id="node10" href="user_images.html" title="user_images" alt="" coords="866,111,1035,263">
-<area shape="rect" id="node11" href="users_events.html" title="users_events" alt="" coords="398,641,571,793">
+<area shape="rect" id="node1" href="descriptions.html" title="descriptions" alt="" coords="872,437,1040,525">
+<area shape="rect" id="node2" href="observations.html" title="observations" alt="" coords="589,396,780,601">
+<area shape="rect" id="node4" href="edges.html" title="edges" alt="" coords="389,153,545,241">
+<area shape="rect" id="node6" href="events.html" title="events" alt="" coords="392,501,543,677">
+<area shape="rect" id="node7" href="users.html" title="users" alt="" coords="5,431,345,1116">
+<area shape="rect" id="node3" href="edges_images.html" title="edges_images" alt="" coords="1156,5,1337,93">
+<area shape="rect" id="node5" href="images.html" title="images" alt="" coords="824,156,1088,420">
+<area shape="rect" id="node8" href="cameras.html" title="cameras" alt="" coords="615,291,755,379">
+<area shape="rect" id="node9" href="observations_images.html" title="observations_images" alt="" coords="1132,373,1361,461">
+<area shape="rect" id="node10" href="user_images.html" title="user_images" alt="" coords="1162,111,1331,263">
+<area shape="rect" id="node11" href="users_events.html" title="users_events" alt="" coords="598,655,771,807">
 </map>
 
 					<a name='diagram'><img id='twodegreesDegreeImg' src='../diagrams/users.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							

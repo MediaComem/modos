@@ -5,7 +5,7 @@
          <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4">
             <child column="cam_id" foreignKey="images_cam_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="images"/>
          </column>
-         <column autoUpdated="false" digits="0" id="1" name="cam_make" nullable="false" remarks="" size="255" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="cam_make" nullable="false" remarks="" size="2147483647" type="cam_make"/>
          <column autoUpdated="false" defaultValue="0.0" digits="17" id="2" name="cam_mm_sensor_w" nullable="false" remarks="" size="17" type="float8"/>
          <column autoUpdated="false" defaultValue="0.0" digits="17" id="3" name="cam_mm_sensor_h" nullable="false" remarks="" size="17" type="float8"/>
          <column autoUpdated="false" defaultValue="0.0" digits="17" id="4" name="cam_um_sensor_pitch_w" nullable="false" remarks="" size="17" type="float8"/>
@@ -46,50 +46,52 @@
          <column autoUpdated="false" digits="0" id="4" name="osmid" nullable="false" remarks="" size="19" type="int8"/>
          <column autoUpdated="false" defaultValue="1.0" digits="8" id="5" name="wplos" nullable="false" remarks="" size="8" type="float4"/>
          <column autoUpdated="false" defaultValue="1.0" digits="8" id="6" name="plos" nullable="false" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" defaultValue="1.0" digits="8" id="7" name="avg_obstacle" nullable="false" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" defaultValue="1.0" digits="8" id="8" name="avg_curb_ramps" nullable="false" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" defaultValue="1.0" digits="8" id="9" name="avg_crosswalks" nullable="false" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" defaultValue="1.0" digits="8" id="10" name="avg_coatings" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="7" name="avg_obstacles" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="8" name="avg_steps" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="9" name="avg_coatings" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="10" name="avg_security" nullable="false" remarks="" size="8" type="float4"/>
          <column autoUpdated="false" defaultValue="1.0" digits="8" id="11" name="avg_slopes" nullable="false" remarks="" size="8" type="float4"/>
          <column autoUpdated="false" defaultValue="1.0" digits="8" id="12" name="avg_widths" nullable="false" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" digits="0" id="13" name="name" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="8" id="14" name="length" nullable="true" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" digits="8" id="15" name="width" nullable="true" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" digits="0" id="16" name="surface" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="17" name="incline" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="18" name="smoothness" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="19" name="crossing" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="20" name="lit" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="21" name="tactile_paving" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="22" name="wheelchair" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="23" name="handrail" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="24" name="description" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="25" name="step_count" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="26" name="sidewalk" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="27" name="footway" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="28" name="foot" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="29" name="kerb" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="30" name="bicycle" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="31" name="cycleway" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="32" name="highway" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="33" name="access" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="34" name="oneway" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="35" name="service" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="36" name="maxspeed" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="37" name="noexit" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="38" name="horse" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="39" name="tracktype" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="40" name="bridge" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="41" name="tunnel" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="42" name="layer" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="43" name="vehicle" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="44" name="motor_vehicle" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="45" name="motorcycle" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="46" name="railway" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="47" name="train" nullable="true" remarks="" size="2147483647" type="varchar"/>
-         <column autoUpdated="false" defaultValue="'osm'::text" digits="0" id="48" name="data_source" nullable="false" remarks="" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="49" name="uuid" nullable="false" remarks="" size="2147483647" type="uuid"/>
-         <column autoUpdated="false" digits="0" id="50" name="geom" nullable="false" remarks="" size="2147483647" type="geometry"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="13" name="avg_other-negatives" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" defaultValue="1.0" digits="8" id="14" name="avg_positives" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="0" id="15" name="name" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="8" id="16" name="length" nullable="true" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="8" id="17" name="width" nullable="true" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="0" id="18" name="surface" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="19" name="incline" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="20" name="smoothness" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="21" name="crossing" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="22" name="lit" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="23" name="tactile_paving" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="24" name="wheelchair" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="25" name="handrail" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="26" name="description" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="27" name="step_count" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="28" name="sidewalk" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="29" name="footway" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="30" name="foot" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="31" name="kerb" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="32" name="bicycle" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="33" name="cycleway" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="34" name="highway" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="35" name="access" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="36" name="oneway" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="37" name="service" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="38" name="maxspeed" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="39" name="noexit" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="40" name="horse" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="41" name="tracktype" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="42" name="bridge" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="43" name="tunnel" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="44" name="layer" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="45" name="vehicle" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="46" name="motor_vehicle" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="47" name="motorcycle" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="48" name="railway" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="49" name="train" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" defaultValue="'osm'::text" digits="0" id="50" name="data_source" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="51" name="uuid" nullable="false" remarks="" size="2147483647" type="uuid"/>
+         <column autoUpdated="false" digits="0" id="52" name="geom" nullable="false" remarks="" size="2147483647" type="geometry"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="edges_pkey" unique="true">
             <column ascending="true" name="id"/>
@@ -122,12 +124,17 @@
             <child column="event_id" foreignKey="users_events_event_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="users_events"/>
          </column>
          <column autoUpdated="false" digits="0" id="1" name="title" nullable="false" remarks="" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="2" name="owner" nullable="false" remarks="" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="6" id="3" name="beginning" nullable="true" remarks="" size="35" type="timestamptz"/>
-         <column autoUpdated="false" digits="6" id="4" name="ending" nullable="true" remarks="" size="35" type="timestamptz"/>
-         <column autoUpdated="false" digits="0" id="5" name="objective" nullable="false" remarks="" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="6" id="6" name="created_at" nullable="true" remarks="" size="35" type="timestamptz"/>
-         <column autoUpdated="false" digits="6" id="7" name="updated_at" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="2" name="creator" nullable="true" remarks="" size="2147483647" type="text">
+            <parent column="username" foreignKey="events_creator_fkey" implied="false" onDeleteCascade="false" schema="modos" table="users"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="user_id" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="events_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="users"/>
+         </column>
+         <column autoUpdated="false" digits="6" id="4" name="beginning" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="6" id="5" name="ending" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="6" name="objective" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="6" id="7" name="created_at" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="6" id="8" name="updated_at" nullable="true" remarks="" size="35" type="timestamptz"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="events_pkey" unique="true">
             <column ascending="true" name="id"/>
@@ -139,32 +146,58 @@
             <child column="image_id" foreignKey="observations_images_image_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="observations_images"/>
             <child column="image_id" foreignKey="user_images_image_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="user_images"/>
          </column>
-         <column autoUpdated="false" digits="0" id="1" name="px_w" nullable="false" remarks="" size="10" type="int4"/>
-         <column autoUpdated="false" digits="0" id="2" name="px_h" nullable="false" remarks="" size="10" type="int4"/>
-         <column autoUpdated="false" digits="17" id="3" name="focal" nullable="false" remarks="" size="17" type="float8"/>
-         <column autoUpdated="false" digits="0" id="4" name="uri" nullable="false" remarks="" size="2048" type="varchar"/>
-         <column autoUpdated="false" digits="17" id="5" name="azim" nullable="false" remarks="" size="17" type="float8"/>
-         <column autoUpdated="false" digits="17" id="6" name="tilt" nullable="false" remarks="" size="17" type="float8"/>
-         <column autoUpdated="false" defaultValue="0.0" digits="17" id="7" name="roll" nullable="false" remarks="" size="17" type="float8"/>
-         <column autoUpdated="false" defaultValue="'mobapp'::character varying" digits="0" id="8" name="data_source" nullable="false" remarks="" size="255" type="varchar"/>
-         <column autoUpdated="false" defaultValue="'copyright'::character varying" digits="0" id="9" name="license" nullable="false" remarks="" size="255" type="varchar"/>
-         <column autoUpdated="false" defaultValue="'uploaded'::character varying" digits="0" id="10" name="state" nullable="false" remarks="" size="255" type="varchar"/>
-         <column autoUpdated="false" defaultValue="'privately-available'::character varying" digits="0" id="11" name="availability" nullable="false" remarks="" size="255" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="12" name="eid" nullable="true" remarks="" size="10" type="int4">
+         <column autoUpdated="false" digits="0" id="1" name="urn" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="uri" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="url" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="azim" nullable="false" remarks="" size="2147483647" type="angle"/>
+         <column autoUpdated="false" digits="0" id="5" name="tilt" nullable="false" remarks="" size="2147483647" type="angle"/>
+         <column autoUpdated="false" defaultValue="0.0" digits="0" id="6" name="roll" nullable="false" remarks="" size="2147483647" type="angle"/>
+         <column autoUpdated="false" digits="0" id="7" name="exif_image_width_px" nullable="false" remarks="" size="2147483647" type="uint2"/>
+         <column autoUpdated="false" digits="0" id="8" name="exif_image_height_px" nullable="false" remarks="" size="2147483647" type="uint2"/>
+         <column autoUpdated="false" digits="17" id="9" name="exif_focal_length" nullable="false" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="10" name="exif_focal_length_35mm" nullable="false" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="0" id="11" name="exif_make" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="12" name="exif_model" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="6" id="13" name="exif_create_date" nullable="false" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="6" id="14" name="exif_modify_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="15" name="gps_version_id" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" defaultValue="'N'::bpchar" digits="0" id="16" name="gps_longitude_ref" nullable="false" remarks="" size="1" type="bpchar"/>
+         <column autoUpdated="false" digits="17" id="17" name="gps_longitude" nullable="false" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" defaultValue="'E'::bpchar" digits="0" id="18" name="gps_latitude_ref" nullable="false" remarks="" size="1" type="bpchar"/>
+         <column autoUpdated="false" digits="17" id="19" name="gps_latitude" nullable="false" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" defaultValue="(0)::boolean" digits="0" id="20" name="gps_altitude_ref" nullable="false" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="8" id="21" name="gps_altitude" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="0" id="22" name="gps_datestamp" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="6" id="23" name="gps_timestamp" nullable="true" remarks="" size="21" type="timetz"/>
+         <column autoUpdated="false" digits="0" id="24" name="gps_satellites" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" defaultValue="3" digits="0" id="25" name="gps_measure_mode" nullable="false" remarks="" size="1" type="bpchar"/>
+         <column autoUpdated="false" digits="8" id="26" name="gps_dop" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="0" id="27" name="gps_img_direction_ref" nullable="false" remarks="" size="1" type="bpchar"/>
+         <column autoUpdated="false" digits="0" id="28" name="gps_img_direction" nullable="false" remarks="" size="2147483647" type="angle"/>
+         <column autoUpdated="false" defaultValue="'WGS-84'::text" digits="0" id="29" name="gps_map_datum" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" defaultValue="'GPS'::text" digits="0" id="30" name="gps_processing_method" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" defaultValue="(0)::boolean" digits="0" id="31" name="gps_differential" nullable="false" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" defaultValue="50" digits="0" id="32" name="gps_position_error" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="33" name="position" nullable="false" remarks="" size="2147483647" type="geometry"/>
+         <column autoUpdated="false" defaultValue="'mobapp'::character varying" digits="0" id="34" name="data_source" nullable="false" remarks="" size="256" type="varchar"/>
+         <column autoUpdated="false" defaultValue="'copyright'::character varying" digits="0" id="35" name="license" nullable="false" remarks="" size="256" type="varchar"/>
+         <column autoUpdated="false" defaultValue="'uploaded'::character varying" digits="0" id="36" name="state" nullable="false" remarks="" size="256" type="varchar"/>
+         <column autoUpdated="false" defaultValue="'privately-available'::character varying" digits="0" id="37" name="availability" nullable="false" remarks="" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="38" name="eid" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="images_eid_fkey" implied="false" onDeleteCascade="false" schema="modos" table="edges"/>
          </column>
-         <column autoUpdated="false" digits="8" id="13" name="edist" nullable="false" remarks="" size="8" type="float4"/>
-         <column autoUpdated="false" digits="0" id="14" name="snap_geom" nullable="false" remarks="" size="2147483647" type="geometry"/>
-         <column autoUpdated="false" digits="0" id="15" name="user_id" nullable="true" remarks="" size="10" type="int4">
+         <column autoUpdated="false" digits="8" id="39" name="edist" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="0" id="40" name="snap_geom" nullable="false" remarks="" size="2147483647" type="geometry"/>
+         <column autoUpdated="false" digits="0" id="41" name="user_id" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="images_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="users"/>
          </column>
-         <column autoUpdated="false" digits="0" id="16" name="cam_id" nullable="true" remarks="" size="10" type="int4">
+         <column autoUpdated="false" digits="0" id="42" name="cam_id" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="images_cam_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="cameras"/>
          </column>
-         <column autoUpdated="false" digits="0" id="17" name="obs_id" nullable="true" remarks="" size="10" type="int4">
+         <column autoUpdated="false" digits="0" id="43" name="obs_id" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="images_obs_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="observations"/>
          </column>
-         <column autoUpdated="false" digits="0" id="18" name="event_id" nullable="true" remarks="" size="10" type="int4">
+         <column autoUpdated="false" digits="0" id="44" name="event_id" nullable="true" remarks="" size="10" type="int4">
             <parent column="id" foreignKey="images_event_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="events"/>
          </column>
          <primaryKey column="id" sequenceNumberInPK="1"/>
@@ -282,29 +315,32 @@
       </table>
       <table name="users" numRows="0" remarks="" schema="modos" type="TABLE">
          <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4">
+            <child column="user_id" foreignKey="events_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="events"/>
             <child column="user_id" foreignKey="images_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="images"/>
             <child column="user_id" foreignKey="observations_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="observations"/>
             <child column="user_id" foreignKey="user_images_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="user_images"/>
             <child column="user_id" foreignKey="users_events_user_id_fkey" implied="false" onDeleteCascade="false" schema="modos" table="users_events"/>
          </column>
-         <column autoUpdated="false" digits="0" id="1" name="first_name" nullable="false" remarks="" size="255" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="2" name="last_name" nullable="false" remarks="" size="255" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="3" name="username" nullable="false" remarks="" size="255" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="first_name" nullable="false" remarks="" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="last_name" nullable="false" remarks="" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="username" nullable="false" remarks="" size="256" type="varchar">
+            <child column="creator" foreignKey="events_creator_fkey" implied="false" onDeleteCascade="false" schema="modos" table="events"/>
+         </column>
          <column autoUpdated="false" digits="0" id="4" name="email" nullable="false" remarks="" size="2147483647" type="citext"/>
-         <column autoUpdated="false" digits="0" id="5" name="gender" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" defaultValue="'na'::character varying" digits="0" id="5" name="gender" nullable="false" remarks="" size="2" type="varchar"/>
          <column autoUpdated="false" digits="0" id="6" name="age" nullable="true" remarks="" size="10" type="int4"/>
          <column autoUpdated="false" digits="0" id="7" name="helper" nullable="true" remarks="" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="8" name="helper_frequency" nullable="true" remarks="" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="9" name="mobility" nullable="true" remarks="" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="10" name="password" nullable="false" remarks="" size="255" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="10" name="password" nullable="false" remarks="" size="256" type="varchar"/>
          <column autoUpdated="false" digits="6" id="11" name="created_at" nullable="true" remarks="" size="35" type="timestamptz"/>
          <column autoUpdated="false" defaultValue="'private'::text" digits="0" id="12" name="organization" nullable="false" remarks="" size="2147483647" type="text"/>
-         <column autoUpdated="false" defaultValue="'restricted'::character varying" digits="0" id="13" name="user_privileges" nullable="false" remarks="" size="255" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="14" name="googleid" nullable="true" remarks="" size="255" type="varchar"/>
-         <column autoUpdated="false" digits="0" id="15" name="facebookid" nullable="true" remarks="" size="255" type="varchar"/>
+         <column autoUpdated="false" defaultValue="'restricted'::character varying" digits="0" id="13" name="user_privileges" nullable="false" remarks="" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="14" name="googleid" nullable="true" remarks="" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="15" name="facebookid" nullable="true" remarks="" size="256" type="varchar"/>
          <column autoUpdated="false" defaultValue="false" digits="0" id="16" name="letter" nullable="true" remarks="" size="1" type="bool"/>
          <column autoUpdated="false" defaultValue="false" digits="0" id="17" name="notifications" nullable="true" remarks="" size="1" type="bool"/>
-         <column autoUpdated="false" defaultValue="'FR'::character varying" digits="0" id="18" name="lang" nullable="true" remarks="" size="10" type="varchar"/>
+         <column autoUpdated="false" defaultValue="'FRA'::character varying" digits="0" id="18" name="lang_iso_639_3" nullable="true" remarks="" size="2" type="varchar"/>
          <column autoUpdated="false" defaultValue="false" digits="0" id="19" name="is_validator" nullable="true" remarks="" size="1" type="bool"/>
          <column autoUpdated="false" defaultValue="false" digits="0" id="20" name="is_super_admin" nullable="true" remarks="" size="1" type="bool"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
@@ -313,6 +349,9 @@
          </index>
          <index name="email_unique" unique="true">
             <column ascending="true" name="email"/>
+         </index>
+         <index name="username_unique" unique="true">
+            <column ascending="true" name="username"/>
          </index>
          <index name="users_facebookid_key" unique="true">
             <column ascending="true" name="facebookid"/>
