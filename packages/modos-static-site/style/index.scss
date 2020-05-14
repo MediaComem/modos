@@ -7,7 +7,10 @@
 @import './utils.scss';
 @import './material-icons.scss';
 
+// colors
+@import './colors';
+
 // fonts
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
+@import './fonts.scss';
 
 @import './main.scss';

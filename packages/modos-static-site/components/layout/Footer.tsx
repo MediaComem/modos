@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import React from 'react';
-import { i18n, Page } from '../libs';
-import { Input } from './index';
+import { i18n, PageLink } from '../../libs';
+import { Input } from '../index';
 
 import styles from './Footer.module.scss';
 
-const PAGE_LIST: Page[] = [
-  new Page('homepage', '/'),
-  new Page('about', '/about')
+const PAGE_LIST: PageLink[] = [
+  new PageLink('homepage', '/'),
+  new PageLink('about', '/about')
 ];
 
 interface Props {

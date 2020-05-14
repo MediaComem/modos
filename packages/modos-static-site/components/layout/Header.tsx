@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import React from 'react';
 import Head from 'next/head';
-import { i18n, Page } from '../libs';
+import { i18n, PageLink } from '../../libs';
 
 import styles from './Header.module.scss';
 
-const PAGE_LIST: Page[] = [
-  new Page('homepage', '/'),
-  new Page('about', '/about'),
-  new Page('mapping-party', '/mapping-party'),
-  new Page('contribute', '/contribute'),
-  new Page('contact', '/contact')
+const PAGE_LIST: PageLink[] = [
+  new PageLink('homepage', '/'),
+  new PageLink('about', '/about'),
+  new PageLink('contribute', '/contribute'),
+  new PageLink('mapping-party', '/mapping-party'),
+  new PageLink('contact', '/contact')
 ];
 
 interface Props {
@@ -39,7 +39,6 @@ class Header extends React.Component<Props, State> {
 
     this.setState({
       changeLanguage: lang => {
-        console.log(lang);
         localStorage.setItem('lang', lang);
         window.location.reload();
       },
@@ -65,8 +64,25 @@ class Header extends React.Component<Props, State> {
         </Head>
 
         <header className={styles.navbar}>
-          <div className={styles['navbar-title']}>
-            <h1>MoDos</h1>
+          <div className={styles.navMenuIcon}>
+            <button
+              onClick={() =>
+                this.setState({ displayMenu: !this.state.displayMenu })
+              }
+            >
+              <i className='material-icons md-36'>menu</i>
+            </button>
+          </div>
+
+          <div className={styles.language}>
+            <select
+              className={styles.languageList}
+              onChange={(e) => this.state.changeLanguage(e.target.value)}
+              value={this.state.selectedLanguage}
+            >
+              <option value='fr'>Français</option>
+              <option value='en'>English</option>
+            </select>
           </div>
 
           <div
@@ -100,27 +116,6 @@ class Header extends React.Component<Props, State> {
                   {i18n('header', page.name, this.props.lang)}
                 </a>
               </Link>)}
-          </div>
-
-          <div className={styles.language}>
-            <select
-              className={styles.languageList}
-              onChange={e => this.state.changeLanguage(e.target.value)}
-              value={this.state.selectedLanguage}
-            >
-              <option value='en'>en</option>
-              <option value='fr'>fr</option>
-            </select>
-          </div>
-
-          <div className={styles.navMenuIcon}>
-            <button
-              onClick={e =>
-                this.setState({ displayMenu: !this.state.displayMenu })
-              }
-            >
-              <i className='material-icons md-36'>menu</i>
-            </button>
           </div>
         </header>
       </>

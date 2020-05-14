@@ -1,4 +1,5 @@
-import { Header, Footer } from './index';
+import React from 'react';
+import { Header, Footer } from '../index';
 
 
 const Layout = props =>

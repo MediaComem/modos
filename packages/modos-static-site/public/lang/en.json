@@ -1,14 +1,14 @@
 {
     "header":{
         "homepage":"Homepage",
-        "about":"About",
+        "about":"Project",
         "mapping-party":"Mapping Party",
         "contribute":"Contribute",
         "contact":"Contact"
     },
     "footer":{
         "homepage":"Homepage",
-        "about":"About",
+        "about":"Project",
         "subscribe":"Subscribe !",
         "join-newsletter":"Join our newsletter !",
         "follow-us":"Follow us on Social Network",

@@ -1,0 +1,100 @@
+@import '../../style/utils.scss';
+
+$INTERACTIVE_BTN_STD_SIZE:75px;
+
+.fade {
+  animation: fade-in-keyframes 1s;
+}
+@keyframes fade-in-keyframes {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.navbar {
+  width: 90%;
+  padding: 50px 5%;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: radial-gradient(107.91% 107.91% at 50% 17.57%, #FFFFFF 26.04%, rgba(255, 255, 255, 0) 100%);
+
+  .navMenuIcon {
+    button {
+      border: none;
+      background: none;
+      height: 100%;
+      line-height: 100%;
+      i {
+        color:var(--primary-text-color);
+        font-size: $INTERACTIVE_BTN_STD_SIZE;
+      }
+    }
+  }
+
+  .language {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    font-family: 'Gotham Pro Bold';
+
+    .languageList {
+      color:var(--secondary-color);
+      height: $INTERACTIVE_BTN_STD_SIZE;
+      border:none;
+      font-family: 'Gotham Pro Bold';
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      width: 110px;
+      background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 140 140' width='24' height='24' xmlns='http://www.w3.org/2000/svg'><g><path style='fill:rgba(96, 111, 199, 1)'  d='m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z' /></g></svg>") no-repeat;
+      background-position: right 5px top 50%;
+   }
+  }
+
+  .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--tertiary-bg-color);
+
+    @include vertical-center;
+
+    z-index: 1;
+
+    font-family: 'Gotham Pro Bold';
+    font-weight: normal;
+
+    button {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      border: none;
+      background: none;
+      line-height: 100%;
+      color: var(--tertiary-text-color);
+
+      i {
+        font-size: $INTERACTIVE_BTN_STD_SIZE;
+      }
+    }
+
+    a {
+      margin-bottom: 4vh;
+      margin-top: 4vh;
+      font-size: 2em;
+      color: var(--tertiary-text-color);
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+    }
+  }
+}
