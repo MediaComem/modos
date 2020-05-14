@@ -1,19 +1,19 @@
-import {Header, Footer} from './index';
+import { Header, Footer } from './index';
 
 
-const Layout = props => (
-  <div className="layout">
+const Layout = props =>
+  <div className='layout'>
     <Header lang={props.lang}/>
-    
-    <main>      
+
+    <main>
       {props.children}
     </main>
 
     <Footer lang={props.lang}>
-      
+
     </Footer>
 
   </div>
-);
+;
 
-export {Layout};
+export { Layout };

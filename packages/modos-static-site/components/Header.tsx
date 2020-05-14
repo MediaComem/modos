@@ -35,7 +35,7 @@ class Header extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    let selectedLanguage = localStorage.getItem('lang');
+    const selectedLanguage = localStorage.getItem('lang');
 
     this.setState({
       changeLanguage: lang => {
@@ -48,29 +48,31 @@ class Header extends React.Component<Props, State> {
   }
 
   render() {
-    if (!this.state.changeLanguage) return <div>loading...</div>;
+    if (!this.state.changeLanguage) {
+      return <div>loading...</div>;
+    }
 
     return (
       <>
         <Head>
           <title>MoDos</title>
-          <link rel="icon" href="/favicon.ico" />
+          <link rel='icon' href='/favicon.ico' />
 
           <link
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            rel="stylesheet"
+            href='https://fonts.googleapis.com/icon?family=Material+Icons'
+            rel='stylesheet'
           ></link>
         </Head>
 
-        <header className={styles['navbar']}>
+        <header className={styles.navbar}>
           <div className={styles['navbar-title']}>
             <h1>MoDos</h1>
           </div>
 
           <div
             className={`
-            ${styles['menu']} 
-            ${this.state.displayAnimMenu ? styles['fade'] : ''} 
+            ${styles.menu} 
+            ${this.state.displayAnimMenu ? styles.fade : ''} 
             ${this.state.displayMenu ? '' : 'hidden'}`}
             onAnimationEnd={() => this.setState({ displayAnimMenu: false })}
           >
@@ -82,10 +84,10 @@ class Header extends React.Component<Props, State> {
                 })
               }
             >
-              <i className="material-icons md-36">close</i>
+              <i className='material-icons md-36'>close</i>
             </button>
 
-            {PAGE_LIST.map(page => (
+            {PAGE_LIST.map(page =>
               <Link href={page.link} key={page.name}>
                 <a
                   onClick={e =>
@@ -97,28 +99,27 @@ class Header extends React.Component<Props, State> {
                 >
                   {i18n('header', page.name, this.props.lang)}
                 </a>
-              </Link>
-            ))}
+              </Link>)}
           </div>
 
-          <div className={styles['language']}>
+          <div className={styles.language}>
             <select
-              className={styles['languageList']}
+              className={styles.languageList}
               onChange={e => this.state.changeLanguage(e.target.value)}
               value={this.state.selectedLanguage}
             >
-              <option value="en">en</option>
-              <option value="fr">fr</option>
+              <option value='en'>en</option>
+              <option value='fr'>fr</option>
             </select>
           </div>
 
-          <div className={styles['navMenuIcon']}>
+          <div className={styles.navMenuIcon}>
             <button
               onClick={e =>
                 this.setState({ displayMenu: !this.state.displayMenu })
               }
             >
-              <i className="material-icons md-36">menu</i>
+              <i className='material-icons md-36'>menu</i>
             </button>
           </div>
         </header>

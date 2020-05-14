@@ -1,6 +1,8 @@
-import { Layout, Section, Grid, Cell } from '../components/index';
+import React from 'react';
 
-const About = () => (
+import { Section, Grid, Cell } from '../components/index';
+
+const About = () =>
   <>
     <Section>
       <h2>Le projet</h2>
@@ -14,29 +16,29 @@ const About = () => (
         eget tempor mattis. Nam pharetra ultricies orci eu semper. Etiam
         ultricies auctor justo. Pellentesque elementum tincidunt facilisis.{' '}
       </p>
-      <img src="zeit.svg" width="300" height="300"></img>
+      <img src='zeit.svg' width='300' height='300'></img>
     </Section>
     <Section>
       <h2>Team</h2>
       <Grid columns={2} rows={3}>
         <Cell>
-          <img src="zeit.svg" width="50" height="50"></img>
+          <img src='zeit.svg' width='50' height='50'></img>
         </Cell>
         <Cell>
-          <img src="zeit.svg" width="50" height="50"></img>
+          <img src='zeit.svg' width='50' height='50'></img>
         </Cell>
         <Cell>
-          <img src="zeit.svg" width="50" height="50"></img>
+          <img src='zeit.svg' width='50' height='50'></img>
         </Cell>
         <Cell>
-          <img src="zeit.svg" width="50" height="50"></img>
+          <img src='zeit.svg' width='50' height='50'></img>
         </Cell>
         <Cell>
-          <img src="zeit.svg" width="50" height="50"></img>
+          <img src='zeit.svg' width='50' height='50'></img>
         </Cell>
       </Grid>
     </Section>
   </>
-);
+;
 
 export default About;

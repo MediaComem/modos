@@ -17,10 +17,10 @@ function i18n(pageName: string, value: string, languagesJson: any) {
 }
 
 function useGetLanguage() {
-  const [language, setLanguage] = useState('en');
+  const [ language, setLanguage ] = useState('en');
 
   useEffect(() => {
-    let lang = localStorage.getItem('lang');
+    const lang = localStorage.getItem('lang');
     if (lang) {
       setLanguage(lang);
     }
@@ -32,11 +32,11 @@ function useGetLanguage() {
   );
 
   if (!error) {
-    return {data};
-  } else {
-    console.error("Error during fetching language",error);
-    return {};
+    return { data };
   }
+  console.error('Error during fetching language', error);
+  return {};
+
 }
 
 export { i18n, useGetLanguage };

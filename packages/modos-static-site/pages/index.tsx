@@ -1,5 +1,6 @@
+import React from 'react';
+
 import {
-  Layout,
   Leaflet,
   Section,
   Button,
@@ -7,12 +8,12 @@ import {
   Cell
 } from '../components/index';
 
-const Home = props => (
+const Home = () =>
   <>
     <Section>
-      <p style={{fontSize:"5vh", textAlign:"center", color:"lightgrey", fontStyle:"italic" ,alignSelf:"center", height:"100%", padding:"15%"}}>
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-        consectetur, adipisci velit..."
+      <p style={{ fontSize: '5vh', textAlign: 'center', color: 'lightgrey', fontStyle: 'italic', alignSelf: 'center', height: '100%', padding: '15%' }}>
+        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
+        consectetur, adipisci velit...
       </p>
     </Section>
     <Section>
@@ -28,17 +29,17 @@ const Home = props => (
         ultricies auctor justo. Pellentesque elementum tincidunt facilisis.
       </p>
       <Button>call to action</Button>
-      <img src="zeit.svg" width="300" height="400"></img>
+      <img src='zeit.svg' width='300' height='400'></img>
     </Section>
     <Section>
       <h2>Pourquoi Contribuer</h2>
       <Grid columns={1} rows={2}>
-        <Cell className="inline-flex">
-          <span style={{border:'5px solid black', borderRadius:'50%',fontSize:"2em", width:'50px',height:'50px',textAlign:"center",lineHeight:'50px', display:"block"}}>1</span>
+        <Cell className='inline-flex'>
+          <span style={{ border: '5px solid black', borderRadius: '50%', fontSize: '2em', width: '50px', height: '50px', textAlign: 'center', lineHeight: '50px', display: 'block' }}>1</span>
           <h3>Raison 1</h3>
         </Cell>
-        <Cell className="inline-flex">
-          <span style={{border:'5px solid black', borderRadius:'50%',fontSize:"2em", width:'50px',height:'50px',textAlign:"center",lineHeight:'50px', display:"block"}}>2</span>
+        <Cell className='inline-flex'>
+          <span style={{ border: '5px solid black', borderRadius: '50%', fontSize: '2em', width: '50px', height: '50px', textAlign: 'center', lineHeight: '50px', display: 'block' }}>2</span>
           <h3>Raison 2</h3>
         </Cell>
       </Grid>
@@ -55,22 +56,22 @@ const Home = props => (
         eget tempor mattis. Nam pharetra ultricies orci eu semper. Etiam
         ultricies auctor justo. Pellentesque elementum tincidunt facilisis.{' '}
       </p>
-      <Grid gap="0" columns={2} rows={2}>
+      <Grid gap='0' columns={2} rows={2}>
         <Cell width={2}>
-          <img src="zeit.svg" style={{ width: '100%', height: '50px' }}></img>
+          <img src='zeit.svg' style={{ width: '100%', height: '50px' }}></img>
         </Cell>
         <Cell>
-          <img src="zeit.svg" style={{ width: '100%', height: '50px' }}></img>
+          <img src='zeit.svg' style={{ width: '100%', height: '50px' }}></img>
         </Cell>
         <Cell>
-          <img src="zeit.svg" style={{ width: '100%', height: '50px' }}></img>
+          <img src='zeit.svg' style={{ width: '100%', height: '50px' }}></img>
         </Cell>
       </Grid>
     </Section>
     <Section>
-      <Leaflet id="leaflet-map"></Leaflet>
+      <Leaflet id='leaflet-map'></Leaflet>
     </Section>
   </>
-);
+;
 
 export default Home;
