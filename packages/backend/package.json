@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"tsc -w\" \"nodemon build/app/index.js\"",
+    "tsc:watch": "tsc -w",
+    "tsc:build": "tsc",    
+    "test": "jest",
+    "test:watch": "concurrently \"tsc -w\" \"jest --watchAll\"",
+    "start": "node build/app/index.js",
+    "lint": "eslint src/app/* src/lib/*"
   },
   "keywords": [],
   "author": "",
