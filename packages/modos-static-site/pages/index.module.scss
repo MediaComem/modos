@@ -1,0 +1,11 @@
+@import '../style/utils.scss';
+
+#homepage-title {
+  font-size: 3vh;
+  font-family: 'Gotham Pro Bold';
+  text-align: 'center';
+  color: var(--secondary-text-color);
+  align-self: 'center';
+  height: 100%;
+  padding: 15%;
+}

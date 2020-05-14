@@ -17,7 +17,7 @@ function i18n(pageName: string, value: string, languagesJson: any) {
 }
 
 function useGetLanguage() {
-  const [ language, setLanguage ] = useState('en');
+  const [ language, setLanguage ] = useState('fr');
 
   useEffect(() => {
     const lang = localStorage.getItem('lang');

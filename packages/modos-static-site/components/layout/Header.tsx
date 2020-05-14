@@ -29,7 +29,7 @@ class Header extends React.Component<Props, State> {
     this.state = {
       changeLanguage: undefined,
       displayMenu: false,
-      selectedLanguage: 'en',
+      selectedLanguage: 'fr',
       displayAnimMenu: true
     };
   }
@@ -42,7 +42,7 @@ class Header extends React.Component<Props, State> {
         localStorage.setItem('lang', lang);
         window.location.reload();
       },
-      selectedLanguage: selectedLanguage ? selectedLanguage : 'en'
+      selectedLanguage: selectedLanguage ? selectedLanguage : 'fr'
     });
   }
 
