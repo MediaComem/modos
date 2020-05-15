@@ -1,12 +1,12 @@
-export const Section = props => {
-  return (
-    <section>
-        {props.children}
-      <style jsx>
-        {`
+import React from 'react';
+
+export const Section = props =>
+  <section id={props.id} className={props.className}>
+    {props.children}
+    <style jsx>
+      {`
           section {
             min-height: 650px;
-            height: 100vh;
             width: 96%;
             padding: 20px 2%;
             display: flex;
@@ -14,7 +14,6 @@ export const Section = props => {
             justify-content: flex-start;
           }
         `}
-      </style>
-    </section>
-  );
-};
+    </style>
+  </section>
+  ;

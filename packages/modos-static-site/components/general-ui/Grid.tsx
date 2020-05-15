@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
 
 interface PropsGrid {
+  id?: string;
   isInline?: boolean;
   gap?: string;
   columns?: number;
   rows?: number;
-  className?:string;
+  className?: string;
 }
 
 interface PropsCell {
@@ -13,14 +14,15 @@ interface PropsCell {
   height?: number;
   left?: number;
   top?: number;
-  className?:string;
+  className?: string;
+  id?:string;
 }
 
 const frGetter = value =>
   typeof value === 'number' ? `repeat(${value}, 1fr)` : value;
 
 const Grid: FunctionComponent<PropsGrid> = props => {
-  let { rows, columns, gap, isInline, className } = props;
+  const { rows, columns, gap, isInline, className, id } = props;
   return (
     <>
       <style jsx>
@@ -29,20 +31,20 @@ const Grid: FunctionComponent<PropsGrid> = props => {
             display: ${isInline ? 'inline-grid' : 'grid'};
             grid-gap: ${gap ? gap : '8px 8px'};
             ${rows && `grid-template-rows: ${frGetter(rows)}`};
-            grid-template-columns: ${!columns
-              ? frGetter(12)
-              : frGetter(columns)};
+            grid-template-columns: ${!columns ?
+      frGetter(12) :
+      frGetter(columns)};
           }
         `}
       </style>
 
-      <div className={className}>{props.children}</div>
+      <div className={className} id={id}>{props.children}</div>
     </>
   );
 };
 
 const Cell: FunctionComponent<PropsCell> = props => {
-  let { width, height, left, top, className } = props;
+  const { width, height, left, top, className, id } = props;
   return (
     <>
       <style jsx>
@@ -58,7 +60,7 @@ const Cell: FunctionComponent<PropsCell> = props => {
         `}
       </style>
 
-      <div className={className}>{props.children}</div>
+      <div className={className} id={id}>{props.children}</div>
     </>
   );
 };

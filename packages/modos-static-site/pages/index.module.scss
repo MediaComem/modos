@@ -9,3 +9,92 @@
   height: 100%;
   padding: 15%;
 }
+
+#project-section {
+  background-color: var(--secondary-bg-color);
+
+  #project-link {
+    margin-top: 30px;
+  }
+}
+
+#contribute-section {
+  background-color: var(--secondary-bg-color);
+}
+
+#contribute-action {
+  background-color: rgba(215, 213, 218, 1);
+
+  #contribute-action-grid {
+    .actions {
+      background-color: rgba(241, 241, 241, 1);
+      figure {
+        border-radius: 50%;
+        background: white;
+      }
+      text-align: center;
+    }
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  #homepage-title {
+    text-align: center;
+    padding: 0 40%;
+  }
+
+  #project-section {
+    padding-top: 7%;
+    padding-left: 40%;
+    padding-right: 10%;
+    width: 50%;
+
+    h2{
+      margin-bottom: 5%;
+    }
+
+    #project-link {
+      width: 350px;
+    }
+  }
+
+  #contribute-section {
+    padding-top:8em;
+    padding-bottom: 8em;;
+    h2{
+      font-size: 4em;
+      width: 300px;
+      margin-bottom: 700px;
+      padding: 0 8%;
+
+    }
+
+    p{
+      padding: 0 8%;
+      columns: 2;
+      column-gap: 15%;
+    }
+  }
+
+  #contribute-action {
+    padding: 10% 8% 0 8%;
+    width: 84%;
+    #contribute-action-grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+
+      .actions {
+        figure {
+        }
+      }
+
+      #contribute-call-to-action{
+        margin-top:30%;
+        grid-column: 2;
+        text-align: center;
+        button{width: 100%;}
+      }
+    }
+  }
+}
