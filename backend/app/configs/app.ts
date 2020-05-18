@@ -1,15 +1,18 @@
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const mongoose = require('mongoose');
+import express from 'express';
+import path from 'path';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import { Request, Response, NextFunction } from 'express';
 
-module.exports = function () {
+
+
+export const app = function () {
     let server = express(),
         create,
         start;
 
-    create = (config) => {
+    create = (config: any) => {
         let routes = require('../routes');
         // Set all the server things.
         server.set('env', config.env);
@@ -49,7 +52,7 @@ module.exports = function () {
         // Set up routes.
         routes.init(server);
 
-        server.use(function (err, req, res, next) {
+        server.use(function (err: any, req: Request, res: Response, next: NextFunction) {
             // Set locals, only providing error in development.
             res.locals.message = err.message;
             res.locals.error = config.env === 'development' ? err : {};

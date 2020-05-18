@@ -1,13 +1,10 @@
+import { Request, Response } from 'express';
+
 const pkg = require('../../../package.json');
 
 
-const getRoot = (req, res) => {
+export const getRoot = (req: Request, res: Response) => {
     return res.status(200).json({
         version: pkg.version
     });
 };
-
-
-module.exports = {
-    getRoot: getRoot
-}

@@ -1,14 +1,15 @@
-const express = require('express');
-const apiRoute = require('./apis');
+import express from 'express';
+import { apiRouter } from './apis';
+import { Request, Response, NextFunction } from 'express';
 
-const init = (server) => {
-    server.use(function (req, res, next) {
+export const init = (server: any) => {
+    server.use(function (req: Request, res: Response, next: NextFunction) {
         console.log('Request was made to: ' + req.originalUrl);
         return next();
     });
 
     // POST and PUT must have a content type of application/json.
-    server.use(function (req, res, next) {
+    server.use(function (req: Request, res: Response, next: NextFunction) {
         const contentType = req.get('Content-Type');
         if (['POST', 'PUT'].includes(req.method) && contentType !== 'application/json') {
             return res.status(415).json({
@@ -20,10 +21,6 @@ const init = (server) => {
         return next();
     });
 
-    server.use('/api', apiRoute);
+    server.use('/api', apiRouter);
     server.use('/landing-page', express.static('./app/public'));
-}
-
-module.exports = {
-    init: init
 };
