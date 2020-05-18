@@ -2,6 +2,7 @@ import React from 'react';
 import { i18n } from '../../libs';
 
 import styles from './Footer.module.scss';
+import { Container, Row, Col } from 'react-bootstrap';
 
 
 interface Props {
@@ -22,7 +23,18 @@ class Footer extends React.Component<Props, State> {
   render() {
     return (
       <footer className={styles['main-footer']}>
-
+        <Container>
+          <Row>
+            <Col>HES SO</Col>
+            <Col>HEIG</Col>
+            <Col>HEARC</Col>
+            <Col>HEIA-FR</Col>
+          </Row>
+          <Row>
+            <Col>© 2020 MEI</Col>
+            <Col>Back to Top /\</Col>
+          </Row>
+        </Container>
       </footer>
     );
   }

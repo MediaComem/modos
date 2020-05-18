@@ -13,7 +13,6 @@
 }
 
 #homepage-title {
-  height: 100vh;
   p {
     font-size: 3vh;
     font-family: 'Gotham Pro Bold';
@@ -25,7 +24,6 @@
 }
 
 #project-section {
-  height: 100vh;
   background-color: var(--secondary-bg-color);
 
   #project-link {
@@ -61,6 +59,7 @@
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
   #homepage-title {
+    height: 100vh;
     p {
       text-align: center;
       padding: 0 40%;
@@ -68,6 +67,7 @@
   }
 
   #project-section {
+    height: 100vh;
     padding-left: 40%;
 
     h2 {
@@ -113,5 +113,9 @@
         }
       }
     }
+  }
+
+  #contact-us {
+    
   }
 }
