@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { TileLayer, Map } from 'leaflet';
+import React, { useEffect, useRef } from 'react';
+import { TileLayer, Map, MapOptions } from 'leaflet';
 
-const initMap = async id => {
-
+const initMap = async (id, options: MapOptions) => {
   const leaflet: any = await import('leaflet');
   await import('leaflet-providers');
 
-  const MAP: Map = leaflet.map(id);
+  const MAP: Map = leaflet.map(id, options);
 
   MAP.fitBounds([
     [ 45, 6 ],
@@ -24,7 +23,12 @@ const Leaflet = props => {
   const isMapInit = useRef(false);
 
   useEffect(() => {
-    initMap(props.id).catch(err => console.log(err)).finally(() => {
+    const MAP_OPTIONS: MapOptions = props.options || {
+      zoom: 13,
+      scrollWheelZoom: false
+    };
+
+    initMap(props.id, MAP_OPTIONS).catch(err => console.error(err)).finally(() => {
       isMapInit.current = true;
     });
 
