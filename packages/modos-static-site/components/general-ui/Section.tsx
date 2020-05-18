@@ -1,19 +1,14 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 
 export const Section = props =>
-  <section id={props.id} className={props.className}>
+  <Container
+    id={props.id}
+    className={props.className}
+    style={{
+      minHeight: '650px'
+    }}
+    fluid>
     {props.children}
-    <style jsx>
-      {`
-          section {
-            min-height: 650px;
-            width: 96%;
-            padding: 20px 2%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-          }
-        `}
-    </style>
-  </section>
+  </Container>
   ;

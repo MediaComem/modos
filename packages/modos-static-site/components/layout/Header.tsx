@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import React from 'react';
 import Head from 'next/head';
+import { Dropdown } from 'react-bootstrap';
+
+import { LanguageSelect } from '../index';
 import { i18n, PageLink } from '../../libs';
 
 import styles from './Header.module.scss';
@@ -20,7 +23,6 @@ interface State {
   changeLanguage;
   displayMenu;
   selectedLanguage;
-  displayAnimMenu;
 }
 
 class Header extends React.Component<Props, State> {
@@ -29,8 +31,7 @@ class Header extends React.Component<Props, State> {
     this.state = {
       changeLanguage: undefined,
       displayMenu: false,
-      selectedLanguage: 'fr',
-      displayAnimMenu: true
+      selectedLanguage: 'fr'
     };
   }
 
@@ -74,29 +75,21 @@ class Header extends React.Component<Props, State> {
             </button>
           </div>
 
-          <div className={styles.language}>
-            <select
-              className={styles.languageList}
-              onChange={(e) => this.state.changeLanguage(e.target.value)}
-              value={this.state.selectedLanguage}
-            >
-              <option value='fr'>Français</option>
-              <option value='en'>English</option>
-            </select>
-          </div>
+          <LanguageSelect
+            className={styles.language}
+            selectedLanguage={this.state.selectedLanguage}
+            onLanguageChange={language => this.state.changeLanguage(language)}
+          ></LanguageSelect>
 
           <div
             className={`
             ${styles.menu} 
-            ${this.state.displayAnimMenu ? styles.fade : ''} 
             ${this.state.displayMenu ? '' : 'hidden'}`}
-            onAnimationEnd={() => this.setState({ displayAnimMenu: false })}
           >
             <button
               onClick={e =>
                 this.setState({
-                  displayMenu: !this.state.displayMenu,
-                  displayAnimMenu: true
+                  displayMenu: !this.state.displayMenu
                 })
               }
             >
@@ -108,8 +101,7 @@ class Header extends React.Component<Props, State> {
                 <a
                   onClick={e =>
                     this.setState({
-                      displayMenu: !this.state.displayMenu,
-                      displayAnimMenu: false
+                      displayMenu: !this.state.displayMenu
                     })
                   }
                 >

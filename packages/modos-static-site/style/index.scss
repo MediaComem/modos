@@ -1,10 +1,14 @@
-// 3p
-@import '../node_modules/normalize.css/normalize';
-@import './reset.scss';
+// Bootstrap
+$theme-colors: (
+  "primary":rgba(218, 98, 101, 1),
+  "secondary":rgba(96, 111, 199, 1),
+);
+@import "~bootstrap/scss/bootstrap";
+
+// Leaflet
 @import '../node_modules/leaflet/dist/leaflet.css';
 
-// local
-@import './utils.scss';
+// material icons
 @import './material-icons.scss';
 
 // colors

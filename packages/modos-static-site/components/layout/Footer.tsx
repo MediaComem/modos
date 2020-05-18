@@ -1,14 +1,8 @@
-import Link from 'next/link';
 import React from 'react';
-import { i18n, PageLink } from '../../libs';
-import { Input } from '../index';
+import { i18n } from '../../libs';
 
 import styles from './Footer.module.scss';
 
-const PAGE_LIST: PageLink[] = [
-  new PageLink('homepage', '/'),
-  new PageLink('about', '/about')
-];
 
 interface Props {
   lang;
@@ -28,48 +22,7 @@ class Footer extends React.Component<Props, State> {
   render() {
     return (
       <footer className={styles['main-footer']}>
-        <div className={styles['general-info']}>
-          <div className={styles.links}>
-            {PAGE_LIST.map(page =>
-              <Link href={page.link} key={page.name}>
-                <a>{this.i18n(page.name)}</a>
-              </Link>)}
-          </div>
-          <div className={styles.subscribe}>
-            <h2>{this.i18n('subscribe')}</h2>
 
-            <div>
-              <h3>{this.i18n('join-newsletter')}</h3>
-              <form>
-                <Input />
-                <input type='submit' className='button'/>
-              </form>
-              <h3>{this.i18n('follow-us')}</h3>
-              <div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.partners}>
-          <h2>{this.i18n('partners')}</h2>
-          <div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-        <div className={styles['footer-end']}>
-          <div>© 2020 MEI</div>
-          <div>
-            {this.i18n('back-to-top')}
-            <button className={styles['back-to-top']}>
-              <i className='material-icons'>arrow_drop_up</i>
-            </button>
-          </div>
-        </div>
       </footer>
     );
   }

@@ -24,7 +24,6 @@ h1,
 h2,
 h3 {
   font-family: 'Gotham Pro Medium';
-  font-weight: bolder;
   margin-bottom: 5px;
   color: var(--primary-text-color);
 }
@@ -53,4 +52,14 @@ h3 {
   h3 {
     font-size: 1.8em;
   }
+}
+
+.hidden {
+  display: none !important;
+}
+
+// BOOTSRAP OVERRIDE
+.btn {
+  font-family: 'Gotham Pro Medium';
+  height: 60px;    
 }
