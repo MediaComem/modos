@@ -1,5 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToMany } from "typeorm";
 import { Profile } from './Profile';
+import { Event } from "./Event";
+import { IsEmail } from 'class-validator'
+import * as bcrypt from "bcrypt";
+import { costFactor } from "../config/config";
+
 
 @Entity()
 export class User {
@@ -7,10 +12,11 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ unique: true })
     pseudonym: string;
 
-    @Column()
+    @Column({ unique: true })
+    @IsEmail()
     email: string;
 
     @Column()
@@ -20,4 +26,11 @@ export class User {
     @JoinColumn()
     profile: Profile;
 
+    @ManyToMany(type => Event)
+    @JoinColumn()
+    events: Event[];
+
+    async hashPassword(password: string) {
+        this.passwordHash = await bcrypt.hash(password, costFactor);
+    }
 }

@@ -33,30 +33,30 @@ export class Profile {
     id: number;
 
     @Column()
-    age: number
+    age: number;
 
     @Column({
         type: "enum",
         enum: UserGender,
         default: UserGender.OTHER
     })
-    gender: UserGender
+    gender: UserGender;
 
     @Column({
         type: "enum",
         enum: Helper
     })
-    helper: Helper
+    helper: Helper;
 
     @Column({
         type: "enum",
         enum: HelperFrequency
     })
-    helperFrequency: HelperFrequency
+    helperFrequency: HelperFrequency;
 
     @Column({
         type: "enum",
         enum: Mobility
     })
-    mobility: Mobility
+    mobility: Mobility;
 }

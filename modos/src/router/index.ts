@@ -2,9 +2,13 @@ import * as express from 'express';
 import { apiRouter } from './apis';
 import { Request, Response, NextFunction } from 'express';
 
-export const init = (server: any) => {
+
+// Router initialization.
+export function init(server: express.Application) {
+
+    // Logger middleware.
     server.use(function (req: Request, res: Response, next: NextFunction) {
-        console.log('Request was made to: ' + req.originalUrl);
+        console.log("[ " + req.method + " ] " + req.originalUrl);
         return next();
     });
 
@@ -22,5 +26,5 @@ export const init = (server: any) => {
     });
 
     server.use('/api', apiRouter);
-    server.use('/landing-page', express.static('./app/public'));
-};
+    server.use('/landing-page', express.static('./src/public'));
+}

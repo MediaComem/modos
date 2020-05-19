@@ -14,9 +14,9 @@ export const authenticateUser = (req: Request, res: Response, next: NextFunction
     const match = authorization.match(/^Bearer (.+)$/);
     if (!match) return sendError(res, 401, 'Unauthorized');
     const token = match[1];
-    jwt.verify(token, secretBase, function (err, decoded) {
+    jwt.verify(token, secretBase, function (err, decoded: any) {
         if (err) return sendError(res, 401, 'Unauthorized');
-        req.body.userId = decoded.toString().sub;
+        req.body.userId = decoded.sub;
         next();
     });
 };

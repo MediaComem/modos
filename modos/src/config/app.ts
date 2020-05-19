@@ -3,7 +3,7 @@ import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import * as express from 'express';
 import * as path from 'path';
-import * as routes from '../routes';
+import * as router from '../router';
 
 
 export class App {
@@ -36,8 +36,8 @@ export class App {
             preflightContinue: true
         }));
 
-        // Set up routes.
-        routes.init(this.server);
+        // Set up router.
+        router.init(this.server);
 
         this.server.use(function (err: any, req: Request, res: Response, next: NextFunction) {
             // Set locals, only providing error in development.
