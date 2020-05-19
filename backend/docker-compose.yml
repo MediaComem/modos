@@ -1,23 +1,31 @@
-version: '3'
+version: '3.5'
+
+networks:
+  modos_network:
+      driver: bridge
 
 services:
 
-  web:
+  modos_api:
     build: .
-    environment:
-      MODOS_DATABASE_URL: mongodb://mongo/restAPI
-      MODOS_PORT: 3000
-      TZ: Europe/Zurich
+    working_dir: /code
     volumes:
       - .:/code
     ports:
       - "3000:3000"
     depends_on:
-      - mongo
+      - modos_db
+    command: npm start
+    networks:
+      - modos_network
 
-  mongo:
-    image: mongo
+  modos_db:
+    image: postgres
     environment:
-      TZ: Europe/Zurich
+      POSTGRES_DB: 'test'
+      POSTGRES_USER: 'test'
+      POSTGRES_PASSWORD: 'test'
     ports:
-      - "27017:27017"
+      - "5432:5432"
+    networks:
+      - modos_network
