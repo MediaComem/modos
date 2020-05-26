@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import { User } from "./User";
 import { Observation } from "./Observation";
 import { IsDate } from 'class-validator'
@@ -9,8 +9,7 @@ export class Event {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(type => User)
-    @JoinColumn()
+    @ManyToOne(type => User)
     owner: User;
 
     @Column()
@@ -33,6 +32,8 @@ export class Event {
     @Column()
     numberOfImages: number;
 
-    @OneToMany(type => Observation, observation => observation.id)
-    observations: Observation[];
+    @OneToMany(type => Observation, observation => observation.event, {
+        nullable: true
+    })
+    observations: Array<Observation>;
 }

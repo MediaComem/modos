@@ -7,7 +7,7 @@ export const handleError = (err: any, res: Response) => {;
     // Invalid text representation (e.g. enum with invalid value)
     if (err.code == '22P02') return sendError(res, 400, err.message);
 
-    return sendError(res, 500, err);
+    return sendError(res, 500, String(err));
 };
 
 export const sendError = (res: Response, code: number, message: string) => {

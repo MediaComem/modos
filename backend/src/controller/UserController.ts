@@ -97,12 +97,12 @@ export class UserController {
         const userRepository = getRepository(User);
         const eventRepository = getRepository(Event);
 
-        const user = await userRepository.findOne(req.body.id);
+        const user = await userRepository.findOne(req.body.id, { relations: ["events"] });
         if (!user) return sendError(res, 404, this.USER404);
 
         const event = await eventRepository.findOne(req.params.eventId);
         if (!event) return sendError(res, 404, this.EVENT404);
-        
+
         if (user.events.includes(event)) {
             return sendError(res, 422, this.USER_ALREADY_JOINED_EVENT);
         }

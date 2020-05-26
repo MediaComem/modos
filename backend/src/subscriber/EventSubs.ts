@@ -10,13 +10,15 @@ export class EventSubs implements EntitySubscriberInterface<Event> {
         return Event;
     }
 
-    async beforeInsert(e: InsertEvent<Event>) {
-        const event = e.entity;
-        const userRepository = getRepository(User);
-        const user = await userRepository.findOne(event.owner);
-        if (user) {
-            user.events.push(event);
-            await userRepository.save(user);
-        }
-    }
+    // async afterInsert(e: InsertEvent<Event>) {
+    //     const event = e.entity;
+    //     const userRepository = getRepository(User);
+
+    //     const user = await userRepository.findOne(event.owner.id, { relations: ["events"] });
+    //     console.log("User: ", user);
+    //     if (user) {
+    //         user.events.push(event);
+    //         await userRepository.save(user);
+    //     }
+    // }
 }

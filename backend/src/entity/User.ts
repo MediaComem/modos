@@ -28,7 +28,7 @@ export class User {
 
     @ManyToMany(type => Event)
     @JoinColumn()
-    events: Event[];
+    events: Array<Event>;
 
     async hashPassword(password: string) {
         this.passwordHash = await bcrypt.hash(password, costFactor);

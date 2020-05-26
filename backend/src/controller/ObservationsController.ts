@@ -48,10 +48,12 @@ export class ObservationController {
 
         // If the request has an event field, add the observation to the referenced event.
         if (req.body.event) {
-            const event = await manager.findOne(Event, req.body.event);
+            const event = await manager.findOne(Event, req.body.event, { relations: ["observations"] });
             if (!event) return sendError(res, 404, this.EVENT404);
             event.observations.push(observation);
-            manager.save(event);
+            console.log(event);
+            
+            await manager.save(event);
         }
 
         await manager.insert(Observation, observation);
