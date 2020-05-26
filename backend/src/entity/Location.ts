@@ -1,17 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Column } from "typeorm";
 
-@Entity()
 export class Location {
 
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column("real")
+    @Column("real",  { nullable: true })
     latitude: number;
 
-    @Column("real")
+    @Column("real",  { nullable: true })
     longitude: number;
 
-    @Column("real")
+    @Column("real", { nullable: true })
     altitude: number;
 }

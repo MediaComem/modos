@@ -1,7 +1,7 @@
 import { createAsyncRoute } from "./utils";
 import { sendError } from "./ErrorController";
 import { Request, Response } from "express";
-import { getRepository, getManager } from "typeorm";
+import { getRepository } from "typeorm";
 import { User } from "../entity/User";
 import { Profile } from "../entity/Profile";
 

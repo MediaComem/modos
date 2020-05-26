@@ -4,7 +4,8 @@ export const handleError = (err: any, res: Response) => {;
     // Check unique constraint violation
     if (err.code == 23505) return sendError(res, 409, err.detail);
 
-    console.log("ERROR: ", err);
+    // Invalid text representation (e.g. enum with invalid value)
+    if (err.code == '22P02') return sendError(res, 400, err.message);
 
     return sendError(res, 500, err);
 };

@@ -1,7 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Column } from "typeorm";
 
 export enum Obstacle {
-    COATING  = 'coating',
+    COATING = 'coating',
     OBSTACLE = 'obstacle',
     SECURITY = 'security',
     PASSABILITY = 'passability',
@@ -12,12 +12,17 @@ export enum Obstacle {
     UNLABELLED = 'unlabelled'
 }
 
+export enum FrontendObstacle {
+    COATING = 'coating',
+    OBSTACLE = 'obstacle',
+    SECURITY = 'security',
+    PASSABILITY = 'passability',
+    SLOPE = 'slope',
+    WIDTH = 'width',
+    OTHER = 'other'
+}
 
-@Entity()
 export class Description {
-
-    @PrimaryGeneratedColumn()
-    id: number;
 
     @Column({
         type: "enum",
@@ -26,7 +31,7 @@ export class Description {
     })
     obstacle: Obstacle;
 
-    @Column()
+    @Column({ nullable: true })
     freeText: string;
 
     @Column("int")
