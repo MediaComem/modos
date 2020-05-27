@@ -1,5 +1,7 @@
+/* eslint-disable max-lines-per-function */
 import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Carousel } from 'react-bootstrap';
+import ReactMarkdown from 'react-markdown';
 
 import { Leaflet, ContainerWithMargin } from '../components/index';
 import { i18n } from '../libs';
@@ -20,7 +22,7 @@ const Home = props => {
         className={styles.section}
       >
         <h2>{hi18n('project-title')}</h2>
-        <p>{hi18n('project-description')}</p>
+        <ReactMarkdown>{hi18n('project-description')}</ReactMarkdown>
         <Button
           id={styles['project-link']}
           className={styles['btn-primary']}
@@ -33,12 +35,67 @@ const Home = props => {
         <Leaflet id='leaflet-map'></Leaflet>
       </div>
 
-      <ContainerWithMargin
+      <Container
         id={styles['contribute-section']}
-        className={styles.section}>
-        <h2>{hi18n('contribute-title')}</h2>
-        <p>{hi18n('contribute-description')}</p>
-      </ContainerWithMargin>
+        className={styles.section}
+        fluid>
+        <Row>
+          <Col md={0} lg={1}></Col>
+          <Col>
+            <h2>{hi18n('contribute-title')}</h2>
+          </Col>
+          <Col md={0} lg={1}></Col>
+        </Row>
+        <Row className={styles['contribute-desktop-flow']}>0</Row>
+        <Row className={styles['contribute-mobile-flow']}>
+          <Col>
+            <Carousel className={styles['custom-carousel']} interval={null} indicators={false}>
+              <Carousel.Item>
+                <img
+                  className='d-block w-100'
+                  src='https://via.placeholder.com/300'
+                  alt='First slide'
+                />
+                <Carousel.Caption>
+                  <h3>First slide label</h3>
+                  <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  className='d-block w-100'
+                  src='https://via.placeholder.com/300'
+                  alt='Third slide'
+                />
+
+                <Carousel.Caption>
+                  <h3>Second slide label</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  className='d-block w-100'
+                  src='https://via.placeholder.com/300'
+                  alt='Third slide'
+                />
+
+                <Carousel.Caption>
+                  <h3>Third slide label</h3>
+                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={0} lg={1}></Col>
+          <Col>
+            <p>{hi18n('contribute-description')}</p>
+          </Col>
+          <Col md={0} lg={1}></Col>
+        </Row>
+      </Container>
 
       <ContainerWithMargin id={styles['contribute-action']} className={styles.section}>
         <Container fluid >

@@ -4,6 +4,7 @@ import styles from './about.module.scss';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { i18n } from '../libs';
 import { ContainerWithMargin } from '../components/index';
+import ReactMarkdown from 'react-markdown';
 
 
 const About = props => {
@@ -21,17 +22,14 @@ const About = props => {
 
       <ContainerWithMargin>
         <div>
-          <p>{ai18n('intro')}</p>
+          <ReactMarkdown>{ai18n('intro')}</ReactMarkdown>
         </div>
         <Button>{ai18n('intro-btn')}</Button>
       </ContainerWithMargin>
 
       <ContainerWithMargin>
         <h2>{ai18n('conception-title')}</h2>
-        <p>{ai18n('conception-motor')}</p>
-        <p>{ai18n('conception-objective')}</p>
-        <p>{ai18n('conception-autolearning')}</p>
-        <p>{ai18n('conception-goal')}</p>
+        <ReactMarkdown source={ai18n('conception-description')}></ReactMarkdown>
       </ContainerWithMargin>
 
       <ContainerWithMargin>

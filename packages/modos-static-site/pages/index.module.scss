@@ -39,6 +39,13 @@
 
 #contribute-section {
   background-color: var(--secondary-bg-color);
+  .contribute-mobile-flow{
+    
+  }
+  .contribute-desktop-flow {
+    display:none;
+  }
+  
 }
 
 #contribute-action {
@@ -91,6 +98,14 @@
     p {
       columns: 2;
       column-gap: 8%;
+    }
+    
+    .contribute-mobile-flow{
+      display:none;
+    }
+
+    .contribute-desktop-flow {
+      display:block;
     }
   }
 
