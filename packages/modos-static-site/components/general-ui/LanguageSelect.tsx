@@ -28,10 +28,10 @@ export const LanguageSelect = props =>
         {(() => {
           switch (props.selectedLanguage) {
             case 'fr':
-              return 'Français';
+              return 'FR';
 
             case 'en':
-              return 'English';
+              return 'EN';
 
             default:
               return 'none';

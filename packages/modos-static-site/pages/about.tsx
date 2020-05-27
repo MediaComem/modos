@@ -1,44 +1,53 @@
 import React from 'react';
 
-import { Section, Grid, Cell } from '../components/index';
+import styles from './about.module.scss';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { i18n } from '../libs';
+import { ContainerWithMargin } from '../components/index';
 
-const About = () =>
-  <>
-    <Section>
-      <h2>Le projet</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed
-        mauris turpis. Praesent est magna, fringilla id magna vitae, congue
-        convallis metus. Integer pellentesque, nulla vel malesuada posuere, est
-        urna blandit lectus, quis pulvinar quam ipsum sit amet quam. Suspendisse
-        arcu enim, tincidunt eu nulla fermentum, lacinia fringilla nibh. Mauris
-        arcu quam, tempor ut eleifend vel, iaculis a magna. Donec luctus mauris
-        eget tempor mattis. Nam pharetra ultricies orci eu semper. Etiam
-        ultricies auctor justo. Pellentesque elementum tincidunt facilisis.{' '}
-      </p>
-      <img src='zeit.svg' width='300' height='300'></img>
-    </Section>
-    <Section>
-      <h2>Team</h2>
-      <Grid columns={2} rows={3}>
-        <Cell>
-          <img src='zeit.svg' width='50' height='50'></img>
-        </Cell>
-        <Cell>
-          <img src='zeit.svg' width='50' height='50'></img>
-        </Cell>
-        <Cell>
-          <img src='zeit.svg' width='50' height='50'></img>
-        </Cell>
-        <Cell>
-          <img src='zeit.svg' width='50' height='50'></img>
-        </Cell>
-        <Cell>
-          <img src='zeit.svg' width='50' height='50'></img>
-        </Cell>
-      </Grid>
-    </Section>
-  </>
-;
 
+const About = props => {
+  const ai18n = value => i18n('about', value, props.lang);
+
+  return (
+    <>
+      <ContainerWithMargin fluid id={styles['about-title']} className={styles.section}>
+        <Row>
+          <Col>
+            <p>{ai18n('title')}</p>
+          </Col>
+        </Row>
+      </ContainerWithMargin>
+
+      <ContainerWithMargin>
+        <div>
+          <p>{ai18n('intro')}</p>
+        </div>
+        <Button>{ai18n('intro-btn')}</Button>
+      </ContainerWithMargin>
+
+      <ContainerWithMargin>
+        <h2>{ai18n('conception-title')}</h2>
+        <p>{ai18n('conception-motor')}</p>
+        <p>{ai18n('conception-objective')}</p>
+        <p>{ai18n('conception-autolearning')}</p>
+        <p>{ai18n('conception-goal')}</p>
+      </ContainerWithMargin>
+
+      <ContainerWithMargin>
+        <h2>{ai18n('competence-title')}</h2>
+      </ContainerWithMargin>
+
+      <ContainerWithMargin>
+        <p>{ai18n('codac-intro')}</p>
+        <h2>{ai18n('codac-title')}</h2>
+        <p>{ai18n('codac-descr')}</p>
+      </ContainerWithMargin>
+
+      <ContainerWithMargin>
+        <h2>{ai18n('publication-title')}</h2>
+      </ContainerWithMargin>
+    </>
+  );
+};
 export default About;

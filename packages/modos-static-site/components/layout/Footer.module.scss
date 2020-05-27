@@ -6,5 +6,26 @@
   justify-content: space-between;
   min-height: 20vh;
   background-color: rgb(243, 243, 243);
+  .contact {
+    min-height: 600px;
+    background: var(--secondary-bg-color)
+  }
+
+  .universities {
+    min-height: 150px;
+    text-align: center;
+  }
+
+  .copyright {
+    min-height: 50px;
+    border-top:1px solid var(--primary-color);
+    line-height: 50px;
+    text-align: center;
+    * {line-height: 50px;}
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
 
 }
