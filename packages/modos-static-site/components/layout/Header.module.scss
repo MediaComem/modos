@@ -3,9 +3,10 @@
 $INTERACTIVE_BTN_STD_SIZE:75px;
 
 .navbar {
+  position: absolute;
   width: 100%;
-  padding: 50px 5%;
-  height: 30%;
+  padding: 50px 5% 0 5%;
+  min-height: 150px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

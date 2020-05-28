@@ -104,7 +104,7 @@ class Header extends React.Component<Props, State> {
             ${this.state.displayMenu ? '' : 'hidden'}`}
           >
             <button
-              onClick={e =>
+              onClick={() =>
                 this.setState({
                   displayMenu: !this.state.displayMenu
                 })
@@ -116,7 +116,7 @@ class Header extends React.Component<Props, State> {
             {PAGE_LIST.map(page =>
               <Link href={page.link} key={page.name}>
                 <a
-                  onClick={e =>
+                  onClick={() =>
                     this.setState({
                       displayMenu: !this.state.displayMenu
                     })

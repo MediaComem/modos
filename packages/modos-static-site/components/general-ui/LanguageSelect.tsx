@@ -4,7 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 const STYLE_DROPDOWN: React.CSSProperties = {
   position: 'relative',
   fontFamily: 'Gotham Pro Bold',
-  width: '110px'
+  width: '100%'
 };
 
 const STYLE_DROPDOWN_BTN: React.CSSProperties = {

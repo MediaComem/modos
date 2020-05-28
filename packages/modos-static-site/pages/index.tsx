@@ -29,10 +29,11 @@ const Home = props => {
         >
           {hi18n('project-link-descr')}
         </Button>
+
       </ContainerWithMargin>
 
       <div id={styles['map-section']}>
-        <Leaflet id='leaflet-map'></Leaflet>
+
       </div>
 
       <Container
@@ -46,14 +47,16 @@ const Home = props => {
           </Col>
           <Col md={0} lg={1}></Col>
         </Row>
-        <Row className={styles['contribute-desktop-flow']}>0</Row>
+        <Row className={styles['contribute-desktop-flow']}>
+          <img alt='' src='./assets/desktop/home-schema-desktop.svg'></img>
+        </Row>
         <Row className={styles['contribute-mobile-flow']}>
           <Col>
             <Carousel className={styles['custom-carousel']} interval={null} indicators={false}>
-              <Carousel.Item>
+              <Carousel.Item className={styles['custom-carousel-item']}>
                 <img
                   className='d-block w-100'
-                  src='https://via.placeholder.com/300'
+                  src='./assets/mobile/home-schema-part01-mobile.svg'
                   alt='First slide'
                 />
                 <Carousel.Caption>
@@ -61,10 +64,10 @@ const Home = props => {
                   <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </Carousel.Caption>
               </Carousel.Item>
-              <Carousel.Item>
+              <Carousel.Item className={styles['custom-carousel-item']}>
                 <img
                   className='d-block w-100'
-                  src='https://via.placeholder.com/300'
+                  src='./assets/mobile/home-schema-part02-mobile.svg'
                   alt='Third slide'
                 />
 
@@ -73,10 +76,10 @@ const Home = props => {
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </Carousel.Caption>
               </Carousel.Item>
-              <Carousel.Item>
+              <Carousel.Item className={styles['custom-carousel-item']}>
                 <img
                   className='d-block w-100'
-                  src='https://via.placeholder.com/300'
+                  src='./assets/mobile/home-schema-part03-mobile.svg'
                   alt='Third slide'
                 />
 
@@ -100,17 +103,28 @@ const Home = props => {
       <ContainerWithMargin id={styles['contribute-action']} className={styles.section}>
         <Container fluid >
           <Row>
-            <Col sm={12} lg={4}>
-              <h3>{hi18n('contribute-explore-title')}</h3>
-              <p>{hi18n('contribute-explore-description')}</p>
-            </Col>
-            <Col sm={12} lg={4}>
-              <h3>{hi18n('contribute-analyze-title')}</h3>
-              <p>{hi18n('contribute-analyze-description')}</p>
-            </Col>
-            <Col sm={12} lg={4}>
-              <h3>{hi18n('contribute-review-title')}</h3>
-              <p>{hi18n('contribute-review-description')}</p>
+            <Col className={styles['contribute-action-items']}>
+              <div className={styles['contribute-action-item']}>
+                <div className={styles['contribute-action-item-pic']}>
+                  <img alt='' src='./assets/home-explore.svg'></img>
+                </div>
+                <h3>{hi18n('contribute-explore-title')}</h3>
+                <p>{hi18n('contribute-explore-description')}</p>
+              </div>
+              <div className={styles['contribute-action-item']}>
+                <div className={styles['contribute-action-item-pic']}>
+                  <img alt='' src='./assets/home-analyse.svg'></img>
+                </div>
+                <h3>{hi18n('contribute-analyze-title')}</h3>
+                <p>{hi18n('contribute-analyze-description')}</p>
+              </div>
+              <div className={styles['contribute-action-item']}>
+                <div className={styles['contribute-action-item-pic']}>
+                  <img alt='' src='./assets/home-evaluation.svg'></img>
+                </div>
+                <h3>{hi18n('contribute-review-title')}</h3>
+                <p>{hi18n('contribute-review-description')}</p>
+              </div>
             </Col>
           </Row>
           <Row>
