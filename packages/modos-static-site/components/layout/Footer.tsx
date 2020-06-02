@@ -36,10 +36,12 @@ class Footer extends React.Component<Props, State> {
             <Col md={0} lg={1}></Col>
           </Row>
           <Row className={styles.universities}>
-            <Col>HES SO</Col>
-            <Col>HEIG</Col>
-            <Col>HEARC</Col>
-            <Col>HEIA-FR</Col>
+            <Col>
+              <a href='https://hes-so.ch'><img src='assets/hes-logo.png' alt='Logo HES-SO' /></a>
+              <a href='https://heig-vd.ch'><img src='assets/heig-logo.png' alt='Logo HEIG-VD' /></a>
+              <a href='https://he-arc.ch'><img src='assets/hearc-logo.png' alt='Logo HEARC' /></a>
+              <a href='https://heia-fr.ch'><img src='assets/heia-logo.png' alt='Logo HEIA-FR' /></a>
+            </Col>
           </Row>
           <Row className={styles.copyright}>
             <Col>© 2020 MEI</Col>
