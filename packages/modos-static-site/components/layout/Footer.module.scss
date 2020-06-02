@@ -6,9 +6,23 @@
   justify-content: space-between;
   min-height: 20vh;
   background-color: rgb(243, 243, 243);
+
   .contact {
+    padding-top: 30px;
     min-height: 600px;
-    background: var(--secondary-bg-color)
+    background-color: var(--secondary-bg-color);
+    background-image: url('../../public/assets/mobile/contact-mobile.svg');
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: 100% auto ;
+    padding-bottom: 600px;
+
+    button {
+      margin-top:20px;
+      width: 100%;
+      background-color: var(--secondary-btn-color);
+      border-color: var(--secondary-btn-color);
+    }
   }
 
   .universities {
@@ -25,7 +39,26 @@
   }
 }
 
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) {
+@media (min-width: 576px) {
+}
 
+@media (min-width: 768px) {
+  .main-footer{
+    .contact {
+      background-image: url('../../public/assets/mobile/contact-mobile-nobackground.svg');
+      background-size: auto 33vh;
+      padding-bottom: 35vh;  
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .main-footer{
+    .contact {
+      background-image: url('../../public/assets/desktop/contact-desktop.svg');
+      background-size: auto 90%;
+      padding-bottom: 30px;  
+      background-position: center right;
+    }
+  }
 }

@@ -142,7 +142,7 @@
   }
 
   #project-section {
-    background-image: url('../public/assets/mobile/home-intro-mobile-background.svg');
+    
   }
 
   #map-section {
@@ -166,7 +166,9 @@
     height: 100vh;
     padding-left: 40%;
     padding-bottom: 0;
+    background-image: url('../public/assets/mobile/home-intro-mobile-background.svg');
     background-position: left center;
+    background-size: auto 100%;
 
     h2 {
       margin-bottom: 5%;
