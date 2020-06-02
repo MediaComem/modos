@@ -51,13 +51,12 @@ export class EventControler {
         const event = await repository.findOne(req.params.id);
         if (!event) return sendError(res, 404, this.EVENT404);
 
-        if (event.owner) event.owner = req.body.userId;
-        if (event.title) event.title = req.body.title;
-        if (event.password) event.password = req.body.password;
-        if (event.beginning) event.beginning = req.body.beginning;
-        if (event.ending) event.ending = req.body.ending;
-        if (event.objective) event.objective = req.body.objective;
-        if (event.numberOfImages) event.numberOfImages = req.body.numberOfImages;
+        if (req.body.title) event.title = req.body.title;
+        if (req.body.password) event.password = req.body.password;
+        if (req.body.beginning) event.beginning = req.body.beginning;
+        if (req.body.ending) event.ending = req.body.ending;
+        if (req.body.objective) event.objective = req.body.objective;
+        if (req.body.numberOfImages) event.numberOfImages = req.body.numberOfImages;
 
         await repository.save(event);
 
@@ -73,14 +72,8 @@ export class EventControler {
 
     public getParticipants = createAsyncRoute(async (req: Request, res: Response) => {
         const manager = getManager();
-        const event = await manager.findOne(Event, req.params.id);
-        const participantsRaw = await manager.find(User, {
-            relations: ["events"],
-            where: `'${event}' = ANY(events)`
-        });
-
-        const participants = participantsRaw.map(user => user.pseudonym);
-        if (participants.length > 0) return res.status(200).json(participants);
+        const event = await manager.findOne(Event, req.params.id, { relations: ["participants"] });
+        if (event.participants.length > 0) return res.status(200).json(event.participants);
         return sendError(res, 404, this.NO_PARTICIPANT);
     });
 

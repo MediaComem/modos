@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, ManyToMany } from "typeorm";
 import { User } from "./User";
 import { Observation } from "./Observation";
 import { IsDate } from 'class-validator'
@@ -36,4 +36,7 @@ export class Event {
         nullable: true
     })
     observations: Array<Observation>;
+
+    @ManyToMany(type => User, user => user.events, { nullable: true })
+    participants: Array<User>;
 }

@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import { sendError } from './ErrorController';
 import { createAsyncRoute, signToken } from './utils';
-import { getRepository } from 'typeorm'
+import { getRepository, getManager } from 'typeorm'
 import { User } from '../entity/User';
 import { Event } from '../entity/Event';
 import { Observation } from '../entity/Observation';
@@ -38,10 +38,10 @@ export class UserController {
     public createUser = createAsyncRoute(async (req: Request, res: Response) => {
         const userRepository = getRepository(User);
 
-        const newUser = userRepository.create({
-            pseudonym: req.body.pseudonym,
-            email: req.body.email
-        });
+        const newUser = new User();
+        newUser.pseudonym = req.body.pseudonym;
+        newUser.email = req.body.email;
+        newUser.events = new Array<Event>();
         await newUser.hashPassword(req.body.password);
 
         await userRepository.insert(newUser);
@@ -59,7 +59,7 @@ export class UserController {
         user.id = req.body.userId
         user.pseudonym = req.body.pseudonym;
         user.email = req.body.email;
-        user.passwordHash = req.body.password;
+        if (req.body.password) await user.hashPassword(req.body.password);
 
         await userRepository.save(user);
         const updatedUser = await userRepository.findOne(user.id);
@@ -94,21 +94,22 @@ export class UserController {
 
 
     public joinEvent = createAsyncRoute(async (req: Request, res: Response) => {
-        const userRepository = getRepository(User);
-        const eventRepository = getRepository(Event);
+        const manager = getManager();
 
-        const user = await userRepository.findOne(req.body.id, { relations: ["events"] });
+        const user = await manager.findOne(User, req.body.userId, { relations: ["events"] });
         if (!user) return sendError(res, 404, this.USER404);
 
-        const event = await eventRepository.findOne(req.params.eventId);
+        const event = await manager.findOne(Event, req.params.eventId);
         if (!event) return sendError(res, 404, this.EVENT404);
 
-        if (user.events.includes(event)) {
-            return sendError(res, 422, this.USER_ALREADY_JOINED_EVENT);
-        }
+        user.events.forEach((e: Event) => {
+            if (e.id == event.id) {
+                return sendError(res, 422, this.USER_ALREADY_JOINED_EVENT);
+            }
+        });
 
         user.events.push(event);
-        const updatedUser = await userRepository.save(user);
+        const updatedUser = await manager.save(user);
         return res.status(200).json(updatedUser);
     });
 }

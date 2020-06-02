@@ -50,10 +50,7 @@ export class ObservationController {
         if (req.body.event) {
             const event = await manager.findOne(Event, req.body.event, { relations: ["observations"] });
             if (!event) return sendError(res, 404, this.EVENT404);
-            event.observations.push(observation);
-            console.log(event);
-            
-            await manager.save(event);
+            observation.event = event;
         }
 
         await manager.insert(Observation, observation);
@@ -102,10 +99,13 @@ export class ObservationController {
 
     public getObstacles = createAsyncRoute(async (req: Request, res: Response) => {
         const isFrontend = req.query.frontend;
+        const obstacles = (isFrontend === 'true') ? FrontendObstacle : Obstacle;
 
-        if (isFrontend === 'true') {
-            return res.status(200).json(FrontendObstacle);
+        const enumList = new Array<String>();
+        for (let key in obstacles) {
+            enumList.push(obstacles[key])
         }
-        return res.status(200).json(Obstacle);
+
+        return res.status(200).json(enumList);
     });
 }

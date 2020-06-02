@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToMany, JoinTable } from "typeorm";
 import { Profile } from './Profile';
 import { Event } from "./Event";
 import { IsEmail } from 'class-validator'
@@ -26,8 +26,8 @@ export class User {
     @JoinColumn()
     profile: Profile;
 
-    @ManyToMany(type => Event)
-    @JoinColumn()
+    @ManyToMany(type => Event, event => event.participants, { nullable: true })
+    @JoinTable()
     events: Array<Event>;
 
     async hashPassword(password: string) {

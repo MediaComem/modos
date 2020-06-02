@@ -20,21 +20,16 @@ export class Observation {
     @JoinColumn()
     owner: User;
 
-    // @OneToOne(type => Description)
-    // @JoinColumn()
     @Column(type => Description)
     description: Description;
 
-    // @OneToOne(type => Image)
-    // @JoinColumn()
     @Column(type => Image)
     image: Image;
 
-    // @OneToOne(type => Location)
     @Column(type => Location)
     location: Location;
 
-    @ManyToOne(type => Event, event => event.observations)
+    @ManyToOne(type => Event, event => event.observations, { cascade: true })
     event: Event;
 
     async saveImage(imageData: string) {
