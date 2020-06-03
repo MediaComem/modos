@@ -54,6 +54,27 @@
   background-position: center center;
   background-size: 100% 100%;
   background-color: var(--secondary-bg-color);
+
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+  p{
+    font-family: 'Gotham Pro Bold';
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    color:white;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    text-align: center;
+    background-color: var(--primary-btn-color);
+    border: 10px solid var(--tertiary-bg-color);
+    box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.3);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 #contribute-section {
@@ -66,14 +87,40 @@
     h3,
     p {
       color: var(--secondary-text-color);
+      font-family: 'Gotham Pro Bold';
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 0.8em;
     }
   }
 
+  .contribute-mobile-flow-col {
+    padding: 0;
+  }
+
   .contribute-mobile-flow {
-    .custom-carousel {
-      .custom-carousel-item>div{
-        bottom:110px;
-      }      
+    
+    .custom-carousel-indicators {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: row;
+      margin-top:10px;
+      margin-bottom: 30px;
+
+      .custom-carousel-indicator {
+        background-color: var(--quaternary-bg-color);
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        margin: 0 10px;
+      }
+
+      .custom-carousel-indicator.active {
+        background-color: var(--tertiary-bg-color);
+        width: 20px;
+        height: 20px;
+      }
     }
   }
   .contribute-desktop-flow {
@@ -85,41 +132,47 @@
   background-color: rgba(215, 213, 218, 1);
 
   .contribute-action-items {
-    display:flex;
+    display: flex;
     flex-flow: column;
     width: 100%;
   }
 
   .contribute-action-item {
     background-color: var(--tertiary-color);
-    display:flex;
-    flex-flow:column;
+    display: flex;
+    flex-flow: column;
     align-items: center;
     justify-content: center;
-    margin: 5% 10% 5% 10%;
-    width: 80%;
+    margin: 5% 0% 5% 0%;
+    width: 100%;
     min-height: 50vh;
     box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.1);
     padding: 20px 10%;
-    p{text-align: center;}
+    p {
+      text-align: center;
+    }
 
     .contribute-action-item-pic {
       position: relative;
       border-radius: 50%;
-      background:white;
+      background: white;
       height: 200px;
       width: 200px;
       margin-bottom: 10%;
       img {
         position: absolute;
         min-width: 250px;
-        left:calc((200px * 0.5) - (250px * 0.5));
-        top:-50px;
+        left: calc((200px * 0.5) - (250px * 0.5));
+        top: -50px;
       }
     }
   }
 
-  button {width: 80%; margin: 3% 10%;background-color:var(--primary-btn-color)}
+  button {
+    width: 80%;
+    margin: 3% 10%;
+    background-color: var(--primary-btn-color);
+  }
 }
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
@@ -142,7 +195,25 @@
   }
 
   #project-section {
-    
+  }
+
+  .contribute-desktop-flow {
+    position: relative;
+
+    div{
+      position: absolute;
+      bottom:15%;
+      width: 100%;
+      display:flex;
+      flex-flow: row;
+      justify-content: center;
+      align-content: center;
+      p {
+        width: 25%;
+        text-align: center;
+        margin:0 30px;
+      }
+    }
   }
 
   #map-section {
@@ -187,9 +258,11 @@
       width: 60%;
     }
 
-    p {
-      columns: 2;
-      column-gap: 8%;
+    .contribute-description{
+      p {
+        columns: 2;
+        column-gap: 8%;
+      }
     }
 
     .contribute-mobile-flow {
@@ -202,22 +275,23 @@
   }
 
   #contribute-action {
-    
     .contribute-action-items {
       flex-flow: row;
       flex-wrap: wrap;
       justify-content: center;
     }
 
-    .contribute-action-item {      
+    .contribute-action-item {
       margin: 5% 2% 5% 2%;
       padding: 40px 5% 20px 5%;
       width: 28%;
       min-width: 300px;
     }
-    
-    button {width: 100%; margin: 3% 0%;}
-    
+
+    button {
+      width: 100%;
+      margin: 3% 0%;
+    }
   }
 
   #contact-us {
