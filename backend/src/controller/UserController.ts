@@ -6,6 +6,7 @@ import { getRepository, getManager } from 'typeorm'
 import { User } from '../entity/User';
 import { Event } from '../entity/Event';
 import { Observation } from '../entity/Observation';
+import { validate } from 'class-validator';
 
 export class UserController {
 
@@ -44,6 +45,9 @@ export class UserController {
         newUser.events = new Array<Event>();
         await newUser.hashPassword(req.body.password);
 
+        const errors = await validate(newUser);
+        if (errors.length > 0) throw errors;
+
         await userRepository.insert(newUser);
 
         return res.status(201)
@@ -55,11 +59,13 @@ export class UserController {
     public updateUser = createAsyncRoute(async (req: Request, res: Response) => {
         const userRepository = getRepository(User);
 
-        const user = new User();
-        user.id = req.body.userId
-        user.pseudonym = req.body.pseudonym;
-        user.email = req.body.email;
+        const user = await userRepository.findOne(req.body.userId);
+        if (req.body.pseudonym) user.pseudonym = req.body.pseudonym;
+        if (req.body.email) user.email = req.body.email;
         if (req.body.password) await user.hashPassword(req.body.password);
+
+        const errors = await validate(user);
+        if (errors.length > 0) throw errors;
 
         await userRepository.save(user);
         const updatedUser = await userRepository.findOne(user.id);

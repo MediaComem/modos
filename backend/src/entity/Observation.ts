@@ -7,6 +7,7 @@ import { Event } from "./Event";
 import * as config from '../config/config';
 import * as fs from 'fs';
 import * as path from 'path';
+import { validate } from "class-validator";
 
 
 
@@ -33,10 +34,15 @@ export class Observation {
     event: Event;
 
     async saveImage(imageData: string) {
+        // create the image model for database
         this.image = new Image();
         this.image.basename = String(Date.now()) + config.imageFormat;
         const imagePath = path.join(config.storageDirectory, this.image.basename);
 
+        const errors = await validate(this.image);
+        if (errors.length > 0) throw errors;
+
+        // write the image data to disk
         const imageWithoutMetadata = imageData.split(',')[1];
         const decodedData = Buffer.from(imageWithoutMetadata, 'base64');
         fs.writeFile(imagePath, decodedData, (err) => {

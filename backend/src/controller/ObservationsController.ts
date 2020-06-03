@@ -6,6 +6,7 @@ import { sendError } from "./ErrorController";
 import { Event } from "../entity/Event";
 import { Description, FrontendObstacle, Obstacle } from "../entity/Description";
 import { Location } from "../entity/Location";
+import { validate } from "class-validator";
 
 
 export class ObservationController {
@@ -34,15 +35,24 @@ export class ObservationController {
         description.obstacle = req.body.description.obstacle;
         description.impact = req.body.description.impact;
 
+        const errorsDescr = await validate(description);
+        if (errorsDescr.length > 0) throw errorsDescr;
+
         const location = new Location();
         location.latitude = req.body.location.latitude;
         location.longitude = req.body.location.longitude;
         location.altitude = req.body.altitude;
 
+        const errorsLoc = await validate(location);
+        if (errorsLoc.length > 0) throw errorsLoc;
+
         const observation = new Observation();
         observation.owner = req.body.userId;
         observation.description = description;
         observation.location = location;
+
+        const errorsObs = await validate(observation);
+        if (errorsObs.length > 0) throw errorsObs;
 
         await observation.saveImage(req.body.imageData);
 
@@ -71,6 +81,10 @@ export class ObservationController {
             if (bodyDescr.freeText) description.freeText = bodyDescr.freeText;
             if (bodyDescr.obstacle) description.obstacle = bodyDescr.obstacle;
             if (bodyDescr.impact) description.impact = bodyDescr.impact;
+
+            const errorsDescr = await validate(description);
+            if (errorsDescr.length > 0) throw errorsDescr;
+
             observation.description = description;
         }
 
@@ -80,6 +94,10 @@ export class ObservationController {
             if (bodyLoc.latitude) location.latitude = bodyLoc.latitude;
             if (bodyLoc.longitude) location.longitude = bodyLoc.longitude;
             if (bodyLoc.altitude) location.altitude = bodyLoc.altitude;
+
+            const errorsLoc = await validate(location);
+            if (errorsLoc.length > 0) throw errorsLoc;
+
             observation.location = location;
         }
 

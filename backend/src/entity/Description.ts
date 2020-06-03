@@ -1,4 +1,5 @@
 import { Column } from "typeorm";
+import { IsEnum, IsString, MaxLength, IsInt, Min, Max } from "class-validator";
 
 export enum Obstacle {
     COATING = 'coating',
@@ -29,11 +30,17 @@ export class Description {
         enum: Obstacle,
         default: Obstacle.UNLABELLED
     })
+    @IsEnum(Obstacle)
     obstacle: Obstacle;
 
     @Column({ nullable: true })
+    @IsString()
+    @MaxLength(255)
     freeText: string;
 
     @Column("int")
+    @IsInt()
+    @Min(1)
+    @Max(5)
     impact: number;
 }

@@ -33,7 +33,8 @@ export class App {
         // Allow CORS.
         this.server.use(cors({
             methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-            preflightContinue: true
+            preflightContinue: false,
+            origin: "*",
         }));
 
         // Set up router.

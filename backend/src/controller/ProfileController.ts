@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { User } from "../entity/User";
 import { Profile } from "../entity/Profile";
+import { validate } from "class-validator";
 
 
 export class ProfileController {
@@ -35,6 +36,9 @@ export class ProfileController {
         profile.helperFrequency = req.body.helperFrequency;
         profile.mobility = req.body.mobility;
 
+        const errors = await validate(profile);
+        if (errors.length > 0) throw errors;
+
         user.profile = await profileRepository.save(profile);
         const updatedUser = await userRepository.save(user);
         return res.status(201).json(updatedUser.profile);
@@ -49,7 +53,15 @@ export class ProfileController {
         if (!user) return sendError(res, 404, this.USER404);
         if (!user.profile) return sendError(res, 404, this.PROFILE404);
 
-        Object.assign(user.profile, req.body);
+        if (req.body.age) user.profile.age = req.body.age;
+        if (req.body.gender) user.profile.gender = req.body.gender;
+        if (req.body.helper) user.profile.helper = req.body.helper;
+        if (req.body.helperFrequency) user.profile.helperFrequency = req.body.helperFrequency;
+        if (req.body.mobility) user.profile.mobility = req.body.mobility;
+
+        const errors = await validate(user.profile);
+        if (errors.length > 0) throw errors;
+
         const updatedProfile = await profileRepository.save(user.profile);
 
         return res.status(200).json(updatedProfile);

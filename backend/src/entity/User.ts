@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToMany, JoinTable } from "typeorm";
 import { Profile } from './Profile';
 import { Event } from "./Event";
-import { IsEmail } from 'class-validator'
+import { IsEmail, IsString } from 'class-validator'
 import * as bcrypt from "bcrypt";
 import { costFactor } from "../config/config";
 
@@ -13,6 +13,7 @@ export class User {
     id: number;
 
     @Column({ unique: true })
+    @IsString()
     pseudonym: string;
 
     @Column({ unique: true })
@@ -20,6 +21,7 @@ export class User {
     email: string;
 
     @Column()
+    @IsString()
     passwordHash: string;
 
     @OneToOne(type => Profile)

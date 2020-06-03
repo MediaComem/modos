@@ -10,9 +10,6 @@ import * as swaggerUi from 'swagger-ui-express';
 const swaggerDocument = require('../../../openapi.json');
 
 
-
-
-
 export const routerV1 = express.Router();
 routerV1.use('/authenticate', userController.authenticate);
 routerV1.use('/users', userRouter);

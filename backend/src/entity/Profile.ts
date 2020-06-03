@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { IsEnum, IsInt, IsPositive, ValidateIf, IsNotEmpty, isNotEmpty } from "class-validator";
 
 export enum UserGender {
     MALE = 'm',
@@ -33,6 +34,8 @@ export class Profile {
     id: number;
 
     @Column()
+    @IsInt()
+    @IsPositive()
     age: number;
 
     @Column({
@@ -40,23 +43,33 @@ export class Profile {
         enum: UserGender,
         default: UserGender.OTHER
     })
+    @IsEnum(UserGender)
     gender: UserGender;
 
     @Column({
         type: "enum",
-        enum: Helper
+        enum: Helper,
+        nullable: true
     })
+    @IsEnum(Helper)
+    @ValidateIf((p: Profile) => isNotEmpty(p.helperFrequency))
+    @IsNotEmpty()
     helper: Helper;
 
     @Column({
         type: "enum",
-        enum: HelperFrequency
+        enum: HelperFrequency,
+        nullable: true
     })
+    @IsEnum(HelperFrequency)
+    @ValidateIf((p: Profile) => isNotEmpty(p.helper))
+    @IsNotEmpty()
     helperFrequency: HelperFrequency;
 
     @Column({
         type: "enum",
         enum: Mobility
     })
+    @IsEnum(Mobility)
     mobility: Mobility;
 }

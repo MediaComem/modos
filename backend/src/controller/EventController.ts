@@ -5,13 +5,13 @@ import { Event } from "../entity/Event";
 import { sendError } from "./ErrorController";
 import { User } from "../entity/User";
 import { Observation } from "../entity/Observation";
+import { validate } from "class-validator";
 
 
 export class EventControler {
 
     private EVENT404 = 'Event does not exist';
     private NO_PARTICIPANT = 'No participants to this event';
-    private NO_OBSERVATIONS = 'This event has no observations';
 
     public getEvents = createAsyncRoute(async (req: Request, res: Response) => {
         const repository = getRepository(Event);
@@ -39,6 +39,9 @@ export class EventControler {
         event.numberOfImages = req.body.numberOfImages;
         event.observations = new Array<Observation>();
 
+        const errors = await validate(event);
+        if (errors.length > 0) throw errors;
+
         await manager.insert(Event, event);
 
         return res.status(201)
@@ -58,6 +61,9 @@ export class EventControler {
         if (req.body.objective) event.objective = req.body.objective;
         if (req.body.numberOfImages) event.numberOfImages = req.body.numberOfImages;
 
+        const errors = await validate(event);
+        if (errors.length > 0) throw errors;
+        
         await repository.save(event);
 
         return res.status(200).json(event);

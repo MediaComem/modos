@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, ManyToMany } from "typeorm";
 import { User } from "./User";
 import { Observation } from "./Observation";
-import { IsDate } from 'class-validator'
+import { IsDate, IsString, MinLength, IsInt, IsPositive } from 'class-validator'
 
 @Entity()
 export class Event {
@@ -13,9 +13,12 @@ export class Event {
     owner: User;
 
     @Column()
+    @IsString()
     title: string;
 
     @Column({ nullable: true })
+    @IsString()
+    @MinLength(8)
     password: string;
 
     @Column()
@@ -27,9 +30,12 @@ export class Event {
     ending: Date;
 
     @Column()
+    @IsString()
     objective: string;
 
     @Column()
+    @IsInt()
+    @IsPositive()
     numberOfImages: number;
 
     @OneToMany(type => Observation, observation => observation.event, {
