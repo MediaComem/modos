@@ -14,12 +14,12 @@ const Home = props => {
 
   return (
     <>
-      <ContainerWithMargin
+      <div
         id={styles['homepage-title']}
         className={styles.section}
       >
         <p>{hi18n('title')}</p>
-      </ContainerWithMargin>
+      </div>
 
       <ContainerWithMargin
         id={styles['project-section']}

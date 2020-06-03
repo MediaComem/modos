@@ -13,20 +13,27 @@
 }
 
 #homepage-title {
-  padding-top: 250px;
-  background: url('../public/assets/mobile/banner-home-mobile.svg') center
-    no-repeat #fff;
-  background-size: 100% 100%;
+  background: url('../public/assets/mobile/banner-home-mobile.svg') no-repeat #fff;
+  background-size: cover;
+  background-position: top;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  padding-top:150px;
 
   p {
-    font-size: 0.9em;
+    font-size: 1.2em;
     font-family: 'Gotham Pro Bold';
-    text-align: 'center';
+    text-transform: uppercase;
+    text-align: center;
     color: var(--secondary-text-color);
-    align-self: 'center';
-    width: 100%;
-    padding: 0 38% 0 38%;
-    height: 100%;
+    background:rgba(255,255,255,0.80);
+    width: 250px;
+    height: 250px;
+    padding: 10px;
+    border-radius: 50%;
+    display:flex;
+    align-items: center;
   }
 }
 
@@ -177,11 +184,10 @@
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
   #homepage-title {
-    background: url('../public/assets/desktop/banner-home-desktop.svg') center
-      no-repeat #fff;
+    background-image: url('../public/assets/desktop/banner-home-desktop.svg');
     background-size: auto 100%;
     p {
-      padding: 0 42% 0 40%;
+      
     }
   }
 }
@@ -189,9 +195,7 @@
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
   #homepage-title {
-    p {
-      padding: 0 44% 0 42%;
-    }
+    
   }
 
   #project-section {
@@ -226,11 +230,7 @@
 @media (min-width: 992px) {
   #homepage-title {
     height: 100vh;
-    p {
-      text-align: center;
-      padding: 120px 40% 0 38%;
-      font-size: 1em;
-    }
+    
   }
 
   #project-section {
@@ -300,12 +300,7 @@
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
-  #homepage-title {
-    background-size: 100% 100%;
-    p {
-      text-align: center;
-      padding: 110px 45% 0 44%;
-      font-size: 1em;
-    }
+  #homepage-title {    
+    
   }
 }
