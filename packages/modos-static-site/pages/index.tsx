@@ -1,16 +1,50 @@
 /* eslint-disable max-lines-per-function */
-import React, { useState } from 'react';
-import { Container, Row, Col, Button, Carousel } from 'react-bootstrap';
+import React, { } from 'react';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 
-import { Leaflet, ContainerWithMargin } from '../components/index';
+import { ContainerWithMargin, CardsModosContainer, ISliderItemModos, SliderModosContainer } from '../components/index';
 import { i18n } from '../libs';
 
 import styles from './index.module.scss';
 
 const Home = props => {
   const hi18n = value => i18n('homepage', value, props.lang);
-  const [ sliderActiveIndex, setSliderActiveIndex ] = useState(0);
+
+  const CONTRIBUTE_SCHEMA_CAROUSEL: ISliderItemModos[] = [
+    {
+      caption: hi18n('contribute-schema-1'),
+      imgAlt: '',
+      imgSrc: './assets/mobile/home-schema-part01-mobile.svg'
+    }, {
+      caption: hi18n('contribute-schema-2'),
+      imgAlt: '',
+      imgSrc: './assets/mobile/home-schema-part02-mobile.svg'
+    }, {
+      caption: hi18n('contribute-schema-3'),
+      imgAlt: '',
+      imgSrc: './assets/mobile/home-schema-part03-mobile.svg'
+    }
+  ];
+
+  const ACTIONS = [
+    {
+      imgSrc: './assets/home-explore.svg',
+      imgAlt: '',
+      title: hi18n('contribute-explore-title'),
+      description: hi18n('contribute-explore-description')
+    }, {
+      imgSrc: './assets/home-analyse.svg',
+      imgAlt: '',
+      title: hi18n('contribute-analyze-title'),
+      description: hi18n('contribute-analyze-description')
+    }, {
+      imgSrc: './assets/home-evaluation.svg',
+      imgAlt: '',
+      title: hi18n('contribute-review-title'),
+      description: hi18n('contribute-review-description')
+    }
+  ];
 
   return (
     <>
@@ -58,83 +92,7 @@ const Home = props => {
         </Row>
         <Row className={styles['contribute-mobile-flow']}>
           <Col className={styles['contribute-mobile-flow-col']}>
-            <Carousel
-              className={styles['custom-carousel']}
-              interval={null}
-              indicators={false}
-              wrap={false}
-              controls={false}
-              activeIndex={sliderActiveIndex}
-              onSelect={event => {
-                setSliderActiveIndex(event);
-              }}
-            >
-              <Carousel.Item className={styles['custom-carousel-item']}>
-                <img
-                  className='d-block w-100'
-                  src='./assets/mobile/home-schema-part01-mobile.svg'
-                  alt='First slide'
-                />
-                <Carousel.Caption
-                  className={styles['custom-carousel-item-caption']}
-                >
-                  <p>
-                    {hi18n('contribute-schema-1')}
-                  </p>
-                </Carousel.Caption>
-              </Carousel.Item>
-
-              <Carousel.Item className={styles['custom-carousel-item']}>
-                <img
-                  className='d-block w-100'
-                  src='./assets/mobile/home-schema-part02-mobile.svg'
-                  alt='Third slide'
-                />
-
-                <Carousel.Caption
-                  className={styles['custom-carousel-item-caption']}
-                >
-                  <p>
-                    {hi18n('contribute-schema-2')}
-                  </p>
-                </Carousel.Caption>
-              </Carousel.Item>
-
-              <Carousel.Item className={styles['custom-carousel-item']}>
-                <img
-                  className='d-block w-100'
-                  src='./assets/mobile/home-schema-part03-mobile.svg'
-                  alt='Third slide'
-                />
-
-                <Carousel.Caption
-                  className={styles['custom-carousel-item-caption']}
-                >
-                  <p>
-                    {hi18n('contribute-schema-3')}
-                  </p>
-                </Carousel.Caption>
-              </Carousel.Item>
-            </Carousel>
-            <div className={styles['custom-carousel-indicators']}>
-              <a onClick={() => setSliderActiveIndex(0)}>
-                <div className={`${styles['custom-carousel-indicator']} ${
-                  sliderActiveIndex === 0 ? styles.active : ''
-                }`}></div>
-              </a>
-              <a onClick={() => setSliderActiveIndex(1)}>
-                <div className={`${styles['custom-carousel-indicator']} ${
-                  sliderActiveIndex === 1 ? styles.active : ''
-                }`}></div>
-              </a>
-              <a onClick={() => setSliderActiveIndex(2)}>
-                <div
-                  className={`${styles['custom-carousel-indicator']} ${
-                    sliderActiveIndex === 2 ? styles.active : ''
-                  }`}
-                ></div>
-              </a>
-            </div>
+            <SliderModosContainer items={CONTRIBUTE_SCHEMA_CAROUSEL}></SliderModosContainer>
           </Col>
         </Row>
         <Row>
@@ -152,28 +110,8 @@ const Home = props => {
       >
         <Container fluid>
           <Row>
-            <Col className={styles['contribute-action-items']}>
-              <div className={styles['contribute-action-item']}>
-                <div className={styles['contribute-action-item-pic']}>
-                  <img alt='' src='./assets/home-explore.svg'></img>
-                </div>
-                <h3>{hi18n('contribute-explore-title')}</h3>
-                <p>{hi18n('contribute-explore-description')}</p>
-              </div>
-              <div className={styles['contribute-action-item']}>
-                <div className={styles['contribute-action-item-pic']}>
-                  <img alt='' src='./assets/home-analyse.svg'></img>
-                </div>
-                <h3>{hi18n('contribute-analyze-title')}</h3>
-                <p>{hi18n('contribute-analyze-description')}</p>
-              </div>
-              <div className={styles['contribute-action-item']}>
-                <div className={styles['contribute-action-item-pic']}>
-                  <img alt='' src='./assets/home-evaluation.svg'></img>
-                </div>
-                <h3>{hi18n('contribute-review-title')}</h3>
-                <p>{hi18n('contribute-review-description')}</p>
-              </div>
+            <Col>
+              <CardsModosContainer cards={ACTIONS}></CardsModosContainer>
             </Col>
           </Row>
           <Row>

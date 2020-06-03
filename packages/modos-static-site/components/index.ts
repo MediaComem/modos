@@ -4,5 +4,7 @@ export * from './layout/Layout';
 export * from './layout/ContainerWithMargin';
 export * from './general-ui/Leaflet';
 export * from './general-ui/LanguageSelect';
+export * from './general-ui/CardsModos';
+export * from './general-ui/SliderModos';
 
 
