@@ -142,24 +142,7 @@
   #project-section {
   }
 
-  .contribute-desktop-flow {
-    position: relative;
-
-    div{
-      position: absolute;
-      bottom:15%;
-      width: 100%;
-      display:flex;
-      flex-flow: row;
-      justify-content: center;
-      align-content: center;
-      p {
-        width: 25%;
-        text-align: center;
-        margin:0 30px;
-      }
-    }
-  }
+  .contribute-desktop-flow { }
 
   #map-section {
     background-image: url('../public/assets/desktop/home-map-desktop.svg');
@@ -212,6 +195,23 @@
 
     .contribute-desktop-flow {
       display: block;
+      position: relative;
+
+      div{
+        position: absolute;
+        bottom:15%;
+        width: 100%;
+        display:flex;
+        flex-flow: row;
+        justify-content: center;
+        align-content: center;
+        p {
+          font-size: 1.1m;
+          width: 25%;
+          text-align: center;
+          margin:0 30px;
+        }
+      }
     }
   }
 
