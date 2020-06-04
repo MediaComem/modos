@@ -1,5 +1,5 @@
 body {
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Gotham Pro';
 }
 
 .layout {
@@ -12,19 +12,20 @@ body {
 }
 
 p {
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Gotham Pro';
   font-weight: 100;
-  font-size: 1em;
+  font-size: 1.2em;
   text-align: justify;
   line-height: 1.4;
+  color: var(--primary-text-color);
 }
 
 h1,
 h2,
 h3 {
-  font-family: 'Fira Sans', sans-serif;
-  font-weight: bolder;
+  font-family: 'Gotham Pro Medium';
   margin-bottom: 5px;
+  color: var(--primary-text-color);
 }
 
 h1 {
@@ -32,10 +33,33 @@ h1 {
 }
 
 h2 {
-  font-size: 1.8em;
+  font-size: 2.5em;
 }
 
 h3 {
-  font-size: 1.5em;
-  color: gray;
+  font-size: 2em;
+}
+
+@media (min-width: 992px) {
+  h1 {
+    font-size: 2.5em;
+  }
+
+  h2 {
+    font-size: 2.1em;
+  }
+
+  h3 {
+    font-size: 1.8em;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+// BOOTSRAP OVERRIDE
+.btn {
+  font-family: 'Gotham Pro Medium';
+  height: 60px;    
 }

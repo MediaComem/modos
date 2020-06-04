@@ -1,0 +1,67 @@
+{
+  "header": {
+    "homepage": "Accueil",
+    "about": "Le projet",
+    "mapping-party": "Mapping Party",
+    "contribute": "Contribuer",
+    "contact": "Contact"
+  },
+  "footer": {
+    "homepage": "Homepage",
+    "about": "Project",
+    "subscribe": "Subscribe !",
+    "join-newsletter": "Join our newsletter !",
+    "follow-us": "Follow us on Social Network",
+    "partners": "Our Partners",
+    "contact": "Contact",
+    "moreinfo":"Besoin d'informations supplémentaires ?",
+    "takecontact":"Je prend contact"
+  },
+  "homepage": {
+    "title": "Améliorer la mobilité douce des seniors au quotidien",
+    "project-title": "Projet modos",
+    "project-description": "Le projet modos - Mobilité Douce des Seniors - est un projet de recherche interdisciplinaire financé par la HES-SO et mené par 4 instituts de la HEIG-VD, **HE-Arc** et HEIA-FR.\n\nCe projet de recherche mêle l’innovation technologique et sociale, intégrant des méthodologies de design participatif pour prendre en considération les besoins, les contraintes et les ressources des seniors et des futurs usagers.\n\nNous avons pour vocation de développer une technologie permettant la cartographie pseudo-automatisée d’entraves à la mobilité pédestre pour proposer aux seniors un accès adapté et sécurisé en environnement urbain. Ceci en alliant participation citoyenne, géoinformation et apprentissage automatique.\n\nEn plus d’offrir un outil cartographique d’aide à la planification d’itinéraires adaptés aux contraintes des utilisateurs, les données récoltées par les citoyens peuvent aider les décideurs (p.e. communes) à prendre des mesures pour l’amélioration de la mobilité douce, ou d’autres projets liés à la mobilité ou à l’aménagement du territoire.",
+    "project-link-descr": "Voir la page de projet",
+
+    "discover-map":"découvrir la carte",
+
+    "contribute-title": "Contribuez à la mobilité douce de votre ville",
+    "contribute-description": "Chaque citoyenne et citoyen peut contribuer grâce aux outils que nous mettons à disposition. En effectuant des observations sur le terrain ou en analysant des données depuis la maison. Notre plateforme va ensuite analyser ces observations pour déterminer l’accessibilité des tronçons piétons de manière automatique ou semi-automatique. Cette classification permettra d’offrir un outil de planification d’itinéraire qui prend en compte les obstacles que les seniors peuvent rencontrer, en fonction des situations de handicap auxquelles ils et elles  sont confrontés. Ces observations permettraient également d’établir une cartographie précise des zones problématiques dans une ville.",
+
+    "contribute-schema-1":"Contributions faites par des citoyens, sur le terrain ou depuis la maison",
+    "contribute-schema-2":"Mécanisme de machine learning et de navigation pour pondérer l’accessibilité de tronçons piétons",
+    "contribute-schema-3":"Application de calcul d’itinéraire adapté au profil de mobilité de l’utilisateur",
+
+    "contribute-explore-title": "Explore",
+    "contribute-explore-description": "Récolte de photographies sur le terrain",
+
+    "contribute-analyze-title": "Analyse",
+    "contribute-analyze-description": "Annotation de photographies depuis la maison",
+
+    "contribute-review-title": "Revue",
+    "contribute-review-description": "Analyse de trajet effectué",
+  
+    "contribute-link-descr":"J'aimerai contribuer"
+  },
+  "about":{
+    "title":"Le Projet",
+    
+    "intro":"En étroite collaboration avec le Senior Lab et le Conseil des Séniors d’Yverdon (COSY), il cherche à développer de nouveaux. Procédés pour accompagner les seniors en mobilité, notamment par la génération automatique d’itinéraires pédestres sachant prendre en considération les contraintes spécifiques de l’environnement urbain.",
+    "intro-btn":"Voir l'interview",
+    
+    "conception-title":"Conception participative et apprentissage automatique",
+    "conception-description":"Le **moteur du projet** modos est constitué de deux éléments principaux ; La science participative et l’apprentissage automatisé par ordinateur (Machine Learning).   La sciences participative est un moyen de produire des données et des connaissances, grâce à la participation des citoyennes et citoyens, qui serviront à construire et renforcer notre solution de navigation. En contribuant de manière active, chaque contributeur devient acteur du projet modos.\n\n**L’objectif** n’est pas seulement fonctionnel. En impliquant des personnes volontaires dans le projet, le but est également de fédérer une communauté autour d’un même but, et de renforcer les liens intergenerationnels et d’entraide. En plus des objectifs technologiques, nous avons pour but avec le projet modos de sensibiliser les citoyens aux problématiques liées à la mobilité douce et aux situations de handicap auxquelles sont confrontés chaque jour un nombre grandissant de personnes.\n\n**L’apprentissage automatisé** consiste en l’analyse automatique de données - photographies, annotations, description de situations de handicap, profil de l’utilisateur - pour déterminer quelles zones sont plus ou moins accessibles pour des personnes à mobilité réduite. Grâce à plusieurs applications, les citoyens ont la possibilité de reporter des problèmes dans leur ville. Ces observations sont ensuite analysées par un algorithme qui va permettre de déterminer l’accessibilité d’une zone ou d’un tronçon.\n\n**Le but final** est de fournir une application de planification d’itinéraire - du même style que Google Maps par exemple - qui prend en compte l’accessibilité déterminée grâce à ces algorithmes, en fonction du profil de l’utilisateur. Ainsi, une personne confrontée à des situations de handicap dans la vie de tous les jours pourra planifier ses déplacement de manière autonome, en évitant au maximum ces situations déplaisantes.",
+    
+    "competence-title":"Domaine de compétences",
+    "competence-digiimgpro":"Digital image processing",
+    "competence-ml":"Machine learning",
+    "competence-ux":"User-centered design",
+    "competence-geoinf":"Geoinformatics",
+    
+    "codac-intro":"Le projet de recherche MoDoS (mobilité douce des seniors), financé par la HES-SO, regroupe des chercheurs de la HEIG-VD (Yverdon-les-Bains), de la HE-Arc (Neuchâtel) et de la EIA-FR (Fribourg), en ingénierie informatique, ingénierie des médias numériques et ingénierie du territoire, lui conférant un fort caractère interdisciplinaire.",
+    "codac-title":"Comité d’accompagnement (CODAC)",
+    "codac-descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sem quam, fringilla eu pretium non, interdum et lectus. Proin sed lacus leo. Cras gravida risus a quam pretium, eu sodales metus tempor.",
+    
+    "publication-title":"Publications et conférences"
+  }
+}
