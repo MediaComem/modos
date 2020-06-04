@@ -1,6 +1,5 @@
-const isStaging = process.env.STAGING;
+const ASSET_PREFIX = process.env.ASSET_PREFIX;
 
 module.exports = {
-  // Use the CDN in production and localhost for development.
-  assetPrefix: isStaging ? 'https://modos.heig-vd.ch/_staging' : ''
+  assetPrefix: ASSET_PREFIX ? ASSET_PREFIX : ''
 }
