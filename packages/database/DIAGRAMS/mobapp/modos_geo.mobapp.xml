@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="modos_geo" schema="mobapp" type="PostgreSQL - 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1)">
+   <tables>
+      <table name="event_observations" numRows="0" remarks="" schema="mobapp" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="event_id" nullable="true" remarks="" size="2147483647" type="text">
+            <parent column="_mobapp_id" foreignKey="event_observations_event_id_fkey" implied="false" onDeleteCascade="false" schema="mobapp" table="events"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="observation_id" nullable="true" remarks="" size="2147483647" type="text">
+            <parent column="_mobapp_id" foreignKey="event_observations_observation_id_fkey" implied="false" onDeleteCascade="false" schema="mobapp" table="observations"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="event_observations_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="event_observations_unique" unique="true">
+            <column ascending="true" name="event_id"/>
+            <column ascending="true" name="observation_id"/>
+         </index>
+      </table>
+      <table name="events" numRows="1" remarks="" schema="mobapp" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="_mobapp_id" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="event_id" foreignKey="event_observations_event_id_fkey" implied="false" onDeleteCascade="false" schema="mobapp" table="event_observations"/>
+            <child column="event_id" foreignKey="users_events_event_id_fkey" implied="false" onDeleteCascade="false" schema="mobapp" table="users_events"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="_mobapp_title" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="_mobapp_owner" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="_mobapp_password" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="_mobapp_observations" nullable="true" remarks="" size="2147483647" type="_text"/>
+         <column autoUpdated="false" digits="6" id="6" name="_mobapp_beginning" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="6" id="7" name="_mobapp_ending" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="8" name="_mobapp_objective" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="9" name="_mobapp_numberofimages" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="6" id="10" name="_mobapp_createdat" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="6" id="11" name="_mobapp_updatedat" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="12" name="_mobapp__v" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="_mobapp_events_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="events__mobapp_id_key" unique="true">
+            <column ascending="true" name="_mobapp_id"/>
+         </index>
+      </table>
+      <table name="observations" numRows="137" remarks="" schema="mobapp" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="_mobapp_id" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="observation_id" foreignKey="event_observations_observation_id_fkey" implied="false" onDeleteCascade="false" schema="mobapp" table="event_observations"/>
+            <child column="observation_id" foreignKey="user_observations_observation_id_fkey" implied="false" onDeleteCascade="false" schema="mobapp" table="user_observations"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="_mobapp_owner" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="_mobapp_description_obstacle" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="_mobapp_description_freetext" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="_mobapp_description_impact" nullable="true" remarks="" size="2147483647" type="uint2"/>
+         <column autoUpdated="false" defaultValue="0.0" digits="17" id="6" name="_mobapp_location_latitude" nullable="false" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" defaultValue="0.0" digits="17" id="7" name="_mobapp_location_longitude" nullable="false" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="0" id="8" name="_mobapp_image_imageurl" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="9" name="_mobapp_image_basename" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="10" name="eid" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="8" id="11" name="edist" nullable="true" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="0" id="12" name="geom" nullable="true" remarks="" size="2147483647" type="geometry"/>
+         <column autoUpdated="false" digits="0" id="13" name="snap_geom" nullable="true" remarks="" size="2147483647" type="geometry"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="_mobapp_observations_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="mobapp_observation_geom_idx" unique="false">
+            <column ascending="true" name="geom"/>
+         </index>
+         <index name="observations__mobapp_id_key" unique="true">
+            <column ascending="true" name="_mobapp_id"/>
+         </index>
+      </table>
+      <table name="user_observations" numRows="0" remarks="" schema="mobapp" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="user_id" nullable="true" remarks="" size="2147483647" type="text">
+            <parent column="_mobapp_id" foreignKey="user_observations_user_id_fkey" implied="false" onDeleteCascade="false" schema="mobapp" table="users"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="observation_id" nullable="true" remarks="" size="2147483647" type="text">
+            <parent column="_mobapp_id" foreignKey="user_observations_observation_id_fkey" implied="false" onDeleteCascade="false" schema="mobapp" table="observations"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="user_observations_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="user_observations_unique" unique="true">
+            <column ascending="true" name="user_id"/>
+            <column ascending="true" name="observation_id"/>
+         </index>
+      </table>
+      <table name="users" numRows="0" remarks="" schema="mobapp" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="_mobapp_id" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="user_id" foreignKey="user_observations_user_id_fkey" implied="false" onDeleteCascade="false" schema="mobapp" table="user_observations"/>
+            <child column="user_id" foreignKey="users_events_user_id_fkey" implied="false" onDeleteCascade="false" schema="mobapp" table="users_events"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="_mobapp_pseudonym" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="_mobapp_email" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="_mobapp_passwordhash" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="_mobapp_events" nullable="true" remarks="" size="2147483647" type="_text"/>
+         <column autoUpdated="false" digits="0" id="6" name="_mobapp_age" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="7" name="_mobapp_gender" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="8" name="_mobapp_helper" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="9" name="_mobapp_helperfrequency" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="10" name="_mobapp_mobility" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="_mobapp_users_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="users__mobapp_id_key" unique="true">
+            <column ascending="true" name="_mobapp_id"/>
+         </index>
+      </table>
+      <table name="users_events" numRows="0" remarks="" schema="mobapp" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="user_id" nullable="true" remarks="" size="2147483647" type="text">
+            <parent column="_mobapp_id" foreignKey="users_events_user_id_fkey" implied="false" onDeleteCascade="false" schema="mobapp" table="users"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="event_id" nullable="true" remarks="" size="2147483647" type="text">
+            <parent column="_mobapp_id" foreignKey="users_events_event_id_fkey" implied="false" onDeleteCascade="false" schema="mobapp" table="events"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="users_events_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="users_events_unique" unique="true">
+            <column ascending="true" name="user_id"/>
+            <column ascending="true" name="event_id"/>
+         </index>
+      </table>
+   </tables>
+</database>

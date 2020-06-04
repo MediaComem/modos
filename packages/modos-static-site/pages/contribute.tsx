@@ -1,8 +1,8 @@
-import Head from 'next/head';
+import React from 'react';
 
-import { Layout, Section, Button } from '../components/index';
+import { Section, Button } from '../components/index';
 
-const Contribute = () => (
+const Contribute = () =>
   <>
     <Section>
       <h2>Pourquoi</h2>
@@ -50,6 +50,6 @@ const Contribute = () => (
       <Button>App Store</Button>
     </Section>
   </>
-);
+;
 
 export default Contribute;

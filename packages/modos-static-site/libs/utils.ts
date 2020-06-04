@@ -1,4 +1,4 @@
-class Page {
+class PageLink {
   name;
   link;
 
@@ -8,4 +8,4 @@ class Page {
   }
 }
 
-export { Page };
+export { PageLink };

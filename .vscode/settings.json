@@ -1,4 +1,4 @@
 {
   "eslint.enable": true,
-  "eslint.workingDirectories": ["./packages/backend"]
+  "eslint.workingDirectories": ["./packages/backend", "./packages/modos-static-site"]
 }

@@ -1,76 +1,133 @@
-import {
-  Layout,
-  Leaflet,
-  Section,
-  Button,
-  Grid,
-  Cell
-} from '../components/index';
+/* eslint-disable max-lines-per-function */
+import React, { } from 'react';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import ReactMarkdown from 'react-markdown';
 
-const Home = props => (
-  <>
-    <Section>
-      <p style={{fontSize:"5vh", textAlign:"center", color:"lightgrey", fontStyle:"italic" ,alignSelf:"center", height:"100%", padding:"15%"}}>
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-        consectetur, adipisci velit..."
-      </p>
-    </Section>
-    <Section>
-      <h2>Nos valeurs</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed
-        mauris turpis. Praesent est magna, fringilla id magna vitae, congue
-        convallis metus. Integer pellentesque, nulla vel malesuada posuere, est
-        urna blandit lectus, quis pulvinar quam ipsum sit amet quam. Suspendisse
-        arcu enim, tincidunt eu nulla fermentum, lacinia fringilla nibh. Mauris
-        arcu quam, tempor ut eleifend vel, iaculis a magna. Donec luctus mauris
-        eget tempor mattis. Nam pharetra ultricies orci eu semper. Etiam
-        ultricies auctor justo. Pellentesque elementum tincidunt facilisis.
-      </p>
-      <Button>call to action</Button>
-      <img src="zeit.svg" width="300" height="400"></img>
-    </Section>
-    <Section>
-      <h2>Pourquoi Contribuer</h2>
-      <Grid columns={1} rows={2}>
-        <Cell className="inline-flex">
-          <span style={{border:'5px solid black', borderRadius:'50%',fontSize:"2em", width:'50px',height:'50px',textAlign:"center",lineHeight:'50px', display:"block"}}>1</span>
-          <h3>Raison 1</h3>
-        </Cell>
-        <Cell className="inline-flex">
-          <span style={{border:'5px solid black', borderRadius:'50%',fontSize:"2em", width:'50px',height:'50px',textAlign:"center",lineHeight:'50px', display:"block"}}>2</span>
-          <h3>Raison 2</h3>
-        </Cell>
-      </Grid>
-    </Section>
-    <Section>
-      <h3>Codac</h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed
-        mauris turpis. Praesent est magna, fringilla id magna vitae, congue
-        convallis metus. Integer pellentesque, nulla vel malesuada posuere, est
-        urna blandit lectus, quis pulvinar quam ipsum sit amet quam. Suspendisse
-        arcu enim, tincidunt eu nulla fermentum, lacinia fringilla nibh. Mauris
-        arcu quam, tempor ut eleifend vel, iaculis a magna. Donec luctus mauris
-        eget tempor mattis. Nam pharetra ultricies orci eu semper. Etiam
-        ultricies auctor justo. Pellentesque elementum tincidunt facilisis.{' '}
-      </p>
-      <Grid gap="0" columns={2} rows={2}>
-        <Cell width={2}>
-          <img src="zeit.svg" style={{ width: '100%', height: '50px' }}></img>
-        </Cell>
-        <Cell>
-          <img src="zeit.svg" style={{ width: '100%', height: '50px' }}></img>
-        </Cell>
-        <Cell>
-          <img src="zeit.svg" style={{ width: '100%', height: '50px' }}></img>
-        </Cell>
-      </Grid>
-    </Section>
-    <Section>
-      <Leaflet id="leaflet-map"></Leaflet>
-    </Section>
-  </>
-);
+import { ContainerWithMargin, CardsModosContainer, ISliderItemModos, SliderModosContainer } from '../components/index';
+import { i18n } from '../libs';
 
+import styles from './index.module.scss';
+
+const Home = props => {
+  const hi18n = value => i18n('homepage', value, props.lang);
+
+  const CONTRIBUTE_SCHEMA_CAROUSEL: ISliderItemModos[] = [
+    {
+      caption: hi18n('contribute-schema-1'),
+      imgAlt: '',
+      imgSrc: './assets/mobile/home-schema-part01-mobile.svg'
+    }, {
+      caption: hi18n('contribute-schema-2'),
+      imgAlt: '',
+      imgSrc: './assets/mobile/home-schema-part02-mobile.svg'
+    }, {
+      caption: hi18n('contribute-schema-3'),
+      imgAlt: '',
+      imgSrc: './assets/mobile/home-schema-part03-mobile.svg'
+    }
+  ];
+
+  const ACTIONS = [
+    {
+      imgSrc: './assets/home-explore.svg',
+      imgAlt: '',
+      title: hi18n('contribute-explore-title'),
+      description: hi18n('contribute-explore-description')
+    }, {
+      imgSrc: './assets/home-analyse.svg',
+      imgAlt: '',
+      title: hi18n('contribute-analyze-title'),
+      description: hi18n('contribute-analyze-description')
+    }, {
+      imgSrc: './assets/home-evaluation.svg',
+      imgAlt: '',
+      title: hi18n('contribute-review-title'),
+      description: hi18n('contribute-review-description')
+    }
+  ];
+
+  return (
+    <>
+      <div
+        id={styles['homepage-title']}
+        className={styles.section}
+      >
+        <p>{hi18n('title')}</p>
+      </div>
+
+      <ContainerWithMargin
+        id={styles['project-section']}
+        className={styles.section}
+      >
+        <h2>{hi18n('project-title')}</h2>
+        <ReactMarkdown>{hi18n('project-description')}</ReactMarkdown>
+        <Button id={styles['project-link']} className={styles['btn-primary']}>
+          {hi18n('project-link-descr')}
+        </Button>
+      </ContainerWithMargin>
+
+      <div id={styles['map-section']}>
+        <p>{hi18n('discover-map')}</p>
+      </div>
+
+      <Container
+        id={styles['contribute-section']}
+        className={styles.section}
+        fluid
+      >
+        <Row>
+          <Col md={0} lg={1}></Col>
+          <Col>
+            <h2>{hi18n('contribute-title')}</h2>
+          </Col>
+          <Col md={0} lg={1}></Col>
+        </Row>
+        <Row className={styles['contribute-desktop-flow']}>
+          <img alt='' src='./assets/desktop/home-schema-desktop.svg'></img>
+          <div>
+            <p>{hi18n('contribute-schema-1')}</p>
+            <p>{hi18n('contribute-schema-2')}</p>
+            <p>{hi18n('contribute-schema-3')}</p>
+          </div>
+        </Row>
+        <Row className={styles['contribute-mobile-flow']}>
+          <Col className={styles['contribute-mobile-flow-col']}>
+            <SliderModosContainer items={CONTRIBUTE_SCHEMA_CAROUSEL}></SliderModosContainer>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={0} lg={1}></Col>
+          <Col className={styles['contribute-description']}>
+            <p>{hi18n('contribute-description')}</p>
+          </Col>
+          <Col md={0} lg={1}></Col>
+        </Row>
+      </Container>
+
+      <ContainerWithMargin
+        id={styles['contribute-action']}
+        className={styles.section}
+      >
+        <Container fluid>
+          <Row>
+            <Col>
+              <CardsModosContainer cards={ACTIONS}></CardsModosContainer>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12} lg={4}></Col>
+            <Col sm={12} lg={4}>
+              <Button className={styles['btn-primary']}>
+                {hi18n('contribute-link-descr')}
+              </Button>
+            </Col>
+            <Col sm={12} lg={4}></Col>
+          </Row>
+        </Container>
+      </ContainerWithMargin>
+
+      <ContainerWithMargin></ContainerWithMargin>
+    </>
+  );
+};
 export default Home;

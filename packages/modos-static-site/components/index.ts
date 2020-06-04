@@ -1,8 +1,10 @@
-export * from './Header';
-export * from './Layout';
-export * from './Footer';
+export * from './layout/Header';
+export * from './layout/Footer';
+export * from './layout/Layout';
+export * from './layout/ContainerWithMargin';
 export * from './general-ui/Leaflet';
-export * from './general-ui/Button';
-export * from './general-ui/Section';
-export * from './general-ui/Forms';
-export * from './general-ui/Grid';
+export * from './general-ui/LanguageSelect';
+export * from './general-ui/CardsModos';
+export * from './general-ui/SliderModos';
+
+

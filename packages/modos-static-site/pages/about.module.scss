@@ -1,0 +1,153 @@
+.section {
+  padding-top: 4%;
+  padding-bottom: 4%;
+  min-height: 650px;
+}
+
+#about-title-mobile {
+  background: url('../public/assets/mobile/banner-project-mobile.svg') no-repeat
+    #fff;
+  background-size: cover;
+  background-position: top;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  min-height: 750px;
+  padding-top: 280px;
+}
+
+#about-intro-mobile {
+  min-height: fit-content;
+  button {
+    margin-top: 30px;
+    width: 100%;
+    background-color: var(--primary-btn-color);
+  }
+}
+
+#about-intro-desktop {
+  display: none;
+}
+
+#about-conception {
+  background-color: var(--secondary-bg-color);
+  p {
+    margin-bottom: 50px;
+  }
+
+  strong {
+    font-family: 'Gotham Pro Bold';
+  }
+
+  .about-conception-img-desktop {
+    display: none;
+  }
+
+}
+
+.about-conception-img-mobile {
+}
+
+#about-codac {
+  background-color: var(--secondary-bg-color);
+  
+  .about-universities {
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-flow: column;
+    a {
+      margin: 30px 0;
+    }
+  }
+  
+  h2 {
+    word-wrap: break-word;
+  }
+
+  .about-members {
+    display:flex;
+    // justify-content: center;
+    // align-items: center;
+    flex-flow: column;
+
+    .about-members-item {
+      margin: 15px 0;
+      background-color: var(--quinary-bg-color);
+      padding:3%;
+      border-radius: 2px;
+      text-align: center;
+      span {
+        color: var(--primary-text-color);
+        font-size: 1.5em;
+      }
+    }
+  }
+
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+  #about-title-mobile,
+  #about-intro-mobile {
+    display: none;
+  }
+  #about-intro-desktop {
+    background: url('../public/assets/desktop/banner-project-desktop.svg') no-repeat
+    #fff;
+    background-position: top left;
+    padding-top: 280px;
+    display: block;
+    padding-left: 50%;
+    min-height: 90vh;
+  }
+  #about-conception {
+    h2 {
+      font-size: 3em;
+    }
+
+    .conception-description {
+      margin-top: 100px;
+      column-gap: 50px;
+      columns: 2;
+    }
+    
+    .about-conception-img-desktop {
+      display: block;
+      background-color: white;
+      border-radius: 30px;
+    }
+    
+  }
+  .about-conception-img-mobile {
+    display: none;
+  }
+
+  #about-codac {
+    .about-universities {
+      flex-flow:row;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 10%;
+    }
+
+    .about-members {
+      flex-flow:row;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 10%;
+
+      .about-members-item {
+        margin: 30px 50px;
+        padding: 1%;
+      }
+    }
+  }
+}

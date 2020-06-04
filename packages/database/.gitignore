@@ -1,0 +1,12 @@
+DUMPS/*
+LOGS/*
+PRIVATE*
+.env*
+*.sql
+*.zip
+*.jar
+*.old
+*.properties
+.create-models.js
+.0*
+00*

@@ -1,4 +1,5 @@
-import '../style/index.scss'
+import React from 'react';
+import '../style/index.scss';
 
 import { useGetLanguage } from '../libs/index';
 import { Layout } from '../components';
@@ -7,9 +8,9 @@ import { Layout } from '../components';
 function MyApp({ Component, pageProps }) {
   const { data } = useGetLanguage();
   pageProps.lang = data;
-  
+
   return (
-    
+
     <Layout lang={data}>
       <Component {...pageProps} />
 

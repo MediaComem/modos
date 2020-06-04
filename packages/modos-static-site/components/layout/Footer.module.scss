@@ -1,0 +1,89 @@
+@import '../../style/utils.scss';
+
+.main-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 20vh;
+  background-color: rgb(243, 243, 243);
+
+  .contact {
+    padding-top: 30px;
+    min-height: 600px;
+    background-color: var(--secondary-bg-color);
+    background-image: url('../../public/assets/mobile/contact-mobile.svg');
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: 100% auto;
+    padding-bottom: 600px;
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: var(--secondary-btn-color);
+      border-color: var(--secondary-btn-color);
+    }
+  }
+
+  .universities {
+    min-height: 150px;
+    text-align: center;
+    background-color: white;
+
+    div {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+    }
+
+    a {
+      margin: 20px;
+      max-height: 140px;
+    }
+  }
+
+  .copyright {
+    background-color: white;
+    min-height: 50px;
+    border-top: 1px solid var(--primary-color);
+    line-height: 50px;
+    text-align: center;
+    * {
+      line-height: 50px;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+  .main-footer {
+    .contact {
+      background-image: url('../../public/assets/mobile/contact-mobile-nobackground.svg');
+      background-size: auto 33vh;
+      padding-bottom: 35vh;
+    }
+    .universities {
+      div {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-evenly;
+      }
+
+      a {
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .main-footer {
+    .contact {
+      background-image: url('../../public/assets/desktop/contact-desktop.svg');
+      background-size: auto 90%;
+      padding-bottom: 30px;
+      background-position: center right;
+    }
+  }
+}
