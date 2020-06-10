@@ -58,6 +58,8 @@ const Home = props => {
       <ContainerWithMargin
         id={styles['project-section']}
         className={styles.section}
+        rowClassName={styles['project-section-row']}
+        mainColClassName={styles['project-section-col']}
       >
         <h2>{hi18n('project-title')}</h2>
         <ReactMarkdown>{hi18n('project-description')}</ReactMarkdown>
@@ -92,7 +94,7 @@ const Home = props => {
         </Row>
         <Row className={styles['contribute-mobile-flow']}>
           <Col className={styles['contribute-mobile-flow-col']}>
-            <SliderModosContainer items={CONTRIBUTE_SCHEMA_CAROUSEL}></SliderModosContainer>
+            <SliderModosContainer carouselCaptionClassName={styles['contribute-mobile-carousel-caption']} items={CONTRIBUTE_SCHEMA_CAROUSEL}></SliderModosContainer>
           </Col>
         </Row>
         <Row>
