@@ -54,7 +54,7 @@ const CardsModosItem = props =>
       display: flex;
       flex-flow: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-evenly;
       margin: 5% 0% 5% 0%;
       width: 100%;
       min-height: 50vh;
@@ -70,24 +70,24 @@ const CardsModosItem = props =>
       border-radius: 50%;
       background: white;
       height: 200px;
-      width: 200px;
-      margin-bottom: 10%;
-      
+      width: 200px;      
     }    
 
     .item .item-pic img {
       position: absolute;
       min-width: 250px;
       left: calc((200px * 0.5) - (250px * 0.5));
-      top: -50px;
+      top: -25px;
     }
 
     @media (min-width: 992px) {
       .item {
         margin: 5% 2% 5% 2%;
         padding: 40px 5% 20px 5%;
-        width: 20%;
-        min-width: 300px;
+        width: 21%;
+        min-width: 250px;
+        min-height: calc(250px + 200px);
+        height:50%;
       }
     }
   `}</style>

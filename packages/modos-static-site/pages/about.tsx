@@ -89,6 +89,8 @@ const About = props => {
       <ContainerWithMargin
         id={styles['about-intro-desktop']}
         className={styles.section}
+        mainColClassName={styles['about-intro-desktop-maincol']}
+        rowClassName={styles['about-intro-desktop-row']}
       >
         <h1>{ai18n('title')}</h1>
         <div>

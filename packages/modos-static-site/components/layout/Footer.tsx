@@ -26,7 +26,7 @@ class Footer extends React.Component<Props, State> {
         <Container fluid>
           <Row className={styles.contact}>
             <Col md={0} lg={1}></Col>
-            <Col sm={12} lg={3}>
+            <Col sm={12} lg={3} className={styles['contact-col']}>
               <h2>{this.i18n('contact')}</h2>
               <p>
                 {this.i18n('moreinfo')}

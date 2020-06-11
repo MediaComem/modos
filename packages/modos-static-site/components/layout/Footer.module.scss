@@ -22,11 +22,12 @@
       width: 100%;
       background-color: var(--secondary-btn-color);
       border-color: var(--secondary-btn-color);
+      text-transform: uppercase;
     }
   }
 
   .universities {
-    min-height: 150px;
+    min-height: 125px;
     text-align: center;
     background-color: white;
 
@@ -38,7 +39,10 @@
 
     a {
       margin: 20px;
-      max-height: 140px;
+      max-height: 95px;
+      img {
+        max-height: 75px;
+      }
     }
   }
 
@@ -64,6 +68,7 @@
       background-size: auto 33vh;
       padding-bottom: 35vh;
     }
+
     .universities {
       div {
         display: flex;
@@ -81,9 +86,15 @@
   .main-footer {
     .contact {
       background-image: url('../../public/assets/desktop/contact-desktop.svg');
-      background-size: auto 90%;
+      background-size: auto 100%;
       padding-bottom: 30px;
-      background-position: center right;
+      background-position: bottom right;
+
+      .contact-col {
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+      }
     }
   }
 }
