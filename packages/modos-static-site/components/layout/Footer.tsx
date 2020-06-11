@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import React from 'react';
 import { i18n } from '../../libs';
 
 import styles from './Footer.module.scss';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import Link from 'next/link';
 
 
 interface Props {
@@ -38,10 +38,10 @@ class Footer extends React.Component<Props, State> {
           </Row>
           <Row className={styles.universities}>
             <Col>
-              <a href='https://hes-so.ch'><img src='assets/hes-logo.png' alt='Logo HES-SO' /></a>
-              <a href='https://heig-vd.ch'><img src='assets/heig-logo.png' alt='Logo HEIG-VD' /></a>
-              <a href='https://he-arc.ch'><img src='assets/hearc-logo.png' alt='Logo HEARC' /></a>
-              <a href='https://heia-fr.ch'><img src='assets/heia-logo.png' alt='Logo HEIA-FR' /></a>
+              <a href='https://hes-so.ch'><img src={require('../../images/hes-logo.png')} alt='Logo HES-SO' /></a>
+              <a href='https://heig-vd.ch'><img src={require('../../images/heig-logo.png')} alt='Logo HEIG-VD' /></a>
+              <a href='https://he-arc.ch'><img src={require('../../images/hearc-logo.png')} alt='Logo HEARC' /></a>
+              <a href='https://heia-fr.ch'><img src={require('../../images/heia-logo.png')} alt='Logo HEIA-FR' /></a>
             </Col>
           </Row>
           <Row className={styles.copyright}>

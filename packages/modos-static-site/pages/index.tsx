@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable max-lines-per-function */
 import React, { } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
@@ -16,31 +17,31 @@ const Home = props => {
     {
       caption: hi18n('contribute-schema-1'),
       imgAlt: '',
-      imgSrc: './assets/mobile/home-schema-part01-mobile.svg'
+      imgSrc: require('../images/mobile/home-schema-part01-mobile.svg')
     }, {
       caption: hi18n('contribute-schema-2'),
       imgAlt: '',
-      imgSrc: './assets/mobile/home-schema-part02-mobile.svg'
+      imgSrc: require('../images/mobile/home-schema-part02-mobile.svg')
     }, {
       caption: hi18n('contribute-schema-3'),
       imgAlt: '',
-      imgSrc: './assets/mobile/home-schema-part03-mobile.svg'
+      imgSrc: require('../images/mobile/home-schema-part03-mobile.svg')
     }
   ];
 
   const ACTIONS = [
     {
-      imgSrc: './assets/home-explore.svg',
+      imgSrc: require('../images/home-explore.svg'),
       imgAlt: '',
       title: hi18n('contribute-explore-title'),
       description: hi18n('contribute-explore-description')
     }, {
-      imgSrc: './assets/home-analyse.svg',
+      imgSrc: require('../images/home-analyse.svg'),
       imgAlt: '',
       title: hi18n('contribute-analyze-title'),
       description: hi18n('contribute-analyze-description')
     }, {
-      imgSrc: './assets/home-evaluation.svg',
+      imgSrc: require('../images/home-evaluation.svg'),
       imgAlt: '',
       title: hi18n('contribute-review-title'),
       description: hi18n('contribute-review-description')
@@ -88,7 +89,7 @@ const Home = props => {
           <Col md={0} lg={1}></Col>
         </Row>
         <Row className={styles['contribute-desktop-flow']}>
-          <img alt='' src='./assets/desktop/home-schema-desktop.svg'></img>
+          <img alt='Schema describing how MoDos work' src={require('../images/desktop/home-schema-desktop.svg')}></img>
           <div>
             <p>{hi18n('contribute-schema-1')}</p>
             <p>{hi18n('contribute-schema-2')}</p>

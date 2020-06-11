@@ -11,7 +11,7 @@
     padding-top: 30px;
     min-height: 600px;
     background-color: var(--secondary-bg-color);
-    background-image: url('../../public/assets/mobile/contact-mobile.svg');
+    background-image: url('../../images/mobile/contact-mobile.svg');
     background-repeat: no-repeat;
     background-position: bottom center;
     background-size: 100% auto;
@@ -65,7 +65,7 @@
 @media (min-width: 768px) {
   .main-footer {
     .contact {
-      background-image: url('../../public/assets/mobile/contact-mobile-nobackground.svg');
+      background-image: url('../../images/mobile/contact-mobile-nobackground.svg');
       background-size: auto 33vh;
       padding-bottom: 35vh;
     }
@@ -86,7 +86,7 @@
 @media (min-width: 992px) {
   .main-footer {
     .contact {
-      background-image: url('../../public/assets/desktop/contact-desktop.svg');
+      background-image: url('../../images/desktop/contact-desktop.svg');
       background-size: auto 100%;
       padding-bottom: 30px;
       background-position: bottom right;
