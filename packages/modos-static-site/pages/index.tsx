@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable max-lines-per-function */
 import React, { } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
@@ -7,6 +8,8 @@ import { ContainerWithMargin, CardsModosContainer, ISliderItemModos, SliderModos
 import { i18n } from '../libs';
 
 import styles from './index.module.scss';
+import Link from 'next/link';
+import { NextSeo } from 'next-seo';
 
 const Home = props => {
   const hi18n = value => i18n('homepage', value, props.lang);
@@ -15,31 +18,31 @@ const Home = props => {
     {
       caption: hi18n('contribute-schema-1'),
       imgAlt: '',
-      imgSrc: './assets/mobile/home-schema-part01-mobile.svg'
+      imgSrc: require('../images/mobile/home-schema-part01-mobile.svg?inline')
     }, {
       caption: hi18n('contribute-schema-2'),
       imgAlt: '',
-      imgSrc: './assets/mobile/home-schema-part02-mobile.svg'
+      imgSrc: require('../images/mobile/home-schema-part02-mobile.svg?inline')
     }, {
       caption: hi18n('contribute-schema-3'),
       imgAlt: '',
-      imgSrc: './assets/mobile/home-schema-part03-mobile.svg'
+      imgSrc: require('../images/mobile/home-schema-part03-mobile.svg?inline')
     }
   ];
 
   const ACTIONS = [
     {
-      imgSrc: './assets/home-explore.svg',
+      imgSrc: require('../images/home-explore.svg?inline'),
       imgAlt: '',
       title: hi18n('contribute-explore-title'),
       description: hi18n('contribute-explore-description')
     }, {
-      imgSrc: './assets/home-analyse.svg',
+      imgSrc: require('../images/home-analyse.svg?inline'),
       imgAlt: '',
       title: hi18n('contribute-analyze-title'),
       description: hi18n('contribute-analyze-description')
     }, {
-      imgSrc: './assets/home-evaluation.svg',
+      imgSrc: require('../images/home-evaluation.svg?inline'),
       imgAlt: '',
       title: hi18n('contribute-review-title'),
       description: hi18n('contribute-review-description')
@@ -48,22 +51,37 @@ const Home = props => {
 
   return (
     <>
+      <NextSeo
+        title='Home'
+        description={`${hi18n('project-description').slice(0, 50)}...`}
+        canonical='https://modos.heig-vd.ch'
+        openGraph={{
+          url: 'https://modos.heig-vd.ch',
+          title: 'MoDos homepage',
+          description: `${hi18n('project-description').slice(0, 50)}...`
+        }}
+      />
+
       <div
         id={styles['homepage-title']}
         className={styles.section}
       >
-        <p>{hi18n('title')}</p>
+        {/* <p>{hi18n('title')}</p> */}
       </div>
 
       <ContainerWithMargin
         id={styles['project-section']}
         className={styles.section}
+        rowClassName={styles['project-section-row']}
+        mainColClassName={styles['project-section-col']}
       >
         <h2>{hi18n('project-title')}</h2>
         <ReactMarkdown>{hi18n('project-description')}</ReactMarkdown>
-        <Button id={styles['project-link']} className={styles['btn-primary']}>
-          {hi18n('project-link-descr')}
-        </Button>
+        <Link href='/about'>
+          <Button id={styles['project-link']} className={styles['btn-primary']}>
+            {hi18n('project-link-descr')}
+          </Button>
+        </Link>
       </ContainerWithMargin>
 
       <div id={styles['map-section']}>
@@ -83,7 +101,7 @@ const Home = props => {
           <Col md={0} lg={1}></Col>
         </Row>
         <Row className={styles['contribute-desktop-flow']}>
-          <img alt='' src='./assets/desktop/home-schema-desktop.svg'></img>
+          <img alt='Schema describing how MoDos work' src={require('../images/desktop/home-schema-desktop.svg')}></img>
           <div>
             <p>{hi18n('contribute-schema-1')}</p>
             <p>{hi18n('contribute-schema-2')}</p>
@@ -92,7 +110,7 @@ const Home = props => {
         </Row>
         <Row className={styles['contribute-mobile-flow']}>
           <Col className={styles['contribute-mobile-flow-col']}>
-            <SliderModosContainer items={CONTRIBUTE_SCHEMA_CAROUSEL}></SliderModosContainer>
+            <SliderModosContainer carouselCaptionClassName={styles['contribute-mobile-carousel-caption']} items={CONTRIBUTE_SCHEMA_CAROUSEL}></SliderModosContainer>
           </Col>
         </Row>
         <Row>
@@ -117,9 +135,11 @@ const Home = props => {
           <Row>
             <Col sm={12} lg={4}></Col>
             <Col sm={12} lg={4}>
-              <Button className={styles['btn-primary']}>
-                {hi18n('contribute-link-descr')}
-              </Button>
+              <Link href='#contact'>
+                <Button className={styles['btn-primary']}>
+                  {hi18n('contribute-link-descr')}
+                </Button>
+              </Link>
             </Col>
             <Col sm={12} lg={4}></Col>
           </Row>

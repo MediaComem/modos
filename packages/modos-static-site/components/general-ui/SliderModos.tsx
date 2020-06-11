@@ -5,6 +5,8 @@ interface IProps {
   items: ISliderItemModos[];
   className?: string;
   id?: string;
+  carouselClassName?: string;
+  carouselCaptionClassName?: string;
 }
 
 export interface ISliderItemModos {
@@ -21,7 +23,7 @@ export const SliderModosContainer = (props: IProps) => {
   return (
     <div className={`${props.className}`} id={props.id}>
       <Carousel
-        className=''
+        className={props.carouselClassName}
         interval={null}
         indicators={false}
         wrap={false}
@@ -38,7 +40,7 @@ export const SliderModosContainer = (props: IProps) => {
               alt={item.imgAlt}
               src={item.imgSrc}
             />
-            <Carousel.Caption>
+            <Carousel.Caption className={props.carouselCaptionClassName}>
               <p>{item.caption}</p>
             </Carousel.Caption>
           </Carousel.Item>)}

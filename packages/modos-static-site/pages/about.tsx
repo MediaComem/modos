@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable max-lines-per-function */
 import React from 'react';
 
@@ -11,6 +12,7 @@ import {
   SliderModosContainer
 } from '../components/index';
 import ReactMarkdown from 'react-markdown';
+import { NextSeo } from 'next-seo';
 
 const About = props => {
   const ai18n = value => i18n('about', value, props.lang);
@@ -19,41 +21,41 @@ const About = props => {
     {
       caption: '',
       imgAlt: '',
-      imgSrc: './assets/mobile/about-schema-part01-mobile.svg'
+      imgSrc: require('../images/mobile/about-schema-part01-mobile.svg')
     },
     {
       caption: '',
       imgAlt: '',
-      imgSrc: './assets/mobile/about-schema-part02-mobile.svg'
+      imgSrc: require('../images/mobile/about-schema-part02-mobile.svg')
     },
     {
       caption: '',
       imgAlt: '',
-      imgSrc: './assets/mobile/about-schema-part03-mobile.svg'
+      imgSrc: require('../images/mobile/about-schema-part03-mobile.svg')
     }
   ];
 
   const CARDS_COMPETENCES = [
     {
-      imgSrc: './assets/about-digiimgpro.svg',
+      imgSrc: require('../images/about-digiimgpro.svg'),
       imgAlt: '',
       title: ai18n('competence-digiimgpro'),
       description: ''
     },
     {
-      imgSrc: './assets/about-ml.svg',
+      imgSrc: require('../images/about-ml.svg'),
       imgAlt: '',
       title: ai18n('competence-ml'),
       description: ''
     },
     {
-      imgSrc: './assets/about-ux.svg',
+      imgSrc: require('../images/about-ux.svg'),
       imgAlt: '',
       title: ai18n('competence-ux'),
       description: ''
     },
     {
-      imgSrc: './assets/about-geoinf.svg',
+      imgSrc: require('../images/about-geoinf.svg'),
       imgAlt: '',
       title: ai18n('competence-geoinf'),
       description: ''
@@ -72,6 +74,17 @@ const About = props => {
 
   return (
     <>
+      <NextSeo
+        title='About'
+        description={`${ai18n('intro').slice(0, 50)}...`}
+        canonical='https://modos.heig-vd.ch/about'
+        openGraph={{
+          url: 'https://modos.heig-vd.ch/about',
+          title: 'About MoDos',
+          description: `${ai18n('intro').slice(0, 50)}...`
+        }}
+      />
+
       <div id={styles['about-title-mobile']}>
         <h1>{ai18n('title')}</h1>
       </div>
@@ -89,6 +102,8 @@ const About = props => {
       <ContainerWithMargin
         id={styles['about-intro-desktop']}
         className={styles.section}
+        mainColClassName={styles['about-intro-desktop-maincol']}
+        rowClassName={styles['about-intro-desktop-row']}
       >
         <h1>{ai18n('title')}</h1>
         <div>
@@ -107,7 +122,7 @@ const About = props => {
         </div>
         <Image
           className={styles['about-conception-img-desktop']}
-          src='./assets/desktop/about-technicalschema-desktop.svg'
+          src={require('../images/desktop/about-technicalschema-desktop.svg')}
           fluid
         />
       </ContainerWithMargin>
@@ -135,13 +150,13 @@ const About = props => {
 
         <div className={styles['about-universities']}>
           <a href='https://heig-vd.ch'>
-            <img src='assets/heig-logo.png' alt='Logo HEIG-VD' />
+            <img src={require('../images/heig-logo.png')} alt='Logo HEIG-VD' />
           </a>
           <a href='https://he-arc.ch'>
-            <img src='assets/hearc-logo.png' alt='Logo HEARC' />
+            <img src={require('../images/hearc-logo.png')} alt='Logo HEARC' />
           </a>
           <a href='https://heia-fr.ch'>
-            <img src='assets/heia-logo.png' alt='Logo HEIA-FR' />
+            <img src={require('../images/heia-logo.png')} alt='Logo HEIA-FR' />
           </a>
         </div>
 
