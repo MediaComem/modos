@@ -3,6 +3,7 @@ import { i18n } from '../../libs';
 
 import styles from './Footer.module.scss';
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import Link from 'next/link';
 
 
 interface Props {
@@ -22,7 +23,7 @@ class Footer extends React.Component<Props, State> {
 
   render() {
     return (
-      <footer className={styles['main-footer']}>
+      <footer id='contact' className={styles['main-footer']}>
         <Container fluid>
           <Row className={styles.contact}>
             <Col md={0} lg={1}></Col>
@@ -31,7 +32,7 @@ class Footer extends React.Component<Props, State> {
               <p>
                 {this.i18n('moreinfo')}
               </p>
-              <Button>{this.i18n('takecontact')}</Button>
+              <a href='https://people.hes-so.ch/fr/profile/olivier.ertz#contact'><Button>{this.i18n('takecontact')}</Button></a>
             </Col>
             <Col md={0} lg={1}></Col>
           </Row>

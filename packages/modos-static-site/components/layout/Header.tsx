@@ -2,17 +2,16 @@ import Link from 'next/link';
 import React from 'react';
 import Head from 'next/head';
 
-import { LanguageSelect } from '../index';
 import { i18n, PageLink } from '../../libs';
 
 import styles from './Header.module.scss';
 
 const PAGE_LIST: PageLink[] = [
   new PageLink('homepage', '/'),
-  new PageLink('about', '/about'),
-  new PageLink('contribute', '/contribute'),
-  new PageLink('mapping-party', '/mapping-party'),
-  new PageLink('contact', '/contact')
+  new PageLink('about', '/about')
+  // new PageLink('contribute', '/contribute'),
+  // new PageLink('mapping-party', '/mapping-party'),
+  // new PageLink('contact', '/contact')
 ];
 
 interface Props {

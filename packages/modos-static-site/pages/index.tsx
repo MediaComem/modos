@@ -7,6 +7,7 @@ import { ContainerWithMargin, CardsModosContainer, ISliderItemModos, SliderModos
 import { i18n } from '../libs';
 
 import styles from './index.module.scss';
+import Link from 'next/link';
 
 const Home = props => {
   const hi18n = value => i18n('homepage', value, props.lang);
@@ -63,9 +64,11 @@ const Home = props => {
       >
         <h2>{hi18n('project-title')}</h2>
         <ReactMarkdown>{hi18n('project-description')}</ReactMarkdown>
-        <Button id={styles['project-link']} className={styles['btn-primary']}>
-          {hi18n('project-link-descr')}
-        </Button>
+        <Link href='/about'>
+          <Button id={styles['project-link']} className={styles['btn-primary']}>
+            {hi18n('project-link-descr')}
+          </Button>
+        </Link>
       </ContainerWithMargin>
 
       <div id={styles['map-section']}>
@@ -119,9 +122,11 @@ const Home = props => {
           <Row>
             <Col sm={12} lg={4}></Col>
             <Col sm={12} lg={4}>
-              <Button className={styles['btn-primary']}>
-                {hi18n('contribute-link-descr')}
-              </Button>
+              <Link href='#contact'>
+                <Button className={styles['btn-primary']}>
+                  {hi18n('contribute-link-descr')}
+                </Button>
+              </Link>
             </Col>
             <Col sm={12} lg={4}></Col>
           </Row>
