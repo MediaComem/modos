@@ -12,6 +12,7 @@ import {
   SliderModosContainer
 } from '../components/index';
 import ReactMarkdown from 'react-markdown';
+import { NextSeo } from 'next-seo';
 
 const About = props => {
   const ai18n = value => i18n('about', value, props.lang);
@@ -73,6 +74,17 @@ const About = props => {
 
   return (
     <>
+      <NextSeo
+        title='About'
+        description={`${ai18n('intro').slice(0, 50)}...`}
+        canonical='https://modos.heig-vd.ch/about'
+        openGraph={{
+          url: 'https://modos.heig-vd.ch/about',
+          title: 'About MoDos',
+          description: `${ai18n('intro').slice(0, 50)}...`
+        }}
+      />
+
       <div id={styles['about-title-mobile']}>
         <h1>{ai18n('title')}</h1>
       </div>

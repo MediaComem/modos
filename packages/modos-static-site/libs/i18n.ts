@@ -32,6 +32,7 @@ function useGetLanguage() {
   );
 
   if (!error) {
+    console.log(data);
     return { data };
   }
 

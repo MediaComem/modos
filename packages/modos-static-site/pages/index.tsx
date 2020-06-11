@@ -9,6 +9,7 @@ import { i18n } from '../libs';
 
 import styles from './index.module.scss';
 import Link from 'next/link';
+import { NextSeo } from 'next-seo';
 
 const Home = props => {
   const hi18n = value => i18n('homepage', value, props.lang);
@@ -50,6 +51,17 @@ const Home = props => {
 
   return (
     <>
+      <NextSeo
+        title='Home'
+        description={`${hi18n('project-description').slice(0, 50)}...`}
+        canonical='https://modos.heig-vd.ch'
+        openGraph={{
+          url: 'https://modos.heig-vd.ch',
+          title: 'MoDos homepage',
+          description: `${hi18n('project-description').slice(0, 50)}...`
+        }}
+      />
+
       <div
         id={styles['homepage-title']}
         className={styles.section}
