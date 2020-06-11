@@ -66,7 +66,7 @@ const Home = props => {
         id={styles['homepage-title']}
         className={styles.section}
       >
-        <p>{hi18n('title')}</p>
+        {/* <p>{hi18n('title')}</p> */}
       </div>
 
       <ContainerWithMargin

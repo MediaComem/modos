@@ -13,29 +13,29 @@
 }
 
 #homepage-title {
-  background: url('../images/mobile/banner-home-mobile.svg') no-repeat #fff;
+  background: url('../images/mobile/banner-home-mobile.jpg') no-repeat #fff;
   background-size: cover;
   background-position: top;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  padding-top:150px;
+  // display:flex;
+  // align-items: center;
+  // justify-content: center;
+  // padding-top:150px;
 
-  p {
-    font-size: 1.2em;
-    font-family: 'Gotham Pro Bold';
-    text-transform: uppercase;
-    color: var(--secondary-text-color);
-    background:rgba(255,255,255,0.80);
-    width: 250px;
-    height: 250px;
-    padding: 10px;
-    border-radius: 50%;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
+  // p {
+  //   font-size: 1.2em;
+  //   font-family: 'Gotham Pro Bold';
+  //   text-transform: uppercase;
+  //   color: var(--secondary-text-color);
+  //   background:rgba(255,255,255,0.80);
+  //   width: 250px;
+  //   height: 250px;
+  //   padding: 10px;
+  //   border-radius: 50%;
+  //   display:flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   text-align: center;
+  // }
 }
 
 #project-section {
@@ -131,7 +131,7 @@
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
   #homepage-title {
-    background-image: url('../images/desktop/banner-home-desktop.svg');
+    background-image: url('../images/desktop/banner-home-desktop.jpg');
     background-size: auto 100%;
     p {
       
@@ -160,7 +160,8 @@
 @media (min-width: 992px) {
   #homepage-title {
     height: 100vh;
-    background-size: 100% auto;
+    max-height: 3445px;
+    background-size: cover;
   }
 
   #project-section {

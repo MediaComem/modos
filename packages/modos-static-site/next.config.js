@@ -10,7 +10,7 @@ module.exports = withPlugins(
     [
       optimizedImages,
       {
-        handleImages: ['png', 'svg'],
+        handleImages: ['png', 'svg', 'jpg'],
         optimizeImages: true,
         // svgo: {
         //   plugins: [
