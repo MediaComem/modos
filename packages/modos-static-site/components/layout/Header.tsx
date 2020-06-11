@@ -1,19 +1,17 @@
 import Link from 'next/link';
 import React from 'react';
 import Head from 'next/head';
-import { Dropdown } from 'react-bootstrap';
 
-import { LanguageSelect } from '../index';
 import { i18n, PageLink } from '../../libs';
 
 import styles from './Header.module.scss';
 
 const PAGE_LIST: PageLink[] = [
   new PageLink('homepage', '/'),
-  new PageLink('about', '/about'),
-  new PageLink('contribute', '/contribute'),
-  new PageLink('mapping-party', '/mapping-party'),
-  new PageLink('contact', '/contact')
+  new PageLink('about', '/about')
+  // new PageLink('contribute', '/contribute'),
+  // new PageLink('mapping-party', '/mapping-party'),
+  // new PageLink('contact', '/contact')
 ];
 
 interface Props {
@@ -71,7 +69,7 @@ class Header extends React.Component<Props, State> {
                 this.setState({ displayMenu: !this.state.displayMenu })
               }
             >
-              <i className='material-icons md-36'>menu</i>
+              <i className='material-icons'>menu</i>
             </button>
           </div>
 
@@ -92,11 +90,12 @@ class Header extends React.Component<Props, State> {
             </svg>
           </div>
 
-          <LanguageSelect
+          {/* <LanguageSelect
             className={styles.language}
             selectedLanguage={this.state.selectedLanguage}
             onLanguageChange={language => this.state.changeLanguage(language)}
-          ></LanguageSelect>
+          ></LanguageSelect> */}
+          <div className={styles.language}></div>
 
           <div
             className={`

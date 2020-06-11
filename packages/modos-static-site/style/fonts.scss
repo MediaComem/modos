@@ -4,18 +4,22 @@
   font-style: normal;
   font-weight: normal;
   src: local('Gotham Pro'), url('./fonts/GothaProReg.woff') format('woff');
-  }
+  font-display: swap;
+}
 @font-face {
   font-family: 'Gotham Pro Medium';
   font-style: normal;
   font-weight: normal;
-  src: local('Gotham Pro Medium'), url('./fonts/GothaProMed.woff') format('woff');
-  }
+  src: local('Gotham Pro Medium'),
+    url('./fonts/GothaProMed.woff') format('woff');
+  font-display: swap;
+}
 @font-face {
   font-family: 'Gotham Pro Bold';
   font-style: normal;
   font-weight: normal;
   src: local('Gotham Pro Bold'), url('./fonts/GothaProBol.woff') format('woff');
+  font-display: swap;
 }
 
 // Fira Sans

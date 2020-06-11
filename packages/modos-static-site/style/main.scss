@@ -15,7 +15,7 @@ p {
   font-family: 'Gotham Pro';
   font-weight: 100;
   font-size: 1.2em;
-  text-align: justify;
+  text-align: left;
   line-height: 1.4;
   color: var(--primary-text-color);
 }
@@ -29,7 +29,7 @@ h3 {
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 2.5em;
 }
 
 h2 {
@@ -42,11 +42,11 @@ h3 {
 
 @media (min-width: 992px) {
   h1 {
-    font-size: 2.5em;
+    font-size: 2.8em;
   }
 
   h2 {
-    font-size: 2.1em;
+    font-size: 2.8em;
   }
 
   h3 {
@@ -62,4 +62,5 @@ h3 {
 .btn {
   font-family: 'Gotham Pro Medium';
   height: 60px;    
+  border-radius: 0;
 }

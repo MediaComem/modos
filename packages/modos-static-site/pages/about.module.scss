@@ -5,7 +5,7 @@
 }
 
 #about-title-mobile {
-  background: url('../public/assets/mobile/banner-project-mobile.svg') no-repeat
+  background: url('../images/mobile/banner-project-mobile.svg') no-repeat
     #fff;
   background-size: cover;
   background-position: top;
@@ -64,7 +64,9 @@
   }
   
   h2 {
-    word-wrap: break-word;
+    margin-top: 50px;
+    hyphens: manual;
+    word-break: break-word;
   }
 
   .about-members {
@@ -100,13 +102,31 @@
     display: none;
   }
   #about-intro-desktop {
-    background: url('../public/assets/desktop/banner-project-desktop.svg') no-repeat
+    background: url('../images/desktop/banner-project-desktop.svg') no-repeat
     #fff;
     background-position: top left;
-    padding-top: 280px;
+    padding-top: 200px;
+    padding-bottom: 0;
     display: block;
-    padding-left: 50%;
-    min-height: 90vh;
+    padding-left: 45%;
+    height: 90vh;
+
+    .about-intro-desktop-row{
+      height: 100%;
+    }
+
+    .about-intro-desktop-maincol{
+      height: 100%;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    button {
+      margin-top: 30px;
+      width: 60%;
+      background-color: var(--primary-btn-color);
+    }
   }
   #about-conception {
     h2 {

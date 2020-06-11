@@ -10,7 +10,7 @@ function i18n(pageName: string, value: string, languagesJson: any) {
     !languagesJson[pageName] ||
     !languagesJson[pageName][value]
   ) {
-    return `${pageName}.${value}`;
+    return '';
   }
 
   return languagesJson[pageName][value];
@@ -34,9 +34,9 @@ function useGetLanguage() {
   if (!error) {
     return { data };
   }
+
   console.error('Error during fetching language', error);
   return {};
-
 }
 
 export { i18n, useGetLanguage };
