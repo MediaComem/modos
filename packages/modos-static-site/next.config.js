@@ -3,7 +3,7 @@ const withPlugins = require('next-compose-plugins');
 // https://github.com/cyrilwanner/next-optimized-images
 const optimizedImages = require('next-optimized-images');
 
-const ASSET_PREFIX = '_staging'//process.env.ASSET_PREFIX;
+const ASSET_PREFIX = process.env.ASSET_PREFIX;
 
 module.exports = withPlugins(
   [
