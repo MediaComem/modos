@@ -17,31 +17,31 @@ const Home = props => {
     {
       caption: hi18n('contribute-schema-1'),
       imgAlt: '',
-      imgSrc: require('../images/mobile/home-schema-part01-mobile.svg')
+      imgSrc: require('../images/mobile/home-schema-part01-mobile.svg?inline')
     }, {
       caption: hi18n('contribute-schema-2'),
       imgAlt: '',
-      imgSrc: require('../images/mobile/home-schema-part02-mobile.svg')
+      imgSrc: require('../images/mobile/home-schema-part02-mobile.svg?inline')
     }, {
       caption: hi18n('contribute-schema-3'),
       imgAlt: '',
-      imgSrc: require('../images/mobile/home-schema-part03-mobile.svg')
+      imgSrc: require('../images/mobile/home-schema-part03-mobile.svg?inline')
     }
   ];
 
   const ACTIONS = [
     {
-      imgSrc: require('../images/home-explore.svg'),
+      imgSrc: require('../images/home-explore.svg?inline'),
       imgAlt: '',
       title: hi18n('contribute-explore-title'),
       description: hi18n('contribute-explore-description')
     }, {
-      imgSrc: require('../images/home-analyse.svg'),
+      imgSrc: require('../images/home-analyse.svg?inline'),
       imgAlt: '',
       title: hi18n('contribute-analyze-title'),
       description: hi18n('contribute-analyze-description')
     }, {
-      imgSrc: require('../images/home-evaluation.svg'),
+      imgSrc: require('../images/home-evaluation.svg?inline'),
       imgAlt: '',
       title: hi18n('contribute-review-title'),
       description: hi18n('contribute-review-description')

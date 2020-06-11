@@ -110,7 +110,7 @@ const About = props => {
         </div>
         <Image
           className={styles['about-conception-img-desktop']}
-          src='./assets/desktop/about-technicalschema-desktop.svg'
+          src={require('../images/desktop/about-technicalschema-desktop.svg')}
           fluid
         />
       </ContainerWithMargin>
