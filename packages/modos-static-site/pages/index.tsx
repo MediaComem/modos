@@ -18,15 +18,15 @@ const Home = props => {
     {
       caption: hi18n('contribute-schema-1'),
       imgAlt: '',
-      imgSrc: require('../images/mobile/home-schema-part01-mobile.svg?inline')
+      imgSrc: require('../images/mobile/home-schema-part01-mobile.png?inline')
     }, {
       caption: hi18n('contribute-schema-2'),
       imgAlt: '',
-      imgSrc: require('../images/mobile/home-schema-part02-mobile.svg?inline')
+      imgSrc: require('../images/mobile/home-schema-part02-mobile.png?inline')
     }, {
       caption: hi18n('contribute-schema-3'),
       imgAlt: '',
-      imgSrc: require('../images/mobile/home-schema-part03-mobile.svg?inline')
+      imgSrc: require('../images/mobile/home-schema-part03-mobile.png?inline')
     }
   ];
 
@@ -53,12 +53,12 @@ const Home = props => {
     <>
       <NextSeo
         title='Home'
-        description={`${hi18n('project-description').slice(0, 50)}...`}
+        description='Améliorer la mobilité douce des seniors au quotidien'
         canonical='https://modos.heig-vd.ch'
         openGraph={{
           url: 'https://modos.heig-vd.ch',
           title: 'MoDos homepage',
-          description: `${hi18n('project-description').slice(0, 50)}...`
+          description: 'Améliorer la mobilité douce des seniors au quotidien'
         }}
       />
 
@@ -111,7 +111,7 @@ const Home = props => {
           <Col md={0} lg={1}></Col>
         </Row>
         <Row className={styles['contribute-desktop-flow']}>
-          <img alt='Schema describing how MoDos work' src={require('../images/desktop/home-schema-desktop.svg')}></img>
+          <img className='lazyload' alt='Schema describing how MoDos work' data-src={require('../images/desktop/home-schema-desktop.png')}></img>
           <div>
             <p>{hi18n('contribute-schema-1')}</p>
             <p>{hi18n('contribute-schema-2')}</p>

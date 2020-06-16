@@ -1,5 +1,6 @@
 import React from 'react';
 import { DefaultSeo } from 'next-seo';
+import 'lazysizes';
 
 import { useGetLanguage } from '../libs/index';
 import { Layout } from '../components';

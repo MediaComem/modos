@@ -19,6 +19,7 @@
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^8.0.0",
     "isomorphic-unfetch": "^3.0.0",
+    "lazysizes": "^5.2.2",
     "leaflet": "^1.6.0",
     "leaflet-providers": "^1.10.1",
     "next": "^9.4.4",

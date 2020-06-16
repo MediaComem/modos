@@ -21,17 +21,17 @@ const About = props => {
     {
       caption: '',
       imgAlt: '',
-      imgSrc: require('../images/mobile/about-schema-part01-mobile.svg')
+      imgSrc: require('../images/mobile/about-schema-part01-mobile.png')
     },
     {
       caption: '',
       imgAlt: '',
-      imgSrc: require('../images/mobile/about-schema-part02-mobile.svg')
+      imgSrc: require('../images/mobile/about-schema-part02-mobile.png')
     },
     {
       caption: '',
       imgAlt: '',
-      imgSrc: require('../images/mobile/about-schema-part03-mobile.svg')
+      imgSrc: require('../images/mobile/about-schema-part03-mobile.png')
     }
   ];
 
@@ -76,12 +76,12 @@ const About = props => {
     <>
       <NextSeo
         title='About'
-        description={`${ai18n('intro').slice(0, 50)}...`}
+        description='Le projet modos cherche à développer de nouveaux procédés pour accompagner les seniors en mobilité...'
         canonical='https://modos.heig-vd.ch/about'
         openGraph={{
           url: 'https://modos.heig-vd.ch/about',
           title: 'About MoDos',
-          description: `${ai18n('intro').slice(0, 50)}...`
+          description: 'Le projet modos cherche à développer de nouveaux procédés pour accompagner les seniors en mobilité...'
         }}
       />
 
@@ -122,7 +122,7 @@ const About = props => {
         </div>
         <Image
           className={styles['about-conception-img-desktop']}
-          src={require('../images/desktop/about-technicalschema-desktop.svg')}
+          src={require('../images/desktop/about-technicalschema-desktop.png')}
           fluid
         />
       </ContainerWithMargin>
@@ -150,13 +150,13 @@ const About = props => {
 
         <div className={styles['about-universities']}>
           <a href='https://heig-vd.ch'>
-            <img src={require('../images/heig-logo.png')} alt='Logo HEIG-VD' />
+            <img className='lazyload' data-src={require('../images/heig-logo.png')} alt='Logo HEIG-VD' />
           </a>
           <a href='https://he-arc.ch'>
-            <img src={require('../images/hearc-logo.png')} alt='Logo HEARC' />
+            <img className='lazyload' data-src={require('../images/hearc-logo.png')} alt='Logo HEARC' />
           </a>
           <a href='https://heia-fr.ch'>
-            <img src={require('../images/heia-logo.png')} alt='Logo HEIA-FR' />
+            <img className='lazyload' data-src={require('../images/heia-logo.png')} alt='Logo HEIA-FR' />
           </a>
         </div>
 

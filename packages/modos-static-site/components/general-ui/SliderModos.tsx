@@ -47,9 +47,9 @@ export const SliderModosContainer = (props: IProps) => {
         {props.items.map((item, index) =>
           <Carousel.Item key={index}>
             <img
-              className='d-block w-100'
+              className='lazyload d-block w-100'
               alt={item.imgAlt}
-              src={item.imgSrc}
+              data-src={item.imgSrc}
             />
             <Carousel.Caption className={props.carouselCaptionClassName}>
               <p>{item.caption}</p>
