@@ -26,20 +26,20 @@
     "discover-map":"découvrir la carte",
 
     "contribute-title": "Contribuez à la mobilité douce de votre ville",
-    "contribute-description": "Dans la démarche du projet, chaque citoyenne et citoyen peut contribuer grâce aux outils mis à disposition : de la cartographie d’entraves sur le terrain à la qualification de leur degré d’impact sur la mobilité piétonne. Vos contributions seront utiles à la fois au  moteur de calcul d’itinéraire pédestre, mais aussi pour la partie apprentissage automatique de la plateforme.",
+    "contribute-description": "Dans la démarche du projet, chaque citoyenne et citoyen peut contribuer grâce aux outils mis à disposition : de la cartographie d’entraves sur le terrain à la qualification de leur degré d’impact sur la mobilité piétonne. Vos contributions seront utiles à la fois au  moteur de calcul d’itinéraire pédestre, mais aussi aux algorithme d’apprentissage automatique de la plateforme.",
 
-    "contribute-schema-1":"Contributions faites par des citoyens, sur le terrain ou depuis la maison",
-    "contribute-schema-2":"Mécanisme de machine learning et de navigation pour pondérer l’accessibilité de tronçons piétons",
-    "contribute-schema-3":"Application de calcul d’itinéraire adapté au profil de mobilité de l’utilisateur",
+    "contribute-schema-1":"Collecte citoyenne d’entraves à la mobilité piétonne",
+    "contribute-schema-2":"Apprentissage automatique et classification d’images\n+\nRéseau pédestre et moteur de calcul d’itinéraire",
+    "contribute-schema-3":"Application cartographique pour une navigation piétonne adaptée au profil de l’usager",
 
-    "contribute-explore-title": "Explore",
-    "contribute-explore-description": "Récolte de photographies sur le terrain",
+    "contribute-explore-title": "Exploration",
+    "contribute-explore-description": "Récolter des photographies sur le terrain",
 
-    "contribute-analyze-title": "Analyse",
-    "contribute-analyze-description": "Annotation de photographies depuis la maison",
+    "contribute-analyze-title": "Qualification",
+    "contribute-analyze-description": "Annoter des photographies depuis la maison",
 
-    "contribute-review-title": "Évaluation",
-    "contribute-review-description": "Revue des trajets effectués",
+    "contribute-review-title": "Vérification",
+    "contribute-review-description": "Évaluer les itinéraires effectués",
   
     "contribute-link-descr":"Comment contribuer ?"
   },
