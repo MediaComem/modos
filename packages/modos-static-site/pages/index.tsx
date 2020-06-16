@@ -66,7 +66,10 @@ const Home = props => {
         id={styles['homepage-title']}
         className={styles.section}
       >
-        {/* <p>{hi18n('title')}</p> */}
+        {/*
+        To uncomment when we will need translation on homepage
+        <p>{hi18n('title')}</p>
+        */}
       </div>
 
       <ContainerWithMargin
@@ -100,6 +103,13 @@ const Home = props => {
           </Col>
           <Col md={0} lg={1}></Col>
         </Row>
+        <Row>
+          <Col md={0} lg={1}></Col>
+          <Col className={styles['contribute-description']}>
+            <p>{hi18n('contribute-description')}</p>
+          </Col>
+          <Col md={0} lg={1}></Col>
+        </Row>
         <Row className={styles['contribute-desktop-flow']}>
           <img alt='Schema describing how MoDos work' src={require('../images/desktop/home-schema-desktop.svg')}></img>
           <div>
@@ -112,13 +122,6 @@ const Home = props => {
           <Col className={styles['contribute-mobile-flow-col']}>
             <SliderModosContainer carouselCaptionClassName={styles['contribute-mobile-carousel-caption']} items={CONTRIBUTE_SCHEMA_CAROUSEL}></SliderModosContainer>
           </Col>
-        </Row>
-        <Row>
-          <Col md={0} lg={1}></Col>
-          <Col className={styles['contribute-description']}>
-            <p>{hi18n('contribute-description')}</p>
-          </Col>
-          <Col md={0} lg={1}></Col>
         </Row>
       </Container>
 

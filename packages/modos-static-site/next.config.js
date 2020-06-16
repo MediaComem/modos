@@ -12,6 +12,7 @@ module.exports = withPlugins(
       {
         handleImages: ['png', 'svg', 'jpg'],
         optimizeImages: true,
+        // If you want to customize options for SVGO plugin:
         // svgo: {
         //   plugins: [
         //     {
@@ -19,6 +20,9 @@ module.exports = withPlugins(
         //     }
         //   ]
         // },
+        mozjpeg: {
+          quality: 80,
+        },
         optipng: {
           // OptiPng plugin options:
           optimizationLevel: 5

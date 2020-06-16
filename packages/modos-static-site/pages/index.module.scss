@@ -16,6 +16,7 @@
   background: url('../images/mobile/banner-home-mobile.jpg') no-repeat #fff;
   background-size: cover;
   background-position: top;
+  // Used for the old MoDos motto
   // display:flex;
   // align-items: center;
   // justify-content: center;
@@ -203,13 +204,10 @@
     h2 {
       font-size: 4em;
       width: 60%;
+      margin-bottom: 5vh;
     }
 
     .contribute-description{
-      p {
-        columns: 2;
-        column-gap: 8%;
-      }
     }
 
     .contribute-mobile-flow {
