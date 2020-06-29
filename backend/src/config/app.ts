@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import * as bodyParser from 'body-parser';
+import * as Config from './config';
 import * as cors from 'cors';
 import * as express from 'express';
 import * as path from 'path';
@@ -10,7 +11,7 @@ export class App {
 
     private server = express();
 
-    constructor(config: any) {
+    constructor(config: typeof Config) {
 
         // Set all the server things.
         this.server.set('env', config.env);
@@ -24,10 +25,6 @@ export class App {
         this.server.use(bodyParser.json({
             limit: config.payloadLimit,
             type: 'application/json'
-        }));
-        this.server.use(bodyParser.urlencoded({
-            limit: config.payloadLimit,
-            extended: false
         }));
 
         // Allow CORS.
