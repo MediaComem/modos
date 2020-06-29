@@ -26,7 +26,6 @@ export enum Mobility {
     MINIMAL = 'minimal'
 }
 
-
 @Entity()
 export class Profile {
 

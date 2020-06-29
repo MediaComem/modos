@@ -7,26 +7,25 @@ import { Event } from "../entity/Event";
 import { Description, FrontendObstacle, Obstacle } from "../entity/Description";
 import { Location } from "../entity/Location";
 
+const OBSERVATION404 = 'Observation does not exist';
+const EVENT404 = 'Event does not exist';
 
 export class ObservationController {
 
-    private OBSERVATION404 = 'Observation does not exist';
-    private EVENT404 = 'Event does not exist';
-
-    public getObservations = createAsyncRoute(async (req: Request, res: Response) => {
+    public getObservations = createAsyncRoute(async (req, res) => {
         const repository = getRepository(Observation);
         const observations = await repository.find();
         return res.status(200).json(observations);
     });
 
-    public getObservationById = createAsyncRoute(async (req: Request, res: Response) => {
+    public getObservationById = createAsyncRoute(async (req, res) => {
         const repository = getRepository(Observation);
         const observation = await repository.findOne(req.params.id);
         if (observation) return res.status(200).json(observation);
-        return sendError(res, 404, this.OBSERVATION404);
+        return sendError(res, 404, OBSERVATION404);
     });
 
-    public createObservation = createAsyncRoute(async (req: Request, res: Response) => {
+    public createObservation = createAsyncRoute(async (req, res) => {
         const manager = getManager();
 
         const description = new Description();
@@ -55,7 +54,7 @@ export class ObservationController {
         // If the request has an event field, add the observation to the referenced event.
         if (req.body.event) {
             const event = await manager.findOne(Event, req.body.event, { relations: ["observations"] });
-            if (!event) return sendError(res, 404, this.EVENT404);
+            if (!event) return sendError(res, 404, EVENT404);
             observation.event = event;
         }
 
@@ -66,10 +65,10 @@ export class ObservationController {
             .json(observation);
     });
 
-    public updateObservation = createAsyncRoute(async (req: Request, res: Response) => {
+    public updateObservation = createAsyncRoute(async (req, res) => {
         const repository = getRepository(Observation);
         const observation = await repository.findOne(req.params.id);
-        if (!observation) sendError(res, 404, this.OBSERVATION404);
+        if (!observation) sendError(res, 404, OBSERVATION404);
 
         const bodyDescr = req.body.description;
         if (bodyDescr) {
@@ -102,14 +101,14 @@ export class ObservationController {
         return res.status(200).json(observation);
     });
 
-    public deleteObservation = createAsyncRoute(async (req: Request, res: Response) => {
+    public deleteObservation = createAsyncRoute(async (req, res) => {
         const repository = getRepository(Observation);
         const result = await repository.delete(req.params.id);
         if (result.affected > 0) return res.status(204).json({});
-        return sendError(res, 404, this.OBSERVATION404);
+        return sendError(res, 404, OBSERVATION404);
     });
 
-    public getObstacles = createAsyncRoute(async (req: Request, res: Response) => {
+    public getObstacles = createAsyncRoute(async (req, res) => {
         const isFrontend = req.query.frontend;
         const obstacles = (isFrontend === 'true') ? FrontendObstacle : Obstacle;
 

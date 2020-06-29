@@ -6,26 +6,25 @@ import { sendError } from "./ErrorController";
 import { User } from "../entity/User";
 import { Observation } from "../entity/Observation";
 
+const EVENT404 = 'Event does not exist';
+const NO_PARTICIPANT = 'No participants to this event';
 
 export class EventControler {
 
-    private EVENT404 = 'Event does not exist';
-    private NO_PARTICIPANT = 'No participants to this event';
-
-    public getEvents = createAsyncRoute(async (req: Request, res: Response) => {
+    public getEvents = createAsyncRoute(async (req, res) => {
         const repository = getRepository(Event);
         const events = await repository.find({ relations: ["owner"] });
         return res.status(200).json(events);
     });
 
-    public getEventById = createAsyncRoute(async (req: Request, res: Response) => {
+    public getEventById = createAsyncRoute(async (req, res) => {
         const eventRepository = getRepository(Event);
         const event = await eventRepository.findOne(req.params.id, { relations: ["owner"] });
         if (event) return res.status(200).json(event);
-        return sendError(res, 404, this.EVENT404);
+        return sendError(res, 404, EVENT404);
     });
 
-    public createEvent = createAsyncRoute(async (req: Request, res: Response) => {
+    public createEvent = createAsyncRoute(async (req, res) => {
         const manager = getManager();
 
         const event = new Event();
@@ -47,10 +46,10 @@ export class EventControler {
             .json(event);
     });
 
-    public updateEvent = createAsyncRoute(async (req: Request, res: Response) => {
+    public updateEvent = createAsyncRoute(async (req, res) => {
         const repository = getRepository(Event);
         const event = await repository.findOne(req.params.id);
-        if (!event) return sendError(res, 404, this.EVENT404);
+        if (!event) return sendError(res, 404, EVENT404);
 
         if (req.body.title) event.title = req.body.title;
         if (req.body.password) event.password = req.body.password;
@@ -66,24 +65,24 @@ export class EventControler {
         return res.status(200).json(event);
     });
 
-    public deleteEvent = createAsyncRoute(async (req: Request, res: Response) => {
+    public deleteEvent = createAsyncRoute(async (req, res) => {
         const repository = getRepository(Event);
         const result = await repository.delete(req.params.id);
         if (result.affected > 0) return res.status(204).json({});
-        return sendError(res, 404, this.EVENT404);
+        return sendError(res, 404, EVENT404);
     });
 
-    public getParticipants = createAsyncRoute(async (req: Request, res: Response) => {
+    public getParticipants = createAsyncRoute(async (req, res) => {
         const manager = getManager();
         const event = await manager.findOne(Event, req.params.id, { relations: ["participants"] });
         if (event.participants.length > 0) return res.status(200).json(event.participants);
-        return sendError(res, 404, this.NO_PARTICIPANT);
+        return sendError(res, 404, NO_PARTICIPANT);
     });
 
-    public getObservations = createAsyncRoute(async (req: Request, res: Response) => {
+    public getObservations = createAsyncRoute(async (req, res) => {
         const repository = getRepository(Event);
         const e = await repository.findOne(req.params.id)
-        if (!e) return sendError(res, 404, this.EVENT404);
+        if (!e) return sendError(res, 404, EVENT404);
         const event = await repository.findOne(req.params.id, { relations: ["observations"] });
         return res.status(200).json(event.observations);
     });

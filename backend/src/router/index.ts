@@ -17,9 +17,9 @@ export function init(server: express.Application) {
         const contentType = req.get('Content-Type');
         if (['POST', 'PUT'].includes(req.method) && contentType !== 'application/json') {
             return res.status(415).json({
-                'code': 415,
-                'message': 'Unsupported Media Type',
-                'description': 'All POST/PUT request must have a content type of application/json'
+                code: 415,
+                message: 'Unsupported Media Type',
+                description: 'All POST/PUT request must have a content type of application/json'
             });
         }
         return next();
