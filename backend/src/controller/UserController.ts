@@ -1,12 +1,11 @@
 import * as bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import { sendError } from './ErrorController';
-import { createAsyncRoute, signToken } from './utils';
+import { createAsyncRoute, signToken, validate } from './utils';
 import { getRepository, getManager } from 'typeorm'
 import { User } from '../entity/User';
 import { Event } from '../entity/Event';
 import { Observation } from '../entity/Observation';
-import { validate } from 'class-validator';
 
 export class UserController {
 
@@ -45,8 +44,7 @@ export class UserController {
         newUser.events = new Array<Event>();
         await newUser.hashPassword(req.body.password);
 
-        const errors = await validate(newUser);
-        if (errors.length > 0) throw errors;
+        await validate(newUser);
 
         await userRepository.insert(newUser);
 
@@ -64,8 +62,7 @@ export class UserController {
         if (req.body.email) user.email = req.body.email;
         if (req.body.password) await user.hashPassword(req.body.password);
 
-        const errors = await validate(user);
-        if (errors.length > 0) throw errors;
+        await validate(user);
 
         await userRepository.save(user);
         const updatedUser = await userRepository.findOne(user.id);

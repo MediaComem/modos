@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
-import { createAsyncRoute } from "./utils";
+import { createAsyncRoute, validate } from "./utils";
 import { getRepository, getManager } from "typeorm";
 import { Event } from "../entity/Event";
 import { sendError } from "./ErrorController";
 import { User } from "../entity/User";
 import { Observation } from "../entity/Observation";
-import { validate } from "class-validator";
 
 
 export class EventControler {
@@ -39,8 +38,7 @@ export class EventControler {
         event.numberOfImages = req.body.numberOfImages;
         event.observations = new Array<Observation>();
 
-        const errors = await validate(event);
-        if (errors.length > 0) throw errors;
+        await validate(event);
 
         await manager.insert(Event, event);
 
@@ -61,9 +59,8 @@ export class EventControler {
         if (req.body.objective) event.objective = req.body.objective;
         if (req.body.numberOfImages) event.numberOfImages = req.body.numberOfImages;
 
-        const errors = await validate(event);
-        if (errors.length > 0) throw errors;
-        
+        await validate(event);
+
         await repository.save(event);
 
         return res.status(200).json(event);

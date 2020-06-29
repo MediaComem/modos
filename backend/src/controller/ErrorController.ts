@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { ValidationError } from 'class-validator';
+import { ClassValidationError } from './errors';
 
 export const handleError = (err: any, res: Response) => {
     // Check unique constraint violation
@@ -9,15 +9,16 @@ export const handleError = (err: any, res: Response) => {
     if (err.code == '22P02') return sendError(res, 400, err.message);
 
     // Entity validation error
-    if (err instanceof Array) return sendError(res, 400, err.toString())
+    if (err instanceof ClassValidationError) return sendError(res, 400, err.message, { errors: err.errors })
 
     return sendError(res, 500, String(err));
 };
 
-export const sendError = (res: Response, code: number, message: string) => {
+export const sendError = (res: Response, code: number, message: string, extraProperties: Record<string, any> = {}) => {
     return res.status(code).json({
-        'code': code,
-        'message': message
+        code,
+        message,
+        ...extraProperties
     });
 };
 
