@@ -11,8 +11,10 @@ import { Request, Response, NextFunction } from 'express';
 export const authenticateUser = (req: Request, res: Response, next: NextFunction) => {
     const authorization = req.headers['authorization'];
     if (!authorization) return sendError(res, 401, 'Unauthorized');
+
     const match = authorization.match(/^Bearer (.+)$/);
     if (!match) return sendError(res, 401, 'Unauthorized');
+
     const token = match[1];
     jwt.verify(token, secretBase, function (err, decoded: any) {
         if (err) return sendError(res, 401, 'Unauthorized');

@@ -21,7 +21,6 @@ export const port = process.env.MODOS_PORT || process.env.PORT || 3000;
 // To sign JWTs, session cookies, etc.
 export const secretBase = process.env.MODOS_SECRET || 'changeme';
 
-
 // Expiration time for JWT.
 export const expirationTime = process.env.MODOS_JWT_EXPIRATION || '1h';
 
