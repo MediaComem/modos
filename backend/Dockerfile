@@ -1,8 +1,7 @@
-FROM node:10
+FROM node:10.21.0
 
 WORKDIR /code
 
-COPY ./package.json .
-COPY ./package-lock.json .
+COPY package.json package-lock.json ./
 
-RUN npm install
+RUN npm ci
