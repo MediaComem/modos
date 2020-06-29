@@ -1,10 +1,9 @@
-import { createAsyncRoute } from "./utils";
+import { createAsyncRoute, validate } from "./utils";
 import { sendError } from "./ErrorController";
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { User } from "../entity/User";
 import { Profile } from "../entity/Profile";
-import { validate } from "class-validator";
 
 
 export class ProfileController {
@@ -36,8 +35,7 @@ export class ProfileController {
         profile.helperFrequency = req.body.helperFrequency;
         profile.mobility = req.body.mobility;
 
-        const errors = await validate(profile);
-        if (errors.length > 0) throw errors;
+        await validate(profile);
 
         user.profile = await profileRepository.save(profile);
         const updatedUser = await userRepository.save(user);
@@ -59,8 +57,7 @@ export class ProfileController {
         if (req.body.helperFrequency) user.profile.helperFrequency = req.body.helperFrequency;
         if (req.body.mobility) user.profile.mobility = req.body.mobility;
 
-        const errors = await validate(user.profile);
-        if (errors.length > 0) throw errors;
+        await validate(user.profile);
 
         const updatedProfile = await profileRepository.save(user.profile);
 
