@@ -25,10 +25,6 @@ export class App {
             limit: config.payloadLimit,
             type: 'application/json'
         }));
-        this.server.use(bodyParser.urlencoded({
-            limit: config.payloadLimit,
-            extended: false
-        }));
 
         // Allow CORS.
         this.server.use(cors({
