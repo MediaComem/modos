@@ -1,14 +1,22 @@
-Procédure de mise en place pour les tests
------------------------------------------
+# MoDos Mobile App
 
-- installer le cli angular
-- installer android studio
-- git clone
-- cd frontend/MoDoSEarlyApp
-- npm install --save @capacitor/core @capacitor/cli
-- npx cap init
-- ng build
-- npx cap add android
-- npx cap copy
-- npx cap update
-- npx cap open android
+## How to launch the app on android
+### Pre Steps
+- Install Angular CLI
+- Install Android Studio
+- Clone this repository
+
+### CLI Steps
+```
+cd packages/mobile-app/
+npm ci
+npx cap init
+ng build
+npx cap add android && npx cap copy && npx cap update && npx cap open android
+
+```
+
+## How to develop on android
+```
+npm run dev:android:watch
+```
