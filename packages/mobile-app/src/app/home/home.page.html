@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar class="main-head">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row
+      class="ion-justify-content-center ion-margin-top ion-margin-bottom"
+    >
+      <ion-col size="6" class="ion-no-margin">
+        <div>
+          <img src="assets/modos_home.png" alt="MoDoS Homepage logo" />
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-top ion-text-center">
+      <ion-col class="ion-align-items-center ion-padding-horizontal">
+        <h2>{{observationsCount}}</h2>
+        <p>observations effectuées jusqu'à maintenant.</p>
+        <p
+          >Grâce à vos contributions, vous aidez à améliorer la mobilité de
+          votre ville !</p
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-no-padding ion-margin-top ion-margin-bottom">
+      <ion-col class="ion-no-padding ion-text-center ion-text-capitalize">
+        <div>
+          <ion-button
+            [routerLink]="['/contribution/select-obstacle']"
+            routerDirection="forward"
+            fill="solid"
+            size="large"
+            class="ion-no-margin"
+            color="tertiary"
+            >Identifier un obstacle</ion-button
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!--<ion-footer class="ion-margin-bottom ion-padding-bottom">
+  <ion-list>
+    <ion-list-header>
+      <h1>Événements</h1>
+    </ion-list-header>
+    <ion-item *ngIf="statusCode">
+      <p>{{statusCode.message}}</p>
+    </ion-item>
+    <ion-item *ngFor="let event of events;" [routerLink]="['./', event.id]">
+      <ion-avatar slot="start">S
+        <img src="../assets/event_live.png" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{event.title}}</h2>
+        <h3>{{event.objective}}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-footer>-->

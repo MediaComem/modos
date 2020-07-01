@@ -1,0 +1,69 @@
+<ion-content class="ion-padding">
+  <form #form="ngForm" (ngSubmit)="login(form)">
+    <ion-grid>
+      <ion-row
+        class="ion-justify-content-center ion-margin-top ion-margin-bottom"
+      >
+        <ion-col size="6" class="ion-no-margin">
+          <div>
+            <img src="assets/modos_home.png" alt="MoDoS Homepage logo" />
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-margin">
+        <ion-col
+          class="ion-align-self-center login-wrapper"
+          size-md="6"
+          size-lg="5"
+          size-xs="12"
+        >
+          <div class="ion-text-center">
+            <h3>Login</h3>
+          </div>
+          <div class="ion-padding">
+            <ion-item>
+              <ion-input
+                name="email"
+                type="email"
+                placeholder="votre@email.com"
+                [(ngModel)]="email"
+                required
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                name="password"
+                type="password"
+                placeholder="mot de passe"
+                [(ngModel)]="password"
+                required
+              ></ion-input>
+            </ion-item>
+          </div>
+          <div class="ion-padding">
+            <ion-button
+              size="large"
+              (click)="authenticate()"
+              [disabled]="form.invalid"
+              expand="block"
+              color="tertiary"
+              >se connecter</ion-button
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="authenticationError" class="ion-justify-content-center ion-margin">
+        <ion-col
+          class="ion-align-self-center error-wrapper"
+          size-md="6"
+          size-lg="5"
+          size-xs="12"
+        >
+          <div class="ion-text-center">
+            <h3>E-mail ou mot de passe incorrect!</h3>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

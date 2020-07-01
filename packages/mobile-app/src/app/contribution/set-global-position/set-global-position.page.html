@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Positionnement</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" [routerLink]="['/home']">annuler</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-padding-vertical ion-margin-bottom instructions">
+      <ion-col class="ion-padding-horizontal">
+        <h2>3/4 - Géolocalisez la photographie</h2>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-row class="ion-margin-bottom ion-text-center">
+    <ion-col>
+      <app-location></app-location>
+    </ion-col>
+  </ion-row>
+</ion-footer>

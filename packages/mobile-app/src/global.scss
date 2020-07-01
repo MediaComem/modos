@@ -1,0 +1,109 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+/* Fonts */
+
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+
+/* Buttons styling */
+.square {
+  width: 256px;
+  height: 256px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.xxl_icon {
+  font-size: 256px;
+}
+
+.xl_icon {
+  font-size: 128px;
+}
+
+/* Imgs styling */
+.img_1-3{
+  max-width:33%;
+  margin:auto;
+}
+
+.img_1-2{
+  max-width:50%;
+  margin:auto;
+}
+
+.img_1-4{
+  max-width:25%;
+  margin:auto;
+}
+
+/* Heading styles */
+.instructions {
+  background: var(--ion-color-primary);
+  color: white;
+}
+
+.crosshair {
+  height: 64px;
+  width: 64px;
+  z-index: 999 !important;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -32px; /* Half the height */
+  margin-left: -32px; /* Half the width */
+}
+
+/* global styling */
+
+.main-head {
+  --background:#826daf ;
+  color:white;
+}
+
+ion-title {
+  font-variant: small-caps;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+ion-list-header > h1 {
+  font-variant: small-caps;
+  font-size: 1.2em;
+}
+
+#input.description {
+  color:black;
+  background:white;
+  padding:5px;
+}

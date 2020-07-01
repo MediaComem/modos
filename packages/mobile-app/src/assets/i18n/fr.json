@@ -1,0 +1,11 @@
+{
+    "OBSTACLES": {
+        "coating": "revêtement",
+        "obstacle": "obstacle",
+        "security": "sécurité",
+        "passability": "passabilité",
+        "slope": "pente",
+        "width": "largeur",
+        "other": "autre"
+    }
+}

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Choix de l'obstacle</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" [routerLink]="['/home']">annuler</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-padding-vertical ion-margin-bottom instructions">
+      <ion-col class="ion-padding-horizontal">
+        <h2
+          >Choisissez le type d'obstacle que vous allez photographier</h2
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col
+        class="ion-text-center ion-align-self-center ion-text-uppercase"
+        *ngFor="let obstacle of obstacles;"
+      >
+        <ion-button
+          [routerLink]="['/contribution/take-picture/', obstacle]"
+          routerDirection="forward"
+          fill="solid"
+          size="medium"
+          color="tertiary"
+          class="square ion-no-margin"
+        >
+          <ion-icon
+            src="assets/icons/{{ obstacle }}.svg"
+            slot="icon-only"
+            class="xxl_icon"
+          ></ion-icon>
+        </ion-button>
+        <p>{{'OBSTACLES.' + obstacle | translate }}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

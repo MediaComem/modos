@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Photo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" [routerLink]="['/home']">annuler</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-padding-vertical ion-margin-bottom instructions">
+      <ion-col class="ion-padding-horizontal">
+        <h2>Photographiez l'obstacle</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-align-self-center ion-text-center ion-margin-vertical">
+        <ion-icon
+          src="assets/icons/{{obstacle}}.svg"
+          slot="icon-only"
+          class="xxl_icon"
+        ></ion-icon>
+        <h1>{{obstacle}}</h1>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <app-camera (imagePick)="onImagePicked($event)"></app-camera>
+  </ion-row>
+</ion-footer>

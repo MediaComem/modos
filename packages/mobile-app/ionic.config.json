@@ -1,0 +1,8 @@
+{
+  "name": "MoDoSEarlyApp",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
