@@ -28,7 +28,10 @@
    },
    "scripts": {
       "start": "ts-node src/index.ts",
-      "synchronize": "ts-node src/config/initialMigration.ts",
-      "migrate": "node --require ts-node/register ./node_modules/typeorm/cli.js migration:run"
+      "migration:create": "ts-node ./node_modules/.bin/typeorm migration:create --config ormconfig.ts",
+      "migration:generate": "ts-node ./node_modules/.bin/typeorm migration:generate --config ormconfig.ts",
+      "migrate": "ts-node ./node_modules/.bin/typeorm migration:run --config ormconfig.ts",
+      "rollback": "ts-node ./node_modules/.bin/typeorm migration:revert --config ormconfig.ts",
+      "synchronize": "ts-node src/config/synchronize.ts"
    }
 }

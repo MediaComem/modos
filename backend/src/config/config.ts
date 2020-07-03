@@ -9,8 +9,8 @@ export const root = path.resolve(path.join(__dirname, '..'));
 // To generate full URLs.
 export const baseUrl = process.env.MODOS_BASE_URL || 'http://localhost:3000';
 
-// MongoDB connection URI.
-export const databaseUrl = process.env.MODOS_DATABASE_URL || 'mongodb://localhost/modos';
+// PostgreSQL connection URI.
+export const databaseUrl = process.env.MODOS_DATABASE_URL || 'postgres://localhost/modos';
 
 // Environment.
 export const env = process.env.NODE_ENV || 'development';

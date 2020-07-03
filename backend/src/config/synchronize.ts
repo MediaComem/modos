@@ -1,9 +1,11 @@
 import { createConnection } from "typeorm";
 import "reflect-metadata";
 
+import * as connectionOptions from '../../ormconfig';
+
 
 // Open a connection pool for the database.
-createConnection().then(async connection => {
+createConnection(connectionOptions).then(async connection => {
 
     // Start with a clean database
     const dropBeforeSync = true;
