@@ -9,7 +9,7 @@ import { ClassValidationError } from './errors';
  * Creates an Express route from an async function, automatically handling
  * rejected promises.
  */
-export const createAsyncRoute = (asyncFunction: (req: Request, res: Response, next: NextFunction) => void | Promise<void>) => {
+export const createAsyncRoute = (asyncFunction: (req: Request, res: Response, next: NextFunction) => any | Promise<any>) => {
     return async function (req: Request, res: Response, next: NextFunction) {
         try {
             await asyncFunction(req, res, next);
