@@ -2,10 +2,11 @@ import { App } from './config/app';
 import { createConnection } from "typeorm";
 import "reflect-metadata";
 import * as config from './config/config';
+import * as connectionOptions from '../ormconfig';
 
 
 // Open a connection pool for the database.
-createConnection().then(async connection => {
+createConnection(connectionOptions).then(async connection => {
 
     if (config.env === 'development') {
         // Start with a clean database

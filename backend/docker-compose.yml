@@ -8,6 +8,8 @@ services:
 
   modos_api:
     build: .
+    environment:
+      MODOS_DATABASE_URL: postgres://test:test@modos_db/test
     volumes:
       # Mount each required directory and file independently instead of mounting
       # the entire current directory. Otherwise the `node_modules` directory
@@ -17,7 +19,7 @@ services:
       # the machine, such as bcrypt, might not work in the container.
       - './src:/code/src:ro'
       - './openapi.json:/code/openapi.json:ro'
-      - './ormconfig.json:/code/ormconfig.json:ro'
+      - './ormconfig.ts:/code/ormconfig.ts:ro'
       - './package.json:/code/package.json:ro'
       - './package-lock.json:/code/package-lock.json:ro'
       - './tsconfig.json:/code/tsconfig.json:ro'
