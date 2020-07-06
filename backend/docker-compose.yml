@@ -1,23 +1,50 @@
-version: '3'
+version: '3.5'
+
+networks:
+  modos_network:
+      driver: bridge
 
 services:
 
-  web:
+  modos_api:
     build: .
     environment:
-      MODOS_DATABASE_URL: mongodb://mongo/restAPI
-      MODOS_PORT: 3000
-      TZ: Europe/Zurich
+      MODOS_DATABASE_URL: postgres://test:test@modos_db/test
     volumes:
-      - .:/code
+      # Mount each required directory and file independently instead of mounting
+      # the entire current directory. Otherwise the `node_modules` directory
+      # from the developer's machine is mounted into the container as well.
+      # There is no guarantee that this machine is running the same architecture
+      # as the container's image. In that case, packages with C code compiled on
+      # the machine, such as bcrypt, might not work in the container.
+      - './src:/code/src:ro'
+      - './openapi.json:/code/openapi.json:ro'
+      - './ormconfig.ts:/code/ormconfig.ts:ro'
+      - './package.json:/code/package.json:ro'
+      - './package-lock.json:/code/package-lock.json:ro'
+      - './tsconfig.json:/code/tsconfig.json:ro'
     ports:
       - "3000:3000"
     depends_on:
-      - mongo
+      - modos_db
+    command: npm start
+    networks:
+      - modos_network
 
-  mongo:
-    image: mongo
+  modos_db:
+    image: postgres:12.3-alpine
     environment:
-      TZ: Europe/Zurich
+      POSTGRES_DB: 'test'
+      POSTGRES_USER: 'test'
+      POSTGRES_PASSWORD: 'test'
     ports:
-      - "27017:27017"
+      - "5432:5432"
+    networks:
+      - modos_network
+    volumes:
+      # Persist data in a named volume. Run `docker-compose down -v` to
+      # permanently delete it.
+      - "db_data:/var/lib/postgresql/data"
+
+volumes:
+  db_data:

@@ -1,11 +1,7 @@
-FROM node:12.10.0
+FROM node:10.21.0
 
 WORKDIR /code
 
-COPY package*.json ./
-RUN npm install
+COPY package.json package-lock.json ./
 
-COPY . .
-
-EXPOSE 3000
-CMD [ "npm", "start" ]
+RUN npm ci

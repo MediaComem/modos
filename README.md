@@ -8,13 +8,12 @@ by various front-end (mobile, web, etc...).
 in the folder `./backend`, simply run the following commands:
 
 ```bash
-$ docker-compose run web npm install
-$ docker-compose up
+$ docker-compose up --build
 ```
 
 Your server should be up and running, Yay!
 
-(From now on, the server can be launched with this single command: `docker-compose up`)
+(From now on, the server can be launched with this single command: `docker-compose up --build`)
 
 ## A few links to browse
 
