@@ -33,15 +33,22 @@ npm ci
 # Create .env and adapt it to your environment.
 cp .env.sample .env
 
-# Run the application (the database you configured in .env must already exist).
-npm start
+# Build the application.
+npm run build
+
+# Migrate the database to the latest version (the database you configured in
+# .env must already exist).
+npm run migrate
+
+# Run the application.
+npm run dev
 ```
 
 The API should be available at http://localhost:3000/api.
 
 
 
-## Getting started with Docker Compose
+## Getting started with Docker
 
 To run the development environment in Docker containers, you will need:
 
@@ -78,12 +85,27 @@ options.
 
 
 
-## Database management scripts
+## Scripts
+
+Example         | Description
+:-------------- | :---------------------------------------------------------------------------------------------------------
+`npm run build` | Compile the application to the `dist` directory.
+`npm run dev`   | Run the application in development mode (it will recompile and restart everytime the source code changes).
+`npm run start` | Run the compiled application (requires `npm run build` to have been run first).
+
+### Database management
 
 Example                                            | Description
-:------------------------------------------------- | :-------------------------------------------------------------------------------------------------------
+:------------------------------------------------- | :------------------------------------------------------------------------------------------------
 `npm run migration:create -- -n UpdateSomeTable`   | Create a new blank database migration.
 `npm run migration:generate -- -n UpdateSomeTable` | Automatically generate a new database migration based on schema changes.
-`npm run migrate`                                  | Run all pending database migrations.
-`npm run rollback`                                 | Roll back the last executed database migration.
-`npm run synchronize`                              | Drop and create the database, applying the schema defined by the entities (use **only in development**).
+`npm run migrate`                                  | Run all pending database migrations (requires `npm run build` to have been run first).
+`npm run rollback`                                 | Roll back the last executed database migration (requires `npm run build` to have been run first).
+
+> Note that the `npm run migrate` and `npm run rollback` scripts will work in
+> production, while the other migration management scripts can only be used in
+> development.
+
+### More
+
+See the `scripts` defined in [`package.json`](./package.json).
