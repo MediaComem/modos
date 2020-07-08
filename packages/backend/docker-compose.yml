@@ -1,15 +1,11 @@
 version: '3.5'
 
-networks:
-  modos_network:
-      driver: bridge
-
 services:
 
-  modos_api:
+  api:
     build: .
     environment:
-      MODOS_DATABASE_URL: postgres://test:test@modos_db/test
+      MODOS_DATABASE_URL: postgres://modos:modos@db/modos
     volumes:
       # Mount each required directory and file independently instead of mounting
       # the entire current directory. Otherwise the `node_modules` directory
@@ -26,21 +22,17 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - modos_db
+      - db
     command: npm start
-    networks:
-      - modos_network
 
-  modos_db:
+  db:
     image: postgres:12.3-alpine
     environment:
-      POSTGRES_DB: 'test'
-      POSTGRES_USER: 'test'
-      POSTGRES_PASSWORD: 'test'
+      POSTGRES_DB: modos
+      POSTGRES_USER: modos
+      POSTGRES_PASSWORD: modos
     ports:
       - "5432:5432"
-    networks:
-      - modos_network
     volumes:
       # Persist data in a named volume. Run `docker-compose down -v` to
       # permanently delete it.
