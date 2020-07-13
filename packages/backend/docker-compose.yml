@@ -1,0 +1,42 @@
+version: '3.5'
+
+services:
+
+  api:
+    build: .
+    environment:
+      MODOS_DATABASE_URL: postgres://modos:modos@db/modos
+    volumes:
+      # Mount each required directory and file independently instead of mounting
+      # the entire current directory. Otherwise the `node_modules` directory
+      # from the developer's machine is mounted into the container as well.
+      # There is no guarantee that this machine is running the same architecture
+      # as the container's image. In that case, packages with C code compiled on
+      # the machine, such as bcrypt, might not work in the container.
+      - './src:/code/src:ro'
+      - './openapi.json:/code/openapi.json:ro'
+      - './ormconfig.ts:/code/ormconfig.ts:ro'
+      - './package.json:/code/package.json:ro'
+      - './package-lock.json:/code/package-lock.json:ro'
+      - './tsconfig.json:/code/tsconfig.json:ro'
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    command: npm start
+
+  db:
+    image: postgres:12.3-alpine
+    environment:
+      POSTGRES_DB: modos
+      POSTGRES_USER: modos
+      POSTGRES_PASSWORD: modos
+    ports:
+      - "5432:5432"
+    volumes:
+      # Persist data in a named volume. Run `docker-compose down -v` to
+      # permanently delete it.
+      - "db_data:/var/lib/postgresql/data"
+
+volumes:
+  db_data:
