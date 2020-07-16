@@ -68,21 +68,23 @@ const Leaflet = (props: IPropsLeafletMap) => {
   }, [ props.onMapClick ]);
 
   useEffect(() => {
-    // Prevent the window is not defined error
+    // Prevent the "window is not defined" error
     // see: https://stackoverflow.com/a/55196385
     if (!process.browser) {
       return;
     }
 
-    const L = window.L;
-
     if (map.current && initializedMap) {
+
+      const L = window.L;
+      const baseIcon = L.icon({ iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png' });
+
       const currentMap: Map = initializedMap;
 
       props.layerGroups.forEach(layerGrp => {
         const markers: Marker[] = [];
         layerGrp.forEach(marker => {
-          markers.push(L.marker(marker));
+          markers.push(L.marker(marker, { icon: baseIcon }));
         });
         const newLayerGroup: LayerGroup = new L.LayerGroup(markers);
 
