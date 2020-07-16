@@ -6,10 +6,26 @@ import { useGetLanguage } from '../libs/index';
 import { Layout } from '../components';
 
 import '../style/index.scss';
+import Head from 'next/head';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
   const { data } = useGetLanguage();
   pageProps.lang = data;
+
+  if (router.pathname.startsWith('/map')) {
+    return <>
+      <Head>
+        <title>MoDos</title>
+        <link rel='icon' href='/favicon.ico' />
+        <link
+          href='https://fonts.googleapis.com/icon?family=Material+Icons'
+          rel='stylesheet'
+        ></link>
+      </Head>
+      <Component {...pageProps} />
+    </>;
+  }
+
 
   return (
     <>

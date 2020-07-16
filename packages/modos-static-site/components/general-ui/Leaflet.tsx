@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { TileLayer, Map, MapOptions } from 'leaflet';
+import React, { useEffect, useRef, useState } from 'react';
+import { TileLayer, Map, MapOptions, LeafletMouseEvent } from 'leaflet';
 
 const initMap = async (id, options: MapOptions) => {
   const leaflet: any = await import('leaflet');
@@ -17,28 +17,46 @@ const initMap = async (id, options: MapOptions) => {
   );
 
   CARTO_DB_POSITRON.addTo(MAP);
+
+  return MAP;
 };
 
 const Leaflet = props => {
-  const isMapInit = useRef(false);
+  const [ isMapInit, setIsMapInit ] = useState(false);
+  const [ initializedMap, initializeMap ] = useState(null);
+  const map = useRef(null);
 
   useEffect(() => {
-    const MAP_OPTIONS: MapOptions = props.options || {
-      zoom: 13,
-      scrollWheelZoom: false
-    };
+    if (!isMapInit) {
+      const MAP_OPTIONS: MapOptions = props.options || {
+        zoom: 13,
+        scrollWheelZoom: true
+      };
 
-    initMap(props.id, MAP_OPTIONS).catch(err => console.error(err)).finally(() => {
-      isMapInit.current = true;
-    });
+      initMap(props.id, MAP_OPTIONS)
+        .catch(err => console.error(err))
+        .then(mapResult => initializeMap(mapResult))
+        .finally(() => {
+          setIsMapInit(true);
+        });
+
+    }
 
     return () => {
-      isMapInit.current = false;
+      setIsMapInit(false);
     };
-  }, [ isMapInit ]);
+  }, [ map ]);
+
+  useEffect(() => {
+    if (map.current && initializedMap) {
+      const currentMap = initializedMap;
+      currentMap.off('click');
+      currentMap.on('click', e=>props.onMapClick(e));
+    }
+  }, [ props.onMapClick ]);
 
   return (
-    <div id={props.id} style={{ height: '100%', width: '100%' }}>
+    <div id={props.id} ref={map}>
 
     </div>
   );
