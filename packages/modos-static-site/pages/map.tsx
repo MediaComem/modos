@@ -4,7 +4,7 @@ import { Leaflet } from '../components/index';
 import { Navbar, Button, Form, InputGroup, FormControl } from 'react-bootstrap';
 
 import styles from './map.module.scss';
-import { LeafletMouseEvent, LatLng } from 'leaflet';
+import { LeafletMouseEvent, LatLng, Marker, LayerGroup } from 'leaflet';
 
 interface IPropsNavPanel {
   location: INavPanelLocation;
@@ -17,6 +17,20 @@ interface INavPanelLocation {
   to: LatLng;
   from: LatLng;
 }
+
+const transformNavPanelLocationIntoMakersArray = (panelLocations: INavPanelLocation) => {
+  const arrayMarkers = [];
+
+  for (const key in panelLocations) {
+    if (panelLocations[key]) {
+      arrayMarkers.push([
+        panelLocations[key].lat, panelLocations[key].lng
+      ]);
+    }
+  }
+
+  return arrayMarkers;
+};
 
 const NavigationPanel = ({ location, onClickExit, onClickTo, onClickFrom }: IPropsNavPanel) => <div id={styles['map-app-navigation-panel']}>
   <Navbar id={styles['map-app-navbar']} expand='lg' >
@@ -66,10 +80,11 @@ const NavigationPanel = ({ location, onClickExit, onClickTo, onClickFrom }: IPro
   </Form>
 </div>;
 
-const Map = () => {
+const MapPage = () => {
   const [ isNavigationPanelOpen, setIsNavigationPanelOpen ] = useState(false);
   const [ isUserLookingForPoint, setIsUserLookingForPoint ] = useState('');
   const [ location, setLocation ] = useState({ to: null, from: null });
+  const [ layerGroupNavigation, setGroupLayerNavigation ] = useState([]);
 
   const onSearchingLocaton = point => {
     setIsNavigationPanelOpen(false);
@@ -83,6 +98,11 @@ const Map = () => {
       setLocation(currLocation);
       setIsNavigationPanelOpen(true);
       setIsUserLookingForPoint('');
+
+      const layer = [];
+      transformNavPanelLocationIntoMakersArray(currLocation)
+        .forEach(marker => layer.push(marker));
+      setGroupLayerNavigation(layer);
     }
   };
 
@@ -123,12 +143,14 @@ const Map = () => {
           onClickTo={() => onSearchingLocaton('to')}
           location={location}></NavigationPanel>}
 
-        <Leaflet id={styles.map} onMapClick={e => onChooseLocation(e)}></Leaflet>
+        <Leaflet
+          id={styles.map}
+          onMapClick={e => onChooseLocation(e)}
+          layerGroups={[ layerGroupNavigation ]}></Leaflet>
       </div>
     </div>
   </>;
-}
-;
+};
 
 
-export default Map;
+export default MapPage;

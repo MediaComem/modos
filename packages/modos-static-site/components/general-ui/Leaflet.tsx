@@ -1,7 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { TileLayer, Map, MapOptions, LeafletMouseEvent } from 'leaflet';
+import { TileLayer, Map, MapOptions, LeafletMouseEvent, LayerGroup, Marker } from 'leaflet';
+
+// declare const L;
+// export default window.L;
+
+interface IPropsLeafletMap {
+  id: string;
+  className?: string;
+  onMapClick?: (evt: LeafletMouseEvent) => any;
+  options?: MapOptions;
+  layerGroups?: any[];
+}
 
 const initMap = async (id, options: MapOptions) => {
+
   const leaflet: any = await import('leaflet');
   await import('leaflet-providers');
 
@@ -21,7 +33,7 @@ const initMap = async (id, options: MapOptions) => {
   return MAP;
 };
 
-const Leaflet = props => {
+const Leaflet = (props: IPropsLeafletMap) => {
   const [ isMapInit, setIsMapInit ] = useState(false);
   const [ initializedMap, initializeMap ] = useState(null);
   const map = useRef(null);
@@ -35,7 +47,7 @@ const Leaflet = props => {
 
       initMap(props.id, MAP_OPTIONS)
         .catch(err => console.error(err))
-        .then(mapResult => initializeMap(mapResult))
+        .then(mapResult => initializeMap(mapResult ? mapResult : null))
         .finally(() => {
           setIsMapInit(true);
         });
@@ -51,9 +63,34 @@ const Leaflet = props => {
     if (map.current && initializedMap) {
       const currentMap = initializedMap;
       currentMap.off('click');
-      currentMap.on('click', e=>props.onMapClick(e));
+      currentMap.on('click', e => props.onMapClick(e));
     }
   }, [ props.onMapClick ]);
+
+  useEffect(() => {
+    // Prevent the window is not defined error
+    // see: https://stackoverflow.com/a/55196385
+    if (!process.browser) {
+      return;
+    }
+
+    const L = window.L;
+
+    if (map.current && initializedMap) {
+      const currentMap: Map = initializedMap;
+
+      props.layerGroups.forEach(layerGrp => {
+        const markers: Marker[] = [];
+        layerGrp.forEach(marker => {
+          markers.push(L.marker(marker));
+        });
+        const newLayerGroup: LayerGroup = new L.LayerGroup(markers);
+
+        newLayerGroup.addTo(currentMap);
+
+      });
+    }
+  }, [ props.layerGroups ]);
 
   return (
     <div id={props.id} ref={map}>
