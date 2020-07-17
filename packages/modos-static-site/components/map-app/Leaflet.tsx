@@ -1,9 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { TileLayer, Map, MapOptions, LeafletMouseEvent, LayerGroup, Marker } from 'leaflet';
 
-// declare const L;
-// export default window.L;
-
+/**
+ * Define the avaible props for the LeafletMap component
+ *
+ * id: the HTML id of the component. This must be defined as if not the component will not work
+ * className: the HTML class of the component
+ * onMapClick: Event which occurs when the user click on the map
+ * options: Define the Leaflet options of the component @see https://leafletjs.com/reference-1.6.0.html#map-option
+ * layerGroups: Define the different LayerGroup of the map.
+ */
 interface IPropsLeafletMap {
   id: string;
   className?: string;
@@ -12,6 +18,11 @@ interface IPropsLeafletMap {
   layerGroups?: any[];
 }
 
+/**
+ * This function job's is to initialize the Leaflet Map
+ * @param id HTML id of the div where the map must be initialize
+ * @param options @see https://leafletjs.com/reference-1.6.0.html#map-option
+ */
 const initMap = async (id, options: MapOptions) => {
 
   const leaflet: any = await import('leaflet');
@@ -33,11 +44,21 @@ const initMap = async (id, options: MapOptions) => {
   return MAP;
 };
 
-const Leaflet = (props: IPropsLeafletMap) => {
+/**
+ * Custom Leaflet Map React Component
+ *
+ * This component manage all leaflet related logic.
+ *
+ * @param props React Props @see IPropsLeafletMap
+ */
+const LeafletCustomMap = (props: IPropsLeafletMap) => {
   const [ isMapInit, setIsMapInit ] = useState(false);
   const [ initializedMap, initializeMap ] = useState(null);
   const map = useRef(null);
 
+  /*
+   * The map must re-render when the div is changing.
+   */
   useEffect(() => {
     if (!isMapInit) {
       const MAP_OPTIONS: MapOptions = props.options || {
@@ -59,14 +80,24 @@ const Leaflet = (props: IPropsLeafletMap) => {
     };
   }, [ map ]);
 
+  /*
+   * This effect will manage the different event
+   * related to leaflet map. It is necessary to always
+   * clean all previous binded event with the leaflet "off" function.
+   * Otherwise, there would be multiple function binded on only one event
+   */
   useEffect(() => {
     if (map.current && initializedMap) {
       const currentMap = initializedMap;
+
       currentMap.off('click');
-      currentMap.on('click', e => props.onMapClick(e));
+      currentMap.on('click', evt => props.onMapClick(evt));
     }
   }, [ props.onMapClick ]);
 
+  /*
+   * This effect is managing the display of the layerGroup on the map
+   */
   useEffect(() => {
     // Prevent the "window is not defined" error
     // see: https://stackoverflow.com/a/55196385
@@ -76,17 +107,17 @@ const Leaflet = (props: IPropsLeafletMap) => {
 
     if (map.current && initializedMap) {
 
-      const L = window.L;
-      const baseIcon = L.icon({ iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png' });
+      const LEAFLET = window.L;
+      const baseIcon = LEAFLET.icon({ iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png' });
 
       const currentMap: Map = initializedMap;
 
       props.layerGroups.forEach(layerGrp => {
         const markers: Marker[] = [];
         layerGrp.forEach(marker => {
-          markers.push(L.marker(marker, { icon: baseIcon }));
+          markers.push(LEAFLET.marker(marker, { icon: baseIcon }));
         });
-        const newLayerGroup: LayerGroup = new L.LayerGroup(markers);
+        const newLayerGroup: LayerGroup = new LEAFLET.LayerGroup(markers);
 
         newLayerGroup.addTo(currentMap);
 
@@ -101,4 +132,4 @@ const Leaflet = (props: IPropsLeafletMap) => {
   );
 };
 
-export { Leaflet };
+export { LeafletCustomMap };

@@ -1,85 +1,18 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+import { LeafletMouseEvent } from 'leaflet';
 import React, { useState } from 'react';
-
-import { Leaflet } from '../components/index';
-import { Navbar, Button, Form, InputGroup, FormControl } from 'react-bootstrap';
-
+import { Navbar } from 'react-bootstrap';
+import { LeafletCustomMap, NavigationPanel, transformNavPanelLocationIntoMakersArray } from '../components/index';
 import styles from './map.module.scss';
-import { LeafletMouseEvent, LatLng, Marker, LayerGroup } from 'leaflet';
 
-interface IPropsNavPanel {
-  location: INavPanelLocation;
-  onClickExit: any;
-  onClickTo: any;
-  onClickFrom: any;
-}
-
-interface INavPanelLocation {
-  to: LatLng;
-  from: LatLng;
-}
-
-const transformNavPanelLocationIntoMakersArray = (panelLocations: INavPanelLocation) => {
-  const arrayMarkers = [];
-
-  for (const key in panelLocations) {
-    if (panelLocations[key]) {
-      arrayMarkers.push([
-        panelLocations[key].lat, panelLocations[key].lng
-      ]);
-    }
-  }
-
-  return arrayMarkers;
-};
-
-const NavigationPanel = ({ location, onClickExit, onClickTo, onClickFrom }: IPropsNavPanel) => <div id={styles['map-app-navigation-panel']}>
-  <Navbar id={styles['map-app-navbar']} expand='lg' >
-
-    <div className='mr-auto'></div>
-
-    <div>
-      <button onClick={e => onClickExit(e)} className={styles['navbar-btn']}>
-        <i className='material-icons'>close</i>
-      </button>
-    </div>
-
-  </Navbar>
-
-  <Form>
-    <Form.Group controlId='nav-from'>
-      <Form.Label>Depart</Form.Label>
-
-      <InputGroup className='mb-3'>
-        <FormControl type='text' name='nav-from'/>
-        <InputGroup.Append>
-          <Button variant='outline-secondary' className='material-icons' onClick={e => onClickFrom(e)}>
-            my_location
-          </Button>
-        </InputGroup.Append>
-      </InputGroup>
-      {location.from &&
-        <Form.Text>Current selected location: {location.from.lat};{location.from.lng}</Form.Text>}
-    </Form.Group>
-
-    <Form.Group controlId='nav-to'>
-      <Form.Label>Arrivee</Form.Label>
-
-      <InputGroup className='mb-3'>
-        <FormControl type='text' name='nav-to'/>
-        <InputGroup.Append>
-          <Button variant='outline-secondary' className='material-icons' onClick={e => onClickTo(e)}>
-            my_location
-          </Button>
-        </InputGroup.Append>
-      </InputGroup>
-      {location.to &&
-        <Form.Text>Current selected location: {location.to.lat};{location.to.lng}</Form.Text>}
-    </Form.Group>
-
-    <Button type='submit'>GO !</Button>
-  </Form>
-</div>;
-
+/**
+ * The MapPage Component
+ *
+ * This Component is the page for the modos application
+ *
+ * @param props React props (for now there is no props avaible)
+ * @returns The MapPage React Component
+ */
 const MapPage = () => {
   const [ isNavigationPanelOpen, setIsNavigationPanelOpen ] = useState(false);
   const [ isUserLookingForPoint, setIsUserLookingForPoint ] = useState('');
@@ -91,10 +24,10 @@ const MapPage = () => {
     setIsUserLookingForPoint(point);
   };
 
-  const onChooseLocation = (e: LeafletMouseEvent) => {
+  const onChooseLocation = (evt: LeafletMouseEvent) => {
     if (isUserLookingForPoint !== '') {
       const currLocation = location;
-      currLocation[isUserLookingForPoint] = e.latlng;
+      currLocation[isUserLookingForPoint] = evt.latlng;
       setLocation(currLocation);
       setIsNavigationPanelOpen(true);
       setIsUserLookingForPoint('');
@@ -138,15 +71,16 @@ const MapPage = () => {
         {
           isNavigationPanelOpen &&
         <NavigationPanel
+          id={styles['map-app-navigation-panel']}
           onClickExit={() => setIsNavigationPanelOpen(false)}
           onClickFrom={() => onSearchingLocaton('from')}
           onClickTo={() => onSearchingLocaton('to')}
           location={location}></NavigationPanel>}
 
-        <Leaflet
+        <LeafletCustomMap
           id={styles.map}
-          onMapClick={e => onChooseLocation(e)}
-          layerGroups={[ layerGroupNavigation ]}></Leaflet>
+          onMapClick={evt => onChooseLocation(evt)}
+          layerGroups={[ layerGroupNavigation ]}></LeafletCustomMap>
       </div>
     </div>
   </>;
