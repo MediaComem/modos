@@ -27,7 +27,7 @@
     "express": "^4.17.1",
     "fast-glob": "^3.2.4",
     "jsonwebtoken": "^8.5.1",
-    "pg": "^8.2.2",
+    "pg": "^8.3.0",
     "reflect-metadata": "^0.1.10",
     "swagger-ui-express": "^4.1.4",
     "typeorm": "^0.2.25"
@@ -39,12 +39,12 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.7",
     "@types/jsonwebtoken": "^8.5.0",
-    "@types/node": "^12.12.48",
+    "@types/node": "^14.0.24",
     "concurrently": "^5.2.0",
     "nodemon": "^2.0.4",
     "rimraf": "^3.0.2",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.7"
   },
   "engines": {
     "node": "^14.0.0"
