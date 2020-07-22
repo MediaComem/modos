@@ -1,4 +1,5 @@
-/data
+/data/*
+!/data/.keep
 /dist
 /.env*
 !/.env.sample
