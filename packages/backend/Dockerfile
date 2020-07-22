@@ -54,7 +54,8 @@ RUN addgroup -S modos_backend && \
 USER modos_backend:modos_backend
 
 COPY --chown=modos_backend:modos_backend --from=builder /usr/src/app/node_modules /usr/src/app/node_modules
-COPY --chown=modos_backend:modos_backend ./ /usr/src/app/
+COPY --chown=modos_backend:modos_backend --from=builder /usr/src/app/dist/ /usr/src/app/dist/
+COPY --chown=modos_backend:modos_backend openapi.json package.json package-lock.json /usr/src/app/
 
 COPY --from=builder /usr/local/bin/tcpwait /usr/local/bin/tcpwait
 
