@@ -31,8 +31,8 @@ const INTIAL_STATE: IMapPageState = {
   isNavigationPanelOpen: false,
   currentSearchedPoint: '',
   location: { to: null, from: null },
-  navigationLayer: { id: 1, lastUpdate: Date.now(), markers: [] },
-  obstaclesLayer: { id: 2, lastUpdate: Date.now(), markers: [] }
+  navigationLayer: { id: 'Navigation', lastUpdate: Date.now(), markers: [] },
+  obstaclesLayer: { id: 'Obstacles', lastUpdate: Date.now(), markers: [] }
 };
 
 /**
@@ -199,9 +199,9 @@ const MapPage = () => {
               <i className='material-icons'>navigation</i>
             </button>
 
-            <button className={styles['navbar-btn']}>
-              <i className='material-icons'>info</i>
-            </button>
+            {/* <button className={styles['navbar-btn']}>
+              <i className='material-icons'>layers</i>
+            </button> */}
           </div>
         </Navbar>
 

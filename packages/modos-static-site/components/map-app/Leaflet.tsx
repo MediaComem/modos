@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import React, { useEffect, useRef, useState } from 'react';
 import {
   TileLayer,
@@ -21,7 +22,7 @@ export interface ICustomMarker {
  *
  */
 export interface ICustomLeafletLayerGroup {
-  id: number;
+  id: string;
   lastUpdate: number;
   markers?: ICustomMarker[];
 }
@@ -109,6 +110,7 @@ const LeafletCustomMap = (props: IPropsLeafletMap) => {
   const [ isMapInit, setIsMapInit ] = useState(false);
   const [ initializedMap, initializeMap ] = useState(null);
   const [ layerGroups, setLayerGroups ] = useState([]);
+  const [ mapLayersControl, setMapLayerControl ] = useState(null);
   const map = useRef(null);
 
   /*
@@ -123,11 +125,14 @@ const LeafletCustomMap = (props: IPropsLeafletMap) => {
 
       initMap(props.id, MAP_OPTIONS)
         .catch(err => console.error(err))
-        .then(mapResult => initializeMap(mapResult ? mapResult : null))
+        .then(mapResult => {
+          initializeMap(mapResult ? mapResult : null);
+        })
         .finally(() => {
           setIsMapInit(true);
         });
     }
+
 
     return () => {
       setIsMapInit(false);
@@ -159,6 +164,7 @@ const LeafletCustomMap = (props: IPropsLeafletMap) => {
       return;
     }
 
+
     if (map.current && initializedMap) {
       const LEAFLET = window.L;
       const currentMap: Map = initializedMap;
@@ -183,6 +189,17 @@ const LeafletCustomMap = (props: IPropsLeafletMap) => {
       }
 
       setLayerGroups(newLayerGroups);
+
+      if (mapLayersControl) {
+        currentMap.removeControl(mapLayersControl);
+      }
+
+      const overlayLayer = newLayerGroups.reduce((accu, layer) => {
+        accu[layer.id] = layer.leafletLayer;
+        return accu;
+      }, {});
+
+      setMapLayerControl(LEAFLET.control.layers({}, overlayLayer).addTo(currentMap));
     }
   }, [ props.layerGroups ]);
 
