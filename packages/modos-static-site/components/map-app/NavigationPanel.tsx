@@ -1,6 +1,7 @@
 import { LatLng } from 'leaflet';
 import React from 'react';
 import { Button, Form, Navbar, InputGroup, FormControl } from 'react-bootstrap';
+import { ICustomMarker } from './Leaflet';
 
 
 /**
@@ -35,13 +36,13 @@ interface INavPanelLocation {
  * @returns an array of marker
  */
 export const transformNavPanelLocationIntoMakersArray = (panelLocations: INavPanelLocation) => {
-  const arrayMarkers = [];
+  const arrayMarkers: ICustomMarker[] = [];
 
   for (const key in panelLocations) {
     if (panelLocations[key]) {
-      arrayMarkers.push([
+      arrayMarkers.push({ coordinate: [
         panelLocations[key].lat, panelLocations[key].lng
-      ]);
+      ] });
     }
   }
 

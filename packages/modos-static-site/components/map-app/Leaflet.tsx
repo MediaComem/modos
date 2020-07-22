@@ -5,8 +5,17 @@ import {
   MapOptions,
   LeafletMouseEvent,
   LayerGroup,
-  Marker
+  Marker,
+  LatLngTuple
 } from 'leaflet';
+
+/**
+ *
+ */
+export interface ICustomMarker {
+  coordinate: LatLngTuple;
+  icon?: string;
+}
 
 /**
  *
@@ -14,7 +23,7 @@ import {
 export interface ICustomLeafletLayerGroup {
   id: number;
   lastUpdate: number;
-  markers?: [];
+  markers?: ICustomMarker[];
 }
 
 /**
@@ -29,8 +38,17 @@ const processLayer = (LEAFLET: any, currentMap: any, layer: ICustomLeafletLayerG
 
     const markers: Marker[] = [];
 
-    layer.markers.forEach(marker => {
-      markers.push(LEAFLET.marker(marker, { icon: baseIcon }));
+    layer.markers.forEach((marker: ICustomMarker) => {
+      if (marker.icon) {
+        const cstmIcon = LEAFLET.icon({
+          iconUrl: marker.icon
+        });
+
+        markers.push(LEAFLET.marker(marker.coordinate, { icon: cstmIcon }));
+      } else {
+        markers.push(LEAFLET.marker(marker.coordinate, { icon: baseIcon }));
+      }
+
     });
     const newLayerGroup: LayerGroup = new LEAFLET.LayerGroup(markers);
 
@@ -167,6 +185,7 @@ const LeafletCustomMap = (props: IPropsLeafletMap) => {
       setLayerGroups(newLayerGroups);
     }
   }, [ props.layerGroups ]);
+
 
   return <div id={props.id} ref={map}></div>;
 };
