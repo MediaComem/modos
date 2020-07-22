@@ -25,6 +25,7 @@ export interface ICustomLeafletLayerGroup {
   id: string;
   lastUpdate: number;
   markers?: ICustomMarker[];
+  isClusterized?: boolean;
 }
 
 /**
@@ -32,29 +33,39 @@ export interface ICustomLeafletLayerGroup {
  * @param layer
  */
 const processLayer = (LEAFLET: any, currentMap: any, layer: ICustomLeafletLayerGroup) => {
-  if (layer.markers) {
-    const baseIcon = LEAFLET.icon({
-      iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png'
-    });
-
-    const markers: Marker[] = [];
-
-    layer.markers.forEach((marker: ICustomMarker) => {
-      if (marker.icon) {
-        const cstmIcon = LEAFLET.icon({
-          iconUrl: marker.icon
-        });
-
-        markers.push(LEAFLET.marker(marker.coordinate, { icon: cstmIcon }));
-      } else {
-        markers.push(LEAFLET.marker(marker.coordinate, { icon: baseIcon }));
-      }
-
-    });
-    const newLayerGroup: LayerGroup = new LEAFLET.LayerGroup(markers);
-
-    return newLayerGroup.addTo(currentMap);
+  if (!layer.markers) {
+    return null;
   }
+
+  const baseIcon = LEAFLET.icon({
+    iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png'
+  });
+
+  const markers: Marker[] = [];
+
+  layer.markers.forEach((marker: ICustomMarker) => {
+    if (marker.icon) {
+      const cstmIcon = LEAFLET.icon({
+        iconUrl: marker.icon
+      });
+
+      markers.push(LEAFLET.marker(marker.coordinate, { icon: cstmIcon }));
+    } else {
+      markers.push(LEAFLET.marker(marker.coordinate, { icon: baseIcon }));
+    }
+
+  });
+  // TODO: CLUSTER
+  // if (layer.isClusterized) {
+  //   const test = new LEAFLET.MarkerClusterGroup();
+  //   test.addLayers(markers);
+  //   return currentMap.addLayer(test);
+  // }
+
+  const newLayerGroup: LayerGroup = new LEAFLET.LayerGroup(markers);
+
+  return newLayerGroup.addTo(currentMap);
+
 };
 
 /**
@@ -82,6 +93,8 @@ interface IPropsLeafletMap {
 const initMap = async (id, options: MapOptions) => {
   const leaflet: any = await import('leaflet');
   await import('leaflet-providers');
+  // TODO: CLUSTER
+  // await import('leaflet.markercluster');
 
   const MAP: Map = leaflet.map(id, options);
 

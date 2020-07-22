@@ -32,7 +32,7 @@ const INTIAL_STATE: IMapPageState = {
   currentSearchedPoint: '',
   location: { to: null, from: null },
   navigationLayer: { id: 'Navigation', lastUpdate: Date.now(), markers: [] },
-  obstaclesLayer: { id: 'Obstacles', lastUpdate: Date.now(), markers: [] }
+  obstaclesLayer: { id: 'Obstacles', isClusterized: true, lastUpdate: Date.now(), markers: [] }
 };
 
 /**
