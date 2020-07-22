@@ -1,4 +1,4 @@
-#map-app{
+#map-app {
   width: 100vw;
   height: 100vh;
 }
@@ -7,7 +7,7 @@
   height: 65px;
 }
 
-#map-app-container {  
+#map-app-container {
   position: relative;
   width: 100%;
   height: calc(100% - 65px);
@@ -21,8 +21,8 @@
 
 #map-app-navigation-panel {
   position: absolute;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: white;
@@ -30,7 +30,7 @@
   padding: 10px;
 }
 
-.navbar-btn{
-  background:none;
-  border:none;
+.navbar-btn {
+  background: none;
+  border: none;
 }

@@ -58,12 +58,20 @@ export const transformNavPanelLocationIntoMakersArray = (panelLocations: INavPan
  */
 export const NavigationPanel = ({ id, location, onClickExit, onClickTo, onClickFrom }: IPropsNavPanel) =>
   <div id={id}>
+    <style jsx>
+      {`
+        .navbar-btn {
+          background:none;
+          border:none;
+        }
+      `}
+    </style>
     <Navbar expand='lg' >
 
       <div className='mr-auto'></div>
 
       <div>
-        <button onClick={evt => onClickExit(evt)} className={'navbar-btn'}>
+        <button onClick={evt => onClickExit(evt)} className='navbar-btn'>
           <i className='material-icons'>close</i>
         </button>
       </div>

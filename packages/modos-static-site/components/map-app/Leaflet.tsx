@@ -1,5 +1,42 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { TileLayer, Map, MapOptions, LeafletMouseEvent, LayerGroup, Marker } from 'leaflet';
+import {
+  TileLayer,
+  Map,
+  MapOptions,
+  LeafletMouseEvent,
+  LayerGroup,
+  Marker
+} from 'leaflet';
+
+/**
+ *
+ */
+export interface ICustomLeafletLayerGroup {
+  id: number;
+  lastUpdate: number;
+  markers?: [];
+}
+
+/**
+ *
+ * @param layer
+ */
+const processLayer = (LEAFLET: any, currentMap: any, layer: ICustomLeafletLayerGroup) => {
+  if (layer.markers) {
+    const baseIcon = LEAFLET.icon({
+      iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png'
+    });
+
+    const markers: Marker[] = [];
+
+    layer.markers.forEach(marker => {
+      markers.push(LEAFLET.marker(marker, { icon: baseIcon }));
+    });
+    const newLayerGroup: LayerGroup = new LEAFLET.LayerGroup(markers);
+
+    return newLayerGroup.addTo(currentMap);
+  }
+};
 
 /**
  * Define the avaible props for the LeafletMap component
@@ -15,7 +52,7 @@ interface IPropsLeafletMap {
   className?: string;
   onMapClick?: (evt: LeafletMouseEvent) => any;
   options?: MapOptions;
-  layerGroups?: any[];
+  layerGroups?: ICustomLeafletLayerGroup[];
 }
 
 /**
@@ -24,7 +61,6 @@ interface IPropsLeafletMap {
  * @param options @see https://leafletjs.com/reference-1.6.0.html#map-option
  */
 const initMap = async (id, options: MapOptions) => {
-
   const leaflet: any = await import('leaflet');
   await import('leaflet-providers');
 
@@ -54,6 +90,7 @@ const initMap = async (id, options: MapOptions) => {
 const LeafletCustomMap = (props: IPropsLeafletMap) => {
   const [ isMapInit, setIsMapInit ] = useState(false);
   const [ initializedMap, initializeMap ] = useState(null);
+  const [ layerGroups, setLayerGroups ] = useState([]);
   const map = useRef(null);
 
   /*
@@ -72,7 +109,6 @@ const LeafletCustomMap = (props: IPropsLeafletMap) => {
         .finally(() => {
           setIsMapInit(true);
         });
-
     }
 
     return () => {
@@ -106,30 +142,33 @@ const LeafletCustomMap = (props: IPropsLeafletMap) => {
     }
 
     if (map.current && initializedMap) {
-
       const LEAFLET = window.L;
-      const baseIcon = LEAFLET.icon({ iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png' });
-
       const currentMap: Map = initializedMap;
+      const newLayerGroups = layerGroups;
 
-      props.layerGroups.forEach(layerGrp => {
-        const markers: Marker[] = [];
-        layerGrp.forEach(marker => {
-          markers.push(LEAFLET.marker(marker, { icon: baseIcon }));
-        });
-        const newLayerGroup: LayerGroup = new LEAFLET.LayerGroup(markers);
+      for (const layer of props.layerGroups) {
+        const layerIndex = newLayerGroups.findIndex(stateLayer => stateLayer.id === layer.id);
 
-        newLayerGroup.addTo(currentMap);
+        if (newLayerGroups[layerIndex]) {
 
-      });
+          // if layer has been update
+          if (newLayerGroups[layerIndex].lastUpdate < layer.lastUpdate) {
+            currentMap.removeLayer(newLayerGroups[layerIndex].leafletLayer);
+            newLayerGroups[layerIndex].leafletLayer = processLayer(LEAFLET, currentMap, layer);
+          }
+
+        } else {
+          const newLayerGroup = { id: layer.id, lastUpdate: layer.lastUpdate, leafletLayer: null };
+          newLayerGroup.leafletLayer = processLayer(LEAFLET, currentMap, layer);
+          newLayerGroups.push(newLayerGroup);
+        }
+      }
+
+      setLayerGroups(newLayerGroups);
     }
   }, [ props.layerGroups ]);
 
-  return (
-    <div id={props.id} ref={map}>
-
-    </div>
-  );
+  return <div id={props.id} ref={map}></div>;
 };
 
 export { LeafletCustomMap };
