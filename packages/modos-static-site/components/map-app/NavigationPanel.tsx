@@ -2,6 +2,7 @@ import { LatLng } from 'leaflet';
 import React from 'react';
 import { Button, Form, Navbar, InputGroup, FormControl } from 'react-bootstrap';
 import { ICustomMarker } from './Leaflet';
+import { GeocodingInput } from './GeocodingInput';
 
 
 /**
@@ -19,6 +20,8 @@ export interface IPropsNavPanel {
   onClickExit: any;
   onClickTo: any;
   onClickFrom: any;
+  onChooseFrom: any;
+  onChooseTo: any;
 }
 
 /**
@@ -57,7 +60,7 @@ export const transformNavPanelLocationIntoMakersArray = (panelLocations: INavPan
  * @param props React props of the object
  * @returns the React component
  */
-export const NavigationPanel = ({ id, location, onClickExit, onClickTo, onClickFrom }: IPropsNavPanel) =>
+export const NavigationPanel = ({ id, location, onClickExit, onClickTo, onClickFrom, onChooseFrom, onChooseTo }: IPropsNavPanel) =>
   <div id={id}>
     <style jsx>
       {`
@@ -84,7 +87,7 @@ export const NavigationPanel = ({ id, location, onClickExit, onClickTo, onClickF
         <Form.Label>Depart</Form.Label>
 
         <InputGroup className='mb-3'>
-          <FormControl type='text' name='nav-from'/>
+          <GeocodingInput type='text' name='nav-from' onChooseLocation={evt => onChooseFrom(evt)}/>
           <InputGroup.Append>
             <Button variant='outline-secondary' className='material-icons' onClick={evt => onClickFrom(evt)}>
             my_location
@@ -99,7 +102,7 @@ export const NavigationPanel = ({ id, location, onClickExit, onClickTo, onClickF
         <Form.Label>Arrivee</Form.Label>
 
         <InputGroup className='mb-3'>
-          <FormControl type='text' name='nav-to'/>
+          <GeocodingInput type='text' name='nav-to' onChooseLocation={evt => onChooseTo(evt)}/>
           <InputGroup.Append>
             <Button variant='outline-secondary' className='material-icons' onClick={evt => onClickTo(evt)}>
             my_location

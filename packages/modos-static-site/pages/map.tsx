@@ -11,7 +11,8 @@ import {
   ICustomMarker
 } from '../components/index';
 import styles from './map.module.scss';
-import { customFetch } from '../libs';
+import { getObservations } from '../libs/modos-api';
+import { IMapnvFeature, translateSwissGridCoordinateToLatLng } from '../libs/mapnv-api';
 
 /**
  *
@@ -109,6 +110,10 @@ const reducer = (
   }
 };
 
+/**
+ *
+ * @param observations
+ */
 const processObservationRequest = observations => {
   const observationsAsMarkers: ICustomMarker[] = [];
   observations.forEach(
@@ -141,33 +146,53 @@ const MapPage = () => {
    *
    * @param point
    */
-  const onSearchingLocaton = point =>
+  const onSearchingLocation = point =>
     setState(reducer(state, MAP_ACTION.SEARCH_LOCATION, point));
+
+  /**
+     *
+     */
+  const updateLocationMarker = location => {
+    const layer = [];
+    transformNavPanelLocationIntoMakersArray(location).forEach(marker =>
+      layer.push(marker));
+
+    setState(
+      reducer(state, MAP_ACTION.CHOOSE_LOCATION, {
+        location,
+        layer
+      })
+    );
+  };
 
   /**
    *
    * @param evt
    */
-  const onChooseLocation = (evt: LeafletMouseEvent) => {
+  const onChooseLocationOnMap = (evt: LeafletMouseEvent) => {
     if (state.currentSearchedPoint !== '') {
       const currLocation = state.location;
       currLocation[state.currentSearchedPoint] = evt.latlng;
-
-      const layer = [];
-      transformNavPanelLocationIntoMakersArray(currLocation).forEach(marker =>
-        layer.push(marker));
-
-      setState(
-        reducer(state, MAP_ACTION.CHOOSE_LOCATION, {
-          location: currLocation,
-          layer
-        })
-      );
+      updateLocationMarker(currLocation);
     }
   };
 
+  /**
+   *
+   * @param evt
+   * @param point
+   */
+  const onChooseLocationByText = (evt: IMapnvFeature, point: string) => {
+    const currLocation = state.location;
+    currLocation[point] = translateSwissGridCoordinateToLatLng(evt);
+    updateLocationMarker(currLocation);
+  };
+
+  /**
+   *
+   */
   useEffect(() => {
-    customFetch('/example-observations.json')
+    getObservations()
       .then(observations => {
         const { observationsAsMarkers } = processObservationRequest(observations);
         setState(reducer(state, MAP_ACTION.OBSERVATIONS_LOADED, observationsAsMarkers));
@@ -209,18 +234,24 @@ const MapPage = () => {
           {state.isNavigationPanelOpen &&
             <NavigationPanel
               id={styles['map-app-navigation-panel']}
+
               onClickExit={() =>
                 setState(reducer(state, MAP_ACTION.TOGGLE_PANEL))
               }
-              onClickFrom={() => onSearchingLocaton('from')}
-              onClickTo={() => onSearchingLocaton('to')}
+
+              onClickFrom={() => onSearchingLocation('from')}
+              onClickTo={() => onSearchingLocation('to')}
+
+              onChooseFrom={evt => onChooseLocationByText(evt, 'from')}
+              onChooseTo={evt => onChooseLocationByText(evt, 'to')}
+
               location={state.location}
             ></NavigationPanel>
           }
 
           <LeafletCustomMap
             id={styles.map}
-            onMapClick={evt => onChooseLocation(evt)}
+            onMapClick={evt => onChooseLocationOnMap(evt)}
             layerGroups={[ state.navigationLayer, state.obstaclesLayer ]}
           ></LeafletCustomMap>
         </div>
