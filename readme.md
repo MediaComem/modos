@@ -28,7 +28,7 @@ see the [static site readme](packages/modos-static-site/readme.md)
 
 ### ... backend
 
-see the [api readme]()
+see the [api readme](packages/backend/README.md)
 
 ### ... mobile-app
 

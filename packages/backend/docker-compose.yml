@@ -1,9 +1,14 @@
-version: '3.5'
+version: '3.8'
 
 services:
 
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: npm run docker:dev
+    depends_on:
+      - db
     environment:
       MODOS_DATABASE_URL: postgres://modos:modos@db/modos
     volumes:
@@ -14,16 +19,13 @@ services:
       # as the container's image. In that case, packages with C code compiled on
       # the machine, such as bcrypt, might not work in the container.
       - './src:/code/src:ro'
+      - './nodemon.json:/code/nodemon.json:ro'
       - './openapi.json:/code/openapi.json:ro'
-      - './ormconfig.ts:/code/ormconfig.ts:ro'
       - './package.json:/code/package.json:ro'
       - './package-lock.json:/code/package-lock.json:ro'
       - './tsconfig.json:/code/tsconfig.json:ro'
     ports:
       - "3000:3000"
-    depends_on:
-      - db
-    command: npm start
 
   db:
     image: postgres:12.3-alpine

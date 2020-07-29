@@ -1,5 +1,4 @@
 import * as bcrypt from 'bcrypt';
-import { Request, Response } from 'express';
 import { sendError } from './ErrorController';
 import { createAsyncRoute, signToken, validate } from './utils';
 import { getRepository, getManager } from 'typeorm'

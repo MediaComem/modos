@@ -1,4 +1,6 @@
-/build
+/data/*
+!/data/.keep
+/dist
 /.env*
 !/.env.sample
 /.idea

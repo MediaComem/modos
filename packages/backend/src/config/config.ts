@@ -3,8 +3,8 @@ import * as path from 'path';
 
 dotenv.config();
 
-// Root of the application.
-export const root = path.resolve(path.join(__dirname, '..'));
+// Root of the project.
+export const root = path.resolve(path.join(__dirname, '..', '..'));
 
 // To generate full URLs.
 export const baseUrl = process.env.MODOS_BASE_URL || 'http://localhost:3000';
@@ -25,7 +25,7 @@ export const secretBase = process.env.MODOS_SECRET || 'changeme';
 export const expirationTime = process.env.MODOS_JWT_EXPIRATION || '1h';
 
 // Configurable directory in which to store data that does not go into the database (e.g. images).
-export const storageDirectory = process.env.MODOS_STORAGE_DIRECTORY || path.join(root, 'data/');
+export const storageDirectory = process.env.MODOS_STORAGE_DIRECTORY || path.join(root, 'data');
 
 // Format in which the images are saved.
 export const imageFormat = process.env.MODOS_IMAGE_FORMAT || '.png';
@@ -35,3 +35,6 @@ export const payloadLimit = process.env.MODOS_PAYLOAD_LIMIT || '25mb';
 
 // Bcrypt cost factor.
 export const costFactor = process.env.MODOS_COST_FACTOR || 10;
+
+// Whether to log TypeORM queries (false by default).
+export const typeormLogging = process.env.TYPEORM_LOGGING !== undefined ? Boolean(process.env.TYPEORM_LOGGING) : false;
