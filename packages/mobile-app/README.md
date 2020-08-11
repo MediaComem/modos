@@ -24,7 +24,7 @@ npm run dev:android:watch
 
 ### Build
 ```shell
-ng build
+npm run build
 
 # for android
 npx cap copy && npx cap update && npx cap open android
