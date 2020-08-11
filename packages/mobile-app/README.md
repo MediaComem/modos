@@ -1,22 +1,37 @@
 # MoDos Mobile App
 
-## How to launch the app on android
+## Install, Develop, Build, Deploy
 ### Pre Steps
 - Install Angular CLI
 - Install Android Studio
 - Clone this repository
 
-### CLI Steps
-```
+### Install
+```shell
+git clone 'modos repo...'
 cd packages/mobile-app/
 npm ci
-npx cap init
-ng build
-npx cap add android && npx cap copy && npx cap update && npx cap open android
-
 ```
 
-## How to develop on android
-```
+### Develop
+```shell
+# on web
+npm run start
+
+# on android
 npm run dev:android:watch
+```
+
+### Build
+```shell
+ng build
+
+# for android
+npx cap copy && npx cap update && npx cap open android
+```
+
+### Deploy
+
+```shell
+# Nothings to see here for now...
 ```
