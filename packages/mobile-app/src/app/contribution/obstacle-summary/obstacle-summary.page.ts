@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavParamsService } from '../../services/nav-params.service';
 import { ObservationsService } from 'src/app/services/observations.service';
 import { Capacitor, Plugins } from '@capacitor/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { Location } from '../../models/location.model';
 import { Observation } from '../../models/observation.model';
 import { Image } from 'src/app/models/image.model';
@@ -34,7 +34,7 @@ export class ObstacleSummaryPage implements OnInit {
   public comment = '';
   public commentHidden = true;
   public isCommentsMandatory = false;
-  public saveHidden = false;
+  public isSaveBtnDisabled = false;
 
   public statusCode: StatusCode;
 
@@ -42,7 +42,8 @@ export class ObstacleSummaryPage implements OnInit {
     private param: NavParamsService,
     private router: Router,
     private observation: ObservationsService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    public loadingController: LoadingController
   ) {}
 
   ngOnInit() {}
@@ -51,21 +52,26 @@ export class ObstacleSummaryPage implements OnInit {
     this.autoLocate();
     if (this.param.obstacle === 'other') {
       this.isCommentsMandatory = true;
-      this.saveHidden = true;
+      this.isSaveBtnDisabled = true;
     }
   }
 
-  save() {
+  async save() {
     this.description.obstacle = this.param.obstacle;
-    this.description.impact = Number(this.impact);
+    this.description.impact = this.impact;
     this.description.freeText = this.comment;
     this.image.imageData = this.param.image;
     this.newObservation.description = this.description;
     this.newObservation.image = this.image;
     this.newObservation.location = this.location;
+
+    this.isSaveBtnDisabled = true;
+
+    const loading = await this.showLoading();
+
     this.observation.createObservation(this.newObservation).subscribe({
       next: (observation) => {
-        console.log(observation);
+        loading.dismiss();
         this.showAlert(
           'Observation terminée !',
           `<center>
@@ -76,7 +82,9 @@ export class ObstacleSummaryPage implements OnInit {
         );
       },
       error: (err) => {
+        loading.dismiss();
         this.statusCode = new StatusCode().deserialize(err.error);
+        console.error(err);
         this.showAlert(
           'Un problème est survenu',
           `<center>
@@ -113,7 +121,7 @@ export class ObstacleSummaryPage implements OnInit {
   }
 
   showSave() {
-    this.saveHidden = false;
+    this.isSaveBtnDisabled = false;
   }
 
   private autoLocate() {
@@ -144,7 +152,21 @@ export class ObstacleSummaryPage implements OnInit {
             handler: () => this.router.navigate(['/home']),
           },
         ],
+        backdropDismiss: false,
       })
-      .then((alertEl) => alertEl.present());
+      .then((alertEl) => {
+        alertEl.present();
+        alertEl
+          .onDidDismiss()
+          .then(() => this.router.navigate(['/home']))
+          .catch((err) => {});
+      })
+      .catch((err) => {});
+  }
+
+  private async showLoading() {
+    const loading = await this.loadingController.create({});
+    await loading.present();
+    return loading;
   }
 }
