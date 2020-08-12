@@ -24,8 +24,6 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     const auth = this.authenticationService.getAuth();
-    console.log(auth);
-    console.log(auth);
     if (auth) {
       this.navCtrl.navigateRoot('/home');
     }

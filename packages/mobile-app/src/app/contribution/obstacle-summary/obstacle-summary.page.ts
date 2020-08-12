@@ -145,6 +145,7 @@ export class ObstacleSummaryPage implements OnInit {
       this.showErrorLocalisationAlert();
       return;
     }
+    
     Plugins.Geolocation.getCurrentPosition()
       .then((geoPosition) => {
         this.location.lat = geoPosition.coords.latitude;
