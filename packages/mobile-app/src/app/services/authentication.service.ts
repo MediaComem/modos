@@ -60,6 +60,11 @@ export class AuthenticationService {
     return headers;
   }
 
+  public logout() {
+    localStorage.removeItem('LS_AUTH');
+    this.auth = new Auth();
+  }
+
   private saveAuth(auth: IStoredAuthInfo) {
     localStorage.setItem('LS_AUTH', JSON.stringify(auth));
   }
@@ -73,7 +78,7 @@ export class AuthenticationService {
     const savedAuthInfo: IStoredAuthInfo = JSON.parse(LS_AUTH);
 
     if (Date.now() > savedAuthInfo.expireDate) {
-      localStorage.removeItem('LS_AUTH');
+      this.logout();
       return null;
     }
 

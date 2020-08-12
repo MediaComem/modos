@@ -71,8 +71,18 @@ export class HomePage implements OnInit {
     });
   }
 
-  goToSelectObstacle() {
+  /**
+   *
+   */
+  public goToSelectObstacle() {
     this.navCtrl.navigateForward('/select-obstacle');
+  }
+
+  /**
+   *
+   */
+  public logout() {
+    this.showLogoutWarningMsg();
   }
 
   private createMsgBoxNoLocalisationError() {
@@ -90,5 +100,27 @@ export class HomePage implements OnInit {
         ],
       })
       .then((alert) => alert.present());
+  }
+
+  private async showLogoutWarningMsg() {
+    const alert = await this.alertCtrl.create({
+      header: `Déconnexion`,
+      message: `Voulez-vous vraiment vous déconnecter ?`,
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+        },
+        {
+          text: `Se déconnecter`,
+          handler: () => {
+            this.authenticationService.logout();
+            this.navCtrl.navigateForward('/login');
+          },
+        },
+      ],
+    });
+
+    return alert.present();
   }
 }

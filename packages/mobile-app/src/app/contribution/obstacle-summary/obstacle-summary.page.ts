@@ -56,6 +56,9 @@ export class ObstacleSummaryPage implements OnInit {
     }
   }
 
+  /**
+   * Save the observation on the API
+   */
   async save() {
     this.description.obstacle = this.param.obstacle;
     this.description.impact = this.impact;
@@ -98,7 +101,21 @@ export class ObstacleSummaryPage implements OnInit {
     });
   }
 
-  async showAlert(header, message, button) {
+  /**
+   * Toggle between the impacts level
+   */
+  public editImpact() {
+    this.impactLabelValue = this.impactStrings[this.impact];
+  }
+
+  /**
+   * Toggle the save btn
+   */
+  public showSave() {
+    this.isSaveBtnDisabled = false;
+  }
+
+  private async showAlert(header, message, button) {
     const alert = await this.alertCtrl.create({
       header,
       message,
@@ -116,17 +133,16 @@ export class ObstacleSummaryPage implements OnInit {
     await alert.present();
   }
 
-  editImpact() {
-    this.impactLabelValue = this.impactStrings[this.impact];
-  }
-
-  showSave() {
-    this.isSaveBtnDisabled = false;
+  /**
+   *
+   */
+  public cancel() {
+    this.showCancelWarning();
   }
 
   private autoLocate() {
     if (!Capacitor.isPluginAvailable('Geolocation')) {
-      this.showErrorAlert();
+      this.showErrorLocalisationAlert();
       return;
     }
     Plugins.Geolocation.getCurrentPosition()
@@ -137,11 +153,11 @@ export class ObstacleSummaryPage implements OnInit {
       .catch((error) => {
         this.location.lat = 0;
         this.location.lng = 0;
-        this.showErrorAlert();
+        this.showErrorLocalisationAlert();
       });
   }
 
-  private showErrorAlert() {
+  private showErrorLocalisationAlert() {
     this.alertCtrl
       .create({
         header: `Impossible d'obtenir la localisation`,
@@ -162,6 +178,26 @@ export class ObstacleSummaryPage implements OnInit {
           .catch((err) => {});
       })
       .catch((err) => {});
+  }
+
+  private async showCancelWarning() {
+    const alert = await this.alertCtrl.create({
+      header: `Annuler`,
+      message: `Vous allez revenir à la page d'accueil et devrez recommencer le processus de signalisation. Êtes-vous sûr-e ?`,
+      buttons: [
+        {
+          text: `Confirmer`,
+          handler: () => this.router.navigate(['/home']),
+        },
+        {
+          text: `Rester ici`,
+          role: 'cancel',
+        },
+      ],
+      backdropDismiss: false,
+    });
+
+    return alert.present();
   }
 
   private async showLoading() {

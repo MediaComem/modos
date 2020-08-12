@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Récapitulatif</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="danger" [routerLink]="['/home']">annuler</ion-button>
+      <ion-button color="danger" (click)="cancel($event)">annuler</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
