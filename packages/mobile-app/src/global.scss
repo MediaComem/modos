@@ -67,7 +67,7 @@
 
 /* Heading styles */
 .instructions {
-  background: #192144;
+  background: var(--cstm-color-primary);
   color: white;
 }
 
@@ -85,7 +85,7 @@
 /* global styling */
 
 .main-head {
-  --background: #192144;
+  --background: var(--cstm-color-primary);
   color: white;
 }
 

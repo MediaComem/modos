@@ -20,19 +20,23 @@ export class ObstacleSummaryPage implements OnInit {
   private image = new Image();
   private description = new Description();
   private location = new Location();
-  impact = 1;
-  impactStrings = {
+
+  public impact = 1;
+  public impactStrings = {
     1: { title: 'Faible', text: 'Je peux quand même passer' },
     2: { title: 'Modéré', text: 'Je dois passer avec précaution' },
     3: { title: 'Marqué', text: 'J’ai du mal à passer' },
     4: { title: 'Sévère', text: 'J’ai beaucoup de mal à passer' },
     5: { title: 'Bloquant', text: 'Je ne peux pas passer du tout' },
   };
-  impactLabelValue = this.impactStrings['1'];
-  comment = '';
-  commentHidden = true;
-  saveHidden = true;
-  statusCode: StatusCode;
+  public impactLabelValue = this.impactStrings[1];
+
+  public comment = '';
+  public commentHidden = true;
+  public isCommentsMandatory = false;
+  public saveHidden = false;
+
+  public statusCode: StatusCode;
 
   constructor(
     private param: NavParamsService,
@@ -41,10 +45,13 @@ export class ObstacleSummaryPage implements OnInit {
     private alertCtrl: AlertController
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
     this.autoLocate();
-    if (this.param.obstacle != 'other') {
-      this.saveHidden = false;
+    if (this.param.obstacle === 'other') {
+      this.isCommentsMandatory = true;
+      this.saveHidden = true;
     }
   }
 
@@ -108,6 +115,7 @@ export class ObstacleSummaryPage implements OnInit {
   showSave() {
     this.saveHidden = false;
   }
+
   private autoLocate() {
     if (!Capacitor.isPluginAvailable('Geolocation')) {
       this.showErrorAlert();

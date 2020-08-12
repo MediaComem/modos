@@ -73,7 +73,7 @@ export class AuthenticationService {
     const savedAuthInfo: IStoredAuthInfo = JSON.parse(LS_AUTH);
 
     if (Date.now() > savedAuthInfo.expireDate) {
-      localStorage.removeItem(LS_AUTH);
+      localStorage.removeItem('LS_AUTH');
       return null;
     }
 

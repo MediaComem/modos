@@ -56,9 +56,9 @@
       </ion-col>
     </ion-row>
 
-    <ion-row class="ion-padding-vertical ion-margin-bottom">
+    <ion-row class="ion-padding-vertical ion-margin-bottom comments">
       <ion-col class="ion-padding-horizontal">
-        Commentaire
+        Commentaire <span class='comments__mandatory' *ngIf='isCommentsMandatory'> - obligatoire pour cette catégorie</span>
         <ion-textarea
           [(ngModel)]="comment"
           required
