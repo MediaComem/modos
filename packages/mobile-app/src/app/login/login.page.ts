@@ -19,22 +19,29 @@ export class LoginPage implements OnInit {
     private authenticationService: AuthenticationService,
     public navCtrl: NavController,
     private observationService: ObservationsService
-    ) { }
+  ) {}
 
   ngOnInit() {
+    const auth = this.authenticationService.getAuth();
+    console.log(auth);
+    console.log(auth);
+    if (auth) {
+      this.navCtrl.navigateRoot('/home');
+    }
   }
 
   authenticate() {
-    this.authenticationService.Authenticate(this.email, this.password).subscribe({
-      next: auth => {
-        this.authenticationService.setAuth(auth.code, auth.token);
-        this.navCtrl.navigateForward('/home');
-      },
-      error: (err) => {
-        this.statusCode = new StatusCode().deserialize(err.error);
-        this.authenticationError = true;
-      }
-    });
+    this.authenticationService
+      .Authenticate(this.email, this.password)
+      .subscribe({
+        next: (auth) => {
+          this.authenticationService.setAuth(auth.code, auth.token);
+          this.navCtrl.navigateRoot('/home');
+        },
+        error: (err) => {
+          this.statusCode = new StatusCode().deserialize(err.error);
+          this.authenticationError = true;
+        },
+      });
   }
-
 }
