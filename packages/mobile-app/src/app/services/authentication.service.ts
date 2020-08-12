@@ -5,40 +5,83 @@ import { ApiEndpoints } from '../config/api-endpoints';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
+interface IStoredAuthInfo {
+  code: number;
+  token: string;
+  expireDate: number;
+}
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
   private auth = new Auth();
 
-  constructor(private httpService: HttpClient) { }
+  constructor(private httpService: HttpClient) {
+    const savedAuthInfo = this.getSavedAuth();
+    if (savedAuthInfo) {
+      this.auth.code = savedAuthInfo.code;
+      this.auth.token = savedAuthInfo.token;
+    }
+  }
 
-  public Authenticate(usermail, password) : Observable<Auth> {
-    var credentials = {"email": usermail, "password": password};
-    let headers = new HttpHeaders();
+  public Authenticate(usermail, password): Observable<Auth> {
+    const credentials = { email: usermail, password };
+    const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    let options = { 'headers': headers };
+    const options = { headers };
 
-    return this.httpService.post<Auth>(`${ApiEndpoints.AUTHENTICATION}`, credentials, options).pipe(
-      map(data => new Auth().deserialize(data)),
-      catchError((err) => throwError(err))
-    );
+    return this.httpService
+      .post<Auth>(`${ApiEndpoints.AUTHENTICATION}`, credentials, options)
+      .pipe(
+        map((data) => {
+          this.setAuth(data.code, data.token);
+          return this.getAuth();
+        }), //new Auth().deserialize(data)),
+        catchError((err) => throwError(err))
+      );
   }
 
   public setAuth(code, token) {
     this.auth.code = code;
     this.auth.token = token;
+    this.saveAuth({ code, token, expireDate: Date.now() + 60 * 60 * 1000 });
   }
-  
+
   public getAuth() {
     return this.auth;
   }
 
   public getHeaders(token) {
-    let headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     });
     return headers;
+  }
+
+  public logout() {
+    localStorage.removeItem('LS_AUTH');
+    this.auth = new Auth();
+  }
+
+  private saveAuth(auth: IStoredAuthInfo) {
+    localStorage.setItem('LS_AUTH', JSON.stringify(auth));
+  }
+
+  private getSavedAuth(): IStoredAuthInfo | null {
+    const LS_AUTH = localStorage.getItem('LS_AUTH');
+    if (!LS_AUTH) {
+      return null;
+    }
+
+    const savedAuthInfo: IStoredAuthInfo = JSON.parse(LS_AUTH);
+
+    if (Date.now() > savedAuthInfo.expireDate) {
+      this.logout();
+      return null;
+    }
+
+    return savedAuthInfo;
   }
 }

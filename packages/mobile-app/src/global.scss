@@ -50,24 +50,24 @@
 }
 
 /* Imgs styling */
-.img_1-3{
-  max-width:33%;
-  margin:auto;
+.img_1-3 {
+  max-width: 33%;
+  margin: auto;
 }
 
-.img_1-2{
-  max-width:50%;
-  margin:auto;
+.img_1-2 {
+  max-width: 50%;
+  margin: auto;
 }
 
-.img_1-4{
-  max-width:25%;
-  margin:auto;
+.img_1-4 {
+  max-width: 25%;
+  margin: auto;
 }
 
 /* Heading styles */
 .instructions {
-  background: var(--ion-color-primary);
+  background: var(--cstm-color-primary);
   color: white;
 }
 
@@ -85,8 +85,8 @@
 /* global styling */
 
 .main-head {
-  --background:#826daf ;
-  color:white;
+  --background: var(--cstm-color-primary);
+  color: white;
 }
 
 ion-title {
@@ -103,7 +103,7 @@ ion-list-header > h1 {
 }
 
 #input.description {
-  color:black;
-  background:white;
-  padding:5px;
+  color: black;
+  background: white;
+  padding: 5px;
 }

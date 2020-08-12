@@ -18,11 +18,11 @@ export class LocationComponent implements OnInit {
   ngOnInit() {}
 
   onLocation() {
-    console.log('plop');
     this.actionSheetCtrl.create({header: 'Choix de la méthode', buttons: [
-      {text: 'Manuelle - préféré', handler: () => {
-        this.openMap();
-      }},
+      // TODO: implements manual geolocation of a point
+      // {text: 'Manuelle - préféré', handler: () => {
+      //   this.openMap();
+      // }},
       {text: 'Automatique', handler: () => {
         this.autoLocate();
       }},
@@ -47,8 +47,8 @@ export class LocationComponent implements OnInit {
       //const coordinates: Coordinates = {lat: geoPosition.coords.latitude, lng: geoPosition.coords.longitude};
       this.location.lat = geoPosition.coords.latitude;
       this.location.lng = geoPosition.coords.longitude;
-      console.log("latitude: " + this.location.lat + ", longitude: " + this.location.lng);
-    }).catch(error => {
+    }).catch(error => {      
+      console.error(error, {location: this.location});
       this.showErrorAlert();
     });
   }

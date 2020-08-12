@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dev:web:watch": "ionic serve",
-    "dev:android:watch": "ionic capacitor run android --livereload"
+    "dev:android:watch": "ionic capacitor run android --livereload --external"
   },
   "private": true,
   "dependencies": {
