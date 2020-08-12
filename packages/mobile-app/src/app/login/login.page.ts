@@ -11,21 +11,20 @@ import { ObservationsService } from 'src/app/services/observations.service';
 })
 export class LoginPage implements OnInit {
   public statusCode: StatusCode;
-  email: String;
-  password: String;
+  email: string;
+  password: string;
   authenticationError = false;
 
   constructor(
     private authenticationService: AuthenticationService,
     public navCtrl: NavController,
-    private observationService: ObservationsService 
+    private observationService: ObservationsService
     ) { }
 
   ngOnInit() {
   }
 
   authenticate() {
-    //"admin@mail.com", "1234"
     this.authenticationService.Authenticate(this.email, this.password).subscribe({
       next: auth => {
         this.authenticationService.setAuth(auth.code, auth.token);

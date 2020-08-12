@@ -65,7 +65,7 @@ export class ObstacleSummaryPage implements OnInit {
             <ion-icon name="checkmark-circle-outline"></ion-icon></ion-icon><br>
             Votre observation a bien été envoyée.<br><br>Merci pour votre contribution !
           </center>`,
-          "Retour à l'accueil"
+          `Retour à l'accueil`
         );
       },
       error: (err) => {
@@ -77,7 +77,7 @@ export class ObstacleSummaryPage implements OnInit {
             Une erreure est survenue lors de l\'envoi de votre observation.<br>
             Il faut malheureusement recommencer depuis la page d\'accueil
           </center>`,
-          "J'ai compris"
+          `J'ai compris`
         );
       },
     });
