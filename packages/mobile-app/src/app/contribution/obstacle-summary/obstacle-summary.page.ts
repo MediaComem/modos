@@ -20,13 +20,13 @@ export class ObstacleSummaryPage implements OnInit {
   private image = new Image();
   private description = new Description();
   private location = new Location();
-  impact = '1';
+  impact = 1;
   impactStrings = {
-    1: 'Je peux quand même passer',
-    2: 'Je dois passer avec précaution',
-    3: 'J’ai du mal à passer',
-    4: 'J’ai beaucoup de mal à passer',
-    5: 'Je ne peux pas passer du tout',
+    1: { title: 'Faible', text: 'Je peux quand même passer' },
+    2: { title: 'Modéré', text: 'Je dois passer avec précaution' },
+    3: { title: 'Marqué', text: 'J’ai du mal à passer' },
+    4: { title: 'Sévère', text: 'J’ai beaucoup de mal à passer' },
+    5: { title: 'Bloquant', text: 'Je ne peux pas passer du tout' },
   };
   impactLabelValue = this.impactStrings['1'];
   comment = '';

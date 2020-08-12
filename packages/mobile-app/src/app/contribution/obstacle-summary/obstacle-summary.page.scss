@@ -1,11 +1,31 @@
-.Center_Label_Section {
-  position: fixed;
-  display: flex;
-  width: 100%;
-  justify-content: center;
+.description {
+  color: black;
+  background: white;
+  border: 1px solid lightgrey;
+  padding: 5px;
 }
 
-.Center_Label {
+.obstacle_pic {
+  height: auto;
+}
+.obstacle_range {
+  margin-bottom: 10px;
+  min-height: 150px;
+
+  .obstacle_range__labels {
+    // position: fixed;
     display: flex;
+    width: 100%;
     justify-content: center;
+
+    .title {
+      margin: none;
+      font-variant: small-caps;
+    }
+
+    .label {
+      display: flex;
+      justify-content: center;
+    }
+  }
 }
