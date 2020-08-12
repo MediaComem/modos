@@ -1,6 +1,5 @@
 <ion-header>
-  <ion-toolbar class="main-head">
-  </ion-toolbar>
+  <ion-toolbar class="main-head"> </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -16,12 +15,10 @@
     </ion-row>
     <ion-row class="ion-margin-top ion-text-center">
       <ion-col class="ion-align-items-center ion-padding-horizontal">
-        <h2>{{observationsCount}}</h2>
-        <p>observations effectuées jusqu'à maintenant.</p>
-        <p
-          >Grâce à vos contributions, vous aidez à améliorer la mobilité de
-          votre ville !</p
-        >
+        <p class='emphasis'>
+          Signalez les obstacles à la mobilité piétonne en un clin d'oeil
+        </p>
+        <p>Vos observations aident à rendre les villes plus accessibles !</p>
       </ion-col>
     </ion-row>
     <ion-row class="ion-no-padding ion-margin-top ion-margin-bottom">
@@ -34,9 +31,17 @@
             size="large"
             class="ion-no-margin"
             color="tertiary"
-            >Identifier un obstacle</ion-button
+            >Signaler un obstacle</ion-button
           >
         </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-top ion-text-center">
+      <ion-col class="ion-align-items-center ion-padding-horizontal">
+        <p class='emphasis' *ngIf="observationsCount===undefined; else noObs">{{observationsCount}}</p>
+        <ng-template #noObs><p class='emphasis'>0</p></ng-template>
+        <p *ngIf="observationsCount < 2; else plural">observation effectuée</p>
+        <ng-template #plural><p>observations effectuées</p></ng-template>
       </ion-col>
     </ion-row>
   </ion-grid>

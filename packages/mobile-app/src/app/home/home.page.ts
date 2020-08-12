@@ -13,9 +13,8 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  
   public events: Event[];
-  public observationsCount: number;
+  public observationsCount = 0;
   public statusCode: StatusCode;
 
   constructor(
@@ -24,9 +23,9 @@ export class HomePage implements OnInit {
     public navCtrl: NavController,
     public storage: Storage,
     private authenticationService: AuthenticationService
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ionViewWillEnter() {
     /*this.authenticationService.Authenticate("admin@mail.com", "1234").subscribe({
@@ -44,12 +43,14 @@ export class HomePage implements OnInit {
       error: (err) => this.statusCode = new StatusCode().deserialize(err.error)
     });*/
     this.eventService.getEvents().subscribe({
-      next: events => this.events = events,
-      error: (err) => this.statusCode = new StatusCode().deserialize(err.error)
+      next: (events) => (this.events = events),
+      error: (err) =>
+        (this.statusCode = new StatusCode().deserialize(err.error)),
     });
     this.observationService.getObservations().subscribe({
-      next: observations => this.observationsCount = observations.length,
-      error: (err) => this.statusCode = new StatusCode().deserialize(err.error)
+      next: (observations) => (this.observationsCount = observations.length),
+      error: (err) =>
+        (this.statusCode = new StatusCode().deserialize(err.error)),
     });
   }
 
