@@ -28,6 +28,6 @@
 </ion-content>
 <ion-footer>
   <ion-row>
-    <app-camera (imagePick)="onImagePicked($event)"></app-camera>
+    <app-camera (imagePick)="onImagePicked($event)" (cancelImagePIck)="onCancelImagePIcked($event)"></app-camera>
   </ion-row>
 </ion-footer>
