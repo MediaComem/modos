@@ -4,11 +4,11 @@ import { observationController } from '../../controller';
 
 export const observationRouter = express.Router();
 
-observationRouter.get('/', authenticateUser, observationController.getObservations);
+observationRouter.get('/', observationController.getObservations);
 observationRouter.post('/', authenticateUser, observationController.createObservation);
 
-observationRouter.get('/obstacles', authenticateUser, observationController.getObstacles);
+observationRouter.get('/obstacles', observationController.getObstacles);
 
-observationRouter.get('/:id', authenticateUser, observationController.getObservationById);
+observationRouter.get('/:id', observationController.getObservationById);
 observationRouter.put('/:id', authenticateUser, observationController.updateObservation);
 observationRouter.delete('/:id', authenticateUser, observationController.deleteObservation);

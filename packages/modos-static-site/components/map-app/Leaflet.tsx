@@ -18,21 +18,64 @@ export interface ICustomMarker {
   icon?: string;
 }
 
-/**
- *
- */
-export interface ICustomLeafletLayerGroup {
+//
+
+export interface ICustomLeafletLayer {
   id: string;
   lastUpdate: number;
+  leafletLayer?: any;
+}
+
+export interface ICustomLeafletMarkerLayer extends ICustomLeafletLayer {
   markers?: ICustomMarker[];
   isClusterized?: boolean;
 }
+
+export interface ICustomLeafletGEOJSONLayer extends ICustomLeafletLayer{
+  geojson: any;
+}
+
+type ProcessingLayerFnc = (LEAFLET: any, map: any, layer: ICustomLeafletLayer) => LayerGroup;
+
+/**
+ * Update a Leaflet layer group with the needed update done to each layer
+ * @param layer
+ * @param layerGroup
+ * @param map
+ * @param LEAFLET
+ * @param processingLayerFnc
+ */
+const updateLayerGroup = (
+  layer: ICustomLeafletLayer,
+  layerGroup: ICustomLeafletLayer[],
+  map: any,
+  LEAFLET: any,
+  processingLayerFnc: ProcessingLayerFnc
+) => {
+  const layerIndex = layerGroup.findIndex(stateLayer => stateLayer.id === layer.id);
+
+  if (layerGroup[layerIndex] && layerGroup[layerIndex].leafletLayer) {
+
+    // if layer has been updated, we remove it and add it
+    if (layerGroup[layerIndex].lastUpdate < layer.lastUpdate) {
+      map.removeLayer(layerGroup[layerIndex].leafletLayer);
+      layerGroup[layerIndex].leafletLayer = processingLayerFnc(LEAFLET, map, layer);
+    }
+
+  } else {
+    const newLayerGroup = { id: layer.id, lastUpdate: layer.lastUpdate, leafletLayer: null };
+    newLayerGroup.leafletLayer = processingLayerFnc(LEAFLET, map, layer);
+    layerGroup.push(newLayerGroup);
+  }
+
+  return layerGroup;
+};
 
 /**
  *
  * @param layer
  */
-const processLayer = (LEAFLET: any, currentMap: any, layer: ICustomLeafletLayerGroup) => {
+const processMarkerLayer: ProcessingLayerFnc = (LEAFLET: any, map: any, layer: ICustomLeafletMarkerLayer) => {
   if (!layer.markers) {
     return null;
   }
@@ -64,7 +107,44 @@ const processLayer = (LEAFLET: any, currentMap: any, layer: ICustomLeafletLayerG
 
   const newLayerGroup: LayerGroup = new LEAFLET.LayerGroup(markers);
 
-  return newLayerGroup.addTo(currentMap);
+  return newLayerGroup.addTo(map);
+
+};
+
+/**
+ * Process a Leaflet geojson and return it if all went okay, null otherwise.
+ * @param LEAFLET
+ * @param map
+ * @param layer
+ */
+const processGeoJSONLayer: ProcessingLayerFnc = (LEAFLET: any, map: any, layer: ICustomLeafletGEOJSONLayer) => {
+  if (!layer.geojson) {
+    return null;
+  }
+  try {
+    return LEAFLET.geoJSON(layer.geojson).addTo(map);
+  } catch (err) {
+    console.warn(err);
+    return null;
+  }
+};
+
+/**
+ * Obtain a leaflet overlay compatible object from a layer group
+ * @param layerGroup
+ */
+const getOverlayFromLayerGroups = (layerGroup: ICustomLeafletLayer[]) => {
+  if (layerGroup) {
+    return {};
+  }
+
+  return layerGroup.reduce((accu, layer) => {
+    if (!layer || !layer.leafletLayer) {
+      return accu;
+    }
+    accu[layer.id] = layer.leafletLayer;
+    return accu;
+  }, {});
 
 };
 
@@ -82,7 +162,8 @@ interface IPropsLeafletMap {
   className?: string;
   onMapClick?: (evt: LeafletMouseEvent) => any;
   options?: MapOptions;
-  layerGroups?: ICustomLeafletLayerGroup[];
+  markerLayerGroups?: ICustomLeafletMarkerLayer[];
+  geojsonLayerGroups?: ICustomLeafletGEOJSONLayer[];
 }
 
 /**
@@ -122,7 +203,8 @@ const initMap = async (id, options: MapOptions) => {
 const LeafletCustomMap = (props: IPropsLeafletMap) => {
   const [ isMapInit, setIsMapInit ] = useState(false);
   const [ initializedMap, initializeMap ] = useState(null);
-  const [ layerGroups, setLayerGroups ] = useState([]);
+  const [ markerLayerGroups, setMarkerLayerGroups ] = useState([]);
+  const [ geojsonLayerGroups, setGeoJSONLayerGroups ] = useState([]);
   const [ mapLayersControl, setMapLayerControl ] = useState(null);
   const map = useRef(null);
 
@@ -181,40 +263,42 @@ const LeafletCustomMap = (props: IPropsLeafletMap) => {
     if (map.current && initializedMap) {
       const LEAFLET = window.L;
       const currentMap: Map = initializedMap;
-      const newLayerGroups = layerGroups;
 
-      for (const layer of props.layerGroups) {
-        const layerIndex = newLayerGroups.findIndex(stateLayer => stateLayer.id === layer.id);
+      // ----------- LAYERS MANAGEMENT
 
-        if (newLayerGroups[layerIndex]) {
-
-          // if layer has been update
-          if (newLayerGroups[layerIndex].lastUpdate < layer.lastUpdate) {
-            currentMap.removeLayer(newLayerGroups[layerIndex].leafletLayer);
-            newLayerGroups[layerIndex].leafletLayer = processLayer(LEAFLET, currentMap, layer);
-          }
-
-        } else {
-          const newLayerGroup = { id: layer.id, lastUpdate: layer.lastUpdate, leafletLayer: null };
-          newLayerGroup.leafletLayer = processLayer(LEAFLET, currentMap, layer);
-          newLayerGroups.push(newLayerGroup);
+      // Process marker layer
+      const newMarkerLayerGroups: ICustomLeafletMarkerLayer[] = markerLayerGroups;
+      if (props.markerLayerGroups) {
+        for (const layer of props.markerLayerGroups) {
+          updateLayerGroup(layer, newMarkerLayerGroups, currentMap, LEAFLET, processMarkerLayer);
         }
+        setMarkerLayerGroups(newMarkerLayerGroups);
       }
 
-      setLayerGroups(newLayerGroups);
+      // process geojson layer
+      const newGeoJSONLayerGroups: ICustomLeafletGEOJSONLayer[] = geojsonLayerGroups;
+      if (props.geojsonLayerGroups) {
+        for (const layer of props.geojsonLayerGroups) {
+          updateLayerGroup(layer, newGeoJSONLayerGroups, currentMap, LEAFLET, processGeoJSONLayer);
+        }
+        setGeoJSONLayerGroups(newGeoJSONLayerGroups);
+      }
+
+      // ----------- LEAFLET CONTROL
 
       if (mapLayersControl) {
         currentMap.removeControl(mapLayersControl);
       }
 
-      const overlayLayer = newLayerGroups.reduce((accu, layer) => {
-        accu[layer.id] = layer.leafletLayer;
-        return accu;
-      }, {});
+      // Create a toggle control for each marker layer group if any exist
+      const overlayLayerMarker = getOverlayFromLayerGroups(newMarkerLayerGroups);
 
-      setMapLayerControl(LEAFLET.control.layers({}, overlayLayer).addTo(currentMap));
+      // Create a toggle control for each geojson layer group if any exist
+      const overlayLayerGeoJSON = getOverlayFromLayerGroups(newGeoJSONLayerGroups);
+
+      setMapLayerControl(LEAFLET.control.layers({}, { ...overlayLayerMarker, ...overlayLayerGeoJSON }).addTo(currentMap));
     }
-  }, [ props.layerGroups ]);
+  }, [ props.markerLayerGroups ]);
 
 
   return <div id={props.id} ref={map}></div>;

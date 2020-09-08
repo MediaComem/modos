@@ -22,6 +22,7 @@ export interface IPropsNavPanel {
   onClickFrom: any;
   onChooseFrom: any;
   onChooseTo: any;
+  onSubmitLocation: any;
 }
 
 /**
@@ -60,7 +61,18 @@ export const transformNavPanelLocationIntoMakersArray = (panelLocations: INavPan
  * @param props React props of the object
  * @returns the React component
  */
-export const NavigationPanel = ({ id, location, onClickExit, onClickTo, onClickFrom, onChooseFrom, onChooseTo }: IPropsNavPanel) =>
+export const NavigationPanel = (
+  {
+    id,
+    location,
+    onClickExit,
+    onClickTo,
+    onClickFrom,
+    onChooseFrom,
+    onChooseTo,
+    onSubmitLocation
+  }: IPropsNavPanel
+) =>
   <div id={id}>
     <style jsx>
       {`
@@ -82,7 +94,7 @@ export const NavigationPanel = ({ id, location, onClickExit, onClickTo, onClickF
 
     </Navbar>
 
-    <Form>
+    <Form onSubmit={onSubmitLocation}>
       <Form.Group controlId='nav-from'>
         <Form.Label>Depart</Form.Label>
 

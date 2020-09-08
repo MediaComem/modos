@@ -1,17 +1,18 @@
 /* eslint-disable max-lines-per-function */
 /* eslint-disable @typescript-eslint/no-require-imports */
-import { LeafletMouseEvent } from 'leaflet';
+import { LeafletMouseEvent, LatLng } from 'leaflet';
 import React, { useState, useEffect } from 'react';
 import { Navbar } from 'react-bootstrap';
 import {
   LeafletCustomMap,
   NavigationPanel,
   transformNavPanelLocationIntoMakersArray,
-  ICustomLeafletLayerGroup,
-  ICustomMarker
+  ICustomLeafletMarkerLayer,
+  ICustomMarker,
+  ICustomLeafletGEOJSONLayer
 } from '../components/index';
 import styles from './map.module.scss';
-import { getObservations } from '../libs/modos-api';
+import { getObservations, getSimpleItinerary } from '../libs/modos-api';
 import { IMapnvFeature, translateSwissGridCoordinateToLatLng } from '../libs/mapnv-api';
 
 /**
@@ -20,9 +21,13 @@ import { IMapnvFeature, translateSwissGridCoordinateToLatLng } from '../libs/map
 interface IMapPageState {
   isNavigationPanelOpen: boolean;
   currentSearchedPoint: string;
-  location: { to: any; from: any };
-  navigationLayer: ICustomLeafletLayerGroup;
-  obstaclesLayer: ICustomLeafletLayerGroup;
+  location: {
+    to: null | LatLng;
+    from: null | LatLng;
+  };
+  navigationLayer: ICustomLeafletMarkerLayer;
+  obstaclesLayer: ICustomLeafletMarkerLayer;
+  itineraryLayer: ICustomLeafletGEOJSONLayer;
 }
 
 /**
@@ -33,7 +38,8 @@ const INTIAL_STATE: IMapPageState = {
   currentSearchedPoint: '',
   location: { to: null, from: null },
   navigationLayer: { id: 'Navigation', lastUpdate: Date.now(), markers: [] },
-  obstaclesLayer: { id: 'Obstacles', isClusterized: true, lastUpdate: Date.now(), markers: [] }
+  obstaclesLayer: { id: 'Obstacles', isClusterized: true, lastUpdate: Date.now(), markers: [] },
+  itineraryLayer: { id: 'Itineraire', lastUpdate: Date.now(), geojson: {} }
 };
 
 /**
@@ -43,7 +49,8 @@ enum MAP_ACTION {
   SEARCH_LOCATION,
   CHOOSE_LOCATION,
   TOGGLE_PANEL,
-  OBSERVATIONS_LOADED
+  OBSERVATIONS_LOADED,
+  SUBMIT_ITINERARY
 }
 
 enum OBSTACLES_TYPE {
@@ -101,6 +108,17 @@ const reducer = (
         obstaclesLayer: {
           ...currentState.obstaclesLayer,
           markers: payload,
+          lastUpdate: Date.now()
+        }
+      };
+
+    case MAP_ACTION.SUBMIT_ITINERARY:
+      return {
+        ...currentState,
+        isNavigationPanelOpen: false,
+        itineraryLayer: {
+          ...currentState.itineraryLayer,
+          geojson: payload,
           lastUpdate: Date.now()
         }
       };
@@ -188,6 +206,18 @@ const MapPage = () => {
     updateLocationMarker(currLocation);
   };
 
+  const onSubmitLocation = (evt: Event, location: IMapPageState['location']) => {
+    evt.preventDefault();
+
+    const currLocation = location;
+    getSimpleItinerary(
+      [ currLocation.from.lat, currLocation.from.lng ],
+      [ currLocation.to.lat, currLocation.from.lng ]
+    )
+      .then(itinerary => setState(reducer(state, MAP_ACTION.SUBMIT_ITINERARY, itinerary)))
+      .catch(err => console.error(err));
+  };
+
   /**
    *
    */
@@ -245,6 +275,8 @@ const MapPage = () => {
               onChooseFrom={evt => onChooseLocationByText(evt, 'from')}
               onChooseTo={evt => onChooseLocationByText(evt, 'to')}
 
+              onSubmitLocation={evt => onSubmitLocation(evt, state.location)}
+
               location={state.location}
             ></NavigationPanel>
           }
@@ -252,7 +284,8 @@ const MapPage = () => {
           <LeafletCustomMap
             id={styles.map}
             onMapClick={evt => onChooseLocationOnMap(evt)}
-            layerGroups={[ state.navigationLayer, state.obstaclesLayer ]}
+            markerLayerGroups={[ state.navigationLayer, state.obstaclesLayer ]}
+            geojsonLayerGroups={[ state.itineraryLayer ]}
           ></LeafletCustomMap>
         </div>
       </div>
