@@ -212,7 +212,7 @@ const MapPage = () => {
     const currLocation = location;
     getSimpleItinerary(
       [ currLocation.from.lat, currLocation.from.lng ],
-      [ currLocation.to.lat, currLocation.from.lng ]
+      [ currLocation.to.lat, currLocation.to.lng ]
     )
       .then(itinerary => setState(reducer(state, MAP_ACTION.SUBMIT_ITINERARY, itinerary)))
       .catch(err => console.error(err));
