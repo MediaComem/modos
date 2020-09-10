@@ -25,7 +25,7 @@ const ModosMap = () => {
     to: null
   });
   const [ itinerary, setItinerary ] = useState({
-    generatedDate: Date.now(),
+    generatedDate: Date.now(), // We need a generated date to force react-leaflet to re-render the geojson
     geojson: null
   });
   const [ displayObservationPanel, setDisplayObersvationPanel ] = useState(false);

@@ -3,26 +3,19 @@ import { LatLng, Icon } from 'leaflet';
 import { LayerGroup, Marker } from 'react-leaflet';
 import { getObservations, IObservation, OBSTACLES_TYPE } from '../../libs/modos-api';
 // import MarkerClusterGroup from 'react-leaflet-markercluster';
+const modosIconSize: [number, number] = [ 15, 15 ];
 
-const SIDEWALK_ICON = new Icon({
-  iconUrl: '/assets/sidewalk-icon.png',
-  iconSize: [ 15, 15 ]
-});
-
-const OBSTACLE_ICON = new Icon({
-  iconUrl: '/assets/obstacle-icon.png',
-  iconSize: [ 15, 15 ]
-});
 
 const getIconFromObstacleType = (type: OBSTACLES_TYPE) => {
-  switch (type) {
-    case OBSTACLES_TYPE.SIDEWALK:
-      return SIDEWALK_ICON;
-    case OBSTACLES_TYPE.OBSTACLE:
-      return OBSTACLE_ICON;
-    default:
-      return OBSTACLE_ICON;
+  let typeToReturn = type;
+  if (!OBSTACLES_TYPE[type]) {
+    typeToReturn = OBSTACLES_TYPE.OTHER;
   }
+
+  return new Icon({
+    iconUrl: `/assets/${OBSTACLES_TYPE[typeToReturn]}-icon.png`,
+    iconSize: modosIconSize
+  });
 };
 
 interface IProps {

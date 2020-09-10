@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FormControl, ListGroup } from 'react-bootstrap';
 
 import { geocode, IMapnvFeature } from '../../libs/mapnv-api';
-import style from './map-app.module.scss';
+import style from './map.module.scss';
 
 /**
  *

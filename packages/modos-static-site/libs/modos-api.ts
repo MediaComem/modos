@@ -13,16 +13,15 @@ const API_URL =
 //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTU5NzE1NDQyMSwiZXhwIjoxNTk3MTU4MDIxfQ.qsZgo5od7vZAEHIFnbyCn3Crem2_eqbt_XkX2DVkUpI';
 
 export enum OBSTACLES_TYPE {
-  CURB_RAMP='curb ramp',
-  MISSING_CURB_RAMP='missing curb ramp',
-  SURFACE_PROBLEM='surface problem',
-  OBSTACLE='obstacle',
-  WIDTH='width',
-  SECURITY='security',
-  SLOPE='slope',
-  NO_PROBLEM='no problem',
-  BONUS='bonus',
-  SIDEWALK='sidewalk'
+  COATING = 'coating',
+  OBSTACLE = 'obstacle',
+  SECURITY = 'security',
+  PASSABILITY = 'passability',
+  SLOPE = 'slope',
+  WIDTH = 'width',
+  OTHER = 'other',
+  NOPROBLEM = 'noproblem',
+  UNLABELLED = 'unlabelled'
 }
 
 export enum IMPACT {

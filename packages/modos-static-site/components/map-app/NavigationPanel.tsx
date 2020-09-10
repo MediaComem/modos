@@ -3,6 +3,7 @@ import React from 'react';
 import { Button, Form, Navbar, InputGroup, FormControl } from 'react-bootstrap';
 import { ICustomMarker } from './Leaflet';
 import { GeocodingInput } from './GeocodingInput';
+import styles from './map.module.scss';
 
 
 /**
@@ -74,20 +75,12 @@ export const NavigationPanel = (
   }: IPropsNavPanel
 ) =>
   <div id={id}>
-    <style jsx>
-      {`
-        .navbar-btn {
-          background:none;
-          border:none;
-        }
-      `}
-    </style>
     <Navbar expand='lg' >
 
       <div className='mr-auto'></div>
 
       <div>
-        <button onClick={evt => onClickExit(evt)} className='navbar-btn'>
+        <button onClick={evt => onClickExit(evt)} className={styles['navbar-btn']}>
           <i className='material-icons'>close</i>
         </button>
       </div>
