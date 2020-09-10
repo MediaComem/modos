@@ -23,4 +23,8 @@ export class TakePicturePage implements OnInit {
     this.router.navigate(['/contribution/obstacle-summary']);
   }
 
+  onCancelImagePIcked() {
+    this.router.navigate(['/contribution/select-obstacle']);
+  }
+
 }

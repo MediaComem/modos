@@ -1,11 +1,11 @@
 {
     "OBSTACLES": {
-        "coating": "revêtement",
-        "obstacle": "obstacle",
-        "security": "sécurité",
-        "passability": "passabilité",
-        "slope": "pente",
-        "width": "largeur",
-        "other": "autre"
+        "coating": "Problème de revêtement",
+        "obstacle": "Obstacle sur le passage",
+        "security": "Sécurité, danger",
+        "passability": "Franchissabilité",
+        "slope": "Forte pente",
+        "width": "Largeur de trottoir",
+        "other": "Autre observation"
     }
 }

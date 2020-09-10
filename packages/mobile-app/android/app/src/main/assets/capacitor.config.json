@@ -1,0 +1,7 @@
+{
+  "appId": "collect.modos.ch",
+  "appName": "modos Explorer",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Récapitulatif</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="danger" [routerLink]="['/home']">annuler</ion-button>
+      <ion-button color="danger" (click)="cancel($event)">annuler</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -15,56 +15,52 @@
       </ion-col>
     </ion-row>
     <ion-row class="ion-align-items-center">
-      <ion-col class="ion-text-center ion-align-self-center">
-        <!-- TODO param.obstacle-->
+      <ion-col class="ion-text-center ion-align-self-center" size="6">
         <ion-icon
           src="assets/icons/{{ param.obstacle }}.svg"
           class="xl_icon"
         ></ion-icon>
-        <!-- TODO param.obstsacle FR-->
-        <h4 class="ion-no-margin ion-align-self-center">{{'OBSTACLES.' + param.obstacle | translate }}</h4>
       </ion-col>
-      <ion-col></ion-col>
       <ion-col class="ion-no-margin ion-no-padding">
-        <ion-img
-          src="{{ param.image }}"
-        ></ion-img>
+        <ion-img src="{{ param.image }}" class=".obstacle_pic"></ion-img>
       </ion-col>
-      <ion-col></ion-col>
     </ion-row>
+
     <ion-item-divider></ion-item-divider>
-    <ion-row class="ion-padding-vertical ion-margin-bottom">
+
+    <ion-row class="ion-padding-vertical ion-margin-bottom obstacle_range">
       <ion-col>
-        <ion-label class="ion-padding-horizontal">À mon avis, l'impact est</ion-label>
-        <ion-row class="ion-padding-horizontal">
-        
-        <ion-range
-          [(ngModel)]="impact"
-          min="1"
-          max="5"
-          step="1"
-          snaps
-          color="secondary"
-          (ionChange)="editImpact()"
+        <ion-label class="ion-padding-horizontal"
+          >À mon avis, l'impact est</ion-label
         >
-          <i class="fas fa-check-circle" slot="start"></i>
-          <i class="fas fa-ban" slot="end"></i>
-        </ion-range>
+        <ion-row class="ion-padding-horizontal">
+          <ion-range
+            [(ngModel)]="impact"
+            min="1"
+            max="5"
+            step="1"
+            snaps
+            color="secondary"
+            (ionChange)="editImpact()"
+          >
+            <i class="fas fa-check-circle" slot="start"></i>
+            <i class="fas fa-ban" slot="end"></i>
+          </ion-range>
         </ion-row>
-        <ion-row class="Center_Label_Section">
+        <ion-row class="obstacle_range__labels">
           <div text-center>
-            <ion-label class="Center_Label">{{ impactLabelValue }}</ion-label>
+            <h5 class="title">{{ impactLabelValue.title }}</h5>
+            <ion-label class="label">{{ impactLabelValue.text }}</ion-label>
           </div>
         </ion-row>
       </ion-col>
     </ion-row>
-    <ion-row
-      class="ion-padding-vertical ion-margin-bottom instructions"
-    >
+
+    <ion-row class="ion-padding-vertical ion-margin-bottom comments">
       <ion-col class="ion-padding-horizontal">
+        Commentaire <span class='comments__mandatory' *ngIf='isCommentsMandatory'> - obligatoire pour cette catégorie</span>
         <ion-textarea
           [(ngModel)]="comment"
-          id="input"
           required
           class="description"
           rows="4"
@@ -73,15 +69,19 @@
         ></ion-textarea>
       </ion-col>
     </ion-row>
+
+    <ion-row class="ion-margin-bottom">
+      <ion-col class="ion-text-center">
+        <ion-button
+          [disabled]="isSaveBtnDisabled"
+          (click)="save()"
+          fill="solid"
+          color="tertiary"
+        >
+          <ion-icon name="log-out" slot="start"></ion-icon>
+          <p>Envoyer mon observation</p>
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
-<ion-footer>
-  <ion-row class="ion-margin-bottom">
-    <ion-col class="ion-text-center">
-      <ion-button [disabled]="saveHidden" (click)="save()" fill="solid" color="tertiary">
-        <ion-icon name="log-out" slot="start"></ion-icon>
-        <p>Valider mon observation</p>
-      </ion-button>
-    </ion-col>
-  </ion-row>
-</ion-footer>
