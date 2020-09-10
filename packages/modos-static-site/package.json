@@ -33,6 +33,8 @@
     "react": "16.13.0",
     "react-bootstrap": "^1.3.0",
     "react-dom": "16.13.0",
+    "react-leaflet": "^2.7.0",
+    "react-leaflet-markercluster": "^2.0.0",
     "react-markdown": "^4.3.1",
     "sass": "^1.26.10",
     "swr": "^0.1.18",
@@ -40,6 +42,7 @@
   },
   "devDependencies": {
     "@types/proj4": "^2.5.0",
+    "@types/react-leaflet": "^2.5.2",
     "@types/turf": "^3.5.32",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",

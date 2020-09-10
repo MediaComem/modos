@@ -7,6 +7,3 @@ export * from './general-ui/LanguageSelect';
 export * from './general-ui/CardsModos';
 export * from './general-ui/SliderModos';
 
-export * from './map-app/Leaflet';
-export * from './map-app/NavigationPanel';
-
