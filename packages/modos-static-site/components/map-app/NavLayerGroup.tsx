@@ -8,13 +8,13 @@ const BASE_ICON = new Icon({
 
 
 interface IProps {
-  from: LatLng;
-  to: LatLng;
+  from?: LatLng;
+  to?: LatLng;
 }
 
 export const NavLayerGroup = (props: IProps) =>
 
   <LayerGroup>
-    <Marker icon={BASE_ICON} position={props.to}></Marker>
-    <Marker icon={BASE_ICON} position={props.from}></Marker>
+    {props?.to && <Marker icon={BASE_ICON} position={props.to}></Marker>}
+    {props?.from && <Marker icon={BASE_ICON} position={props.from}></Marker>}
   </LayerGroup>;

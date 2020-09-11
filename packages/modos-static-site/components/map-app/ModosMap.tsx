@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import { LatLng, LeafletMouseEvent } from 'leaflet';
 import React, { useState } from 'react';
-import { Map, TileLayer, GeoJSON as GeoJSONLayer } from 'react-leaflet';
+import { Map, TileLayer, GeoJSON as GeoJSONLayer, LayersControl, Pane, Rectangle } from 'react-leaflet';
 import {
   IMapnvFeature,
   translateSwissGridCoordinateToLatLng
 } from '../../libs/mapnv-api';
-import { getSimpleItinerary } from '../../libs/modos-api';
+import { getSimpleItinerary, OBSTACLES_TYPE } from '../../libs/modos-api';
 import { MapNavbar } from './MapNavbar';
 import { NavigationPanel } from './NavigationPanel';
 import ObservationsLayerGroup from './ObservationsLayerGroup';
@@ -16,6 +16,7 @@ import { ObservationInfoPanel } from './ObservationInfoPanel';
 // import scss
 import styles from './map.module.scss';
 import { NavLayerGroup } from './NavLayerGroup';
+import { LeafletCustomControl } from './LeafletCustomControl';
 
 const ModosMap = () => {
   const [ displayNavPanel, setDisplayNavPanel ] = useState(false);
@@ -117,26 +118,40 @@ const ModosMap = () => {
           zoom={13}
           onclick={onChooseLocationOnMap}
         >
+
           <TileLayer
             url='https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
           />
 
-          <ObservationsLayerGroup onObservationClick={onObservationClick} />
+          <LayersControl position='topright'>
 
-          {navPanelLocation.from && navPanelLocation.to &&
-            <NavLayerGroup
-              from={navPanelLocation.from}
-              to={navPanelLocation.to}
-            />
-          }
+            <LayersControl.Overlay name='Observations' checked={true}>
+              <ObservationsLayerGroup onObservationClick={onObservationClick} />
+            </LayersControl.Overlay>
 
-          {itinerary?.geojson &&
-            <GeoJSONLayer
-              key={itinerary.generatedDate}
-              data={itinerary.geojson}
-            />
-          }
+            <LayersControl.Overlay name='Marqueurs de navigation' checked={true}>
+
+              <NavLayerGroup
+                from={navPanelLocation.from}
+                to={navPanelLocation.to}
+              />
+
+            </LayersControl.Overlay>
+
+            <LayersControl.Overlay name='Itineraire' checked={true}>
+              {itinerary?.geojson &&
+              <GeoJSONLayer
+                key={itinerary.generatedDate}
+                data={itinerary.geojson}
+              />
+              }
+            </LayersControl.Overlay>
+          </LayersControl>
+
+          <LeafletCustomControl id='map-legends' className='map-legends' position='bottomright'>
+            { Object.values(OBSTACLES_TYPE).map(type => <img key={type} src={`/assets/${type}-icon.png`} />) }
+          </LeafletCustomControl>
         </Map>
       </div>
     </div>

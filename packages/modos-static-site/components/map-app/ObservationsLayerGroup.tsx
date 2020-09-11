@@ -7,15 +7,21 @@ const modosIconSize: [number, number] = [ 15, 15 ];
 
 
 const getIconFromObstacleType = (type: OBSTACLES_TYPE) => {
-  let typeToReturn = type;
-  if (!OBSTACLES_TYPE[type]) {
-    typeToReturn = OBSTACLES_TYPE.OTHER;
+
+  for (const obstacleType in OBSTACLES_TYPE) {
+    if (obstacleType === type) {
+      return new Icon({
+        iconUrl: `/assets/${obstacleType}-icon.png`,
+        iconSize: modosIconSize
+      });
+    }
   }
 
   return new Icon({
-    iconUrl: `/assets/${OBSTACLES_TYPE[typeToReturn]}-icon.png`,
+    iconUrl: `/assets/${OBSTACLES_TYPE.OTHER}-icon.png`,
     iconSize: modosIconSize
   });
+
 };
 
 interface IProps {
