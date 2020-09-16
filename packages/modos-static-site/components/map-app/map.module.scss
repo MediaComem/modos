@@ -49,8 +49,33 @@
 .geocodinginput-suggestions {
   max-height: 250px;
   overflow-y: auto;
-  position:absolute;
-  z-index:99;
-  top:100%;
-  width:100%;
+  position: absolute;
+  z-index: 99;
+  top: 100%;
+  width: 100%;
+}
+
+#map-legends {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 20);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+  #map-app-navigation-panel {
+    width: 30%;
+  }
+
+  #map-app-observation-panel {
+    overflow-wrap: break-word;
+    width: 30%;
+  }
 }

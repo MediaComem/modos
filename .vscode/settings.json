@@ -5,5 +5,7 @@
     "./packages/modos-static-site"
   ],
   "liveServer.settings.multiRootWorkspaceName": "modos-website-api",
-  "liveServer.settings.root": "/packages/modos-static-site/out"
+  "liveServer.settings.root": "/packages/modos-static-site/out",
+  "editor.formatOnSaveMode": "modifications",
+  "editor.formatOnSave": true
 }
