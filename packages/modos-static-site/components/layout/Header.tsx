@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import Head from 'next/head';
 
-import { i18n, PageLink } from '../../libs';
+import { useI18N, PageLink } from '../../libs';
 
 import styles from './Header.module.scss';
 

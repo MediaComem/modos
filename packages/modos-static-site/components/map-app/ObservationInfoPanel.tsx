@@ -11,7 +11,7 @@ interface IProps {
   onClickExit: (evt: any) => void;
 }
 
-export const ObservationInfoPanel = (props: IProps) => (
+export const ObservationInfoPanel = (props: IProps) =>
   <div id={props.id} className={props.className}>
     <Navbar expand='lg'>
       <div className='mr-auto'></div>
@@ -27,7 +27,8 @@ export const ObservationInfoPanel = (props: IProps) => (
     </Navbar>
 
     <img src={props.observation.image} />
+    {/* eslint-disable-next-line no-underscore-dangle*/}
     <h3>Observation N° {props.observation._id}</h3>
     <p>{props.observation.description.freeText}</p>
   </div>
-);
+;

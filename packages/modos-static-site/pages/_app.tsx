@@ -2,7 +2,6 @@ import React from 'react';
 import { DefaultSeo } from 'next-seo';
 import 'lazysizes';
 
-import { useGetLanguage } from '../libs/index';
 import { Layout } from '../components';
 
 import Head from 'next/head';
@@ -12,9 +11,6 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import '../style/index.scss';
 
 function MyApp({ Component, pageProps, router }) {
-  const { data } = useGetLanguage();
-  pageProps.lang = data;
-
   if (router.pathname.startsWith('/map')) {
     return (
       <>
@@ -23,10 +19,9 @@ function MyApp({ Component, pageProps, router }) {
           <link rel='icon' href='/favicon.ico' />
           <link
             href='https://fonts.googleapis.com/icon?family=Material+Icons'
-            rel='stylesheet'
-          ></link>
+            rel='stylesheet'></link>
         </Head>
-        <Component {...pageProps} />
+        <Component />
       </>
     );
   }
@@ -43,8 +38,8 @@ function MyApp({ Component, pageProps, router }) {
         }}
       />
 
-      <Layout lang={data}>
-        <Component {...pageProps} />
+      <Layout>
+        <Component />
       </Layout>
     </>
   );

@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './about.module.scss';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
-import { i18n } from '../libs';
+import { useI18N } from '../libs';
 import {
   ContainerWithMargin,
   CardsModosContainer,
@@ -14,8 +14,8 @@ import {
 import ReactMarkdown from 'react-markdown';
 import { NextSeo } from 'next-seo';
 
-const About = props => {
-  const ai18n = value => i18n('about', value, props.lang);
+const About = () => {
+  const i18n = useI18N('about');
 
   const SLIDER_TECH_SCHEM: ISliderItemModos[] = [
     {
@@ -39,25 +39,25 @@ const About = props => {
     {
       imgSrc: require('../images/about-digiimgpro.svg'),
       imgAlt: '',
-      title: ai18n('competence-digiimgpro'),
+      title: i18n('competence-digiimgpro'),
       description: ''
     },
     {
       imgSrc: require('../images/about-ml.svg'),
       imgAlt: '',
-      title: ai18n('competence-ml'),
+      title: i18n('competence-ml'),
       description: ''
     },
     {
       imgSrc: require('../images/about-ux.svg'),
       imgAlt: '',
-      title: ai18n('competence-ux'),
+      title: i18n('competence-ux'),
       description: ''
     },
     {
       imgSrc: require('../images/about-geoinf.svg'),
       imgAlt: '',
-      title: ai18n('competence-geoinf'),
+      title: i18n('competence-geoinf'),
       description: ''
     }
   ];
@@ -86,7 +86,7 @@ const About = props => {
       />
 
       <div id={styles['about-title-mobile']}>
-        <h1>{ai18n('title')}</h1>
+        <h1>{i18n('title')}</h1>
       </div>
 
       <ContainerWithMargin
@@ -94,9 +94,9 @@ const About = props => {
         className={styles.section}
       >
         <div>
-          <ReactMarkdown>{ai18n('intro')}</ReactMarkdown>
+          <ReactMarkdown>{i18n('intro')}</ReactMarkdown>
         </div>
-        <Button>{ai18n('intro-btn')}</Button>
+        <Button>{i18n('intro-btn')}</Button>
       </ContainerWithMargin>
 
       <ContainerWithMargin
@@ -105,20 +105,20 @@ const About = props => {
         mainColClassName={styles['about-intro-desktop-maincol']}
         rowClassName={styles['about-intro-desktop-row']}
       >
-        <h1>{ai18n('title')}</h1>
+        <h1>{i18n('title')}</h1>
         <div>
-          <ReactMarkdown>{ai18n('intro')}</ReactMarkdown>
+          <ReactMarkdown>{i18n('intro')}</ReactMarkdown>
         </div>
-        <Button>{ai18n('intro-btn')}</Button>
+        <Button>{i18n('intro-btn')}</Button>
       </ContainerWithMargin>
 
       <ContainerWithMargin
         id={styles['about-conception']}
         className={styles.section}
       >
-        <h2>{ai18n('conception-title')}</h2>
+        <h2>{i18n('conception-title')}</h2>
         <div className={styles['conception-description']}>
-          <ReactMarkdown source={ai18n('conception-description')}></ReactMarkdown>
+          <ReactMarkdown source={i18n('conception-description')}></ReactMarkdown>
         </div>
         <Image
           className={styles['about-conception-img-desktop']}
@@ -138,7 +138,7 @@ const About = props => {
       </Container>
 
       <ContainerWithMargin className={styles.section}>
-        <h2>{ai18n('competence-title')}</h2>
+        <h2>{i18n('competence-title')}</h2>
         <CardsModosContainer cards={CARDS_COMPETENCES}></CardsModosContainer>
       </ContainerWithMargin>
 
@@ -146,7 +146,7 @@ const About = props => {
         id={styles['about-codac']}
         className={styles.section}
       >
-        <p>{ai18n('codac-intro')}</p>
+        <p>{i18n('codac-intro')}</p>
 
         <div className={styles['about-universities']}>
           <a href='https://heig-vd.ch'>
@@ -160,8 +160,8 @@ const About = props => {
           </a>
         </div>
 
-        <h2>{ai18n('codac-title')}</h2>
-        <p>{ai18n('codac-descr')}</p>
+        <h2>{i18n('codac-title')}</h2>
+        <p>{i18n('codac-descr')}</p>
         <div className={styles['about-members']}>
           {MEMBERS.map((member, index) =>
             <div key={index} className={styles['about-members-item']}>
