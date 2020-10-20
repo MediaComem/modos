@@ -34,7 +34,11 @@ export interface IObservation {
     freeText: string;
     impact: IMPACT;
   };
-  owner: string;
+  owner?: {
+    id: number;
+    email?: string;
+    pseudonym?: string;
+  };
   location: {
     latitude: number;
     longitude: number;
@@ -63,6 +67,40 @@ export const getObservations = async (): Promise<IObservation[]> => {
   } catch (err) {
     console.error(err);
     throw new Error('can not load observations');
+  }
+};
+
+/**
+ * Get all the observation from an event trough participant
+ * @param eventID a number which is the eventID
+ */
+export const getObservationByOwnerEvent = async (eventID: number): Promise<IObservation[]> => {
+  try {
+    return await customFetch(
+      new Request(`${API_URL}/observations/event-participants/${eventID}`, {
+        method: 'GET'
+      })
+    );
+  } catch (err) {
+    console.error(err);
+    throw new Error('can not load observations');
+  }
+};
+
+/**
+ *
+ * @returns All the observations of the modos api
+ */
+export const getEvents = async (): Promise<any[]> => {
+  try {
+    return await customFetch(
+      new Request(`${API_URL}/events`, {
+        method: 'GET'
+      })
+    );
+  } catch (err) {
+    console.error(err);
+    throw new Error('can not load events');
   }
 };
 

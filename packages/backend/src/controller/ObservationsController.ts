@@ -1,11 +1,11 @@
-import { createAsyncRoute, validate } from "./utils";
-import { Request, Response } from "express";
-import { getManager, getRepository } from "typeorm";
-import { Observation } from "../entity/Observation";
-import { sendError } from "./ErrorController";
-import { Event } from "../entity/Event";
-import { Description, FrontendObstacle, Obstacle } from "../entity/Description";
-import { Location } from "../entity/Location";
+import { createAsyncRoute, validate } from './utils';
+import { Request, Response } from 'express';
+import { getManager, getRepository } from 'typeorm';
+import { Observation } from '../entity/Observation';
+import { sendError } from './ErrorController';
+import { Event } from '../entity/Event';
+import { Description, FrontendObstacle, Obstacle } from '../entity/Description';
+import { Location } from '../entity/Location';
 
 const OBSERVATION404 = 'Observation does not exist';
 const EVENT404 = 'Event does not exist';
@@ -28,29 +28,31 @@ export class ObservationController {
      * Get all observations that are owned by an event trough an user
      */
     public getObservationByOwnerEvent = createAsyncRoute(async (req, res) => {
-        if (!req.params.eventID)  {
+        if (!req.params.eventID) {
             return res.status(404).send('No events found for this id');
-        
         }
 
         const repEvents = getRepository(Event);
         const event = await repEvents.findOne(req.params.eventID, {
             relations: ['participants']
         });
-        if (event.participants.length === 0)  {
+        if (event.participants.length === 0) {
             return res.status(404).send('No participant on this event');
-        
         }
 
-        const observations = [];
+        let observations = [];
         const repObservations = getRepository(Observation);
 
-        for (const participant in event.participants) {
+        for (const participant of event.participants) {
+            // will prevent memory overload if too many points exist in db
+            if (observations.length > 1000) break;
+
             const observationFromParticipant = await repObservations.find({
-                where: { owner: participant }
+                where: { owner: participant },
+                relations: ['owner']
             });
 
-            observations.push(observationFromParticipant);
+            observations = [...observations, ...observationFromParticipant];
         }
 
         return res.status(200).send(observations);

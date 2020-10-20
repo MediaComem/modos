@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 /* eslint-disable @typescript-eslint/no-require-imports */
 import { LatLng, LeafletMouseEvent } from 'leaflet';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Map,
   TileLayer,
@@ -12,16 +12,19 @@ import {
   IMapnvFeature,
   translateSwissGridCoordinateToLatLng
 } from '../../libs/mapnv-api';
-import { getSimpleItinerary, OBSTACLES_TYPE } from '../../libs/modos-api';
+import {
+  getEvents,
+  getSimpleItinerary,
+  OBSTACLES_TYPE
+} from '../../libs/modos-api';
 import { MapNavbar } from './MapNavbar';
 import { NavigationPanel } from './NavigationPanel';
 import ObservationsLayerGroup from './ObservationsLayerGroup';
 import { ObservationInfoPanel } from './ObservationInfoPanel';
-
-// import scss
-import styles from './map.module.scss';
-import { NavLayerGroup } from './NavLayerGroup';
 import { LeafletCustomControl } from './LeafletCustomControl';
+
+import styles from './map.module.scss';
+import { Form } from 'react-bootstrap';
 
 const ModosMap = () => {
   const [ displayNavPanel, setDisplayNavPanel ] = useState(false);
@@ -38,6 +41,7 @@ const ModosMap = () => {
   const [ currentSelectedObservation, setCurrentSelectedObservation ] = useState(
     undefined
   );
+  const [eventID, setEventID] = useState(undefined);
 
   const START_POSITION = new LatLng(46.7833, 6.65);
   const START_ZOOM = 15;
@@ -97,7 +101,7 @@ const ModosMap = () => {
       />
 
       <div id={styles['map-app-container']}>
-        {displayNavPanel &&
+        {displayNavPanel && (
           <NavigationPanel
             id={styles['map-app-navigation-panel']}
             onClickExit={() => setDisplayNavPanel(false)}
@@ -106,33 +110,33 @@ const ModosMap = () => {
             onChooseFrom={evt => onChooseLocationByText(evt, 'from')}
             onChooseTo={evt => onChooseLocationByText(evt, 'to')}
             onSubmitLocation={evt => onSubmitLocation(evt)}
-            location={navPanelLocation}
-          ></NavigationPanel>
-        }
+            location={navPanelLocation}></NavigationPanel>
+        )}
 
-        {displayObservationPanel && currentSelectedObservation &&
+        {displayObservationPanel && currentSelectedObservation && ( 
           <ObservationInfoPanel
             id={styles['map-app-observation-panel']}
             observation={currentSelectedObservation}
             onClickExit={() => onObservationInfoPanelExit()}
           />
-        }
+        )}
 
         <Map
           id={styles.map}
           center={START_POSITION}
           zoom={START_ZOOM}
-          onclick={onChooseLocationOnMap}
-        >
+          onclick={onChooseLocationOnMap}>
           <TileLayer
             url='https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
           />
 
-          <LayersControl position='topright'>
+          <LayersControl position='bottomleft'>
             <LayersControl.Overlay name='Observations' checked={true}>
-              <ObservationsLayerGroup onObservationClick={onObservationClick} />
+              <ObservationsLayerGroup eventID={eventID} onObservationClick={onObservationClick} />
             </LayersControl.Overlay>
+
+            {/* Bellow are control for navigation, don't remove it */}
 
             {/* <LayersControl.Overlay
               name='Marqueurs de navigation'
@@ -154,6 +158,8 @@ const ModosMap = () => {
             </LayersControl.Overlay> */}
           </LayersControl>
 
+          <Events onChange={eventID => setEventID(eventID)} />
+
           <Legends />
         </Map>
       </div>
@@ -163,21 +169,45 @@ const ModosMap = () => {
 
 export default ModosMap;
 
-const Legends = () =>
+const Legends = () => (
   <LeafletCustomControl
     id={styles['map-legends']}
     className={styles['map-legends']}
-    position='bottomright'
-  >
+    position='bottomright'>
     {Object.values(OBSTACLES_TYPE).map(
       type =>
         type !== OBSTACLES_TYPE.UNLABELLED &&
-        type !== OBSTACLES_TYPE.NOPROBLEM &&
+        type !== OBSTACLES_TYPE.NOPROBLEM && (
           <div key={type}>
             <img src={`/assets/${type}-icon.png`} />
             <span>{type}</span>
           </div>
-
+        )
     )}
   </LeafletCustomControl>
-;
+);
+
+const Events = (props: any) => {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    getEvents()
+      .then(result => {
+        setEvents(result);
+      })
+      .catch(err => console.error(err));
+  }, []);
+
+  return (
+    <LeafletCustomControl id='map-events' position='topright'>
+      {events && events.length > 0 && <Form.Control onChange={event => props.onChange(event.target.value)} as='select' size='sm' custom placeholder='Evénements'>
+        <option value=''>Choisissez un évenement</option>
+        {events?.map(event => (
+          <option value={event.id} key={event.id}>
+            {event.title}
+          </option>
+        ))}
+      </Form.Control>}
+    </LeafletCustomControl>
+  );
+};

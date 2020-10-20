@@ -37,7 +37,7 @@ export const ObservationInfoPanel = (props: IProps) => {
         </div>
 
         <div className={styles['infos-owner']}>
-          {owner ? `Publié par ${owner}` : 'Publicateur inconnu'}
+          {owner ? `Publié par ${owner.pseudonym}` : 'Publicateur inconnu'}
         </div>
 
         <div className={styles['infos-category']}>

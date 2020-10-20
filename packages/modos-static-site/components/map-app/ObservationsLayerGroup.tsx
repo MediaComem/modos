@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { LatLng, Icon } from 'leaflet';
 import { LayerGroup, Marker } from 'react-leaflet';
 import {
+  getObservationByOwnerEvent,
   getObservations,
   IObservation,
   OBSTACLES_TYPE
@@ -17,6 +18,7 @@ const getIconFromObstacleType = (type: OBSTACLES_TYPE) =>
 
 interface IProps {
   onObservationClick?: (observation: IObservation) => void;
+  eventID?: number;
 }
 
 const ObservationsLayerGroup = (props: IProps) => {
@@ -30,8 +32,24 @@ const ObservationsLayerGroup = (props: IProps) => {
       .catch(err => console.error(err));
   }, []);
 
-  const test = observation => {
-    // console.log(observation);
+  useEffect(() => {
+    if (props.eventID) {
+      getObservationByOwnerEvent(props.eventID)
+        .then(result => setObservations(result))
+        .catch(err => {
+          console.error(err);
+          setObservations([]);
+        });
+    } else {
+      getObservations()
+        .then(result => {
+          setObservations(result);
+        })
+        .catch(err => console.error(err));
+    }
+  }, [props.eventID]);
+
+  const getInfoObs = observation => {
     props.onObservationClick(observation);
   };
   // For now Clustering is disabled as it impact a lot the perfomances of the interface
@@ -71,7 +89,7 @@ const ObservationsLayerGroup = (props: IProps) => {
               )
             }
             icon={getIconFromObstacleType(observation?.description?.obstacle)}
-            onclick={() => test(observation)}></Marker>
+            onclick={() => getInfoObs(observation)}></Marker>
         );
       })}
     </LayerGroup>
