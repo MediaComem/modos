@@ -1,5 +1,4 @@
 {
-  "eslint.enable": true,
   "eslint.workingDirectories": [
     "./packages/backend",
     "./packages/modos-static-site"
@@ -8,5 +7,6 @@
   "liveServer.settings.root": "/packages/modos-static-site/out",
   "editor.formatOnSaveMode": "modifications",
   "editor.formatOnSave": true,
-  "eslint.codeActionsOnSave.mode": "problems"
+  "eslint.codeActionsOnSave.mode": "problems",
+  "editor.rulers": [90]
 }

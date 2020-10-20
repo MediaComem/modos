@@ -5,10 +5,16 @@ import { observationController } from '../../controller';
 export const observationRouter = express.Router();
 
 observationRouter.get('/', observationController.getObservations);
-observationRouter.post('/', authenticateUser, observationController.createObservation);
-
+observationRouter.post(
+    '/',
+    authenticateUser,
+    observationController.createObservation
+);
 observationRouter.get('/obstacles', observationController.getObstacles);
-
+observationRouter.get(
+    '/event-participants/:eventID',
+    observationController.getObservationByOwnerEvent
+);
 observationRouter.get('/:id', observationController.getObservationById);
 observationRouter.put('/:id', authenticateUser, observationController.updateObservation);
 observationRouter.delete('/:id', authenticateUser, observationController.deleteObservation);
