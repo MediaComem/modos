@@ -2,11 +2,13 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import { LatLng, LeafletMouseEvent } from 'leaflet';
 import React, { useEffect, useState } from 'react';
+import { Form } from 'react-bootstrap';
 import {
-  Map,
+  LayersControl, Map,
   TileLayer,
-  GeoJSON as GeoJSONLayer,
-  LayersControl
+
+
+  WMSTileLayer
 } from 'react-leaflet';
 import {
   IMapnvFeature,
@@ -17,28 +19,28 @@ import {
   getSimpleItinerary,
   OBSTACLES_TYPE
 } from '../../libs/modos-api';
-import { MapNavbar } from './MapNavbar';
-import { NavigationPanel } from './NavigationPanel';
-import ObservationsLayerGroup from './ObservationsLayerGroup';
-import { ObservationInfoPanel } from './ObservationInfoPanel';
 import { LeafletCustomControl } from './LeafletCustomControl';
-
 import styles from './map.module.scss';
-import { Form } from 'react-bootstrap';
+import { MapNavbar } from './MapNavbar';
+import MapnvAccessibilityLayer from './MapnvAccessibilityLayer';
+import { NavigationPanel } from './NavigationPanel';
+import { ObservationInfoPanel } from './ObservationInfoPanel';
+import ObservationsLayerGroup from './ObservationsLayerGroup';
+
 
 const ModosMap = () => {
-  const [ displayNavPanel, setDisplayNavPanel ] = useState(false);
-  const [ currentSearchedPoint, setCurrentSearchedPoint ] = useState('');
-  const [ navPanelLocation, setNavPanelLocation ] = useState({
+  const [displayNavPanel, setDisplayNavPanel] = useState(false);
+  const [currentSearchedPoint, setCurrentSearchedPoint] = useState('');
+  const [navPanelLocation, setNavPanelLocation] = useState({
     from: null,
     to: null
   });
-  const [ itinerary, setItinerary ] = useState({
+  const [itinerary, setItinerary] = useState({
     generatedDate: Date.now(), // We need a generated date to force react-leaflet to re-render the geojson
     geojson: null
   });
-  const [ displayObservationPanel, setDisplayObersvationPanel ] = useState(false);
-  const [ currentSelectedObservation, setCurrentSelectedObservation ] = useState(
+  const [displayObservationPanel, setDisplayObersvationPanel] = useState(false);
+  const [currentSelectedObservation, setCurrentSelectedObservation] = useState(
     undefined
   );
   const [eventID, setEventID] = useState(undefined);
@@ -73,11 +75,12 @@ const ModosMap = () => {
 
     const currLocation = navPanelLocation;
     getSimpleItinerary(
-      [ currLocation.from.lat, currLocation.from.lng ],
-      [ currLocation.to.lat, currLocation.to.lng ]
+      [currLocation.from.lat, currLocation.from.lng],
+      [currLocation.to.lat, currLocation.to.lng]
     )
       .then(result =>
-        setItinerary({ generatedDate: Date.now(), geojson: result }))
+        setItinerary({ generatedDate: Date.now(), geojson: result })
+      )
       .catch(err => console.error(err))
       .finally(() => setDisplayNavPanel(false));
   };
@@ -113,7 +116,7 @@ const ModosMap = () => {
             location={navPanelLocation}></NavigationPanel>
         )}
 
-        {displayObservationPanel && currentSelectedObservation && ( 
+        {displayObservationPanel && currentSelectedObservation && (
           <ObservationInfoPanel
             id={styles['map-app-observation-panel']}
             observation={currentSelectedObservation}
@@ -133,7 +136,10 @@ const ModosMap = () => {
 
           <LayersControl position='bottomleft'>
             <LayersControl.Overlay name='Observations' checked={true}>
-              <ObservationsLayerGroup eventID={eventID} onObservationClick={onObservationClick} />
+              <ObservationsLayerGroup
+                eventID={eventID}
+                onObservationClick={onObservationClick}
+              />
             </LayersControl.Overlay>
 
             {/* Bellow are control for navigation, don't remove it */}
@@ -156,6 +162,10 @@ const ModosMap = () => {
                 />
               }
             </LayersControl.Overlay> */}
+
+            <LayersControl.Overlay name='Accessibilité' checked={true}>
+              <MapnvAccessibilityLayer />
+            </LayersControl.Overlay>
           </LayersControl>
 
           <Events onChange={eventID => setEventID(eventID)} />
@@ -200,14 +210,21 @@ const Events = (props: any) => {
 
   return (
     <LeafletCustomControl id='map-events' position='topright'>
-      {events && events.length > 0 && <Form.Control onChange={event => props.onChange(event.target.value)} as='select' size='sm' custom placeholder='Evénements'>
-        <option value=''>Choisissez un évenement</option>
-        {events?.map(event => (
-          <option value={event.id} key={event.id}>
-            {event.title}
-          </option>
-        ))}
-      </Form.Control>}
+      {events && events.length > 0 && (
+        <Form.Control
+          onChange={event => props.onChange(event.target.value)}
+          as='select'
+          size='sm'
+          custom
+          placeholder='Evénements'>
+          <option value=''>Choisissez un évenement</option>
+          {events?.map(event => (
+            <option value={event.id} key={event.id}>
+              {event.title}
+            </option>
+          ))}
+        </Form.Control>
+      )}
     </LeafletCustomControl>
   );
 };
