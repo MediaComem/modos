@@ -48,19 +48,19 @@ function useGetLanguage() {
  * @param defaultPageName you can use pass the pageName as parameter to avoid to retype it
  * @returns a function to translate
  */
-function useI18N(defaultPageName?: string) {
+function useI18N(defaultPageName?: string): any {
   const lang = useGetLanguage();
 
   if (!lang) {
     return () => '';
   }
 
-  if (!defaultPageName) {
+  if (!defaultPageName || defaultPageName === '') {
     return (pageName: string, value: string): string =>
       i18n(pageName, value, lang);
   }
 
-  return (value: string) => i18n(defaultPageName, value, lang);
+  return (value: string): string => i18n(defaultPageName, value, lang);
 }
 
 export { i18n, useGetLanguage, useI18N };
