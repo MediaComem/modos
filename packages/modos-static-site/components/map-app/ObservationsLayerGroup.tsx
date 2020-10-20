@@ -1,35 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { LatLng, Icon } from 'leaflet';
 import { LayerGroup, Marker } from 'react-leaflet';
-import { getObservations, IObservation, OBSTACLES_TYPE } from '../../libs/modos-api';
+import {
+  getObservations,
+  IObservation,
+  OBSTACLES_TYPE
+} from '../../libs/modos-api';
 // import MarkerClusterGroup from 'react-leaflet-markercluster';
-const modosIconSize: [number, number] = [ 15, 15 ];
+const modosIconSize: [number, number] = [15, 15];
 
-
-const getIconFromObstacleType = (type: OBSTACLES_TYPE) => {
-
-  for (const obstacleType in OBSTACLES_TYPE) {
-    if (obstacleType === type) {
-      return new Icon({
-        iconUrl: `/assets/${obstacleType}-icon.png`,
-        iconSize: modosIconSize
-      });
-    }
-  }
-
-  return new Icon({
-    iconUrl: `/assets/${OBSTACLES_TYPE.OTHER}-icon.png`,
+const getIconFromObstacleType = (type: OBSTACLES_TYPE) =>
+  new Icon({
+    iconUrl: `/assets/${type}-icon.png`,
     iconSize: modosIconSize
   });
-
-};
 
 interface IProps {
   onObservationClick?: (observation: IObservation) => void;
 }
 
 const ObservationsLayerGroup = (props: IProps) => {
-  const [ observations, setObservations ] = useState<IObservation[]>([]);
+  const [observations, setObservations] = useState<IObservation[]>([]);
 
   useEffect(() => {
     getObservations()
@@ -63,20 +54,28 @@ const ObservationsLayerGroup = (props: IProps) => {
   return (
     <LayerGroup>
       {observations?.map((observation, index) => {
-        if (!observation?.location?.latitude || !observation?.location?.longitude) {
+        if (
+          !observation?.location?.latitude ||
+          !observation?.location?.longitude
+        ) {
           return;
         }
 
-        return <Marker
-          key={index}
-          position={new LatLng(observation.location.latitude, observation.location.longitude)}
-          icon={getIconFromObstacleType(observation?.description?.obstacle)}
-          onclick={() => test(observation)}
-        ></Marker>;
+        return (
+          <Marker
+            key={index}
+            position={
+              new LatLng(
+                observation.location.latitude,
+                observation.location.longitude
+              )
+            }
+            icon={getIconFromObstacleType(observation?.description?.obstacle)}
+            onclick={() => test(observation)}></Marker>
+        );
       })}
     </LayerGroup>
   );
-
 };
 
 export default ObservationsLayerGroup;

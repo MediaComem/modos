@@ -28,7 +28,7 @@ export enum IMPACT {
 }
 
 export interface IObservation {
-  _id: string;
+  id: number;
   description: {
     obstacle: OBSTACLES_TYPE;
     freeText: string;
@@ -39,7 +39,11 @@ export interface IObservation {
     latitude: number;
     longitude: number;
   };
-  image: string;
+  image: {
+    basename: string;
+    height: number | null;
+    width: number | null;
+  };
 }
 
 /**

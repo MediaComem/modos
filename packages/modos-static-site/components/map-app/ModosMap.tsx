@@ -134,7 +134,7 @@ const ModosMap = () => {
               <ObservationsLayerGroup onObservationClick={onObservationClick} />
             </LayersControl.Overlay>
 
-            <LayersControl.Overlay
+            {/* <LayersControl.Overlay
               name='Marqueurs de navigation'
               checked={true}
             >
@@ -142,16 +142,16 @@ const ModosMap = () => {
                 from={navPanelLocation.from}
                 to={navPanelLocation.to}
               />
-            </LayersControl.Overlay>
+            </LayersControl.Overlay> */}
 
-            <LayersControl.Overlay name='Itineraire' checked={true}>
+            {/* <LayersControl.Overlay name='Itineraire' checked={true}>
               {itinerary?.geojson &&
                 <GeoJSONLayer
                   key={itinerary.generatedDate}
                   data={itinerary.geojson}
                 />
               }
-            </LayersControl.Overlay>
+            </LayersControl.Overlay> */}
           </LayersControl>
 
           <Legends />
