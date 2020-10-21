@@ -1,5 +1,5 @@
 import React from 'react';
-import { IObservation, OBSTACLES_TYPE } from '../../libs/modos-api';
+import { API_URL, IObservation, OBSTACLES_TYPE } from '../../libs/modos-api';
 import { Navbar } from 'react-bootstrap';
 
 import styles from './map.module.scss';
@@ -31,7 +31,7 @@ export const ObservationInfoPanel = (props: IProps) => {
         <div className={styles['infos-details']}>
           <h3>Observation N°{id}</h3>
           <figure>
-            <img src={image.basename} alt={image.basename} />
+            <img src={`${API_URL}${image.apiLink}`} alt={image.basename} />
             <figcaption>{description.freeText}</figcaption>
           </figure>
         </div>

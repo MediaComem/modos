@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne, Column } from "typeorm";
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    OneToOne,
+    JoinColumn,
+    ManyToOne,
+    Column,
+    AfterLoad
+} from 'typeorm';
 import { User } from "./User";
 import { Description } from "./Description";
 import { Image } from "./Image";
@@ -13,7 +21,6 @@ import { validate } from "class-validator";
 
 @Entity()
 export class Observation {
-
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -33,11 +40,19 @@ export class Observation {
     @ManyToOne(type => Event, event => event.observations, { cascade: true })
     event: Event;
 
+    @AfterLoad()
+    setAPIImageLink() {
+        this.image.apiLink = `/observations/images/${this.image.basename}`;
+    }
+
     async saveImage(imageData: string) {
         // create the image model for database
         this.image = new Image();
         this.image.basename = String(Date.now()) + config.imageFormat;
-        const imagePath = path.join(config.storageDirectory, this.image.basename);
+        const imagePath = path.join(
+            config.storageDirectory,
+            this.image.basename
+        );
 
         const errors = await validate(this.image);
         if (errors.length > 0) throw errors;
@@ -45,7 +60,7 @@ export class Observation {
         // write the image data to disk
         const imageWithoutMetadata = imageData.split(',')[1];
         const decodedData = Buffer.from(imageWithoutMetadata, 'base64');
-        fs.writeFile(imagePath, decodedData, (err) => {
+        fs.writeFile(imagePath, decodedData, err => {
             if (err) throw err;
         });
     }

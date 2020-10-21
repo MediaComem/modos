@@ -1,10 +1,10 @@
 import { customFetch } from './fetch';
 
 // MODOS API CONFIG
-const API_URL =
-  process.env.NODE_ENV === 'production' ?
-    'https://modos.heig-vd.ch/api/v1' :
-    'http://localhost:3000/api/v1';
+export const API_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://modos.heig-vd.ch/api/v1'
+    : 'http://localhost:3000/api/v1';
 
 export enum OBSTACLES_TYPE {
   COATING = 'coating',
@@ -47,6 +47,7 @@ export interface IObservation {
     basename: string;
     height: number | null;
     width: number | null;
+    apiLink: string;
   };
 }
 
@@ -74,7 +75,9 @@ export const getObservations = async (): Promise<IObservation[]> => {
  * Get all the observation from an event trough participant
  * @param eventID a number which is the eventID
  */
-export const getObservationByOwnerEvent = async (eventID: number): Promise<IObservation[]> => {
+export const getObservationByOwnerEvent = async (
+  eventID: number
+): Promise<IObservation[]> => {
   try {
     return await customFetch(
       new Request(`${API_URL}/observations/event-participants/${eventID}`, {

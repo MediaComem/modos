@@ -83,10 +83,13 @@
         height: 80%;
       }
       figure img {
-        min-height: 150px;
+        // min-height: 150px;
         border: 1px dotted lightgray;
+        font-size: 0.8em;
+        text-align: center;
       }
       figure figcaption {
+        min-height: 4em ;
         font-style: italic;
         text-align: justify;
         overflow-y: auto;

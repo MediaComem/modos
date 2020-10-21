@@ -1,9 +1,7 @@
 import React from 'react';
 import { WMSTileLayer } from 'react-leaflet';
 
-const URLWMS =
-  'https://www.mapnv.ch/mapserv_proxy?ogcserver=source for image/png&cache_version=71e6fdb2fa224ff9b7dd4749d5b11bc0';
-const EPSG_MAPNV = 'EPSG:2056';
+const URLWMS = `https://www.mapnv.ch/mapserv_proxy?ogcserver=source for image/png&cache_version=71e6fdb2fa224ff9b7dd4749d5b11bc0`;
 
 const MapnvAccessibilityLayer = () => (
   <WMSTileLayer

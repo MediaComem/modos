@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 /* eslint-disable @typescript-eslint/no-require-imports */
-import { LatLng, LeafletMouseEvent } from 'leaflet';
+import { CRS, LatLng, LeafletMouseEvent } from 'leaflet';
 import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import {
@@ -128,6 +128,7 @@ const ModosMap = () => {
           id={styles.map}
           center={START_POSITION}
           zoom={START_ZOOM}
+          // crs={CRS.EPSG4326}
           onclick={onChooseLocationOnMap}>
           <TileLayer
             url='https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
@@ -142,7 +143,7 @@ const ModosMap = () => {
               />
             </LayersControl.Overlay>
 
-            {/* Bellow are control for navigation, don't remove it */}
+            {/* Bellow are layer and control for navigation, don't remove it */}
 
             {/* <LayersControl.Overlay
               name='Marqueurs de navigation'
@@ -163,9 +164,11 @@ const ModosMap = () => {
               }
             </LayersControl.Overlay> */}
 
-            <LayersControl.Overlay name='Accessibilité' checked={true}>
+            {/* Bellow are control any layer for accessibility, don't remove it */}
+
+            {/* <LayersControl.Overlay name='Accessibilité' checked={true}>
               <MapnvAccessibilityLayer />
-            </LayersControl.Overlay>
+            </LayersControl.Overlay> */}
           </LayersControl>
 
           <Events onChange={eventID => setEventID(eventID)} />
