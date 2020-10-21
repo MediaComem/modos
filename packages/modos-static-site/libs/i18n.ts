@@ -4,7 +4,7 @@ import { customFetch } from './index';
 
 const JSON_LOCATION = '/lang/';
 
-function i18n(pageName: string, value: string, languagesJson: any) {
+function i18n(pageName: string, value: string, languagesJson: any): string {
   if (
     !languagesJson ||
     !languagesJson[pageName] ||
@@ -16,8 +16,12 @@ function i18n(pageName: string, value: string, languagesJson: any) {
   return languagesJson[pageName][value];
 }
 
+/**
+ * Hooks that returns the current asset json of language
+ * @returns A JSON parse dataset (a js object)
+ */
 function useGetLanguage() {
-  const [ language, setLanguage ] = useState('fr');
+  const [language, setLanguage] = useState('fr');
 
   useEffect(() => {
     const lang = localStorage.getItem('lang');
@@ -32,11 +36,31 @@ function useGetLanguage() {
   );
 
   if (!error) {
-    return { data };
+    return data;
   }
 
   console.error('Error during fetching language', error);
-  return {};
+  return null;
 }
 
-export { i18n, useGetLanguage };
+/**
+ * Hooks that return the translating function
+ * @param defaultPageName you can use pass the pageName as parameter to avoid to retype it
+ * @returns a function to translate
+ */
+function useI18N(defaultPageName?: string): any {
+  const lang = useGetLanguage();
+
+  if (!lang) {
+    return () => '';
+  }
+
+  if (!defaultPageName || defaultPageName === '') {
+    return (pageName: string, value: string): string =>
+      i18n(pageName, value, lang);
+  }
+
+  return (value: string): string => i18n(defaultPageName, value, lang);
+}
+
+export { i18n, useGetLanguage, useI18N };

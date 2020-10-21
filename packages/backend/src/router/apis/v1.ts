@@ -4,6 +4,7 @@ import { userRouter } from './userRouter';
 import { eventRouter } from './eventRouter';
 import { observationRouter } from './observationRouter';
 import { profileRouter } from './profileRouter';
+import { itineraryRouter } from './itineraryRouter';
 import * as swaggerUi from 'swagger-ui-express';
 
 
@@ -16,6 +17,7 @@ routerV1.use('/users', userRouter);
 routerV1.use('/users/profile', profileRouter);
 routerV1.use('/events', eventRouter);
 routerV1.use('/observations', observationRouter);
+routerV1.use('/itinerary', itineraryRouter);
 
 routerV1.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
     customCss: '.swagger-ui .topbar { display: none }'

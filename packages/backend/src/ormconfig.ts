@@ -9,9 +9,9 @@ const connectionOptions: ConnectionOptions = {
   url: databaseUrl,
   synchronize: false,
   logging: typeormLogging,
-  entities: findAppFiles('entity', '*.[jt]s'),
-  migrations: findAppFiles('migration', '*.[jt]s'),
-  subscribers: findAppFiles('subscriber', '*.[jt]s'),
+  entities: findAppFiles('entity/*.[jt]s'),
+  migrations: findAppFiles('migration/*.[jt]s'),
+  subscribers: findAppFiles('subscriber/*.[jt]s'),
   cli: {
     entitiesDir: joinPath(__dirname, 'entity'),
     migrationsDir: joinPath(__dirname, 'migration'),
@@ -21,6 +21,6 @@ const connectionOptions: ConnectionOptions = {
 
 export = connectionOptions;
 
-function findAppFiles(...patterns) {
-  return globSync(joinPath(...patterns), { absolute: true, cwd: __dirname });
+function findAppFiles(pattern) {
+  return globSync(pattern, { absolute: true, cwd: __dirname });
 }

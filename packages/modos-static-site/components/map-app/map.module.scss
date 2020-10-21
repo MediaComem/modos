@@ -1,0 +1,150 @@
+#map-app {
+  width: 100vw;
+  height: 100vh;
+}
+
+#map-app-navbar {
+  height: 65px;
+}
+
+#map-app-container {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 65px);
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#map-app-navigation-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 10;
+  padding: 10px;
+}
+
+.navbar-btn {
+  background: none;
+  border: none;
+}
+
+.geocodinginput-suggestions {
+  max-height: 250px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 99;
+  top: 100%;
+  width: 100%;
+}
+
+#map-legends {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 20);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+/*---------------- OBSERVATIONS PANEL*/
+
+#map-app-observation-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 10;
+}
+
+.observations {
+  .infos {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 50px);
+
+    .infos-details {
+      display: flex;
+      flex-direction: column;
+      height: 70%;
+      padding: 10px;
+
+      figure {
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-start;
+        height: 80%;
+      }
+      figure img {
+        // min-height: 150px;
+        border: 1px dotted lightgray;
+        font-size: 0.8em;
+        text-align: center;
+        max-height: 90%;
+      }
+      figure figcaption {
+        min-height: 4em ;
+        font-style: italic;
+        text-align: justify;
+        overflow-y: auto;
+      }
+    }
+
+    .infos-owner {
+      text-align: center;
+      height: 10%;
+    }
+
+    .infos-category {
+      height: 20%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      border-top: 1px solid lightgray;
+      > div {
+        width: 50%;
+        height: 100%;
+        text-align: center;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        text-transform: uppercase;
+      }
+      .infos-category-impact>div:nth-child(2) {
+        font-weight: bolder;
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+  #map-app-navigation-panel {
+    width: 30%;
+  }
+
+  #map-app-observation-panel {
+    overflow-wrap: break-word;
+    width: 40%;
+  }
+
+  .infos-category {
+    > div {
+      padding-right: 5%;
+      padding-left: 5%;
+    }
+  }
+}
