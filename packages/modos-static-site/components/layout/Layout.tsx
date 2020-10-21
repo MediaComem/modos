@@ -1,20 +1,13 @@
 import React from 'react';
 import { Header, Footer } from '../index';
 
-
-const Layout = props =>
+const Layout = props => (
   <div className='layout'>
-    <Header lang={props.lang}/>
+    <Header />
 
-    <main>
-      {props.children}
-    </main>
+    <main>{props.children}</main>
 
-    <Footer lang={props.lang}>
-
-    </Footer>
-
+    <Footer />
   </div>
-;
-
+);
 export { Layout };
