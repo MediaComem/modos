@@ -87,6 +87,7 @@
         border: 1px dotted lightgray;
         font-size: 0.8em;
         text-align: center;
+        max-height: 90%;
       }
       figure figcaption {
         min-height: 4em ;
@@ -116,6 +117,10 @@
         justify-content: center;
         text-transform: uppercase;
       }
+      .infos-category-impact>div:nth-child(2) {
+        font-weight: bolder;
+        font-size: 2rem;
+      }
     }
   }
 }
@@ -134,5 +139,12 @@
   #map-app-observation-panel {
     overflow-wrap: break-word;
     width: 40%;
+  }
+
+  .infos-category {
+    > div {
+      padding-right: 5%;
+      padding-left: 5%;
+    }
   }
 }

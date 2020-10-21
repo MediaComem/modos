@@ -3,13 +3,8 @@
 import { CRS, LatLng, LeafletMouseEvent } from 'leaflet';
 import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import {
-  LayersControl, Map,
-  TileLayer,
-
-
-  WMSTileLayer
-} from 'react-leaflet';
+import { LayersControl, Map, TileLayer, WMSTileLayer } from 'react-leaflet';
+import { useI18N } from '../../libs';
 import {
   IMapnvFeature,
   translateSwissGridCoordinateToLatLng
@@ -26,7 +21,6 @@ import MapnvAccessibilityLayer from './MapnvAccessibilityLayer';
 import { NavigationPanel } from './NavigationPanel';
 import { ObservationInfoPanel } from './ObservationInfoPanel';
 import ObservationsLayerGroup from './ObservationsLayerGroup';
-
 
 const ModosMap = () => {
   const [displayNavPanel, setDisplayNavPanel] = useState(false);
@@ -171,7 +165,7 @@ const ModosMap = () => {
             </LayersControl.Overlay> */}
           </LayersControl>
 
-          <Events onChange={eventID => setEventID(eventID)} />
+          <Events onChange={eEventID => setEventID(eEventID)} />
 
           <Legends />
         </Map>
@@ -182,23 +176,27 @@ const ModosMap = () => {
 
 export default ModosMap;
 
-const Legends = () => (
-  <LeafletCustomControl
-    id={styles['map-legends']}
-    className={styles['map-legends']}
-    position='bottomright'>
-    {Object.values(OBSTACLES_TYPE).map(
-      type =>
-        type !== OBSTACLES_TYPE.UNLABELLED &&
-        type !== OBSTACLES_TYPE.NOPROBLEM && (
-          <div key={type}>
-            <img src={`/assets/${type}-icon.png`} />
-            <span>{type}</span>
-          </div>
-        )
-    )}
-  </LeafletCustomControl>
-);
+const Legends = () => {
+  const i18n = useI18N('map');
+
+  return (
+    <LeafletCustomControl
+      id={styles['map-legends']}
+      className={styles['map-legends']}
+      position='bottomright'>
+      {Object.values(OBSTACLES_TYPE).map(
+        type =>
+          type !== OBSTACLES_TYPE.UNLABELLED &&
+          type !== OBSTACLES_TYPE.NOPROBLEM && (
+            <div key={type}>
+              <img src={`/assets/${type}-icon.png`} />
+              <span>{i18n(type)}</span>
+            </div>
+          )
+      )}
+    </LeafletCustomControl>
+  );
+};
 
 const Events = (props: any) => {
   const [events, setEvents] = useState([]);

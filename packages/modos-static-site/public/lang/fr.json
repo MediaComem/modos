@@ -14,8 +14,8 @@
     "follow-us": "Follow us on Social Network",
     "partners": "Our Partners",
     "contact": "Contact",
-    "moreinfo":"Besoin d'informations supplémentaires ?",
-    "takecontact":"Je prends contact"
+    "moreinfo": "Besoin d'informations supplémentaires ?",
+    "takecontact": "Je prends contact"
   },
   "homepage": {
     "title": "Améliorer la mobilité douce des seniors au quotidien",
@@ -23,14 +23,14 @@
     "project-description": "Comment améliorer la mobilité piétonne des villes ? Comment la rendre plus facile et agréable pour tous dans ses déplacements quotidiens ? Comment prendre en compte les contraintes et capacités de chacun, mais aussi les contraintes imposées par l'espace public.\n\nCombinant **innovation technologique et sociale**, le projet de recherche **modos** combine participation citoyenne, géoinformation et apprentissage automatique pour faire avancer l'état de l'art sur ces questions.\n\nL'objectif est d'expérimenter une combinaison d'outils pour cartographier les entraves à la mobilité piétonne et offrir une planification d'itinéraires sur mesure.\n\nLa solution proposée est une plateforme autant au bénéfice des seniors, cible première du projet, que toute personne contrainte d’une manière ou d’une autre dans sa mobilité piétonne. Si cette solution doit permettre de contourner les difficultés, l'**approche participative** offre aussi aux décideurs (ex. communes) un outil pour améliorer l'aménagement urbain grâce à des données de terrain produites par les citoyennes et citoyens.",
     "project-link-descr": "Voir la page du projet",
 
-    "discover-map":"découvrir la carte",
+    "discover-map": "découvrir la carte",
 
     "contribute-title": "Contribuez à la mobilité douce de votre ville",
     "contribute-description": "Dans la démarche du projet, chaque citoyenne et citoyen peut contribuer grâce aux outils mis à disposition : de la cartographie d’entraves sur le terrain à la qualification de leur degré d’impact sur la mobilité piétonne. Vos contributions seront utiles à la fois au  moteur de calcul d’itinéraire pédestre, mais aussi aux algorithme d’apprentissage automatique de la plateforme.",
 
-    "contribute-schema-1":"Collecte citoyenne d’entraves à la mobilité piétonne",
-    "contribute-schema-2":"Apprentissage automatique et classification d’images\n+\nRéseau pédestre et moteur de calcul d’itinéraire",
-    "contribute-schema-3":"Application cartographique pour une navigation piétonne adaptée au profil de l’usager",
+    "contribute-schema-1": "Collecte citoyenne d’entraves à la mobilité piétonne",
+    "contribute-schema-2": "Apprentissage automatique et classification d’images\n+\nRéseau pédestre et moteur de calcul d’itinéraire",
+    "contribute-schema-3": "Application cartographique pour une navigation piétonne adaptée au profil de l’usager",
 
     "contribute-explore-title": "Exploration",
     "contribute-explore-description": "Récolter des photographies sur le terrain",
@@ -40,28 +40,37 @@
 
     "contribute-review-title": "Vérification",
     "contribute-review-description": "Évaluer les itinéraires effectués",
-  
-    "contribute-link-descr":"Comment contribuer ?"
+
+    "contribute-link-descr": "Comment contribuer ?"
   },
-  "about":{
-    "title":"Le Projet",
-    
-    "intro":"En étroite collaboration avec le Senior Lab et le Conseil des Séniors d’Yverdon (COSY), le projet modos cherche à développer de nouveaux procédés pour accompagner les seniors en mobilité, notamment par la génération automatique d’itinéraires pédestres sachant prendre en considération les contraintes spécifiques de l’environnement urbain.",
-    "intro-btn":"Voir l'interview",
-    
-    "conception-title":"Conception participative et apprentissage automatique",
-    "conception-description":"**Le moteur du projet** modos est constitué de deux éléments principaux ; La science participative et l’apprentissage automatisé par ordinateur (Machine Learning).La sciences participative est un moyen de produire des données et des connaissances, grâce à la participation des citoyennes et citoyens, qui serviront à construire et renforcer notre solution de navigation. En contribuant de manière active, chaque contributeur devient acteur du projet modos.\n\n**L’objectif** n’est pas seulement fonctionnel. En impliquant des personnes volontaires dans le projet, le but est également de fédérer une communauté autour d’un même but, et de renforcer les liens intergenerationnels et d’entraide. En plus des objectifs technologiques, nous avons pour but avec le projet modos de sensibiliser les citoyens aux problématiques liées à la mobilité douce et aux situations de handicap auxquelles sont confrontés chaque jour un nombre grandissant de personnes.\n\n**L’apprentissage automatisé** consiste en l’analyse automatique de données - photographies, annotations, description de situations de handicap, profil de l’utilisateur - pour déterminer quelles zones sont plus ou moins accessibles pour des personnes à mobilité réduite. Grâce à plusieurs applications, les citoyens ont la possibilité de reporter des problèmes dans leur ville. Ces observations sont ensuite analysées par un algorithme qui va permettre de déterminer l’accessibilité d’une zone ou d’un tronçon.\n\n**Le but final** est de fournir une application de planification d’itinéraire - du même style que Google Maps par exemple - qui prend en compte l’accessibilité déterminée grâce à ces algorithmes, en fonction du profil de l’utilisateur. Ainsi, une personne confrontée à des situations de handicap dans la vie de tous les jours pourra planifier ses déplacement de manière autonome, en évitant au maximum ces situations déplaisantes.",
-    
-    "competence-title":"Domaine de compétences",
-    "competence-digiimgpro":"Digital image processing",
-    "competence-ml":"Machine learning",
-    "competence-ux":"User-centered design",
-    "competence-geoinf":"Geoinformatics",
-    
-    "codac-intro":"Le projet de recherche MoDoS (mobilité douce des seniors), financé par la HES-SO, regroupe des chercheurs de la HEIG-VD (Yverdon-les-Bains), de la HE-Arc (Neuchâtel) et de la EIA-FR (Fribourg), en ingénierie informatique, ingénierie des médias numériques et ingénierie du territoire, lui conférant un fort caractère interdisciplinaire.",
-    "codac-title":"Comité d’accompagnement (CODAC)",
-    "codac-descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sem quam, fringilla eu pretium non, interdum et lectus. Proin sed lacus leo. Cras gravida risus a quam pretium, eu sodales metus tempor.",
-    
-    "publication-title":"Publications et conférences"
+  "about": {
+    "title": "Le Projet",
+
+    "intro": "En étroite collaboration avec le Senior Lab et le Conseil des Séniors d’Yverdon (COSY), le projet modos cherche à développer de nouveaux procédés pour accompagner les seniors en mobilité, notamment par la génération automatique d’itinéraires pédestres sachant prendre en considération les contraintes spécifiques de l’environnement urbain.",
+    "intro-btn": "Voir l'interview",
+
+    "conception-title": "Conception participative et apprentissage automatique",
+    "conception-description": "**Le moteur du projet** modos est constitué de deux éléments principaux ; La science participative et l’apprentissage automatisé par ordinateur (Machine Learning).La sciences participative est un moyen de produire des données et des connaissances, grâce à la participation des citoyennes et citoyens, qui serviront à construire et renforcer notre solution de navigation. En contribuant de manière active, chaque contributeur devient acteur du projet modos.\n\n**L’objectif** n’est pas seulement fonctionnel. En impliquant des personnes volontaires dans le projet, le but est également de fédérer une communauté autour d’un même but, et de renforcer les liens intergenerationnels et d’entraide. En plus des objectifs technologiques, nous avons pour but avec le projet modos de sensibiliser les citoyens aux problématiques liées à la mobilité douce et aux situations de handicap auxquelles sont confrontés chaque jour un nombre grandissant de personnes.\n\n**L’apprentissage automatisé** consiste en l’analyse automatique de données - photographies, annotations, description de situations de handicap, profil de l’utilisateur - pour déterminer quelles zones sont plus ou moins accessibles pour des personnes à mobilité réduite. Grâce à plusieurs applications, les citoyens ont la possibilité de reporter des problèmes dans leur ville. Ces observations sont ensuite analysées par un algorithme qui va permettre de déterminer l’accessibilité d’une zone ou d’un tronçon.\n\n**Le but final** est de fournir une application de planification d’itinéraire - du même style que Google Maps par exemple - qui prend en compte l’accessibilité déterminée grâce à ces algorithmes, en fonction du profil de l’utilisateur. Ainsi, une personne confrontée à des situations de handicap dans la vie de tous les jours pourra planifier ses déplacement de manière autonome, en évitant au maximum ces situations déplaisantes.",
+
+    "competence-title": "Domaine de compétences",
+    "competence-digiimgpro": "Digital image processing",
+    "competence-ml": "Machine learning",
+    "competence-ux": "User-centered design",
+    "competence-geoinf": "Geoinformatics",
+
+    "codac-intro": "Le projet de recherche MoDoS (mobilité douce des seniors), financé par la HES-SO, regroupe des chercheurs de la HEIG-VD (Yverdon-les-Bains), de la HE-Arc (Neuchâtel) et de la EIA-FR (Fribourg), en ingénierie informatique, ingénierie des médias numériques et ingénierie du territoire, lui conférant un fort caractère interdisciplinaire.",
+    "codac-title": "Comité d’accompagnement (CODAC)",
+    "codac-descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sem quam, fringilla eu pretium non, interdum et lectus. Proin sed lacus leo. Cras gravida risus a quam pretium, eu sodales metus tempor.",
+
+    "publication-title": "Publications et conférences"
+  },
+  "map": {
+    "coating": "Problème de revêtement",
+    "obstacle": "Obstacle sur le passage",
+    "security": "Sécurité / Danger",
+    "passability": "Franchissabilité",
+    "slope": "Forte pente",
+    "width": "Largeur du trottoir",
+    "other": "Autre observation"
   }
 }

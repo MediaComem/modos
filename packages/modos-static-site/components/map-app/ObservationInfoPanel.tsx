@@ -3,6 +3,7 @@ import { API_URL, IObservation, OBSTACLES_TYPE } from '../../libs/modos-api';
 import { Navbar } from 'react-bootstrap';
 
 import styles from './map.module.scss';
+import { useI18N } from '../../libs';
 
 interface IProps {
   id?: string;
@@ -12,6 +13,8 @@ interface IProps {
 }
 
 export const ObservationInfoPanel = (props: IProps) => {
+  const i18n = useI18N('map');
+
   const { id, description, image, owner } = props.observation;
   return (
     <div id={props.id} className={`${styles.observations} ${props.className}`}>
@@ -31,7 +34,11 @@ export const ObservationInfoPanel = (props: IProps) => {
         <div className={styles['infos-details']}>
           <h3>Observation N°{id}</h3>
           <figure>
-            <img src={`${API_URL}${image.apiLink}`} alt={image.basename} />
+            <img
+              className='img-fluid'
+              src={`${API_URL}${image.apiLink}`}
+              alt={image.basename}
+            />
             <figcaption>{description.freeText}</figcaption>
           </figure>
         </div>
@@ -42,7 +49,7 @@ export const ObservationInfoPanel = (props: IProps) => {
 
         <div className={styles['infos-category']}>
           <div>
-            <div>{description.obstacle}</div>
+            <div>{i18n(description.obstacle)}</div>
             <div>
               {description.obstacle !== OBSTACLES_TYPE.UNLABELLED &&
                 description.obstacle !== OBSTACLES_TYPE.NOPROBLEM && (
@@ -50,7 +57,7 @@ export const ObservationInfoPanel = (props: IProps) => {
                 )}
             </div>
           </div>
-          <div>
+          <div className={styles['infos-category-impact']}>
             <div>Impact</div>
             <div>{description.impact}</div>
           </div>
