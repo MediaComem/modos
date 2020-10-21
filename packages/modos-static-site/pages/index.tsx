@@ -93,7 +93,9 @@ const Home = () => {
       </ContainerWithMargin>
 
       <div id={styles['map-section']}>
-        <p>{i18n('discover-map')}</p>
+        <Link href={'/map'}>
+          <a>{i18n('discover-map')}</a>
+        </Link>
       </div>
 
       <Container
