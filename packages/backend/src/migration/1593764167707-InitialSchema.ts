@@ -24,6 +24,10 @@ export class InitialSchema1593764167707 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE modos."events" ADD CONSTRAINT "FK_e4abcb418e46db776e920a05a16" FOREIGN KEY ("ownerId") REFERENCES modos."users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`, undefined);
         await queryRunner.query(`ALTER TABLE modos."users_events_event" ADD CONSTRAINT "FK_507e9d8e231d089b5c4d44cce00" FOREIGN KEY ("userId") REFERENCES modos."users"("id") ON DELETE CASCADE ON UPDATE NO ACTION`, undefined);
         await queryRunner.query(`ALTER TABLE modos."users_events_event" ADD CONSTRAINT "FK_c885fff747e43934134ceb67d33" FOREIGN KEY ("eventId") REFERENCES modos."events"("id") ON DELETE CASCADE ON UPDATE NO ACTION`, undefined);
+        await queryRunner.query(`DROP INDEX IF EXISTS modos_observation_position_idx;`, undefined);
+        await queryRunner.query(`CREATE INDEX IF NOT EXISTS modos_observation_position_idx ON modos.observations USING GIST (position);`, undefined);
+        await queryRunner.query(`DROP INDEX IF EXISTS modos_observation_snap_geom_idx;`, undefined);
+        await queryRunner.query(`CREATE INDEX IF NOT EXISTS modos_observation_snap_geom_idx ON modos.observations USING GIST (snap_geom);`, undefined);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
