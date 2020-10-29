@@ -15,7 +15,6 @@ export class initSnapping1603969816824 implements MigrationInterface {
         await queryRunner.query(`CREATE OR REPLACE FUNCTION set_geom_from_latlon() RETURNS trigger AS $$ DECLARE latcol TEXT := NULL; loncol TEXT := NULL; lat FLOAT := NULL; lon FLOAT := NULL; BEGIN latcol:= (SELECT column_name FROM information_schema.columns WHERE table_schema = TG_TABLE_SCHEMA AND table_name = TG_TABLE_NAME AND column_name LIKE '%latitude%'); loncol := (SELECT column_name FROM information_schema.columns WHERE table_schema = TG_TABLE_SCHEMA AND table_name = TG_TABLE_NAME AND column_name LIKE '%longitude%'); EXECUTE 'select $1.' || loncol USING NEW INTO lon; EXECUTE 'select $1.' || latcol USING NEW INTO lat; NEW.geom := ST_SetSRID(ST_MakePoint(lon,lat), 4326); RETURN NEW; END $$ LANGUAGE 'plpgsql';`, undefined);
         await queryRunner.query(`CREATE TRIGGER set_geom_from_latlon_biut BEFORE INSERT OR UPDATE ON modos.observations FOR EACH ROW EXECUTE PROCEDURE modos.set_geom_from_latlon();`, undefined);
         await queryRunner.query(`CREATE TRIGGER set_geom_from_latlon_biut BEFORE INSERT OR UPDATE ON modos.images FOR EACH ROW EXECUTE PROCEDURE modos.set_geom_from_latlon();`, undefined);
-        await queryRunner.query(`CREATE INDEX IF NOT EXISTS modos_observation_geom_idx ON modos.observations USING GIST (geom);`, undefined);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
