@@ -1,8 +1,8 @@
 import { sync as globSync } from 'fast-glob';
-import { join as joinPath } from 'path';
+import { join as joinPath, relative as relativePath } from 'path';
 import { ConnectionOptions } from 'typeorm';
 
-import { databaseUrl, typeormLogging } from './config/config';
+import { databaseUrl, root, typeormLogging } from './config/config';
 
 const connectionOptions: ConnectionOptions = {
   type: 'postgres',
@@ -13,9 +13,9 @@ const connectionOptions: ConnectionOptions = {
   migrations: findAppFiles('migration/*.[jt]s'),
   subscribers: findAppFiles('subscriber/*.[jt]s'),
   cli: {
-    entitiesDir: joinPath(__dirname, 'entity'),
-    migrationsDir: joinPath(__dirname, 'migration'),
-    subscribersDir: joinPath(__dirname, 'subscriber')
+    entitiesDir: relativePath(root, joinPath(__dirname, 'entity')),
+    migrationsDir: relativePath(root, joinPath(__dirname, 'migration')),
+    subscribersDir: relativePath(root, joinPath(__dirname, 'subscriber'))
   }
 };
 
