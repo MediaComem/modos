@@ -2,11 +2,12 @@ import { sync as globSync } from 'fast-glob';
 import { join as joinPath } from 'path';
 import { ConnectionOptions } from 'typeorm';
 
-import { databaseUrl, typeormLogging } from './config/config';
+import { databaseUrl, databaseMainSchema, typeormLogging } from './config/config';
 
 const connectionOptions: ConnectionOptions = {
   type: 'postgres',
   url: databaseUrl,
+  schema: databaseMainSchema,
   synchronize: false,
   logging: typeormLogging,
   entities: findAppFiles('entity/*.[jt]s'),

@@ -109,3 +109,26 @@ Example                                            | Description
 ### More
 
 See the `scripts` defined in [`package.json`](./package.json).
+
+
+### Minimal setup for local development
+If you work locally, you have to prepare this minimal database setup for the backend to work correctly.
+
+#### First create the database:
+CREATE DATABASE modos_dev;
+
+#### Then set the schemas:
+CREATE SCHEMA IF NOT EXISTS extensions;
+CREATE SCHEMA IF NOT EXISTS postgis;
+CREATE SCHEMA IF NOT EXISTS osmdata;
+CREATE SCHEMA IF NOT EXISTS modos;
+
+#### And install the extensions:
+CREATE EXTENSION IF NOT EXISTS adminpack;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA extensions;
+CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA extensions;
+CREATE EXTENSION IF NOT EXISTS tablefunc WITH SCHEMA extensions;
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA postgis;
+CREATE EXTENSION IF NOT EXISTS postgis_topology;
+CREATE EXTENSION IF NOT EXISTS pgrouting WITH SCHEMA postgis;
+CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA extensions;

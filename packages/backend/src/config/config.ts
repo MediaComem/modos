@@ -12,6 +12,9 @@ export const baseUrl = process.env.MODOS_BASE_URL || 'http://localhost:3000';
 // PostgreSQL connection URI.
 export const databaseUrl = process.env.MODOS_DATABASE_URL || 'postgres://localhost/modos';
 
+// PostgreSQL database main schema.
+export const databaseMainSchema = process.env.MODOS_DATABASE_MAIN_SCHEMA || 'modos';
+
 // Environment.
 export const env = process.env.NODE_ENV || 'development';
 
