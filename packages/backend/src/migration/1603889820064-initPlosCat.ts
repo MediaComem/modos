@@ -1,6 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class initPlosCat1603889820064 implements MigrationInterface {
+    name = 'initPlosCat1603889820064'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE IF NOT EXISTS modos.ploscategories(id INTEGER GENERATED ALWAYS AS IDENTITY, category TEXT NOT NULL, "weight" REAL NOT NULL DEFAULT 0.0, time_weight REAL NOT NULL DEFAULT 1.0, CONSTRAINT ploscategories_pkey PRIMARY KEY (id), CONSTRAINT check_categories CHECK (category='obstacle' OR category='step' OR category='coating' OR category='security' OR category='slope' OR category='width' OR category='other-negative' OR category='positive'), CONSTRAINT check_weight CHECK (weight <=1 AND weight>=0), CONSTRAINT check_time_weight CHECK (time_weight <=1 AND time_weight>=0));CREATE TABLE IF NOT EXISTS modos.nodes(id INTEGER GENERATED ALWAYS AS IDENTITY, lat FLOAT NOT NULL, lon FLOAT NOT NULL, osmid BIGINT UNIQUE NOT NULL, highway VARCHAR, data_source text NOT NULL DEFAULT 'osm', geom geometry(Point, 4326) NOT NULL, uuid UUID UNIQUE NOT NULL, CONSTRAINT nodes_pkey PRIMARY KEY (id), CONSTRAINT check_source CHECK (data_source='osm' OR data_source='other'));`, undefined);

@@ -2,6 +2,7 @@ import { MigrationInterface, QueryRunner } from "typeorm";
 import { promises as fs } from "fs";
 
 export class initDomains1603879411988 implements MigrationInterface {
+    name = 'initDomains1603879411988'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE DOMAIN modos.uint2 AS SMALLINT CHECK(VALUE >= 0 AND VALUE < 65535);`, undefined);

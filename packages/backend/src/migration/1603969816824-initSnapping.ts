@@ -1,6 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class initSnapping1603969816824 implements MigrationInterface {
+    name = 'initSnapping1603969816824'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`DROP TRIGGER IF EXISTS snap_point_biut ON modos.images;`, undefined);

@@ -1,6 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class alterTables1593764167709 implements MigrationInterface {
+    name = 'alterTables1593764167709'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`BEGIN; ALTER TABLE "observation" ALTER COLUMN id DROP DEFAULT; DROP SEQUENCE observation_id_seq; ALTER TABLE "observation" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY; COMMIT;`, undefined);

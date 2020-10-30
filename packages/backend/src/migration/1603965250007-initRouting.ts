@@ -1,6 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class initRouting1603965250007 implements MigrationInterface {
+    name = 'initRouting1603965250007'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`DROP FUNCTION IF EXISTS mds_weighted_routing(text, text, float4[]);`, undefined);
