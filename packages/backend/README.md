@@ -117,18 +117,12 @@ If you work locally, you have to prepare this minimal database setup for the bac
 #### First create the database:
 CREATE DATABASE modos_dev;
 
-#### Then set the schemas:
-CREATE SCHEMA IF NOT EXISTS extensions;
-CREATE SCHEMA IF NOT EXISTS postgis;
-CREATE SCHEMA IF NOT EXISTS osmdata;
-CREATE SCHEMA IF NOT EXISTS modos;
-
-#### And install the extensions:
+#### Then install the extensions:
 CREATE EXTENSION IF NOT EXISTS adminpack;
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA extensions;
-CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA extensions;
-CREATE EXTENSION IF NOT EXISTS tablefunc WITH SCHEMA extensions;
-CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA postgis;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
+CREATE EXTENSION IF NOT EXISTS tablefunc;
+CREATE EXTENSION IF NOT EXISTS postgis;
 CREATE EXTENSION IF NOT EXISTS postgis_topology;
-CREATE EXTENSION IF NOT EXISTS pgrouting WITH SCHEMA postgis;
-CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA extensions;
+CREATE EXTENSION IF NOT EXISTS pgrouting;
+CREATE EXTENSION IF NOT EXISTS citext;
