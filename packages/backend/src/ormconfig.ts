@@ -2,7 +2,7 @@ import { sync as globSync } from 'fast-glob';
 import { join as joinPath } from 'path';
 import { ConnectionOptions } from 'typeorm';
 
-import { databaseUrl, databaseMainSchema, typeormLogging } from './config/config';
+import { databaseUrl, databaseMainSchema, root, typeormLogging } from './config/config';
 
 const connectionOptions: ConnectionOptions = {
   type: 'postgres',
