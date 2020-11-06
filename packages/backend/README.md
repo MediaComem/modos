@@ -19,6 +19,7 @@ front-end (mobile, web, etc...).
 
 ### Minimal setup
 If you work locally, you have to prepare this minimal database setup for the backend to work correctly.
+
 #### Install mandatory packages
 You will need:
 - PostgreSQL v.12.4-1
