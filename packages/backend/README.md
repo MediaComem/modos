@@ -29,9 +29,14 @@ You will need:
 The best is to use the dockerized version of the app.
 
 #### Create the postgres database from a psql console:
-CREATE DATABASE modos_dev;
+```SQL 
+CREATE DATABASE YOUR_DATABASE_NAME;
+```
 
 #### Then install the extensions from a psql console:
+⚠ The line below are not needed if your executing the migration.
+
+```SQL
 CREATE EXTENSION IF NOT EXISTS adminpack;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
@@ -40,6 +45,13 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 CREATE EXTENSION IF NOT EXISTS postgis_topology;
 CREATE EXTENSION IF NOT EXISTS pgrouting;
 CREATE EXTENSION IF NOT EXISTS citext;
+```
+
+#### Add the modos schema
+Modos is working with multiple schema but for dev, you specifically need to create a schema call "modos" in the db.
+```SQL
+CREATE SCHEMA "modos";
+```
 
 ## Getting started with Node.js
 
