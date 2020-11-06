@@ -24,6 +24,16 @@ const extractLatLongFromQuery = (query: string): [number, number] => {
   return query.split(',').map(val=>Number.parseFloat(val)) as [number, number]
 }
 
+/*
+ * Existing SQL function to calc route
+ * mds_shortest_routing(text,text) 
+ * --> select ST_AsGeoJSON(mds_simple_routing('POINT(45 64.7)','POINT(45 64.7)'))
+ * 
+ * mds_simple_routing(text,text) 
+ * mds_weighted_routing(text,text,real[]) 
+ */
+
+
 export class ItineraryControler {
 
   public getSimpleItinerary = createAsyncRoute(async (req, res) => {
