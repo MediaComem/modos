@@ -28,13 +28,15 @@ services:
       - "3000:3000"
 
   db:
-    image: postgres:12.3-alpine
+    env_file:
+      - .env.docker
+    image: pgrouting/pgrouting:12-3.0-2.6.3
     environment:
       POSTGRES_DB: modos
       POSTGRES_USER: modos
       POSTGRES_PASSWORD: modos
     ports:
-      - "5432:5432"
+      - "${MODOS_DB_PORT}:5432"
     volumes:
       # Persist data in a named volume. Run `docker-compose down -v` to
       # permanently delete it.
