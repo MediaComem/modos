@@ -15,7 +15,30 @@ front-end (mobile, web, etc...).
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+## Prerequisites for local development
 
+### Minimal setup
+If you work locally, you have to prepare this minimal database setup for the backend to work correctly.
+#### Install mandatory packages
+You will need:
+- PostgreSQL v.12.4-1
+- PostGIS v.3.0 with geos and proj installed
+- pgrouting v.2.6.3 with boost v.1.67
+
+The best is to use the dockerized version of the app.
+
+#### Create the postgres database from a psql console:
+CREATE DATABASE modos_dev;
+
+#### Then install the extensions from a psql console:
+CREATE EXTENSION IF NOT EXISTS adminpack;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
+CREATE EXTENSION IF NOT EXISTS tablefunc;
+CREATE EXTENSION IF NOT EXISTS postgis;
+CREATE EXTENSION IF NOT EXISTS postgis_topology;
+CREATE EXTENSION IF NOT EXISTS pgrouting;
+CREATE EXTENSION IF NOT EXISTS citext;
 
 ## Getting started with Node.js
 
@@ -110,19 +133,3 @@ Example                                            | Description
 
 See the `scripts` defined in [`package.json`](./package.json).
 
-
-### Minimal setup for local development
-If you work locally, you have to prepare this minimal database setup for the backend to work correctly.
-
-#### First create the database:
-CREATE DATABASE modos_dev;
-
-#### Then install the extensions:
-CREATE EXTENSION IF NOT EXISTS adminpack;
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
-CREATE EXTENSION IF NOT EXISTS tablefunc;
-CREATE EXTENSION IF NOT EXISTS postgis;
-CREATE EXTENSION IF NOT EXISTS postgis_topology;
-CREATE EXTENSION IF NOT EXISTS pgrouting;
-CREATE EXTENSION IF NOT EXISTS citext;
