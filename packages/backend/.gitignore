@@ -3,6 +3,7 @@
 /dist
 /.env*
 !/.env.sample
+!/.env.docker.sample
 /.idea
 /node_modules
 /tmp
