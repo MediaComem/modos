@@ -58,6 +58,7 @@ To run the development environment in Docker containers, you will need:
 Then simply run the application:
 
 ```bash
+cp .env.docker.sample .env.docker # adapt the database port number to fit an open port in your local environment.
 docker-compose up --build
 ```
 
