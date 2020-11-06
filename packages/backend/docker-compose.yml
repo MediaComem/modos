@@ -28,8 +28,6 @@ services:
       - "3000:3000"
 
   db:
-    env_file:
-      - .env.docker
     image: pgrouting/pgrouting:12-3.0-2.6.3
     environment:
       POSTGRES_DB: modos

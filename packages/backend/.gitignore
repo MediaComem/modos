@@ -2,8 +2,9 @@
 !/data/.keep
 /dist
 /.env*
+/.docker.env
 !/.env.sample
-!/.env.docker.sample
+!/.docker.env.sample
 /.idea
 /node_modules
 /tmp

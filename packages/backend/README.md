@@ -82,8 +82,8 @@ To run the development environment in Docker containers, you will need:
 Then simply run the application:
 
 ```bash
-cp .env.docker.sample .env.docker # adapt the database port number to fit an open port in your local environment.
-docker-compose up --build
+cp .docker.env.sample .docker.env # adapt the database port number to fit an open port in your local environment.
+docker-compose --env-file ".docker.env" up --build
 ```
 
 The API should be available at http://localhost:3000/api.
