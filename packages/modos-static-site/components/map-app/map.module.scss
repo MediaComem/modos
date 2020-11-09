@@ -1,6 +1,7 @@
 #map-app {
-  width: 100vw;
-  height: 100vh;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 #map-app-navbar {
@@ -88,7 +89,10 @@
           text-align: center;
           max-width: 100%;
           height: auto;
-          max-height: 90%;          
+          max-height: 90%;
+          img {
+            max-height: 100%;
+          }          
         }
 
         figcaption {
