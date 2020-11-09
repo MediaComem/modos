@@ -7,46 +7,57 @@ front-end (mobile, web, etc...).
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
+- [Getting started with Docker](#getting-started-with-docker)
 - [Getting started with Node.js](#getting-started-with-nodejs)
-- [Getting started with Docker Compose](#getting-started-with-docker-compose)
 - [A few links to browse](#a-few-links-to-browse)
 - [Configuration](#configuration)
-- [Database management scripts](#database-management-scripts)
+- [Scripts](#scripts)
+  - [Database management](#database-management)
+  - [More](#more)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Prerequisites for local development
 
-### Minimal setup
-If you work locally, you have to prepare this minimal database setup for the backend to work correctly.
 
-#### Install mandatory packages
-You will need:
-- PostgreSQL v.12.4-1
-- PostGIS v.3.0 with geos and proj installed
-- pgrouting v.2.6.3 with boost v.1.67
+## Getting started with Docker
 
-The best is to use the dockerized version of the app.
+Make sure to install the following requirements:
 
-#### Create the postgres database from a psql console:
-CREATE DATABASE modos_dev;
+* [Docker](https://www.docker.com) 19+
+* [Docker Compose](https://docs.docker.com/compose/) 1.27+
 
-#### Then install the extensions from a psql console:
-CREATE EXTENSION IF NOT EXISTS adminpack;
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
-CREATE EXTENSION IF NOT EXISTS tablefunc;
-CREATE EXTENSION IF NOT EXISTS postgis;
-CREATE EXTENSION IF NOT EXISTS postgis_topology;
-CREATE EXTENSION IF NOT EXISTS pgrouting;
-CREATE EXTENSION IF NOT EXISTS citext;
+Then perform the following steps:
+
+```bash
+# Create .env and adapt it to your environment if necessary. The default settings should
+# work out of the box.
+cp .env.sample .env
+
+# Run the application.
+docker-compose up --build
+```
+
+The API should be available at http://localhost:3000/api.
+
+
 
 ## Getting started with Node.js
 
-To run the application on your machine, you will need:
+Make sure to install the following requirements:
 
 * [Node.js](https://nodejs.org) 12
-* [PostgreSQL](https://www.postgresql.org) 12+
+* [PostgreSQL](https://www.postgresql.org) 12 with:
+  * [PostGIS](https://postgis.net) 3.0 with geos and proj installed
+  * [pgRouting](https://pgrouting.org) 2.6
+
+You will also need to create a database with a schema named `modos` in your PostgreSQL
+cluster:
+
+```bash
+CREATE DATABASE modos;
+\connect modos
+CREATE SCHEMA modos;
+```
 
 Then perform the following steps:
 
@@ -54,7 +65,7 @@ Then perform the following steps:
 # Install dependencies.
 npm ci
 
-# Create .env and adapt it to your environment.
+# Create .env and adapt it to your environment, notably the $MODOS_DATABASE_URL variable.
 cp .env.sample .env
 
 # Build the application.
@@ -72,24 +83,6 @@ The API should be available at http://localhost:3000/api.
 
 
 
-## Getting started with Docker
-
-To run the development environment in Docker containers, you will need:
-
-* [Docker](https://www.docker.com) 19+
-* [Docker Compose](https://docs.docker.com/compose/) 1.25+
-
-Then simply run the application:
-
-```bash
-cp .docker.env.sample .docker.env # adapt the database port number to fit an open port in your local environment.
-docker-compose --env-file ".docker.env" up --build
-```
-
-The API should be available at http://localhost:3000/api.
-
-
-
 ## A few links to browse
 
 Once your server is running, you can access:
@@ -101,12 +94,11 @@ Once your server is running, you can access:
 
 ## Configuration
 
-The default configuration is suited for a development environment. However, if
-you want to tweak some values (or switch to a production environment), don't
-forget to modify `.env` according to your needs.
+The default configuration is suited for a development environment. However, if you want to
+tweak some values (or switch to a production environment), you can modify `.env` according
+to your needs.
 
-Look at `src/config/config.ts` for more information on available configuration
-options.
+Look at `src/config/config.ts` for more information on available configuration options.
 
 
 
