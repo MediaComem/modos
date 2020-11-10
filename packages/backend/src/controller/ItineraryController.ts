@@ -57,7 +57,7 @@ export class ItineraryControler {
               'FeatureCollection',
               'features',
               json_agg(
-                  ST_AsGeoJSON(t.*)
+                  ST_AsGeoJSON(t.*)::json
               )
             ) as simpleroute
           FROM mds_simple_routing(
