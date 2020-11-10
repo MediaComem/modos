@@ -1,12 +1,12 @@
-import { Request, Response } from "express";
-import { createAsyncRoute, validate } from "./utils";
+import { Request, Response } from 'express';
+import { createAsyncRoute, validate } from './utils';
 import { getRepository, getManager, getConnection } from 'typeorm';
-import { Event } from "../entity/Event";
-import { sendError } from "./ErrorController";
+import { Event } from '../entity/Event';
+import { sendError } from './ErrorController';
 
 enum ItineraryError {
-  ITINERARY_NO_ORIGIN_OR_DEST = 'No origin or destination provided for the itinerary',
-  BAD_COORDINATE = 'Bad coordinate given'
+    ITINERARY_NO_ORIGIN_OR_DEST = 'No origin or destination provided for the itinerary',
+    BAD_COORDINATE = 'Bad coordinate given'
 }
 
 /**
@@ -16,42 +16,49 @@ enum ItineraryError {
  * @returns an array of two number corresponding to [lat, long]
  */
 const extractLatLongFromQuery = (query: string): [number, number] => {
-  
-  if(query.split(',').length < 2 || query.split(',').length > 2){
-    throw new Error(ItineraryError.BAD_COORDINATE);
-  }
+    if (query.split(',').length < 2 || query.split(',').length > 2) {
+        throw new Error(ItineraryError.BAD_COORDINATE);
+    }
 
-  return query.split(',').map(val=>Number.parseFloat(val)) as [number, number]
-}
+    return query.split(',').map(val => Number.parseFloat(val)) as [
+        number,
+        number
+    ];
+};
 
 /*
  * Existing SQL function to calc route
- * mds_shortest_routing(text,text) 
+ * mds_shortest_routing(text,text)
  * --> select ST_AsGeoJSON(mds_simple_routing('POINT(45 64.7)','POINT(45 64.7)'))
- * 
- * mds_simple_routing(text,text) 
- * mds_weighted_routing(text,text,real[]) 
+ *
+ * mds_simple_routing(text,text)
+ * mds_weighted_routing(text,text,real[])
  */
 
-
 export class ItineraryControler {
+    public getSimpleItinerary = createAsyncRoute(async (req, res) => {
+        const { origin, destination, waypoints } = req.query as {
+            origin: string;
+            destination: string;
+            waypoints?: string[];
+        };
 
-  public getSimpleItinerary = createAsyncRoute(async (req, res) => {
-    const {origin, destination, waypoints} = req.query as {
-      origin:string, destination:string, waypoints?: string[]};
+        if (!origin || !destination) {
+            return sendError(
+                res,
+                400,
+                ItineraryError.ITINERARY_NO_ORIGIN_OR_DEST
+            );
+        }
 
-    if(!origin || !destination){
-      return sendError(res, 400, ItineraryError.ITINERARY_NO_ORIGIN_OR_DEST)
-    }
+        try {
+            const [originLat, originLong] = extractLatLongFromQuery(origin);
+            const [destinationLat, destinationLong] = extractLatLongFromQuery(
+                destination
+            );
 
-    try{
-      const [originLat, originLong] = extractLatLongFromQuery(origin);
-      const [destinationLat, destinationLong] = extractLatLongFromQuery(
-          destination
-      );
-
-      const queryResult = await getConnection().query(
-          `SELECT 
+            const queryResult = await getConnection().query(
+                `SELECT 
             json_build_object(
               'type',
               'FeatureCollection',
@@ -64,17 +71,18 @@ export class ItineraryControler {
               'POINT(' || $1 || ' ' || $2 || ')',
               'POINT(' || $3 || ' ' || $4 || ')'
             ) AS t(geom)`,
-          [originLong, originLat, destinationLong, destinationLat]
-      );
+                [originLong, originLat, destinationLong, destinationLat]
+            );
 
-      if (!queryResult[0]) return res.send([]);
-      if (!queryResult[0].simpleroute.features) return res.send([]);
+            if (!queryResult[0])
+                return res.send({ type: 'Feature', geometry: [] });
+            if (!queryResult[0].simpleroute.features)
+                return res.send({ type: 'Feature', geometry: [] });
 
-      return res.send(queryResult[0].simpleroute);
-    }catch(err){
-      console.error(err);
-      return sendError(res, 400, ItineraryError.BAD_COORDINATE)
-    }
-    
-  });
+            return res.send(queryResult[0].simpleroute);
+        } catch (err) {
+            console.error(err);
+            return sendError(res, 400, ItineraryError.BAD_COORDINATE);
+        }
+    });
 }

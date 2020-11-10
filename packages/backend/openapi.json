@@ -1,62 +1,73 @@
 {
-  "openapi" : "3.0.0",
-  "info" : {
-    "title" : "MoDoS Research API",
-    "description" : "The MoDoS API endpoints enable external applications to communicate with the MoDoS resources. It uses resource-oriented URLs and leverages various HTTP features, like authentication, verbs or response codes. All request and response bodies are JSON encoded, including error responses.",
-    "contact" : {
-      "email" : "quentin.vaucher@he-arc.ch"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MoDoS Research API",
+    "description": "The MoDoS API endpoints enable external applications to communicate with the MoDoS resources. It uses resource-oriented URLs and leverages various HTTP features, like authentication, verbs or response codes. All request and response bodies are JSON encoded, including error responses.",
+    "contact": {
+      "email": "comem.media@gmail.com"
     },
-    "license" : {
-      "name" : "Apache 2.0",
-      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "version" : "1.0.0"
+    "version": "1.0.0"
   },
-  "externalDocs" : {
-    "description" : "Find out more about the MoDoS API",
-    "url" : "https://labinfo.ing.he-arc.ch/gitlab/ticc/19ticc02-hes-so---modos/early-app/wikis/API-endpoint-reference"
-  },
-  "servers" : [ {
-    "url" : "https://virtserver.swaggerhub.com/Kjuvi/modos/1.0.0",
-    "description" : "SwaggerHub API Auto Mocking"
-  }, {
-    "url" : "https://modos.heig-vd.ch/api/v1",
-    "description" : "MoDoS REST API Base URL"
-  } ],
-  "tags" : [ {
-    "name" : "root",
-    "description" : "Information about the API"
-  }, {
-    "name" : "authenticate",
-    "description" : "Manage your JWT"
-  }, {
-    "name" : "users",
-    "description" : "Manage your profile, user accout and contributions"
-  }, {
-    "name" : "events",
-    "description" : "Manage the events"
-  }, {
-    "name" : "observations",
-    "description" : "Manage the observations"
-  } ],
-  "paths" : {
-    "/api" : {
-      "get" : {
-        "tags" : [ "root" ],
-        "summary" : "API status",
-        "description" : "Be careful, this endpoint is at the root URL of MoDoS API (`https://modos.heig-vd.ch/api`), and therefore does not respect the baseurl specified above",
-        "operationId" : "root",
-        "responses" : {
-          "200" : {
-            "description" : "API status",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "version" : {
-                      "type" : "string",
-                      "example" : "1.0.0"
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/Kjuvi/modos/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
+        "url": "https://modos.heig-vd.ch/api/v1",
+        "description": "MoDoS REST API Base URL"
+    }
+  ],
+  "tags": [
+    {
+      "name": "root",
+      "description": "Information about the API"
+    },
+    {
+      "name": "authenticate",
+      "description": "Manage your JWT"
+    },
+    {
+      "name": "users",
+      "description": "Manage your profile, user accout and contributions"
+    },
+    {
+      "name": "events",
+      "description": "Manage the events"
+    },
+    {
+      "name": "observations",
+      "description": "Manage the observations"
+    },
+    {
+      "name": "itinerary",
+      "description": "Obtain optimized itinerary between some coordinates"
+    }
+  ],
+  "paths": {
+    "/api": {
+      "get": {
+        "tags": [
+          "root"
+        ],
+        "summary": "API status",
+        "description": "Be careful, this endpoint is at the root URL of MoDoS API (`https://modos.heig-vd.ch/api`), and therefore does not respect the baseurl specified above",
+        "operationId": "root",
+        "responses": {
+          "200": {
+            "description": "API status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "version": {
+                      "type": "string",
+                      "example": "1.0.0"
                     }
                   }
                 }
@@ -66,39 +77,41 @@
         }
       }
     },
-    "/authenticate" : {
-      "post" : {
-        "tags" : [ "authenticate" ],
-        "summary" : "retrieve a JWT",
-        "description" : "Return a JWT which contains the user id in exchange of valid credentials (email, password)\n",
-        "operationId" : "authenticate",
-        "requestBody" : {
-          "description" : "credentials",
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/body"
+    "/authenticate": {
+      "post": {
+        "tags": [
+          "authenticate"
+        ],
+        "summary": "retrieve a JWT",
+        "description": "Return a JWT which contains the user id in exchange of valid credentials (email, password)\n",
+        "operationId": "authenticate",
+        "requestBody": {
+          "description": "credentials",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body"
               }
             }
           }
         },
-        "responses" : {
-          "200" : {
-            "description" : "A Json Web Token (JWT)",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_200"
+        "responses": {
+          "200": {
+            "description": "A Json Web Token (JWT)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
                 }
               }
             }
           },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
@@ -106,1270 +119,1415 @@
         }
       }
     },
-    "/users" : {
-      "get" : {
-        "tags" : [ "users" ],
-        "summary" : "retrieve the authenticated user's information",
-        "description" : "The user id is automatically extracted from the JWT\n",
-        "operationId" : "getUser",
-        "responses" : {
-          "200" : {
-            "description" : "user information",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/User"
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "retrieve the authenticated user's information",
+        "description": "The user id is automatically extracted from the JWT\n",
+        "operationId": "getUser",
+        "responses": {
+          "200": {
+            "description": "user information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }
           },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
           }
         },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
-      "put" : {
-        "tags" : [ "users" ],
-        "summary" : "update the authenticated user's information",
-        "description" : "The user id is automatically extracted from the JWT\n",
-        "operationId" : "updateUser",
-        "requestBody" : {
-          "$ref" : "#/components/requestBodies/User"
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "update the authenticated user's information",
+        "description": "The user id is automatically extracted from the JWT\n",
+        "operationId": "updateUser",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/User"
         },
-        "responses" : {
-          "200" : {
-            "description" : "user updated",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/User"
+        "responses": {
+          "200": {
+            "description": "user updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }
           },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
           },
-          "409" : {
-            "description" : "Conflict in the request",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_409"
+          "409": {
+            "description": "Conflict in the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_409"
                 }
               }
             }
           },
-          "422" : {
-            "description" : "Database validaion error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_422"
+          "422": {
+            "description": "Database validaion error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_422"
                 }
               }
             }
           }
         },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
-      "post" : {
-        "tags" : [ "users" ],
-        "summary" : "create a new user (sign up)",
-        "description" : "This is the operation to call when a new user want to register to MoDoS",
-        "operationId" : "createUser",
-        "requestBody" : {
-          "$ref" : "#/components/requestBodies/User"
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "create a new user (sign up)",
+        "description": "This is the operation to call when a new user want to register to MoDoS",
+        "operationId": "createUser",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/User"
         },
-        "responses" : {
-          "201" : {
-            "description" : "user created",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/User"
+        "responses": {
+          "201": {
+            "description": "user created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }
           },
-          "409" : {
-            "description" : "Conflict in the request",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_409"
+          "409": {
+            "description": "Conflict in the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_409"
                 }
               }
             }
           },
-          "422" : {
-            "description" : "Database validaion error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_422"
+          "422": {
+            "description": "Database validaion error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_422"
                 }
               }
             }
           }
         }
       },
-      "delete" : {
-        "tags" : [ "users" ],
-        "summary" : "delete the authenticated user",
-        "description" : "The authenticated user is deleted from the database. This will \"delete\" the entire account since the user will not be able to sign in anymore.\n",
-        "operationId" : "deleteUser",
-        "responses" : {
-          "204" : {
-            "description" : "user deleted"
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "delete the authenticated user",
+        "description": "The authenticated user is deleted from the database. This will \"delete\" the entire account since the user will not be able to sign in anymore.\n",
+        "operationId": "deleteUser",
+        "responses": {
+          "204": {
+            "description": "user deleted"
           },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
           }
         },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/users/events" : {
-      "get" : {
-        "tags" : [ "users" ],
-        "summary" : "get the events the user is taking part",
-        "operationId" : "getUserEvents",
-        "responses" : {
-          "200" : {
-            "description" : "events the user is taking part",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/Event"
+    "/users/events": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get the events the user is taking part",
+        "operationId": "getUserEvents",
+        "responses": {
+          "200": {
+            "description": "events the user is taking part",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
                   }
                 }
               }
             }
           },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
           }
         },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/users/observations" : {
-      "get" : {
-        "tags" : [ "users" ],
-        "summary" : "get the observations of the user",
-        "operationId" : "getUserObservations",
-        "responses" : {
-          "200" : {
-            "description" : "observations the user has made",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/Observation"
+    "/users/observations": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get the observations of the user",
+        "operationId": "getUserObservations",
+        "responses": {
+          "200": {
+            "description": "observations the user has made",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Observation"
                   }
                 }
               }
             }
           },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
           }
         },
-        "security" : [ {
-          "baererAuth" : [ ]
-        } ]
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/users/join/{event_id}" : {
-      "post" : {
-        "tags" : [ "users" ],
-        "summary" : "join the given event",
-        "operationId" : "joinEvent",
-        "parameters" : [ {
-          "name" : "event_id",
-          "in" : "path",
-          "description" : "id of the event the user is joining",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
+    "/users/join/{event_id}": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "join the given event",
+        "operationId": "joinEvent",
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "description": "id of the event the user is joining",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+                "type": "integer"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "event joined",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/User"
+        ],
+        "responses": {
+          "200": {
+            "description": "event joined",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "$ref": "#/components/schemas/User"
+                    }
+                }
+            }
+          },
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
           },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_404"
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_404"
                 }
               }
             }
           }
         },
-        "security" : [ {
-          "baererAuth" : [ ]
-        } ]
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/users/profile" : {
-      "get" : {
-        "tags" : [ "users" ],
-        "summary" : "get the user profile",
-        "operationId" : "getProfile",
-        "responses" : {
-          "200" : {
-            "description" : "user profile",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Profile"
+    "/users/profile": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get the user profile",
+        "operationId": "getProfile",
+        "responses": {
+          "200": {
+            "description": "user profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
                 }
               }
             }
           },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
           }
         },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
-      "put" : {
-        "tags" : [ "users" ],
-        "summary" : "update profile",
-        "operationId" : "updateProfile",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Profile"
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "update profile",
+        "operationId": "updateProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Profile"
               }
             }
           }
         },
-        "responses" : {
-          "200" : {
-            "description" : "profile updated",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Profile"
+        "responses": {
+          "200": {
+            "description": "profile updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
                 }
               }
             }
           },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
           },
-          "422" : {
-            "description" : "Database validaion error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_422"
+          "422": {
+            "description": "Database validaion error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_422"
                 }
               }
             }
           }
         },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
-      "post" : {
-        "tags" : [ "users" ],
-        "summary" : "create a new profile",
-        "operationId" : "createProfile",
-        "requestBody" : {
-          "description" : "user profile",
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Profile"
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "create a new profile",
+        "operationId": "createProfile",
+        "requestBody": {
+          "description": "user profile",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Profile"
               }
             }
           }
         },
-        "responses" : {
-          "201" : {
-            "description" : "profile created",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Profile"
+        "responses": {
+          "201": {
+            "description": "profile created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
                 }
               }
             }
           },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
           },
-          "422" : {
-            "description" : "Database validaion error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_422"
+          "422": {
+            "description": "Database validaion error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_422"
                 }
               }
             }
           }
         },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/events" : {
-      "get" : {
-        "tags" : [ "events" ],
-        "summary" : "get all the existing events",
-        "operationId" : "getEvents",
-        "responses" : {
-          "200" : {
-            "description" : "list all events",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/Event"
+    "/events": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "get all the existing events",
+        "operationId": "getEvents",
+        "responses": {
+            "200": {
+                "description": "list all events",
+                "content": {
+                      "application/json": {
+                            "schema": {
+                                  "type": "array",
+                                  "items": {
+                                        "$ref": "#/components/schemas/Event"
+                                  }
+                            }
+                      }
+                }
+            }
+        }
+      },
+      "post": {
+        "tags": [
+          "events"
+        ],
+        "summary": "create a new event",
+        "operationId": "createEvent",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Event"
+        },
+        "responses": {
+          "201": {
+            "description": "event created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Database validaion error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_422"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/events/{id}": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "get the given event",
+        "operationId": "getEventById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the event",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+                "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+            "200": {
+                "description": "event information",
+                "content": {
+                    "application/json": {
+                          "schema": {
+                                "$ref": "#/components/schemas/Event"
+                          }
+                    }
+                }
+            }
+        }
+      },
+      "put": {
+        "tags": [
+          "events"
+        ],
+        "summary": "update the given event",
+        "operationId": "updateEven",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the event",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Event"
+        },
+        "responses": {
+          "200": {
+            "description": "event updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Database validaion error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_422"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "events"
+        ],
+        "summary": "delete the given event",
+        "operationId": "deleteEvent",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the event",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "event deleted"
+          },
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/events/{id}/users": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "get the participants of an event",
+        "operationId": "getParticipants",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the event the user is updating",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+                "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "participants list",
+            "content": {
+              "application/json": {
+                  "schema": {
+                      "type": "array",
+                      "items": {
+                          "type": "string"
+                      }
+                  }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/{id}/observations": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "get the observations of an event",
+        "operationId": "getObservation",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the event",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "observation list",
+            "content": {
+              "application/json": {
+                  "schema": {
+                        "type": "array",
+                        "items": {
+                              "type": "string",
+                              "format": "uuid"
+                        }
+                  }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/observations": {
+      "get": {
+        "tags": [
+          "observations"
+        ],
+        "summary": "list all the observations",
+        "operationId": "getObservations",
+        "responses": {
+          "200": {
+            "description": "observations list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Observation"
                   }
                 }
               }
             }
-          },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
-                }
-              }
-            }
           }
-        },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
+        }
       },
-      "post" : {
-        "tags" : [ "events" ],
-        "summary" : "create a new event",
-        "operationId" : "createEvent",
-        "requestBody" : {
-          "$ref" : "#/components/requestBodies/Event"
+      "post": {
+        "tags": [
+          "observations"
+        ],
+        "summary": "create a new observation",
+        "operationId": "createObservation",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Observation"
         },
-        "responses" : {
-          "201" : {
-            "description" : "event created",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Event"
+        "responses": {
+          "201": {
+            "description": "observation created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Observation"
                 }
               }
             }
           },
-          "422" : {
-            "description" : "Database validaion error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_422"
+          "422": {
+            "description": "Database validaion error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_422"
                 }
               }
             }
           }
         },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/events/{id}" : {
-      "get" : {
-        "tags" : [ "events" ],
-        "summary" : "get the given event",
-        "operationId" : "getEventById",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id of the event",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "event information",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Event"
-                }
-              }
-            }
-          },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
-                }
-              }
-            }
-          }
-        },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
-      },
-      "put" : {
-        "tags" : [ "events" ],
-        "summary" : "update the given event",
-        "operationId" : "updateEven",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id of the event",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "requestBody" : {
-          "$ref" : "#/components/requestBodies/Event"
-        },
-        "responses" : {
-          "200" : {
-            "description" : "event updated",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Event"
-                }
-              }
-            }
-          },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
-                }
-              }
-            }
-          },
-          "422" : {
-            "description" : "Database validaion error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_422"
-                }
-              }
-            }
-          }
-        },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
-      },
-      "delete" : {
-        "tags" : [ "events" ],
-        "summary" : "delete the given event",
-        "operationId" : "deleteEvent",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id of the event",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "event deleted"
-          },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
-                }
-              }
-            }
-          }
-        },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
-      }
-    },
-    "/events/{id}/users" : {
-      "get" : {
-        "tags" : [ "events" ],
-        "summary" : "get the participants of an event",
-        "operationId" : "getParticipants",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id of the event the user is updating",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "participants list",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "type" : "string"
-                  }
-                }
-              }
-            }
-          },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
-                }
-              }
-            }
-          }
-        },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
-      }
-    },
-    "/events/{id}/observations" : {
-      "get" : {
-        "tags" : [ "events" ],
-        "summary" : "get the observations of an event",
-        "operationId" : "getObservation",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id of the event",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "observation list",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "type" : "string",
-                    "format" : "uuid"
-                  }
-                }
-              }
-            }
-          },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
-                }
-              }
-            }
-          }
-        },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
-      }
-    },
-    "/observations" : {
-      "get" : {
-        "tags" : [ "observations" ],
-        "summary" : "list all the observations",
-        "operationId" : "getObservations",
-        "responses" : {
-          "200" : {
-            "description" : "observations list",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/Observation"
-                  }
-                }
-              }
-            }
-          },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
-                }
-              }
-            }
-          }
-        },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
-      },
-      "post" : {
-        "tags" : [ "observations" ],
-        "summary" : "create a new observation",
-        "operationId" : "createObservation",
-        "requestBody" : {
-          "$ref" : "#/components/requestBodies/Observation"
-        },
-        "responses" : {
-          "201" : {
-            "description" : "observation created",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Observation"
-                }
-              }
-            }
-          },
-          "422" : {
-            "description" : "Database validaion error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_422"
-                }
-              }
-            }
-          }
-        },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
-      }
-    },
-    "/observations/obstacles" : {
-      "get" : {
-        "tags" : [ "observations" ],
-        "summary" : "get the obstacles list",
-        "operationId" : "getObstacles",
-        "parameters" : [ {
-            "name" : "frontend",
-            "in" : "query",
-            "schema" : {
-                "type" : "boolean"
+    "/observations/obstacles": {
+      "get": {
+        "tags": [
+          "observations"
+        ],
+        "summary": "get the obstacles list",
+        "operationId": "getObstacles",
+        "parameters": [
+          {
+            "name": "frontend",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
             },
-            "description" : "True to only have the frontend related obstacles"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "obstacles list",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "example" : ["curb ramp", "missing curb ramp", "surface problem", "obstacle", "width", "security", "slope", "no problem", "bonus"]
+            "description": "True to only have the frontend related obstacles"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "obstacles list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": [
+                    "curb ramp",
+                    "missing curb ramp",
+                    "surface problem",
+                    "obstacle",
+                    "width",
+                    "security",
+                    "slope",
+                    "no problem",
+                    "bonus"
+                  ]
                 }
               }
             }
           },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
           }
         },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/observations/{id}" : {
-      "get" : {
-        "tags" : [ "observations" ],
-        "summary" : "get the given observation",
-        "operationId" : "getObservationById",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id of the observations",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "observation information",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Observation"
-                }
-              }
+    "/observations/{id}": {
+      "get": {
+        "tags": [
+          "observations"
+        ],
+        "summary": "get the given observation",
+        "operationId": "getObservationById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the observations",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
             }
-          },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "observation information",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Observation"
                 }
               }
             }
           }
-        },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
+        }
       },
-      "put" : {
-        "tags" : [ "observations" ],
-        "summary" : "update the given observation",
-        "operationId" : "updateObservation",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id of the observations",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
+      "put": {
+        "tags": [
+          "observations"
+        ],
+        "summary": "update the given observation",
+        "operationId": "updateObservation",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the observations",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
           }
-        } ],
-        "requestBody" : {
-          "$ref" : "#/components/requestBodies/Observation"
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Observation"
         },
-        "responses" : {
-          "200" : {
-            "description" : "observation updated",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Observation"
+        "responses": {
+          "200": {
+            "description": "observation updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Observation"
                 }
               }
             }
           },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
           },
-          "422" : {
-            "description" : "Database validaion error",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_422"
+          "422": {
+            "description": "Database validaion error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_422"
                 }
               }
             }
           }
         },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
+        "security": [
+            {
+                "bearerAuth": []
+            }
+        ]
       },
-      "delete" : {
-        "tags" : [ "observations" ],
-        "summary" : "delete the given observation",
-        "operationId" : "deleteObservation",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id of the observations",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
+      "delete": {
+        "tags": [
+          "observations"
+        ],
+        "summary": "delete the given observation",
+        "operationId": "deleteObservation",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the observations",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
           }
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "observation deleted"
+        ],
+        "responses": {
+          "204": {
+            "description": "observation deleted"
           },
-          "401" : {
-            "description" : "Access token or credentials are missing or invalid",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_401"
+          "401": {
+            "description": "Access token or credentials are missing or invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
           }
         },
-        "security" : [ {
-          "bearerAuth" : [ ]
-        } ]
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/itinerary/simple": {
+      "get": {
+        "tags": [
+          "itinerary"
+        ],
+        "summary": "obtains the shortest route between two points by taking obstacle on the path in account",
+        "operationId": "getSimpleItinerary",
+        "parameters": [
+          ({
+              "name": "origin",
+              "description": "The origin coordinate of the itinerary written in the format latitude,longitude",
+              "required": true,
+              "in": "query",
+              "schema": {
+                  "type": "string"
+              }
+          },
+          {
+              "name": "destination",
+              "description": "The destination coordinate of the itinerary written in the format latitude,longitude",
+              "required": true,
+              "in": "query",
+              "schema": {
+                  "type": "string"
+              }
+          })
+        ],
+        "responses": {
+            "200": {
+                "description": "A GeoJSON containing the itinerary",
+                "content": {
+                      "application/json": {
+                            "schema": {
+                                  "type": "object",
+                                  "properties": {
+                                        "type": {
+                                              "type": "string",
+                                              "default": "Feature"
+                                        },
+                                        "geometry": {
+                                              "type": "array",
+                                              "items": {
+                                                    "type": "object"
+                                              },
+                                              "default": []
+                                        }
+                                  }
+                            }
+                      }
+                }
+            },
+            "400": {
+                "description": "Bad coordinate given",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "string",
+                            "default": "Bad coordinate given"
+                        }
+                    }
+                }
+            }
+        }
       }
     }
   },
-  "components" : {
-    "schemas" : {
-      "User" : {
-        "required" : [ "email", "password", "pseudonym" ],
-        "type" : "object",
-        "properties" : {
-          "pseudonym" : {
-            "type" : "string"
+  "components": {
+    "schemas": {
+      "User": {
+        "required": [
+          "email",
+          "password",
+          "pseudonym"
+        ],
+        "type": "object",
+        "properties": {
+          "pseudonym": {
+            "type": "string"
           },
-          "email" : {
-            "type" : "string"
+          "email": {
+            "type": "string"
           },
-          "password" : {
-            "type" : "string"
+          "password": {
+            "type": "string"
           },
-          "profile" : {
-            "$ref" : "#/components/schemas/Profile"
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
           },
-          "events" : {
-            "type" : "array",
-            "description" : "Id of the events the user is taking part",
-            "items" : {
-              "type" : "string",
-              "format" : "uui"
+          "events": {
+            "type": "array",
+            "description": "Id of the events the user is taking part",
+            "items": {
+              "type": "string",
+              "format": "uui"
             }
           }
         }
       },
-      "Profile" : {
-        "required" : [ "age", "mobility" ],
-        "type" : "object",
-        "properties" : {
-          "age" : {
-            "type" : "integer"
+      "Profile": {
+        "required": [
+          "age",
+          "mobility"
+        ],
+        "type": "object",
+        "properties": {
+          "age": {
+            "type": "integer"
           },
-          "gender" : {
-            "type" : "string",
-            "enum" : [ "m", "f" ]
+          "gender": {
+            "type": "string",
+            "enum": [
+              "m",
+              "f"
+            ]
           },
-          "helper" : {
-            "type" : "string",
-            "enum" : [ "white cane", "walker", "wheelchair" ]
+          "helper": {
+            "type": "string",
+            "enum": [
+              "white cane",
+              "walker",
+              "wheelchair"
+            ]
           },
-          "helperFrequency" : {
-            "type" : "string",
-            "enum" : [ "rarely", "sometimes", "always" ]
+          "helperFrequency": {
+            "type": "string",
+            "enum": [
+              "rarely",
+              "sometimes",
+              "always"
+            ]
           },
-          "mobility" : {
-            "type" : "string",
-            "enum" : [ "minimal", "reduced", "good", "perfect" ]
+          "mobility": {
+            "type": "string",
+            "enum": [
+              "minimal",
+              "reduced",
+              "good",
+              "perfect"
+            ]
           }
         }
       },
-      "Event" : {
-        "required" : [ "beginning", "ending", "id", "numberOfImages", "objective", "owner", "title" ],
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "uuid"
+      "Event": {
+        "required": [
+          "beginning",
+          "ending",
+          "id",
+          "numberOfImages",
+          "objective",
+          "owner",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
           },
-          "owner" : {
-            "type" : "string"
+          "owner": {
+            "type": "string"
           },
-          "title" : {
-            "type" : "string"
+          "title": {
+            "type": "string"
           },
-          "password" : {
-            "type" : "string"
+          "password": {
+            "type": "string"
           },
-          "beginning" : {
-            "type" : "string"
+          "beginning": {
+            "type": "string"
           },
-          "ending" : {
-            "type" : "string"
+          "ending": {
+            "type": "string"
           },
-          "objective" : {
-            "type" : "string"
+          "objective": {
+            "type": "string"
           },
-          "numberOfImages" : {
-            "type" : "integer"
+          "numberOfImages": {
+            "type": "integer"
           },
-          "observations" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "format" : "uuid"
+          "observations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
             }
           }
         }
       },
-      "Observation" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "uuid"
+      "Observation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
           },
-          "owner" : {
-            "type" : "string",
-            "format" : "uuid"
+          "owner": {
+            "type": "string",
+            "format": "uuid"
           },
-          "description" : {
-            "$ref" : "#/components/schemas/Description"
+          "description": {
+            "$ref": "#/components/schemas/Description"
           },
-          "image" : {
-              "$ref" : "#/components/schemas/Image"
+          "image": {
+            "$ref": "#/components/schemas/Image"
           },
-          "location" : {
-            "$ref" : "#/components/schemas/Location"
+          "location": {
+            "$ref": "#/components/schemas/Location"
           }
         }
       },
-      "Description" : {
-        "type" : "object",
-        "properties" : {
-          "obstacle" : {
-            "type" : "string",
-            "enum" : [ "curb ramp", "missing curb ramp", "surface problem", "obstacle", "width", "security", "slope", "no problem", "bonus" ]
+      "Description": {
+        "type": "object",
+        "properties": {
+          "obstacle": {
+            "type": "string",
+            "enum": [
+              "curb ramp",
+              "missing curb ramp",
+              "surface problem",
+              "obstacle",
+              "width",
+              "security",
+              "slope",
+              "no problem",
+              "bonus"
+            ]
           },
-          "freeText" : {
-            "type" : "string"
+          "freeText": {
+            "type": "string"
           },
-          "impact" : {
-            "type" : "integer"
+          "impact": {
+            "type": "integer"
           }
         }
       },
-      "Location" : {
-        "type" : "object",
-        "properties" : {
-            "latitude" : {
-                "type" : "number"
-            },
-            "longitude" : {
-                "type" : "number"
-            },
-            "altitude" : {
-              "type" : "number"
-            }
-        }
-      },
-      "Image" : {
-          "type" : "object",
-          "properties" : {
-              "basename" : {
-                  "type" : "string",
-                  "example" : "1589189004789.png"
-              }
-          }
-      },
-      "body" : {
-        "type" : "object",
-        "properties" : {
-          "email" : {
-            "type" : "string",
-            "example" : "my@mail.com"
+      "Location": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number"
           },
-          "password" : {
-            "type" : "string"
+          "longitude": {
+            "type": "number"
+          },
+          "altitude": {
+            "type": "number"
           }
         }
       },
-      "inline_response_200" : {
-        "type" : "object",
-        "properties" : {
-          "code" : {
-            "type" : "integer",
-            "description" : "http code",
-            "example" : 200
-          },
-          "token" : {
-            "type" : "string",
-            "description" : "JWT",
-            "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+      "Image": {
+        "type": "object",
+        "properties": {
+          "basename": {
+            "type": "string",
+            "example": "1589189004789.png"
           }
         }
       },
-      "inline_response_401" : {
-        "type" : "object",
-        "properties" : {
-          "code" : {
-            "type" : "integer",
-            "description" : "http status code",
-            "example" : 401
+      "body": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "my@mail.com"
           },
-          "message" : {
-            "type" : "string",
-            "description" : "error message",
-            "example" : "Unauthorized"
+          "password": {
+            "type": "string"
           }
         }
       },
-      "inline_response_409" : {
-        "type" : "object",
-        "properties" : {
-          "code" : {
-            "type" : "integer",
-            "description" : "http status code",
-            "example" : 409
+      "inline_response_200": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "http code",
+            "example": 200
           },
-          "message" : {
-            "type" : "string",
-            "description" : "error message",
-            "example" : "conflict"
+          "token": {
+            "type": "string",
+            "description": "JWT",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
           }
         }
       },
-      "inline_response_422" : {
-        "type" : "object",
-        "properties" : {
-          "code" : {
-            "type" : "integer",
-            "description" : "http status code",
-            "example" : 422
+      "inline_response_401": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "http status code",
+            "example": 401
           },
-          "message" : {
-            "type" : "string",
-            "description" : "error message",
-            "example" : "validation error"
+          "message": {
+            "type": "string",
+            "description": "error message",
+            "example": "Unauthorized"
           }
         }
       },
-      "inline_response_404" : {
-        "type" : "object",
-        "properties" : {
-          "code" : {
-            "type" : "integer",
-            "description" : "http status code",
-            "example" : 404
+      "inline_response_409": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "http status code",
+            "example": 409
           },
-          "message" : {
-            "description" : "error message",
-            "example" : "Not Found"
+          "message": {
+            "type": "string",
+            "description": "error message",
+            "example": "conflict"
+          }
+        }
+      },
+      "inline_response_422": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "http status code",
+            "example": 422
+          },
+          "message": {
+            "type": "string",
+            "description": "error message",
+            "example": "validation error"
+          }
+        }
+      },
+      "inline_response_404": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "http status code",
+            "example": 404
+          },
+          "message": {
+            "description": "error message",
+            "example": "Not Found"
           }
         }
       }
     },
-    "responses" : {
-      "UnauthorizedError" : {
-        "description" : "Access token or credentials are missing or invalid",
-        "content" : {
-          "application/json" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_response_401"
+    "responses": {
+      "UnauthorizedError": {
+        "description": "Access token or credentials are missing or invalid",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/inline_response_401"
             }
           }
         }
       },
-      "NotFoundError" : {
-        "description" : "Not Found",
-        "content" : {
-          "application/json" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_response_404"
+      "NotFoundError": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/inline_response_404"
             }
           }
         }
       },
-      "ConflictError" : {
-        "description" : "Conflict in the request",
-        "content" : {
-          "application/json" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_response_409"
+      "ConflictError": {
+        "description": "Conflict in the request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/inline_response_409"
             }
           }
         }
       },
-      "ValidationError" : {
-        "description" : "Database validaion error",
-        "content" : {
-          "application/json" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_response_422"
+      "ValidationError": {
+        "description": "Database validaion error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/inline_response_422"
             }
           }
         }
       }
     },
-    "requestBodies" : {
-      "User" : {
-        "description" : "Required to create or update a user",
-        "content" : {
-          "application/json" : {
-            "schema" : {
-              "required" : [ "email", "password", "pseudonym" ],
-              "type" : "object",
-              "properties" : {
-                "pseudonym" : {
-                  "type" : "string"
+    "requestBodies": {
+      "User": {
+        "description": "Required to create or update a user",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "email",
+                "password",
+                "pseudonym"
+              ],
+              "type": "object",
+              "properties": {
+                "pseudonym": {
+                  "type": "string"
                 },
-                "email" : {
-                  "type" : "string"
+                "email": {
+                  "type": "string"
                 },
-                "password" : {
-                  "type" : "string"
+                "password": {
+                  "type": "string"
                 }
               }
             }
           }
         }
       },
-      "Event" : {
-        "description" : "Required to create or update an event",
-        "content" : {
-          "applicatio/json" : {
-            "schema" : {
-              "required" : [ "beginning", "ending", "objective", "title" ],
-              "type" : "object",
-              "properties" : {
-                "title" : {
-                  "type" : "string"
+      "Event": {
+        "description": "Required to create or update an event",
+        "content": {
+          "applicatio/json": {
+            "schema": {
+              "required": [
+                "beginning",
+                "ending",
+                "objective",
+                "title"
+              ],
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
                 },
-                "password" : {
-                  "type" : "string"
+                "password": {
+                  "type": "string"
                 },
-                "beginning" : {
-                  "type" : "string"
+                "beginning": {
+                  "type": "string"
                 },
-                "ending" : {
-                  "type" : "string"
+                "ending": {
+                  "type": "string"
                 },
-                "objective" : {
-                  "type" : "string"
+                "objective": {
+                  "type": "string"
                 },
                 "numberOfImages": {
                   "type": "number"
@@ -1379,21 +1537,21 @@
           }
         }
       },
-      "Observation" : {
-        "description" : "Required to create or update an observation",
-        "content" : {
-          "application/json" : {
-            "schema" : {
-              "type" : "object",
-              "properties" : {
-                "description" : {
-                  "$ref" : "#/components/schemas/Description"
+      "Observation": {
+        "description": "Required to create or update an observation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "$ref": "#/components/schemas/Description"
                 },
-                "imageData" : {
-                  "type" : "string"
+                "imageData": {
+                  "type": "string"
                 },
-                "location" : {
-                    "$ref" : "#/components/schemas/Location"
+                "location": {
+                  "$ref": "#/components/schemas/Location"
                 }
               }
             }
@@ -1401,11 +1559,11 @@
         }
       }
     },
-    "securitySchemes" : {
-      "bearerAuth" : {
-        "type" : "http",
-        "scheme" : "bearer",
-        "bearerFormat" : "JWT"
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
