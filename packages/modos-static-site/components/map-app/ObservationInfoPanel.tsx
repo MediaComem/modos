@@ -34,11 +34,13 @@ export const ObservationInfoPanel = (props: IProps) => {
         <div className={styles['infos-details']}>
           <h3>Observation N°{id}</h3>
           <figure>
-            <img
-              className='img-fluid'
-              src={`${API_URL}${image.apiLink}`}
-              alt={image.basename}
-            />
+            <div className={styles['img-container']}>
+              <img
+                className='img-fluid'
+                src={`${API_URL}${image.apiLink}`}
+                alt={image.basename}
+              />
+            </div>
             <figcaption>{description.freeText}</figcaption>
           </figure>
         </div>
