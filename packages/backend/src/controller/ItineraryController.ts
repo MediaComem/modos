@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { createAsyncRoute, validate } from "./utils";
-import { getRepository, getManager } from "typeorm";
+import { getRepository, getManager, getConnection } from 'typeorm';
 import { Event } from "../entity/Event";
 import { sendError } from "./ErrorController";
 
@@ -45,33 +45,31 @@ export class ItineraryControler {
     }
 
     try{
-      const [originLat, originLont] = extractLatLongFromQuery(origin);
-      const [destinationLat, destinationLont] = extractLatLongFromQuery(destination);
+      const [originLat, originLong] = extractLatLongFromQuery(origin);
+      const [destinationLat, destinationLong] = extractLatLongFromQuery(
+          destination
+      );
 
-      return res.json(JSON.parse(`
-    {
-      "type": "FeatureCollection",
-      "features": [
-        {
-          "type": "Feature",
-          "properties": {},
-          "geometry": {
-            "type": "LineString",
-            "coordinates": [
-              [
-                ${originLont},
-                ${originLat}
-              ],              
-              [
-                ${destinationLont},
-                ${destinationLat}
-              ]
-            ]
-          }
-        }
-      ]
-    }    
-    `));
+      const queryResult = await getConnection().query(
+          `SELECT 
+            json_build_object(
+              'type',
+              'FeatureCollection',
+              'features',
+              json_agg(
+                  ST_AsGeoJSON(t.*)
+              )
+            ) as simpleroute
+          FROM mds_simple_routing(
+              'POINT(' || $1 || ' ' || $2 || ')',
+              'POINT(' || $3 || ' ' || $4 || ')'
+            ) AS t(geom)`,
+          [originLong, originLat, destinationLong, destinationLat]
+      );
+
+      if (!queryResult[0]) return res.send([]);
+
+      return res.send(queryResult[0].simpleroute);
     }catch(err){
       console.error(err);
       return sendError(res, 400, ItineraryError.BAD_COORDINATE)
