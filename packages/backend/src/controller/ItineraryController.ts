@@ -68,6 +68,7 @@ export class ItineraryControler {
       );
 
       if (!queryResult[0]) return res.send([]);
+      if (!queryResult[0].simpleroute.features) return res.send([]);
 
       return res.send(queryResult[0].simpleroute);
     }catch(err){

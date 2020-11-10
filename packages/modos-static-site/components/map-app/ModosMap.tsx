@@ -23,29 +23,35 @@ import { NavLayerGroup } from './NavLayerGroup';
 import { ObservationInfoPanel } from './ObservationInfoPanel';
 import ObservationsLayerGroup from './ObservationsLayerGroup';
 
+enum SEARCHED_POINT {
+  FROM='from',
+  TO='to',
+  NOT_SEARCHING=''
+}
+
 const ModosMap = () => {
-  const [displayNavPanel, setDisplayNavPanel] = useState(false);
-  const [currentSearchedPoint, setCurrentSearchedPoint] = useState('');
-  const [navPanelLocation, setNavPanelLocation] = useState({
+  const [ displayNavPanel, setDisplayNavPanel ] = useState(false);
+  const [ currentSearchedPoint, setCurrentSearchedPoint ] = useState(SEARCHED_POINT.NOT_SEARCHING);
+  const [ navPanelLocation, setNavPanelLocation ] = useState({
     from: null,
     to: null
   });
-  const [itinerary, setItinerary] = useState({
+  const [ itinerary, setItinerary ] = useState({
     generatedDate: Date.now(), // We need a generated date to force react-leaflet to re-render the geojson
     geojson: null
   });
-  const [displayObservationPanel, setDisplayObersvationPanel] = useState(false);
-  const [currentSelectedObservation, setCurrentSelectedObservation] = useState(
+  const [ displayObservationPanel, setDisplayObersvationPanel ] = useState(false);
+  const [ currentSelectedObservation, setCurrentSelectedObservation ] = useState(
     undefined
   );
-  const [eventID, setEventID] = useState(undefined);
+  const [ eventID, setEventID ] = useState(undefined);
 
   const START_POSITION = new LatLng(46.7833, 6.65);
   const START_ZOOM = 15;
 
   // ------------ EVENT MANAGEMENT FOR NAVIGATION PANEL
 
-  const onSearchingLocation = (point: 'from' | 'to') => {
+  const onSearchingLocation = (point: SEARCHED_POINT.FROM | SEARCHED_POINT.TO) => {
     setDisplayNavPanel(false);
     setCurrentSearchedPoint(point);
   };
@@ -56,6 +62,7 @@ const ModosMap = () => {
       currLocation[currentSearchedPoint] = evt.latlng;
       setNavPanelLocation({ ...navPanelLocation, ...currLocation });
       setDisplayNavPanel(true);
+      setCurrentSearchedPoint(SEARCHED_POINT.NOT_SEARCHING);
     }
   };
 
@@ -70,12 +77,11 @@ const ModosMap = () => {
 
     const currLocation = navPanelLocation;
     getSimpleItinerary(
-      [currLocation.from.lat, currLocation.from.lng],
-      [currLocation.to.lat, currLocation.to.lng]
+      [ currLocation.from.lat, currLocation.from.lng ],
+      [ currLocation.to.lat, currLocation.to.lng ]
     )
       .then(result =>
-        setItinerary({ generatedDate: Date.now(), geojson: result })
-      )
+        setItinerary({ generatedDate: Date.now(), geojson: result }))
       .catch(err => console.error(err))
       .finally(() => setDisplayNavPanel(false));
   };
@@ -99,25 +105,25 @@ const ModosMap = () => {
       />
 
       <div id={styles['map-app-container']}>
-        {displayNavPanel && (
+        {displayNavPanel &&
           <NavigationPanel
             id={styles['map-app-navigation-panel']}
             onClickExit={() => setDisplayNavPanel(false)}
-            onClickFrom={() => onSearchingLocation('from')}
-            onClickTo={() => onSearchingLocation('to')}
-            onChooseFrom={evt => onChooseLocationByText(evt, 'from')}
-            onChooseTo={evt => onChooseLocationByText(evt, 'to')}
+            onClickFrom={() => onSearchingLocation(SEARCHED_POINT.FROM)}
+            onClickTo={() => onSearchingLocation(SEARCHED_POINT.TO)}
+            onChooseFrom={evt => onChooseLocationByText(evt, SEARCHED_POINT.FROM)}
+            onChooseTo={evt => onChooseLocationByText(evt, SEARCHED_POINT.TO)}
             onSubmitLocation={evt => onSubmitLocation(evt)}
             location={navPanelLocation}></NavigationPanel>
-        )}
+        }
 
-        {displayObservationPanel && currentSelectedObservation && (
+        {displayObservationPanel && currentSelectedObservation &&
           <ObservationInfoPanel
             id={styles['map-app-observation-panel']}
             observation={currentSelectedObservation}
             onClickExit={() => onObservationInfoPanelExit()}
           />
-        )}
+        }
 
         <Map
           id={styles.map}
@@ -198,19 +204,19 @@ const Legends = () => {
       {Object.values(OBSTACLES_TYPE).map(
         type =>
           type !== OBSTACLES_TYPE.UNLABELLED &&
-          type !== OBSTACLES_TYPE.NOPROBLEM && (
+          type !== OBSTACLES_TYPE.NOPROBLEM &&
             <div key={type}>
               <img src={`/assets/${type}-icon.png`} />
               <span>{i18n(type)}</span>
             </div>
-          )
+
       )}
     </LeafletCustomControl>
   );
 };
 
 const Events = (props: any) => {
-  const [events, setEvents] = useState([]);
+  const [ events, setEvents ] = useState([]);
 
   useEffect(() => {
     getEvents()
@@ -222,7 +228,7 @@ const Events = (props: any) => {
 
   return (
     <LeafletCustomControl id='map-events' position='topright'>
-      {events && events.length > 0 && (
+      {events && events.length > 0 &&
         <Form.Control
           onChange={event => props.onChange(event.target.value)}
           as='select'
@@ -230,13 +236,13 @@ const Events = (props: any) => {
           custom
           placeholder='Evénements'>
           <option value=''>Choisissez un évenement</option>
-          {events?.map(event => (
+          {events?.map(event =>
             <option value={event.id} key={event.id}>
               {event.title}
             </option>
-          ))}
+          )}
         </Form.Control>
-      )}
+      }
     </LeafletCustomControl>
   );
 };
