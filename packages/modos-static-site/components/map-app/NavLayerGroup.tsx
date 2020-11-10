@@ -4,6 +4,7 @@ import { Icon, LatLng } from 'leaflet';
 
 const BASE_ICON = new Icon({
   iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-shadow.png',
   iconSize: [25, 41],
   iconAnchor: [13, 41]
 });
