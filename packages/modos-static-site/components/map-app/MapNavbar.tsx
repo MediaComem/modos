@@ -23,12 +23,12 @@ export const MapNavbar = (props: IProps) => (
 
     <div>
       {/* Navigation is desactivated for now... */}
-      {/* <button
-      className={styles['navbar-btn']}
-      onClick={() => props.onClickToggleNavPanel()}
-    >
-      <i className='material-icons'>navigation</i>
-    </button> */}
+      <button
+        className={styles['navbar-btn']}
+        onClick={() => props.onClickToggleNavPanel()}
+      >
+        <i className='material-icons'>navigation</i>
+      </button>
     </div>
   </Navbar>
 );

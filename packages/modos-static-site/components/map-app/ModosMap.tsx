@@ -1,9 +1,9 @@
 /* eslint-disable max-lines-per-function */
 /* eslint-disable @typescript-eslint/no-require-imports */
-import { CRS, LatLng, LeafletMouseEvent } from 'leaflet';
+import { LatLng, LeafletMouseEvent } from 'leaflet';
 import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { LayersControl, Map, TileLayer, WMSTileLayer } from 'react-leaflet';
+import { GeoJSON, LayersControl, Map, TileLayer/* , WMSTileLayer */ } from 'react-leaflet';
 import { useI18N } from '../../libs';
 import {
   IMapnvFeature,
@@ -17,8 +17,9 @@ import {
 import { LeafletCustomControl } from './LeafletCustomControl';
 import styles from './map.module.scss';
 import { MapNavbar } from './MapNavbar';
-import MapnvAccessibilityLayer from './MapnvAccessibilityLayer';
+// import MapnvAccessibilityLayer from './MapnvAccessibilityLayer';
 import { NavigationPanel } from './NavigationPanel';
+import { NavLayerGroup } from './NavLayerGroup';
 import { ObservationInfoPanel } from './ObservationInfoPanel';
 import ObservationsLayerGroup from './ObservationsLayerGroup';
 
@@ -139,7 +140,7 @@ const ModosMap = () => {
 
             {/* Bellow are layer and control for navigation, don't remove it */}
 
-            {/* <LayersControl.Overlay
+            <LayersControl.Overlay
               name='Marqueurs de navigation'
               checked={true}
             >
@@ -147,16 +148,16 @@ const ModosMap = () => {
                 from={navPanelLocation.from}
                 to={navPanelLocation.to}
               />
-            </LayersControl.Overlay> */}
+            </LayersControl.Overlay>
 
-            {/* <LayersControl.Overlay name='Itineraire' checked={true}>
+            <LayersControl.Overlay name='Itineraire' checked={true}>
               {itinerary?.geojson &&
-                <GeoJSONLayer
+                <GeoJSON
                   key={itinerary.generatedDate}
                   data={itinerary.geojson}
                 />
               }
-            </LayersControl.Overlay> */}
+            </LayersControl.Overlay>
 
             {/* Bellow are control any layer for accessibility, don't remove it */}
 
