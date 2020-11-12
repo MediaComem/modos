@@ -17,6 +17,7 @@ import {
 import { LeafletCustomControl } from './LeafletCustomControl';
 import styles from './map.module.scss';
 import { MapNavbar } from './MapNavbar';
+import MapnvAccessibilityLayer from './MapnvAccessibilityLayer';
 // import MapnvAccessibilityLayer from './MapnvAccessibilityLayer';
 import { NavigationPanel } from './NavigationPanel';
 import { NavLayerGroup } from './NavLayerGroup';
@@ -177,9 +178,9 @@ const ModosMap = () => {
 
             {/* Bellow are control any layer for accessibility, don't remove it */}
 
-            {/* <LayersControl.Overlay name='Accessibilité' checked={true}>
+            <LayersControl.Overlay name='Accessibilité' checked={false}>
               <MapnvAccessibilityLayer />
-            </LayersControl.Overlay> */}
+            </LayersControl.Overlay>
           </LayersControl>
 
           <Events onChange={eEventID => setEventID(eEventID)} />
