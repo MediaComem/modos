@@ -46,46 +46,6 @@ export class initSnapping1603969816824 implements MigrationInterface {
             $$
         LANGUAGE 'plpgsql';
         `, undefined);
-        await queryRunner.query(`
-            CREATE OR REPLACE FUNCTION "modos"."snap_point_simple"()
-            RETURNS trigger AS
-            $$
-            DECLARE
-                geomx geometry(Point,4326) := NULL;
-            BEGIN
-                IF to_jsonb(NEW) ? 'geom' THEN
-                    geomx := NEW.geom;
-                ELSIF to_jsonb(NEW) ? 'position' THEN
-                    geomx := NEW.position;
-                END IF;
-                NEW.snap_geom := (
-                SELECT sub.snap_geom
-                FROM
-                    (
-                        SELECT
-                            "modos"."edges".id AS modos_edge_id,
-                            ST_Distance(
-                            ST_Transform("modos"."edges".geom, 2056),
-                            ST_Transform(geomx, 2056)
-                            )::double precision AS dist_to_nearest_edge,
-                            ST_Transform(
-                                ST_ClosestPoint(
-                                ST_Transform("modos"."edges".geom, 2056),
-                                ST_Transform(geomx, 2056)
-                            ),
-                            4326
-                        )::geometry(Point, 4326) AS snap_geom
-                        FROM
-                            "modos"."edges"
-                        ORDER BY dist_to_nearest_edge
-                        LIMIT 1
-                    ) AS sub
-                );
-                RETURN NEW;
-            END
-            $$
-        LANGUAGE 'plpgsql';
-        `, undefined);
         await queryRunner.query(`CREATE TRIGGER "snap_point_biut" BEFORE INSERT OR UPDATE ON "modos"."observation" FOR EACH ROW EXECUTE PROCEDURE "modos"."snap_point"();`, undefined);
         await queryRunner.query(`CREATE TRIGGER "snap_point_biut" BEFORE INSERT OR UPDATE ON "modos"."images" FOR EACH ROW EXECUTE PROCEDURE "modos"."snap_point"();`, undefined);
         await queryRunner.query(`
