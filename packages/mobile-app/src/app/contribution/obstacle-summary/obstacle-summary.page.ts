@@ -58,7 +58,6 @@ export class ObstacleSummaryPage implements OnInit {
         this.isSaveBtnDisabled = true;
       }
     } catch (err) {
-      this.isSaveBtnDisabled = true;
       this.showErrorLocalisationAlert();
     }
   }
@@ -156,6 +155,8 @@ export class ObstacleSummaryPage implements OnInit {
       return;
     }
 
+    // For more information about the options:
+    // https://github.com/apache/cordova-plugin-geolocation#geolocationoptions
     const position = await Plugins.Geolocation.getCurrentPosition({
       maximumAge: 1000,
       timeout: 5000,
@@ -164,16 +165,6 @@ export class ObstacleSummaryPage implements OnInit {
 
     this.location.lat = position.coords.latitude;
     this.location.lng = position.coords.longitude;
-
-    // .then((geoPosition) => {
-    //   this.location.lat = geoPosition.coords.latitude;
-    //   this.location.lng = geoPosition.coords.longitude;
-    // })
-    // .catch((error) => {
-    //   this.location.lat = 0;
-    //   this.location.lng = 0;
-    //   this.showErrorLocalisationAlert();
-    // });
   }
 
   private showErrorLocalisationAlert() {
