@@ -6,8 +6,8 @@ export class initRouting1603965250007 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`
             CREATE OR REPLACE FUNCTION "modos"."mds_weighted_routing"(
-                    IN source_address TEXT,
-                    IN target_address TEXT,
+                    IN source TEXT,
+                    IN target TEXT,
                     IN uw FLOAT4[],
                     OUT seq INTEGER,
                     OUT edge BIGINT,
