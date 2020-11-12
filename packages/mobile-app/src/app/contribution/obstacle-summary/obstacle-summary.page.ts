@@ -48,11 +48,17 @@ export class ObstacleSummaryPage implements OnInit {
 
   ngOnInit() {}
 
-  ionViewWillEnter() {
-    this.autoLocate();
-    if (this.param.obstacle === 'other') {
-      this.isCommentsMandatory = true;
-      this.isSaveBtnDisabled = true;
+  async ionViewWillEnter() {
+    this.isSaveBtnDisabled = true;
+    try {
+      await this.autoLocate();
+      this.isSaveBtnDisabled = false;
+      if (this.param.obstacle === 'other') {
+        this.isCommentsMandatory = true;
+        this.isSaveBtnDisabled = true;
+      }
+    } catch (err) {
+      this.showErrorLocalisationAlert();
     }
   }
 
@@ -140,22 +146,25 @@ export class ObstacleSummaryPage implements OnInit {
     this.showCancelWarning();
   }
 
-  private autoLocate() {
+  /**
+   * Will locate the user with high accuracy
+   */
+  private async autoLocate() {
     if (!Capacitor.isPluginAvailable('Geolocation')) {
       this.showErrorLocalisationAlert();
       return;
     }
-    
-    Plugins.Geolocation.getCurrentPosition()
-      .then((geoPosition) => {
-        this.location.lat = geoPosition.coords.latitude;
-        this.location.lng = geoPosition.coords.longitude;
-      })
-      .catch((error) => {
-        this.location.lat = 0;
-        this.location.lng = 0;
-        this.showErrorLocalisationAlert();
-      });
+
+    // For more information about the options:
+    // https://github.com/apache/cordova-plugin-geolocation#geolocationoptions
+    const position = await Plugins.Geolocation.getCurrentPosition({
+      maximumAge: 1000,
+      timeout: 5000,
+      enableHighAccuracy: true,
+    });
+
+    this.location.lat = position.coords.latitude;
+    this.location.lng = position.coords.longitude;
   }
 
   private showErrorLocalisationAlert() {
