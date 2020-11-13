@@ -192,7 +192,7 @@ export class initRouting1603965250007 implements MigrationInterface {
                         ORDER BY
                             ST_Distance(
                                 ST_Transform(geom, 2056),
-                                ST_Transform(ST_GeomFromText($ 1, 4326), 2056)
+                                ST_Transform(ST_GeomFromText($1, 4326), 2056)
                             ) ASC
                         LIMIT 1
                         ),
