@@ -27,18 +27,20 @@ export class initRouting1603965250007 implements MigrationInterface {
                         "source"::bigint as source,
                         "target"::bigint as target,
                         (length/((
+                        %s*avg_obstacles+
                         %s*avg_steps+
                         %s*avg_security+
                         %s*avg_coating+
                         %s*avg_slopes+
-                        %s*avg_widths)/5)
+                        %s*avg_widths)/6)
                         )::float4 as cost
                         FROM "modos"."edges"',
                         $3[1],
                         $3[2],
                         $3[3],
                         $3[4],
-                        $3[5]),
+                        $3[5],
+                        $3[6]),
                         (
                         SELECT osmid
                         FROM "modos"."nodes"
@@ -107,11 +109,12 @@ export class initRouting1603965250007 implements MigrationInterface {
                         "source"::bigint as source,
                         "target"::bigint as target,
                         (length/((
+                        avg_obstacles+
                         avg_steps+
                         avg_security+
                         avg_coating+
                         avg_slopes+
-                        avg_widths)/5)
+                        avg_widths)/6)
                         )::float4 as cost
                         FROM "modos"."edges"'),
                         (
