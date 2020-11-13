@@ -3,7 +3,9 @@ import { User } from "./User";
 import { Observation } from "./Observation";
 import { IsDate, IsString, MinLength, IsInt, IsPositive } from 'class-validator'
 
-@Entity()
+@Entity({
+    schema: 'modos'
+})
 export class Event {
 
     @PrimaryGeneratedColumn()

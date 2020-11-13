@@ -26,7 +26,9 @@ export enum Mobility {
     MINIMAL = 'minimal'
 }
 
-@Entity()
+@Entity({
+    schema: 'modos'
+})
 export class Profile {
 
     @PrimaryGeneratedColumn()

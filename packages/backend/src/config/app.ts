@@ -50,7 +50,7 @@ export class App {
     public start() {
         const port = this.server.get('port');
         this.server.listen(port, function () {
-            console.log('Express server listening on - http://localhost:' + port);
+          console.log(`Express server listening on port ${port} (base URL is ${Config.baseUrl})`);
         });
     }
 }

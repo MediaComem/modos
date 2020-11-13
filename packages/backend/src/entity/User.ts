@@ -5,8 +5,9 @@ import { IsEmail, IsString } from 'class-validator'
 import * as bcrypt from "bcrypt";
 import { costFactor } from "../config/config";
 
-
-@Entity()
+@Entity({
+    schema: 'modos'
+})
 export class User {
 
     @PrimaryGeneratedColumn()
