@@ -64,6 +64,7 @@ export class initSnapping1603969816824 implements MigrationInterface {
                      WHERE table_schema = TG_TABLE_SCHEMA
                        AND table_name = TG_TABLE_NAME
                        AND column_name LIKE '%latitude%'
+                       AND column_name NOT LIKE '%ref'
                 );
                 loncol := (
                     SELECT column_name
@@ -71,6 +72,7 @@ export class initSnapping1603969816824 implements MigrationInterface {
                      WHERE table_schema = TG_TABLE_SCHEMA
                        AND table_name = TG_TABLE_NAME
                        AND column_name LIKE '%longitude%'
+                       AND column_name NOT LIKE '%ref'
                 );
                 EXECUTE 'select $1.' || loncol USING NEW INTO lon;
                 EXECUTE 'select $1.' || latcol USING NEW INTO lat;
