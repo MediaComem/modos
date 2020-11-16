@@ -1095,7 +1095,7 @@
         "summary": "obtains the shortest route between two points by taking obstacle on the path in account",
         "operationId": "getSimpleItinerary",
         "parameters": [
-          ({
+          {
               "name": "origin",
               "description": "The origin coordinate of the itinerary written in the format latitude,longitude",
               "required": true,
@@ -1112,7 +1112,7 @@
               "schema": {
                   "type": "string"
               }
-          })
+          }
         ],
         "responses": {
             "200": {
