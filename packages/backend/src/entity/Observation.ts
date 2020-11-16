@@ -17,9 +17,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { validate } from "class-validator";
 
-
-
-@Entity()
+@Entity({
+    schema: 'modos'
+})
 export class Observation {
     @PrimaryGeneratedColumn()
     id: number;

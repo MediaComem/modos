@@ -10,7 +10,18 @@ services:
     depends_on:
       - db
     environment:
+      MODOS_BASE_URL:
+      MODOS_BCRYPT_COST_FACTOR:
       MODOS_DATABASE_URL: postgres://modos:modos@db/modos
+      MODOS_IMAGE_FORMAT:
+      MODOS_JWT_EXPIRATION:
+      MODOS_PAYLOAD_LIMIT:
+      MODOS_PORT: "${MODOS_PORT:-3000}"
+      MODOS_SECRET:
+      MODOS_STORAGE_DIRECTORY: /var/lib/modos
+      NODE_ENV:
+      PORT:
+      TYPEORM_LOGGING:
     volumes:
       # Mount each required directory and file independently instead of mounting
       # the entire current directory. Otherwise the `node_modules` directory
@@ -24,8 +35,12 @@ services:
       - './package.json:/code/package.json:ro'
       - './package-lock.json:/code/package-lock.json:ro'
       - './tsconfig.json:/code/tsconfig.json:ro'
+      # Persist installed node_modules into a named volume.
+      - 'api_node_modules_data:/code/node_modules'
+      # Persist uploaded images into a named volume.
+      - 'api_storage_data:/var/lib/modos'
     ports:
-      - "3000:3000"
+      - "${MODOS_PORT:-3000}:${MODOS_PORT:-3000}"
 
   db:
     image: pgrouting/pgrouting:12-3.0-2.6.3
@@ -34,11 +49,15 @@ services:
       POSTGRES_USER: modos
       POSTGRES_PASSWORD: modos
     ports:
-      - "${MODOS_DB_PORT}:5432"
+      - "${MODOS_DATABASE_PORT:-5432}:5432"
     volumes:
+      # Mount the database initialization script into the container.
+      - "./docker/init-db.sh:/docker-entrypoint-initdb.d/000-init-db.sh:ro"
       # Persist data in a named volume. Run `docker-compose down -v` to
       # permanently delete it.
       - "db_data:/var/lib/postgresql/data"
 
 volumes:
   db_data:
+  api_node_modules_data:
+  api_storage_data:
