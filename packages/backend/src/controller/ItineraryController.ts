@@ -59,18 +59,22 @@ export class ItineraryControler {
 
             const queryResult = await getConnection().query(
                 `SELECT 
-            json_build_object(
-              'type',
-              'FeatureCollection',
-              'features',
-              json_agg(
-                  ST_AsGeoJSON(t.*)::json
-              )
-            ) as simpleroute
-          FROM mds_simple_routing(
-              'POINT(' || $1 || ' ' || $2 || ')',
-              'POINT(' || $3 || ' ' || $4 || ')'
-            ) AS t(geom)`,
+                    json_build_object(
+                    'type',
+                    'FeatureCollection',
+                    'features',
+                    json_agg(
+                        ST_AsGeoJSON(s_r.*)::json
+                    )
+                    ) as simpleroute
+                FROM (
+                        SELECT simple_routes.route_geom 
+                        FROM mds_simple_routing(
+                            'POINT(' || $1 || ' ' || $2 || ')',
+                            'POINT(' || $3 || ' ' || $4 || ')'
+                        ) AS simple_routes(geom)
+                    ) AS s_r
+            `,
                 [originLong, originLat, destinationLong, destinationLat]
             );
 
