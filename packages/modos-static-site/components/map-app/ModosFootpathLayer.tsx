@@ -2,9 +2,9 @@ import React from 'react';
 import { TileLayer } from 'react-leaflet';
 
 const URL =
-  'https://cartocdn-gusc-c.global.ssl.fastly.net/verdonarthur/api/v1/map/11715edd6df580a3e8f0b69b175012b4:1605615941765/1/{z}/{x}/{y}.png?api_key=b39f56eb8cdf42ac5edd9ff0258ea6bebb1e7de3';
+  'https://cartocdn-gusc-c.global.ssl.fastly.net/verdonarthur/api/v1/map/11715edd6df580a3e8f0b69b175012b4:1605615941765/1/{z}/{x}/{y}.png?api_key=default_public';
 const ModosFootpathLayer = () => (
-  <TileLayer minZoom={14} maxZoom={16} url={URL} />
+  <TileLayer minZoom={14} maxZoom={18} url={URL} />
 );
 
 // Bellow is the code begining of the integration of VectorGrid raster from
