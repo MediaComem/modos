@@ -157,7 +157,7 @@ const ModosMap = () => {
               />
             </LayersControl.Overlay>
 
-            <LayersControl.Overlay name='Modos pedestre' checked={true}>
+            <LayersControl.Overlay name='Réseau pédestre' checked={true}>
               <ModosFootpathLayer />
             </LayersControl.Overlay>
 
