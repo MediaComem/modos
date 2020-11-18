@@ -43,7 +43,7 @@ export class initImages1603890987710 implements MigrationInterface {
             license CHARACTER VARYING(256) NOT NULL DEFAULT 'copyright',
             state CHARACTER VARYING(256) NOT NULL DEFAULT 'uploaded',
             availability CHARACTER VARYING(256) NOT NULL DEFAULT 'privately-available',
-            "in_range" BOOLEAN NOT NULL DEFAULT false,
+            "in_range" BOOLEAN NOT NULL DEFAULT FALSE,
             eid INT REFERENCES "modos"."edges" (id),
             edist REAL NOT NULL,
             snap_geom geometry(Point, 4326) NOT NULL,
