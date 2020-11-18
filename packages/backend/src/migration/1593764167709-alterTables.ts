@@ -9,7 +9,7 @@ export class alterTables1593764167709 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "modos"."user" RENAME COLUMN "passwordHash" to "password_hash";`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."user" RENAME COLUMN "profileId" to "profile_id";`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."user" DROP CONSTRAINT IF EXISTS "REL_9466682df91534dd95e4dbaa61";`, undefined);
-        await queryRunner.query(`ALTER TABLE "modos"."user" ADD CONSTRAINT " user_profileid_unique" UNIQUE ("profile_id"),`, undefined);
+        await queryRunner.query(`ALTER TABLE "modos"."user" ADD CONSTRAINT " user_profileid_unique" UNIQUE ("profile_id");`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."observation" RENAME COLUMN "ownerId" to "owner_id";`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."observation" RENAME COLUMN "eventId" to "event_id";`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."observation" RENAME COLUMN "descriptionObstacle" to "description_obstacle";`, undefined);
@@ -48,7 +48,7 @@ export class alterTables1593764167709 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "modos"."user_events_event" ADD CONSTRAINT "FK_userid" FOREIGN KEY ("user_id") REFERENCES "modos"."user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;`, undefined);
 
         await queryRunner.query(`ALTER TABLE "modos"."user_events_event" DROP CONSTRAINT IF EXISTS "FK_c885fff747e43934134ceb67d33";`, undefined);
-        await queryRunner.query(`ALTER TABLE "modos"."user_events_event" ADD CONSTRAINT "FK_userid" FOREIGN KEY ("event_id") REFERENCES "modos"."event"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;`, undefined);
+        await queryRunner.query(`ALTER TABLE "modos"."user_events_event" ADD CONSTRAINT "FK_eventid" FOREIGN KEY ("event_id") REFERENCES "modos"."event"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;`, undefined);
 
 
         await queryRunner.query(`ALTER TABLE "modos"."observation" ALTER COLUMN "id" DROP DEFAULT;`, undefined);
