@@ -9,7 +9,7 @@ export class alterTables1593764167709 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "modos"."user" RENAME COLUMN "passwordHash" to "password_hash";`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."user" RENAME COLUMN "profileId" to "profile_id";`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."user" DROP CONSTRAINT IF EXISTS "REL_9466682df91534dd95e4dbaa61";`, undefined);
-        await queryRunner.query(`ALTER TABLE "modos"."user" ADD CONSTRAINT " user_profileid_key" UNIQUE ("profile_id"),`, undefined);
+        await queryRunner.query(`ALTER TABLE "modos"."user" ADD CONSTRAINT " user_profileid_unique" UNIQUE ("profile_id"),`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."observation" RENAME COLUMN "ownerId" to "owner_id";`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."observation" RENAME COLUMN "eventId" to "event_id";`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."observation" RENAME COLUMN "descriptionObstacle" to "description_obstacle";`, undefined);
@@ -39,7 +39,7 @@ export class alterTables1593764167709 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "modos"."observation" ADD CONSTRAINT "FK_ownerid" FOREIGN KEY ("owner_id") REFERENCES "modos"."user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;`, undefined);
 
         await queryRunner.query(`ALTER TABLE "modos"."observation" DROP CONSTRAINT IF EXISTS "FK_3b103dc1bb4c103c5e0df5d5069";`, undefined);
-        await queryRunner.query(`ALTER TABLE "modos"."observation" ADD CONSTRAINT "FK_eveintid" FOREIGN KEY ("event_id") REFERENCES "modos"."event"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;`, undefined);
+        await queryRunner.query(`ALTER TABLE "modos"."observation" ADD CONSTRAINT "FK_eventid" FOREIGN KEY ("event_id") REFERENCES "modos"."event"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;`, undefined);
 
         await queryRunner.query(`ALTER TABLE "modos"."event" DROP CONSTRAINT IF EXISTS "FK_e4abcb418e46db776e920a05a16";`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."event" ADD CONSTRAINT "FK_ownerid" FOREIGN KEY ("owner_id") REFERENCES "modos"."user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;`, undefined);
