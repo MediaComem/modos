@@ -22,6 +22,10 @@ export class initSnapping1603969816824 implements MigrationInterface {
                 ) FROM "modos"."network_convex_hull_v")
                 THEN
                     SELECT
+                        ST_Intersects(
+                            ST_Transform(geomx, 2056),
+                            ST_Transform("modos"."network_convex_hull_v".geom, 2056)
+                        ) AS "range",
                         "modos"."edges".id AS modos_edge_id,
                         (
                         ST_Transform("modos"."edges".geom, 2056)
@@ -36,10 +40,34 @@ export class initSnapping1603969816824 implements MigrationInterface {
                         4326
                     )::geometry(Point, 4326) AS snap_geom
                     FROM
-                        "modos"."edges"
+                        "modos"."edges", "modos"."network_convex_hull_v"
                     ORDER BY dist_to_nearest_edge
                     LIMIT 1
-                    INTO NEW.eid, NEW.edist, NEW.snap_geom;
+                    INTO NEW.in_range, NEW.eid, NEW.edist, NEW.snap_geom;
+                ELSE
+                    SELECT
+                        ST_Intersects(
+                            ST_Transform(geomx, 2056),
+                            ST_Transform("modos"."network_convex_hull_v".geom, 2056)
+                        ) AS "range",
+                        "modos"."edges".id AS modos_edge_id,
+                        (
+                        ST_Transform("modos"."edges".geom, 2056)
+                        <->
+                        ST_Transform(geomx, 2056)
+                        )::double precision AS dist_to_nearest_edge,
+                        ST_Transform(
+                            ST_ClosestPoint(
+                            ST_Transform("modos"."edges".geom, 2056),
+                            ST_Transform(geomx, 2056)
+                        ),
+                        4326
+                    )::geometry(Point, 4326) AS snap_geom
+                    FROM
+                        "modos"."edges", "modos"."network_convex_hull_v"
+                    ORDER BY dist_to_nearest_edge
+                    LIMIT 1
+                    INTO NEW.in_range, NEW.eid, NEW.edist, NEW.snap_geom;
                 END IF;
                 RETURN NEW;
             END
