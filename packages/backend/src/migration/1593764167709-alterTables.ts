@@ -60,7 +60,7 @@ export class alterTables1593764167709 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "modos"."observation" ADD COLUMN "edist" REAL;`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."observation" ADD COLUMN "created_at" TIMESTAMP WITH TIME ZONE DEFAULT NOW();`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."observation" ADD COLUMN "updated_at" TIMESTAMP WITH TIME ZONE DEFAULT NOW();`, undefined);
-        await queryRunner.query(`ALTER TABLE "modos"."observation" ADD COLUMN "snap_geom" geometry(Point, 4326)`, undefined);
+        await queryRunner.query(`ALTER TABLE "modos"."observation" ADD COLUMN "snap_geom" geometry(Point, 4326);`, undefined);
 
         await queryRunner.query(`ALTER TABLE "modos"."event" ALTER COLUMN "id" DROP DEFAULT;`, undefined);
         await queryRunner.query(`DROP SEQUENCE "modos"."event_id_seq";`, undefined);
