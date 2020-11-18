@@ -76,9 +76,15 @@ export class initSnapping1603969816824 implements MigrationInterface {
                 );
                 EXECUTE 'select $1.' || loncol USING NEW INTO lon;
                 EXECUTE 'select $1.' || latcol USING NEW INTO lat;
-                NEW.geom := ST_SetSRID(
-                    ST_MakePoint(lon,lat), 4326
-                );
+                IF to_jsonb(NEW) ? 'geom' THEN
+                    NEW.geom := ST_SetSRID(
+                        ST_MakePoint(lon,lat), 4326
+                    );
+                ELSIF to_jsonb(NEW) ? 'position' THEN
+                    NEW.position := ST_SetSRID(
+                        ST_MakePoint(lon,lat), 4326
+                    );
+                END IF;
                 RETURN NEW;
             END
             $$
