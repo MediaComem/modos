@@ -234,21 +234,21 @@ const Events = (props: any) => {
 
   return (
     <LeafletCustomControl id='map-events' position='topright'>
-      {events && events.length > 0 &&
+      {events && events.length > 0 && (
         <Form.Control
           onChange={event => props.onChange(event.target.value)}
           as='select'
           size='sm'
           custom
           placeholder='Evénements'>
-          <option value=''>Choisissez un évenement</option>
-          {events?.map(event =>
+          <option value=''>Choisissez un événement</option>
+          {events?.map(event => (
             <option value={event.id} key={event.id}>
               {event.title}
             </option>
-          )}
+          ))}
         </Form.Control>
-      }
+      )}
     </LeafletCustomControl>
   );
 };
