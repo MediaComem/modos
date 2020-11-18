@@ -44,7 +44,7 @@ export class initImages1603890987710 implements MigrationInterface {
             state CHARACTER VARYING(256) NOT NULL DEFAULT 'uploaded',
             availability CHARACTER VARYING(256) NOT NULL DEFAULT 'privately-available',
             "in_range" BOOLEAN NOT NULL DEFAULT FALSE,
-            eid INT REFERENCES "modos"."edges" (id),
+            eid INT REFERENCES "modos"."edges" (id) NOT NULL,
             edist REAL NOT NULL,
             snap_geom geometry(Point, 4326) NOT NULL,
             user_id INT REFERENCES "modos"."user" (id),
