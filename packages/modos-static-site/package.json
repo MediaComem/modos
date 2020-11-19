@@ -11,6 +11,7 @@
     "lint:fix": "eslint components/* libs/* pages/* --fix"
   },
   "dependencies": {
+    "@carto/carto.js": "^4.2.1",
     "@turf/centroid": "^6.0.2",
     "@turf/invariant": "^6.1.2",
     "@types/leaflet": "^1.5.19",
