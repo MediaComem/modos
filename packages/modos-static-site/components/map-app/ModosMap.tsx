@@ -133,6 +133,7 @@ const ModosMap = () => {
           id={styles.map}
           center={START_POSITION}
           zoom={START_ZOOM}
+          maxZoom={30}
           // crs={CRS.EPSG4326}
           onclick={onChooseLocationOnMap}>
           <LayersControl position='bottomleft'>
