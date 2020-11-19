@@ -13,7 +13,7 @@ const EVENT404 = 'Event does not exist';
 export class ObservationController {
     public getObservations = createAsyncRoute(async (req, res) => {
         const repository = getRepository(Observation);
-        const observations = await repository.find();
+        const observations = await repository.find({ relations: ['owner'] });
         return res.status(200).json(observations);
     });
 
