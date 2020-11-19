@@ -9,7 +9,7 @@ export class alterTables1593764167709 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "modos"."observation" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY;`, undefined);
 
         await queryRunner.query(`ALTER TABLE "modos"."observation" ADD COLUMN "position" geometry(Point, 4326);`, undefined);
-        await queryRunner.query(`ALTER TABLE "modos"."observation" ADD COLUMN "inRange" BOOLEAN NOT NULL DEFAULT FALSE;`, undefined);
+        await queryRunner.query(`ALTER TABLE "modos"."observation" ADD COLUMN "in_range" BOOLEAN NOT NULL DEFAULT FALSE;`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."observation" ADD COLUMN "edist" REAL;`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."observation" ADD COLUMN "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT NOW();`, undefined);
         await queryRunner.query(`ALTER TABLE "modos"."observation" ADD COLUMN "updatedAt" TIMESTAMP WITH TIME ZONE DEFAULT NOW();`, undefined);
