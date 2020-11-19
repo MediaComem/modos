@@ -4,7 +4,6 @@ import carto from '@carto/carto.js';
 
 const ModosFootpathLayer = () => {
   const LeafletContext = useLeaflet();
-  let tileLayerOptions: any = {};
   useEffect(() => {
     const cartoClient = new carto.Client({
       apiKey: 'default_public',
@@ -27,9 +26,7 @@ const ModosFootpathLayer = () => {
     );
 
     cartoClient.addLayer(modosWalknetLayer);
-    tileLayerOptions = cartoClient
-      .getLeafletLayer()
-      .addTo(LeafletContext.layerContainer);
+    cartoClient.getLeafletLayer().addTo(LeafletContext.layerContainer);
   }, []);
   return <div />;
 };
