@@ -2,7 +2,9 @@ import { Column } from "typeorm";
 import { IsString } from "class-validator";
 
 export class Image {
+    
     @IsString()
+    @Column()
     basename: string;
 
     @Column('int', { nullable: true })
