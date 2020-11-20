@@ -91,19 +91,19 @@ export class initSnapping1603969816824 implements MigrationInterface {
                       FROM information_schema.columns
                      WHERE table_schema = TG_TABLE_SCHEMA
                        AND table_name = TG_TABLE_NAME
-                       AND column_name LIKE '%latitude%'
-                       AND column_name NOT LIKE '%ref'
+                       AND column_name ~* '.*latitude.*'
+                       AND column_name !~* '.*ref$'
                 );
                 loncol := (
                     SELECT column_name
                       FROM information_schema.columns
                      WHERE table_schema = TG_TABLE_SCHEMA
                        AND table_name = TG_TABLE_NAME
-                       AND column_name LIKE '%longitude%'
-                       AND column_name NOT LIKE '%ref'
+                       AND column_name ~* '.*longitude.*'
+                       AND column_name !~* '.*ref$'
                 );
-                EXECUTE 'select $1.' || loncol USING NEW INTO lon;
-                EXECUTE 'select $1.' || latcol USING NEW INTO lat;
+                EXECUTE FORMAT('select $1.%I', loncol) USING NEW INTO lon;
+                EXECUTE FORMAT('select $1.%I', latcol) USING NEW INTO lat;
                 IF to_jsonb(NEW) ? 'geom' THEN
                     NEW.geom := ST_SetSRID(
                         ST_MakePoint(lon,lat), 4326
