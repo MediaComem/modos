@@ -34,6 +34,10 @@ export class User {
     events: Array<Event>;
 
     async hashPassword(password: string) {
-        this.passwordHash = await bcrypt.hash(password, costFactor);
+        const salt = await bcrypt.genSalt(parseInt(costFactor)); // TODO:: fix costFactor which is NOT an INT, but parseInt() doesn't work?
+        console.log("salt: ", salt);
+        this.passwordHash = await bcrypt.hash(password, salt);
+        console.log("This passhash: ", this.passwordHash);
+        console.log("Type of passhash: ", typeof (this.passwordHash));
     }
 }
