@@ -127,3 +127,7 @@ Example                                            | Description
 
 See the `scripts` defined in [`package.json`](./package.json).
 
+After the migrations have taken place, you need to refresh a view using this SQL query:
+```
+REFRESH MATERIALIZED VIEW "modos"."network_convex_hull_v";
+```
