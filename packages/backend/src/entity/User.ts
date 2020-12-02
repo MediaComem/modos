@@ -34,7 +34,6 @@ export class User {
     events: Array<Event>;
 
     async hashPassword(password: string) {
-        const salt = await bcrypt.genSalt(parseInt(costFactor)); // TODO:: fix costFactor which is NOT an INT, but parseInt() doesn't work?
-        this.passwordHash = await bcrypt.hash(password, salt);
+        this.passwordHash = await bcrypt.hash(password, costFactor);
     }
 }
