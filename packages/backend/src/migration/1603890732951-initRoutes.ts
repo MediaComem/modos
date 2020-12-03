@@ -11,6 +11,7 @@ export class initRoutes1603890732951 implements MigrationInterface {
             route_plos FLOAT NOT NULL DEFAULT 1.0,
             geom geometry(MultiLineString, 4326) NOT NULL,
             created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+            updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
             CONSTRAINT routes_pkey PRIMARY KEY (id)
         );`, undefined);
     }
