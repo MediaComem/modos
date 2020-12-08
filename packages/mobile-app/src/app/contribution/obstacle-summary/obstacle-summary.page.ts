@@ -39,7 +39,7 @@ export class ObstacleSummaryPage implements OnInit {
   public statusCode: StatusCode;
 
   constructor(
-    private param: NavParamsService,
+    public param: NavParamsService,
     private router: Router,
     private observation: ObservationsService,
     private alertCtrl: AlertController,
