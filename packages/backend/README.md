@@ -40,7 +40,6 @@ docker-compose up --build
 The API should be available at http://localhost:3000/api.
 
 
-
 ## Getting started with Node.js
 
 Make sure to install the following requirements:
