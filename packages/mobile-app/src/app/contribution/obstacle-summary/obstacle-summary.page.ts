@@ -49,8 +49,6 @@ export class ObstacleSummaryPage implements OnInit {
   ngOnInit() {}
 
   async ionViewWillEnter() {
-    console.log(this.param.location);
-
     this.isSaveBtnDisabled = false;
     if (this.param.obstacle === 'other') {
       this.isCommentsMandatory = true;
