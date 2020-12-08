@@ -18,6 +18,7 @@ import { LeafletCustomControl } from './LeafletCustomControl';
 import styles from './map.module.scss';
 import { MapNavbar } from './MapNavbar';
 import MapnvAccessibilityLayer from './MapnvAccessibilityLayer';
+import ModosFootpathLayer from './ModosFootpathLayer';
 // import MapnvAccessibilityLayer from './MapnvAccessibilityLayer';
 import { NavigationPanel } from './NavigationPanel';
 import { NavLayerGroup } from './NavLayerGroup';
@@ -106,33 +107,35 @@ const ModosMap = () => {
       />
 
       <div id={styles['map-app-container']}>
-        {displayNavPanel &&
+        {displayNavPanel && (
           <NavigationPanel
             id={styles['map-app-navigation-panel']}
             onClickExit={() => setDisplayNavPanel(false)}
             onClickFrom={() => onSearchingLocation(SEARCHED_POINT.FROM)}
             onClickTo={() => onSearchingLocation(SEARCHED_POINT.TO)}
-            onChooseFrom={evt => onChooseLocationByText(evt, SEARCHED_POINT.FROM)}
+            onChooseFrom={evt =>
+              onChooseLocationByText(evt, SEARCHED_POINT.FROM)
+            }
             onChooseTo={evt => onChooseLocationByText(evt, SEARCHED_POINT.TO)}
             onSubmitLocation={evt => onSubmitLocation(evt)}
             location={navPanelLocation}></NavigationPanel>
-        }
+        )}
 
-        {displayObservationPanel && currentSelectedObservation &&
+        {displayObservationPanel && currentSelectedObservation && (
           <ObservationInfoPanel
             id={styles['map-app-observation-panel']}
             observation={currentSelectedObservation}
             onClickExit={() => onObservationInfoPanelExit()}
           />
-        }
+        )}
 
         <Map
           id={styles.map}
           center={START_POSITION}
           zoom={START_ZOOM}
+          maxZoom={30}
           // crs={CRS.EPSG4326}
           onclick={onChooseLocationOnMap}>
-
           <LayersControl position='bottomleft'>
             <LayersControl.BaseLayer checked name='Carte'>
               <TileLayer
@@ -155,12 +158,15 @@ const ModosMap = () => {
               />
             </LayersControl.Overlay>
 
+            <LayersControl.Overlay name='Réseau pédestre' checked={true}>
+              <ModosFootpathLayer />
+            </LayersControl.Overlay>
+
             {/* Bellow are layer and control for navigation, don't remove it */}
 
             <LayersControl.Overlay
               name='Marqueurs de navigation'
-              checked={true}
-            >
+              checked={true}>
               <NavLayerGroup
                 from={navPanelLocation.from}
                 to={navPanelLocation.to}
@@ -168,12 +174,12 @@ const ModosMap = () => {
             </LayersControl.Overlay>
 
             <LayersControl.Overlay name='Itineraire' checked={true}>
-              {itinerary?.geojson &&
+              {itinerary?.geojson && (
                 <GeoJSON
                   key={itinerary.generatedDate}
                   data={itinerary.geojson}
                 />
-              }
+              )}
             </LayersControl.Overlay>
 
             {/* Bellow are control any layer for accessibility, don't remove it */}
@@ -229,21 +235,21 @@ const Events = (props: any) => {
 
   return (
     <LeafletCustomControl id='map-events' position='topright'>
-      {events && events.length > 0 &&
+      {events && events.length > 0 && (
         <Form.Control
           onChange={event => props.onChange(event.target.value)}
           as='select'
           size='sm'
           custom
           placeholder='Evénements'>
-          <option value=''>Choisissez un évenement</option>
-          {events?.map(event =>
+          <option value=''>Choisissez un événement</option>
+          {events?.map(event => (
             <option value={event.id} key={event.id}>
               {event.title}
             </option>
-          )}
+          ))}
         </Form.Control>
-      }
+      )}
     </LeafletCustomControl>
   );
 };
