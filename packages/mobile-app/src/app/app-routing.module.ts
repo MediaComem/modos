@@ -30,7 +30,11 @@ export class IsSignedInGuard implements CanActivate {
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginPageModule),
+  },
   {
     path: 'home',
     loadChildren: () =>
@@ -42,28 +46,38 @@ const routes: Routes = [
     children: [
       {
         path: 'select-obstacle',
-        loadChildren:
-          './contribution/select-obstacle/select-obstacle.module#SelectObstaclePageModule',
+        loadChildren: () =>
+          import('./contribution/select-obstacle/select-obstacle.module').then(
+            (m) => m.SelectObstaclePageModule
+          ),
       },
       {
         path: 'take-picture/:obstacle',
-        loadChildren:
-          './contribution/take-picture/take-picture.module#TakePicturePageModule',
+        loadChildren: () =>
+          import('./contribution/take-picture/take-picture.module').then(
+            (m) => m.TakePicturePageModule
+          ),
       },
       {
-        path: 'set-global-position',
-        loadChildren:
-          './contribution/set-global-position/set-global-position.module#SetGlobalPositionPageModule',
+        path: 'set-position',
+        loadChildren: () =>
+          import(
+            './contribution/set-global-position/set-global-position.module'
+          ).then((m) => m.SetGlobalPositionPageModule),
       },
       {
         path: 'obstacle-summary',
-        loadChildren:
-          './contribution/obstacle-summary/obstacle-summary.module#ObstacleSummaryPageModule',
+        loadChildren: () =>
+          import(
+            './contribution/obstacle-summary/obstacle-summary.module'
+          ).then((m) => m.ObstacleSummaryPageModule),
       },
       {
         path: 'feedback',
-        loadChildren:
-          './contribution/feedback/feedback.module#FeedbackPageModule',
+        loadChildren: () =>
+          import('./contribution/feedback/feedback.module').then(
+            (m) => m.FeedbackPageModule
+          ),
       },
     ],
   },
