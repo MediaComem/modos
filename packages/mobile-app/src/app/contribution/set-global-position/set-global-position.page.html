@@ -8,19 +8,29 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="ion-no-padding">
-    <ion-row class="ion-padding-vertical ion-margin-bottom instructions">
+  <ion-grid class="ion-no-padding" style="height: 100%">
+    <!-- <ion-row class="ion-padding-vertical ion-margin-bottom instructions">
       <ion-col class="ion-padding-horizontal">
         <h2>3/4 - Géolocalisez la photographie</h2>
       </ion-col>
+    </ion-row> -->
+    <ion-row style="height: 100%">
+      <div
+        style="height: 100%; width: 100%; background-color: black"
+        id="map"
+      ></div>
     </ion-row>
   </ion-grid>
-</ion-content>
 
-<ion-footer>
-  <ion-row class="ion-margin-bottom ion-text-center">
-    <ion-col>
-      <app-location></app-location>
-    </ion-col>
-  </ion-row>
-</ion-footer>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start" >
+    <ion-fab-button (click)="getLocalisation()">
+      <ion-icon name="locate-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" >
+    <ion-fab-button color="success" (click)="goToSummary()">
+      <ion-icon name="checkmark-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
