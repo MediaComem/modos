@@ -22,6 +22,10 @@ export class initSnapping1603969816824 implements MigrationInterface {
                 ) FROM "modos"."network_convex_hull_v")
                 THEN
                     SELECT
+                        ST_Intersects(
+                            ST_Transform(geomx, 2056),
+                            ST_Transform("modos"."network_convex_hull_v".geom, 2056)
+                        ) AS "range",
                         "modos"."edges".id AS modos_edge_id,
                         (
                         ST_Transform("modos"."edges".geom, 2056)
@@ -36,10 +40,34 @@ export class initSnapping1603969816824 implements MigrationInterface {
                         4326
                     )::geometry(Point, 4326) AS snap_geom
                     FROM
-                        "modos"."edges"
+                        "modos"."edges", "modos"."network_convex_hull_v"
                     ORDER BY dist_to_nearest_edge
                     LIMIT 1
-                    INTO NEW.eid, NEW.edist, NEW.snap_geom;
+                    INTO NEW.in_range, NEW.eid, NEW.edist, NEW.snap_geom;
+                ELSE
+                    SELECT
+                        ST_Intersects(
+                            ST_Transform(geomx, 2056),
+                            ST_Transform("modos"."network_convex_hull_v".geom, 2056)
+                        ) AS "range",
+                        "modos"."edges".id AS modos_edge_id,
+                        (
+                        ST_Transform("modos"."edges".geom, 2056)
+                        <->
+                        ST_Transform(geomx, 2056)
+                        )::double precision AS dist_to_nearest_edge,
+                        ST_Transform(
+                            ST_ClosestPoint(
+                            ST_Transform("modos"."edges".geom, 2056),
+                            ST_Transform(geomx, 2056)
+                        ),
+                        4326
+                    )::geometry(Point, 4326) AS snap_geom
+                    FROM
+                        "modos"."edges", "modos"."network_convex_hull_v"
+                    ORDER BY dist_to_nearest_edge
+                    LIMIT 1
+                    INTO NEW.in_range, NEW.eid, NEW.edist, NEW.snap_geom;
                 END IF;
                 RETURN NEW;
             END
@@ -63,22 +91,28 @@ export class initSnapping1603969816824 implements MigrationInterface {
                       FROM information_schema.columns
                      WHERE table_schema = TG_TABLE_SCHEMA
                        AND table_name = TG_TABLE_NAME
-                       AND column_name LIKE '%latitude%'
-                       AND column_name NOT LIKE '%ref'
+                       AND column_name ~* '.*latitude.*'
+                       AND column_name !~* '.*ref$'
                 );
                 loncol := (
                     SELECT column_name
                       FROM information_schema.columns
                      WHERE table_schema = TG_TABLE_SCHEMA
                        AND table_name = TG_TABLE_NAME
-                       AND column_name LIKE '%longitude%'
-                       AND column_name NOT LIKE '%ref'
+                       AND column_name ~* '.*longitude.*'
+                       AND column_name !~* '.*ref$'
                 );
-                EXECUTE 'select $1.' || loncol USING NEW INTO lon;
-                EXECUTE 'select $1.' || latcol USING NEW INTO lat;
-                NEW.geom := ST_SetSRID(
-                    ST_MakePoint(lon,lat), 4326
-                );
+                EXECUTE FORMAT('select $1.%I', loncol) USING NEW INTO lon;
+                EXECUTE FORMAT('select $1.%I', latcol) USING NEW INTO lat;
+                IF to_jsonb(NEW) ? 'geom' THEN
+                    NEW.geom := ST_SetSRID(
+                        ST_MakePoint(lon,lat), 4326
+                    );
+                ELSIF to_jsonb(NEW) ? 'position' THEN
+                    NEW.position := ST_SetSRID(
+                        ST_MakePoint(lon,lat), 4326
+                    );
+                END IF;
                 RETURN NEW;
             END
             $$
