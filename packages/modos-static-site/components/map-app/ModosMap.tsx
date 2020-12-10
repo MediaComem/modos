@@ -1,9 +1,16 @@
 /* eslint-disable max-lines-per-function */
 /* eslint-disable @typescript-eslint/no-require-imports */
 import { LatLng, LeafletMouseEvent } from 'leaflet';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { GeoJSON, LayersControl, Map, TileLayer/* , WMSTileLayer */ } from 'react-leaflet';
+import {
+  GeoJSON,
+  LayersControl,
+  Map,
+  TileLayer /* , WMSTileLayer */,
+  Viewport
+} from 'react-leaflet';
 import { useI18N } from '../../libs';
 import {
   IMapnvFeature,
@@ -19,41 +26,98 @@ import styles from './map.module.scss';
 import { MapNavbar } from './MapNavbar';
 import MapnvAccessibilityLayer from './MapnvAccessibilityLayer';
 import ModosFootpathLayer from './ModosFootpathLayer';
-// import MapnvAccessibilityLayer from './MapnvAccessibilityLayer';
 import { NavigationPanel } from './NavigationPanel';
 import { NavLayerGroup } from './NavLayerGroup';
 import { ObservationInfoPanel } from './ObservationInfoPanel';
 import ObservationsLayerGroup from './ObservationsLayerGroup';
 
 enum SEARCHED_POINT {
-  FROM='from',
-  TO='to',
-  NOT_SEARCHING=''
+  FROM = 'from',
+  TO = 'to',
+  NOT_SEARCHING = ''
 }
 
 const ModosMap = () => {
-  const [ displayNavPanel, setDisplayNavPanel ] = useState(false);
-  const [ currentSearchedPoint, setCurrentSearchedPoint ] = useState(SEARCHED_POINT.NOT_SEARCHING);
-  const [ navPanelLocation, setNavPanelLocation ] = useState({
+  // ------------ ROUTING QUERY PARAM MANAGEMENT
+  const router = useRouter();
+
+  // ------------ STATE DECLARATION
+  const [displayNavPanel, setDisplayNavPanel] = useState(false);
+  const [currentSearchedPoint, setCurrentSearchedPoint] = useState(
+    SEARCHED_POINT.NOT_SEARCHING
+  );
+  const [navPanelLocation, setNavPanelLocation] = useState({
     from: null,
     to: null
   });
-  const [ itinerary, setItinerary ] = useState({
+  const [itinerary, setItinerary] = useState({
     generatedDate: Date.now(), // We need a generated date to force react-leaflet to re-render the geojson
     geojson: null
   });
-  const [ displayObservationPanel, setDisplayObersvationPanel ] = useState(false);
-  const [ currentSelectedObservation, setCurrentSelectedObservation ] = useState(
+  const [displayObservationPanel, setDisplayObersvationPanel] = useState(false);
+  const [currentSelectedObservation, setCurrentSelectedObservation] = useState(
     undefined
   );
-  const [ eventID, setEventID ] = useState(undefined);
+  const [eventID, setEventID] = useState(undefined);
 
-  const START_POSITION = new LatLng(46.7833, 6.65);
-  const START_ZOOM = 15;
+  const [hasInitMapPos, setHasInitMapPos] = useState(false);
+  const [mapPosition, setMapPos] = useState(new LatLng(46.7833, 6.65));
+  const [mapZoom, setMapZoom] = useState(15);
+
+  /**
+   * Will change the url and keep already existing param
+   * @param newParams
+   */
+  const managePageURL = async (newParams: {
+    newMapLat?: any;
+    newMapLng?: any;
+    newMapZoom?: any;
+    newObservationID?: any;
+  }) => {
+    const { newMapLat, newMapLng, newMapZoom, newObservationID } = newParams;
+    await router.replace(
+      {
+        pathname: '/map',
+        query: {
+          mapLat: newMapLat || router.query.mapLat || undefined,
+          mapLng: newMapLng || router.query.mapLng || undefined,
+          mapZoom: newMapZoom || router.query.mapZoom || undefined,
+          observationID:
+            (newObservationID ?? router.query.observationID) || undefined
+        }
+      },
+      undefined,
+      {
+        shallow: true
+      }
+    );
+  };
+
+  // ------------ APP INIT
+  useEffect(() => {
+    const {
+      mapLat: paramMapLat,
+      mapLng: paramMapLng,
+      mapZoom: paramMapZoom
+    } = router.query;
+
+    if (!hasInitMapPos && paramMapLat && paramMapLng && mapZoom) {
+      setMapPos(
+        new LatLng(
+          Number.parseFloat(paramMapLat as string),
+          Number.parseFloat(paramMapLng as string)
+        )
+      );
+      setMapZoom(Number.parseInt(paramMapZoom as string, 10));
+      setHasInitMapPos(true);
+    }
+  }, [router.query.mapLat, router.query.mapLng, router.query.mapZoom]);
 
   // ------------ EVENT MANAGEMENT FOR NAVIGATION PANEL
 
-  const onSearchingLocation = (point: SEARCHED_POINT.FROM | SEARCHED_POINT.TO) => {
+  const onSearchingLocation = (
+    point: SEARCHED_POINT.FROM | SEARCHED_POINT.TO
+  ) => {
     setDisplayNavPanel(false);
     setCurrentSearchedPoint(point);
   };
@@ -79,27 +143,46 @@ const ModosMap = () => {
 
     const currLocation = navPanelLocation;
     getSimpleItinerary(
-      [ currLocation.from.lat, currLocation.from.lng ],
-      [ currLocation.to.lat, currLocation.to.lng ]
+      [currLocation.from.lat, currLocation.from.lng],
+      [currLocation.to.lat, currLocation.to.lng]
     )
       .then(result =>
-        setItinerary({ generatedDate: Date.now(), geojson: result }))
+        setItinerary({ generatedDate: Date.now(), geojson: result })
+      )
       .catch(err => console.error(err))
       .finally(() => setDisplayNavPanel(false));
   };
 
   // ------------- EVENT MANAGEMENT FOR OBSERVATION PANEL
 
-  const onObservationClick = observation => {
+  const onObservationClick = async observation => {
     setCurrentSelectedObservation(observation);
     setDisplayObersvationPanel(true);
+    await managePageURL({
+      newObservationID: observation.id
+    });
   };
 
-  const onObservationInfoPanelExit = () => {
+  const onObservationInfoPanelExit = async () => {
     setCurrentSelectedObservation(null);
     setDisplayNavPanel(false);
+    await managePageURL({
+      newObservationID: 0
+    });
   };
 
+  // ------------- EVENT MANAGEMENT FOR THE MAP
+
+  const onViewportChanged = async (viewport: Viewport) => {
+    setHasInitMapPos(true);
+    await managePageURL({
+      newMapLat: viewport.center[0],
+      newMapLng: viewport.center[1],
+      newMapZoom: viewport.zoom
+    });
+  };
+
+  // ------------- RENDERED COMPONENT
   return (
     <div id={styles['map-app']}>
       <MapNavbar
@@ -131,11 +214,11 @@ const ModosMap = () => {
 
         <Map
           id={styles.map}
-          center={START_POSITION}
-          zoom={START_ZOOM}
+          center={mapPosition}
+          zoom={mapZoom}
           maxZoom={30}
-          // crs={CRS.EPSG4326}
-          onclick={onChooseLocationOnMap}>
+          onclick={onChooseLocationOnMap}
+          onViewportChanged={onViewportChanged}>
           <LayersControl position='bottomleft'>
             <LayersControl.BaseLayer checked name='Carte'>
               <TileLayer
@@ -211,19 +294,19 @@ const Legends = () => {
       {Object.values(OBSTACLES_TYPE).map(
         type =>
           type !== OBSTACLES_TYPE.UNLABELLED &&
-          type !== OBSTACLES_TYPE.NOPROBLEM &&
+          type !== OBSTACLES_TYPE.NOPROBLEM && (
             <div key={type}>
               <img src={`/assets/${type}-icon.png`} />
               <span>{i18n(type)}</span>
             </div>
-
+          )
       )}
     </LeafletCustomControl>
   );
 };
 
 const Events = (props: any) => {
-  const [ events, setEvents ] = useState([]);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     getEvents()
