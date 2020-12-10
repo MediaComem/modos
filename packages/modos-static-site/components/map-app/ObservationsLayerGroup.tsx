@@ -7,6 +7,7 @@ import {
   IObservation,
   OBSTACLES_TYPE
 } from '../../libs/modos-api';
+import { useRouter } from 'next/router';
 // import MarkerClusterGroup from 'react-leaflet-markercluster';
 const modosIconSize: [number, number] = [15, 15];
 
@@ -22,12 +23,30 @@ interface IProps {
 }
 
 const ObservationsLayerGroup = (props: IProps) => {
+  const router = useRouter();
   const [observations, setObservations] = useState<IObservation[]>([]);
+
+  const getInfoObs = observation => {
+    props.onObservationClick(observation);
+  };
 
   useEffect(() => {
     getObservations()
       .then(result => {
         setObservations(result);
+
+        // If an observation is selected in the url params
+        // trigger the click event to display the obs on the app
+        if (router.query.observationID) {
+          const permaLinkedObs = result.find(
+            obs =>
+              obs.id ===
+              Number.parseInt(router.query.observationID as string, 10)
+          );
+          if (permaLinkedObs) {
+            getInfoObs(permaLinkedObs);
+          }
+        }
       })
       .catch(err => console.error(err));
   }, []);
@@ -49,9 +68,6 @@ const ObservationsLayerGroup = (props: IProps) => {
     }
   }, [props.eventID]);
 
-  const getInfoObs = observation => {
-    props.onObservationClick(observation);
-  };
   // For now Clustering is disabled as it impact a lot the perfomances of the interface
   // return (
   //   <MarkerClusterGroup>

@@ -3,7 +3,12 @@
 import { LatLng, LeafletMouseEvent } from 'leaflet';
 import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { GeoJSON, LayersControl, Map, TileLayer/* , WMSTileLayer */ } from 'react-leaflet';
+import {
+  GeoJSON,
+  LayersControl,
+  Map,
+  TileLayer /* , WMSTileLayer */
+} from 'react-leaflet';
 import { useI18N } from '../../libs';
 import {
   IMapnvFeature,
@@ -24,36 +29,47 @@ import { NavigationPanel } from './NavigationPanel';
 import { NavLayerGroup } from './NavLayerGroup';
 import { ObservationInfoPanel } from './ObservationInfoPanel';
 import ObservationsLayerGroup from './ObservationsLayerGroup';
+import { useRouter } from 'next/router';
 
 enum SEARCHED_POINT {
-  FROM='from',
-  TO='to',
-  NOT_SEARCHING=''
+  FROM = 'from',
+  TO = 'to',
+  NOT_SEARCHING = ''
 }
 
 const ModosMap = () => {
-  const [ displayNavPanel, setDisplayNavPanel ] = useState(false);
-  const [ currentSearchedPoint, setCurrentSearchedPoint ] = useState(SEARCHED_POINT.NOT_SEARCHING);
-  const [ navPanelLocation, setNavPanelLocation ] = useState({
+  const router = useRouter();
+
+  // ------------ STATE DECLARATION
+  const [displayNavPanel, setDisplayNavPanel] = useState(false);
+  const [currentSearchedPoint, setCurrentSearchedPoint] = useState(
+    SEARCHED_POINT.NOT_SEARCHING
+  );
+  const [navPanelLocation, setNavPanelLocation] = useState({
     from: null,
     to: null
   });
-  const [ itinerary, setItinerary ] = useState({
+  const [itinerary, setItinerary] = useState({
     generatedDate: Date.now(), // We need a generated date to force react-leaflet to re-render the geojson
     geojson: null
   });
-  const [ displayObservationPanel, setDisplayObersvationPanel ] = useState(false);
-  const [ currentSelectedObservation, setCurrentSelectedObservation ] = useState(
+  const [displayObservationPanel, setDisplayObersvationPanel] = useState(false);
+  const [currentSelectedObservation, setCurrentSelectedObservation] = useState(
     undefined
   );
-  const [ eventID, setEventID ] = useState(undefined);
+  const [eventID, setEventID] = useState(undefined);
 
   const START_POSITION = new LatLng(46.7833, 6.65);
   const START_ZOOM = 15;
 
+  // ------------ APP INIT
+  useEffect(() => {}, []);
+
   // ------------ EVENT MANAGEMENT FOR NAVIGATION PANEL
 
-  const onSearchingLocation = (point: SEARCHED_POINT.FROM | SEARCHED_POINT.TO) => {
+  const onSearchingLocation = (
+    point: SEARCHED_POINT.FROM | SEARCHED_POINT.TO
+  ) => {
     setDisplayNavPanel(false);
     setCurrentSearchedPoint(point);
   };
@@ -79,21 +95,28 @@ const ModosMap = () => {
 
     const currLocation = navPanelLocation;
     getSimpleItinerary(
-      [ currLocation.from.lat, currLocation.from.lng ],
-      [ currLocation.to.lat, currLocation.to.lng ]
+      [currLocation.from.lat, currLocation.from.lng],
+      [currLocation.to.lat, currLocation.to.lng]
     )
       .then(result =>
-        setItinerary({ generatedDate: Date.now(), geojson: result }))
+        setItinerary({ generatedDate: Date.now(), geojson: result })
+      )
       .catch(err => console.error(err))
       .finally(() => setDisplayNavPanel(false));
   };
 
   // ------------- EVENT MANAGEMENT FOR OBSERVATION PANEL
 
-  const onObservationClick = observation => {
+  const onObservationClick = async observation => {
     setCurrentSelectedObservation(observation);
-    setDisplayObersvationPanel(true);
+    await router.push(`?observationID=${observation.id}`, undefined, {
+      shallow: true
+    });
   };
+
+  useEffect(() => {
+    setDisplayObersvationPanel(true);
+  }, [router.query.observationID]);
 
   const onObservationInfoPanelExit = () => {
     setCurrentSelectedObservation(null);
@@ -211,19 +234,19 @@ const Legends = () => {
       {Object.values(OBSTACLES_TYPE).map(
         type =>
           type !== OBSTACLES_TYPE.UNLABELLED &&
-          type !== OBSTACLES_TYPE.NOPROBLEM &&
+          type !== OBSTACLES_TYPE.NOPROBLEM && (
             <div key={type}>
               <img src={`/assets/${type}-icon.png`} />
               <span>{i18n(type)}</span>
             </div>
-
+          )
       )}
     </LeafletCustomControl>
   );
 };
 
 const Events = (props: any) => {
-  const [ events, setEvents ] = useState([]);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     getEvents()
