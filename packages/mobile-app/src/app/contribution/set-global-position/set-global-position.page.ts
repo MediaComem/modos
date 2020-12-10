@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Capacitor, Plugins } from '@capacitor/core';
 import { Location } from '../../models/location.model';
-import { Map, tileLayer, marker } from 'leaflet';
+import { Map, tileLayer, marker, LayerGroup, Control } from 'leaflet';
 import { AlertController, LoadingController } from '@ionic/angular';
 
 // resolve bug with leaflet not loading the icon
@@ -10,7 +10,7 @@ import 'leaflet/dist/images/marker-icon-2x.png';
 import { Router } from '@angular/router';
 import { NavParamsService } from 'src/app/services/nav-params.service';
 
-const DEFAULT_MAP_ZOOM = 16;
+const DEFAULT_MAP_ZOOM = 18;
 
 // following position is ~Yverdon-Les-Bains
 const DEFAULT_LAT = 46.7785;
@@ -92,14 +92,36 @@ export class SetGlobalPositionPage implements OnInit {
    * Initialize a Leaflet map in the div with ID 'map'
    */
   private loadLeafletMap() {
+    const OPENSTREETMAP_LAYER = tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
+        attribution:
+          'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors,<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+      }
+    );
+    const ESRI_IMAGERY_LAYER = tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      {
+        attribution:
+          'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+      }
+    );
+
     this.map = new Map('map').setView(
       [this.location.lat, this.location.lng],
       DEFAULT_MAP_ZOOM
     );
-    tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:
-        'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors,<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-    }).addTo(this.map);
+
+    ESRI_IMAGERY_LAYER.addTo(this.map);
+
+    new Control.Layers(
+      {
+        Plan: OPENSTREETMAP_LAYER,
+        Satellite: ESRI_IMAGERY_LAYER,
+      },
+      {},
+      { collapsed: false }
+    ).addTo(this.map);
   }
 
   /**
