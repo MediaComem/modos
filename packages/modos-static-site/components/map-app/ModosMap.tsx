@@ -58,11 +58,26 @@ const ModosMap = () => {
   );
   const [eventID, setEventID] = useState(undefined);
 
-  const START_POSITION = new LatLng(46.7833, 6.65);
-  const START_ZOOM = 15;
-
+  const [mapPosition, setMapPos] = useState(new LatLng(46.7833, 6.65));
+  const [mapZoom, setMapZoom] = useState(15);
+  
   // ------------ APP INIT
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const {
+      mapLat: paramMapLat,
+      mapLng: paramMapLng,
+      mapZoom: paramMapZoom
+    } = router.query;
+    if (paramMapLat && paramMapLng && mapZoom) {
+      setMapPos(
+        new LatLng(
+          Number.parseInt(paramMapLat as string, 10),
+          Number.parseInt(paramMapLng as string, 10)
+        )
+      );
+      setMapZoom(Number.parseInt(paramMapZoom as string, 10));
+    }
+  }, [router.query]);
 
   // ------------ EVENT MANAGEMENT FOR NAVIGATION PANEL
 
@@ -150,8 +165,8 @@ const ModosMap = () => {
 
         <Map
           id={styles.map}
-          center={START_POSITION}
-          zoom={START_ZOOM}
+          center={mapPosition}
+          zoom={mapZoom}
           maxZoom={30}
           onclick={onChooseLocationOnMap}>
           <LayersControl position='bottomleft'>
