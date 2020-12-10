@@ -8,7 +8,9 @@ import {
   OBSTACLES_TYPE
 } from '../../libs/modos-api';
 import { useRouter } from 'next/router';
-// import MarkerClusterGroup from 'react-leaflet-markercluster';
+import 'react-leaflet-markercluster/dist/styles.min.css';
+import MarkerClusterGroup from 'react-leaflet-markercluster';
+
 const modosIconSize: [number, number] = [15, 15];
 
 const getIconFromObstacleType = (type: OBSTACLES_TYPE) =>
@@ -68,25 +70,8 @@ const ObservationsLayerGroup = (props: IProps) => {
     }
   }, [props.eventID]);
 
-  // For now Clustering is disabled as it impact a lot the perfomances of the interface
-  // return (
-  //   <MarkerClusterGroup>
-  //     {observations?.map((observation, index) => {
-  //       if (!observation?.location?.latitude || !observation?.location?.longitude) {
-  //         return;
-  //       }
-
-  //       return <Marker
-  //         key={index}
-  //         position={new LatLng(observation.location.latitude, observation.location.longitude)}
-  //         icon={getIconFromObstacleType(observation?.description?.obstacle)}
-  //         onclick={() => props.onObservationClick(observation)}
-  //       ></Marker>;
-  //     })}
-  //   </MarkerClusterGroup>
-  // );
   return (
-    <LayerGroup>
+    <MarkerClusterGroup>
       {observations?.map((observation, index) => {
         if (
           !observation?.location?.latitude ||
@@ -108,7 +93,7 @@ const ObservationsLayerGroup = (props: IProps) => {
             onclick={() => getInfoObs(observation)}></Marker>
         );
       })}
-    </LayerGroup>
+    </MarkerClusterGroup>
   );
 };
 
