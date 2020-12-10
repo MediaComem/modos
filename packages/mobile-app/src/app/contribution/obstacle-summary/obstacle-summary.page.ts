@@ -39,7 +39,7 @@ export class ObstacleSummaryPage implements OnInit {
   public statusCode: StatusCode;
 
   constructor(
-    private param: NavParamsService,
+    public param: NavParamsService,
     private router: Router,
     private observation: ObservationsService,
     private alertCtrl: AlertController,
@@ -49,16 +49,10 @@ export class ObstacleSummaryPage implements OnInit {
   ngOnInit() {}
 
   async ionViewWillEnter() {
-    this.isSaveBtnDisabled = true;
-    try {
-      await this.autoLocate();
-      this.isSaveBtnDisabled = false;
-      if (this.param.obstacle === 'other') {
-        this.isCommentsMandatory = true;
-        this.isSaveBtnDisabled = true;
-      }
-    } catch (err) {
-      this.showErrorLocalisationAlert();
+    this.isSaveBtnDisabled = false;
+    if (this.param.obstacle === 'other') {
+      this.isCommentsMandatory = true;
+      this.isSaveBtnDisabled = true;
     }
   }
 
@@ -72,7 +66,7 @@ export class ObstacleSummaryPage implements OnInit {
     this.image.imageData = this.param.image;
     this.newObservation.description = this.description;
     this.newObservation.image = this.image;
-    this.newObservation.location = this.location;
+    this.newObservation.location = this.param.location;
 
     this.isSaveBtnDisabled = true;
 
@@ -144,50 +138,6 @@ export class ObstacleSummaryPage implements OnInit {
    */
   public cancel() {
     this.showCancelWarning();
-  }
-
-  /**
-   * Will locate the user with high accuracy
-   */
-  private async autoLocate() {
-    if (!Capacitor.isPluginAvailable('Geolocation')) {
-      this.showErrorLocalisationAlert();
-      return;
-    }
-
-    // For more information about the options:
-    // https://github.com/apache/cordova-plugin-geolocation#geolocationoptions
-    const position = await Plugins.Geolocation.getCurrentPosition({
-      maximumAge: 1000,
-      timeout: 5000,
-      enableHighAccuracy: true,
-    });
-
-    this.location.lat = position.coords.latitude;
-    this.location.lng = position.coords.longitude;
-  }
-
-  private showErrorLocalisationAlert() {
-    this.alertCtrl
-      .create({
-        header: `Impossible d'obtenir la localisation`,
-        message: `Sans localisation, il est impossible d'effectuer une observation.`,
-        buttons: [
-          {
-            text: `Retour à l'accueil`,
-            handler: () => this.router.navigate(['/home']),
-          },
-        ],
-        backdropDismiss: false,
-      })
-      .then((alertEl) => {
-        alertEl.present();
-        alertEl
-          .onDidDismiss()
-          .then(() => this.router.navigate(['/home']))
-          .catch((err) => {});
-      })
-      .catch((err) => {});
   }
 
   private async showCancelWarning() {

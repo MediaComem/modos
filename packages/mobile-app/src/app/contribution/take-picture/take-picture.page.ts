@@ -20,7 +20,7 @@ export class TakePicturePage implements OnInit {
   onImagePicked(imageData: string) {
     this.param.image = imageData;
     this.param.obstacle = this.obstacle;
-    this.router.navigate(['/contribution/obstacle-summary']);
+    this.router.navigate(['/contribution/set-position']);
   }
 
   onCancelImagePIcked() {
