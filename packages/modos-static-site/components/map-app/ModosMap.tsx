@@ -1,6 +1,7 @@
 /* eslint-disable max-lines-per-function */
 /* eslint-disable @typescript-eslint/no-require-imports */
 import { LatLng, LeafletMouseEvent } from 'leaflet';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import {
@@ -24,12 +25,10 @@ import styles from './map.module.scss';
 import { MapNavbar } from './MapNavbar';
 import MapnvAccessibilityLayer from './MapnvAccessibilityLayer';
 import ModosFootpathLayer from './ModosFootpathLayer';
-// import MapnvAccessibilityLayer from './MapnvAccessibilityLayer';
 import { NavigationPanel } from './NavigationPanel';
 import { NavLayerGroup } from './NavLayerGroup';
 import { ObservationInfoPanel } from './ObservationInfoPanel';
 import ObservationsLayerGroup from './ObservationsLayerGroup';
-import { useRouter } from 'next/router';
 
 enum SEARCHED_POINT {
   FROM = 'from',
@@ -109,14 +108,11 @@ const ModosMap = () => {
 
   const onObservationClick = async observation => {
     setCurrentSelectedObservation(observation);
+    setDisplayObersvationPanel(true);
     await router.push(`?observationID=${observation.id}`, undefined, {
       shallow: true
     });
   };
-
-  useEffect(() => {
-    setDisplayObersvationPanel(true);
-  }, [router.query.observationID]);
 
   const onObservationInfoPanelExit = () => {
     setCurrentSelectedObservation(null);
@@ -157,7 +153,6 @@ const ModosMap = () => {
           center={START_POSITION}
           zoom={START_ZOOM}
           maxZoom={30}
-          // crs={CRS.EPSG4326}
           onclick={onChooseLocationOnMap}>
           <LayersControl position='bottomleft'>
             <LayersControl.BaseLayer checked name='Carte'>
