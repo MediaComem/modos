@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LatLng, Icon } from 'leaflet';
-import { LayerGroup, Marker } from 'react-leaflet';
+import { Marker } from 'react-leaflet';
 import {
   getObservationByOwnerEvent,
   getObservations,
@@ -36,19 +36,6 @@ const ObservationsLayerGroup = (props: IProps) => {
     getObservations()
       .then(result => {
         setObservations(result);
-
-        // If an observation is selected in the url params
-        // trigger the click event to display the obs on the app
-        if (router.query.observationID) {
-          const permaLinkedObs = result.find(
-            obs =>
-              obs.id ===
-              Number.parseInt(router.query.observationID as string, 10)
-          );
-          if (permaLinkedObs) {
-            getInfoObs(permaLinkedObs);
-          }
-        }
       })
       .catch(err => console.error(err));
   }, []);
@@ -69,6 +56,20 @@ const ObservationsLayerGroup = (props: IProps) => {
         .catch(err => console.error(err));
     }
   }, [props.eventID]);
+
+  useEffect(() => {
+    // If an observation is selected in the url params
+    // trigger the click event to display the obs on the app
+    if (router.query.observationID) {
+      const permaLinkedObs = observations.find(
+        obs =>
+          obs.id === Number.parseInt(router.query.observationID as string, 10)
+      );
+      if (permaLinkedObs) {
+        getInfoObs(permaLinkedObs);
+      }
+    }
+  }, [observations, router.query.observationID]);
 
   return (
     <MarkerClusterGroup>

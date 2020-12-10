@@ -8,7 +8,8 @@ import {
   GeoJSON,
   LayersControl,
   Map,
-  TileLayer /* , WMSTileLayer */
+  TileLayer /* , WMSTileLayer */,
+  Viewport
 } from 'react-leaflet';
 import { useI18N } from '../../libs';
 import {
@@ -37,6 +38,7 @@ enum SEARCHED_POINT {
 }
 
 const ModosMap = () => {
+  // ------------ ROUTING QUERY PARAM MANAGEMENT
   const router = useRouter();
 
   // ------------ STATE DECLARATION
@@ -58,9 +60,39 @@ const ModosMap = () => {
   );
   const [eventID, setEventID] = useState(undefined);
 
+  const [hasInitMapPos, setHasInitMapPos] = useState(false);
   const [mapPosition, setMapPos] = useState(new LatLng(46.7833, 6.65));
   const [mapZoom, setMapZoom] = useState(15);
-  
+
+  /**
+   * Will change the url and keep already existing param
+   * @param newParams
+   */
+  const managePageURL = async (newParams: {
+    newMapLat?: any;
+    newMapLng?: any;
+    newMapZoom?: any;
+    newObservationID?: any;
+  }) => {
+    const { newMapLat, newMapLng, newMapZoom, newObservationID } = newParams;
+    await router.replace(
+      {
+        pathname: '/map',
+        query: {
+          mapLat: newMapLat || router.query.mapLat || undefined,
+          mapLng: newMapLng || router.query.mapLng || undefined,
+          mapZoom: newMapZoom || router.query.mapZoom || undefined,
+          observationID:
+            (newObservationID ?? router.query.observationID) || undefined
+        }
+      },
+      undefined,
+      {
+        shallow: true
+      }
+    );
+  };
+
   // ------------ APP INIT
   useEffect(() => {
     const {
@@ -68,16 +100,18 @@ const ModosMap = () => {
       mapLng: paramMapLng,
       mapZoom: paramMapZoom
     } = router.query;
-    if (paramMapLat && paramMapLng && mapZoom) {
+
+    if (!hasInitMapPos && paramMapLat && paramMapLng && mapZoom) {
       setMapPos(
         new LatLng(
-          Number.parseInt(paramMapLat as string, 10),
-          Number.parseInt(paramMapLng as string, 10)
+          Number.parseFloat(paramMapLat as string),
+          Number.parseFloat(paramMapLng as string)
         )
       );
       setMapZoom(Number.parseInt(paramMapZoom as string, 10));
+      setHasInitMapPos(true);
     }
-  }, [router.query]);
+  }, [router.query.mapLat, router.query.mapLng, router.query.mapZoom]);
 
   // ------------ EVENT MANAGEMENT FOR NAVIGATION PANEL
 
@@ -124,16 +158,31 @@ const ModosMap = () => {
   const onObservationClick = async observation => {
     setCurrentSelectedObservation(observation);
     setDisplayObersvationPanel(true);
-    await router.push(`?observationID=${observation.id}`, undefined, {
-      shallow: true
+    await managePageURL({
+      newObservationID: observation.id
     });
   };
 
-  const onObservationInfoPanelExit = () => {
+  const onObservationInfoPanelExit = async () => {
     setCurrentSelectedObservation(null);
     setDisplayNavPanel(false);
+    await managePageURL({
+      newObservationID: 0
+    });
   };
 
+  // ------------- EVENT MANAGEMENT FOR THE MAP
+
+  const onViewportChanged = async (viewport: Viewport) => {
+    setHasInitMapPos(true);
+    await managePageURL({
+      newMapLat: viewport.center[0],
+      newMapLng: viewport.center[1],
+      newMapZoom: viewport.zoom
+    });
+  };
+
+  // ------------- RENDERED COMPONENT
   return (
     <div id={styles['map-app']}>
       <MapNavbar
@@ -168,7 +217,8 @@ const ModosMap = () => {
           center={mapPosition}
           zoom={mapZoom}
           maxZoom={30}
-          onclick={onChooseLocationOnMap}>
+          onclick={onChooseLocationOnMap}
+          onViewportChanged={onViewportChanged}>
           <LayersControl position='bottomleft'>
             <LayersControl.BaseLayer checked name='Carte'>
               <TileLayer
