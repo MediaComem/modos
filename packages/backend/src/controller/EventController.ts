@@ -26,22 +26,22 @@ export class EventControler {
 
     public createEvent = createAsyncRoute(async (req, res) => {
         const manager = getManager();
-
+        console.log(req.body);
         const event = new Event();
         event.owner = req.body.userId;
         event.title = req.body.title;
         event.password = req.body.password;
         event.beginning = new Date(req.body.beginning);
         event.ending = new Date(req.body.ending);
-        event.objective = req.body.objective;
-        event.numberOfImages = req.body.numberOfImages;
-        event.observations = new Array<Observation>();
+        event.objective = req.body.objective ?? '';
+        event.numberOfImages = 0;
 
         await validate(event);
 
         await manager.insert(Event, event);
 
-        return res.status(201)
+        return res
+            .status(201)
             .location(`api/v1/events/${event.id}`)
             .json(event);
     });
@@ -58,7 +58,7 @@ export class EventControler {
         if (req.body.objective) event.objective = req.body.objective;
         if (req.body.numberOfImages) event.numberOfImages = req.body.numberOfImages;
 
-        await validate(event);
+        await validate(event, { skipMissingProperties: true });
 
         await repository.save(event);
 
