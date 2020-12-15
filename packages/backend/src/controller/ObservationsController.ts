@@ -8,6 +8,7 @@ import { Description, FrontendObstacle, Obstacle } from '../entity/Description';
 import { Location } from '../entity/Location';
 
 const OBSERVATION404 = 'Observation does not exist';
+const OBSERVATION_FILE_404 = 'Observation image not found';
 const EVENT404 = 'Event does not exist';
 
 export class ObservationController {
@@ -27,7 +28,7 @@ export class ObservationController {
         } else {
             observations = await repository.find({ relations: ['owner'] });
         }
-         
+
         return res.status(200).json(observations);
     });
 
@@ -127,7 +128,7 @@ export class ObservationController {
             if (bodyDescr.obstacle) description.obstacle = bodyDescr.obstacle;
             if (bodyDescr.impact) description.impact = bodyDescr.impact;
 
-            await validate(description);
+            await validate(description, { skipMissingProperties: true });
 
             observation.description = description;
         }
@@ -139,7 +140,7 @@ export class ObservationController {
             if (bodyLoc.longitude) location.longitude = bodyLoc.longitude;
             if (bodyLoc.altitude) location.altitude = bodyLoc.altitude;
 
-            await validate(location);
+            await validate(location, { skipMissingProperties: true });
 
             observation.location = location;
         }
@@ -152,10 +153,27 @@ export class ObservationController {
     });
 
     public deleteObservation = createAsyncRoute(async (req, res) => {
+        const OBSERVATION_ID = req.params.id;
+
         const repository = getRepository(Observation);
-        const result = await repository.delete(req.params.id);
-        if (result.affected > 0) return res.status(204).json({});
-        return sendError(res, 404, OBSERVATION404);
+
+        try {
+            const observation = await repository.findOneOrFail(OBSERVATION_ID);
+            const result = await repository.delete(req.params.id);
+
+            if (result.affected > 0) {
+                try {
+                    await observation.deleteImage();
+                    return res.status(204).json({});
+                } catch (err) {
+                    return res                        
+                        .status(206)                        
+                        .json({  error: OBSERVATION_FILE_404  });
+                }
+            } else throw new Error(OBSERVATION404);
+        } catch (err) {
+            return sendError(res, 404, OBSERVATION404);
+        }
     });
 
     public getObstacles = createAsyncRoute(async (req, res) => {
