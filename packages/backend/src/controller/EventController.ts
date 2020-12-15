@@ -85,14 +85,13 @@ export class EventControler {
         return sendError(res, 404, NO_PARTICIPANT);
     });
 
-    public addParticipant = createAsyncRoute(async (req, res) => {
+    public addParticipants = createAsyncRoute(async (req, res) => {
         const eventRepository = getRepository(Event);
         const userRepository = getRepository(User);
 
         const EVENT_ID = req.params.id;
         const event = await eventRepository.findOne(req.params.id);
         if (!event) return sendError(res, 404, EVENT404);
-        
 
         if (!req.body.participants) {
             return sendError(res, 400, NO_PARTICIPANT_DEFINED);
@@ -103,7 +102,7 @@ export class EventControler {
         if (!(participants instanceof Array) || participants.length <= 0) {
             return sendError(res, 400, NO_PARTICIPANT_DEFINED);
         }
-        
+
         const loadedUser = await userRepository.find({
             relations: ['events'],
             where: {
@@ -111,22 +110,21 @@ export class EventControler {
             }
         });
 
-        if(loadedUser.length !== participants.length){
+        if (loadedUser.length !== participants.length) {
             return sendError(res, 400, EVENT_PARTICIPANT_NOT_EXISTING_USER);
         }
-        
+
         const addedUser = [];
 
-        for(const userToAddInEvent of loadedUser){
-            if(!userToAddInEvent.events.find(e => e.id === event.id)){
+        for (const userToAddInEvent of loadedUser) {
+            if (!userToAddInEvent.events.find(e => e.id === event.id)) {
                 userToAddInEvent.events.push(event);
             }
-            
+
             addedUser.push(await userRepository.save(userToAddInEvent));
         }
 
-
-        return res.status(200).json({...event, participants: addedUser});
+        return res.status(200).json({ ...event, participants: addedUser });
     });
 
     public getObservations = createAsyncRoute(async (req, res) => {

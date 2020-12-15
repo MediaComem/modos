@@ -13,7 +13,21 @@ const EVENT404 = 'Event does not exist';
 export class ObservationController {
     public getObservations = createAsyncRoute(async (req, res) => {
         const repository = getRepository(Observation);
-        const observations = await repository.find({ relations: ['owner'] });
+        let observations = undefined;
+
+        if (req.query.geojson) {
+            const geojsonObservations = await repository.query(`
+            SELECT json_build_object(
+                'type', 'FeatureCollection',
+                'features', json_agg(ST_AsGeoJSON(o.*)::json)
+                ) as observations 
+            FROM observation o;
+            `);
+            observations = geojsonObservations[0];
+        } else {
+            observations = await repository.find({ relations: ['owner'] });
+        }
+         
         return res.status(200).json(observations);
     });
 
