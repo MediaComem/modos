@@ -15,6 +15,8 @@ def index():
     if request.method == 'POST':
         uploaded_file = request.files['file']
         if uploaded_file.filename != '':
+            if not os.path.exists('static'):
+                os.makedirs('static')
             image_path = os.path.join('static', uploaded_file.filename)
             uploaded_file.save(image_path)
 
