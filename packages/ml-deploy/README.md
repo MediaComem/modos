@@ -53,4 +53,4 @@ The model is being served on port 8501
 ```bash
 flask run
 ```
-You can now access to the adress [localhost:5000](http://localhost:5000) where you can upload an image and get the prediction
+You can now access the adress [localhost:5000](http://localhost:5000) where you can upload an image and get the prediction
