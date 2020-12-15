@@ -1,7 +1,7 @@
 # MoDoS ML-Deploy
 ## Requirements
 * Docker
-* Python 3.6+
+* [Python 3.7.9](https://www.python.org/downloads/release/python-379/)
 ## Setting up the environment
 Inside the folder ml-deploy
 ### Create the venv
