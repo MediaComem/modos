@@ -20,9 +20,13 @@ export class ObservationController {
             const geojsonObservations = await repository.query(`
             SELECT json_build_object(
                 'type', 'FeatureCollection',
-                'features', json_agg(ST_AsGeoJSON(o.*)::json)
+                'features', json_agg(ST_AsGeoJSON(obs.*)::json)
                 ) as observations 
-            FROM observation o;
+            FROM (
+                SELECT o.*, u.email, u.pseudonym
+                FROM observation o
+                INNER JOIN modos.user u on u.id=o."ownerId" 
+                ) obs;
             `);
             observations = geojsonObservations[0];
         } else {
@@ -59,16 +63,34 @@ export class ObservationController {
         let observations = [];
         const repObservations = getRepository(Observation);
 
-        observations = await repObservations
-            .createQueryBuilder('observation')
-            .innerJoinAndSelect('observation.owner', 'owner')
-            .innerJoinAndSelect(
-                'user_events_event',
-                'uee',
-                'uee."userId"=owner.id'
-            )
-            .where('uee."eventId"=:eventID', { eventID: EVENT_ID })
-            .getMany();
+        if (req.query.geojson === 'true') {
+            observations = await repObservations.query(
+                `
+            SELECT json_build_object(
+                'type', 'FeatureCollection',
+                'features', json_agg(ST_AsGeoJSON(obs.*)::json)
+                ) as observations 
+            FROM (
+                SELECT o.*, u.email, u.pseudonym from observation o 
+                INNER JOIN modos.user u ON u.id=o."ownerId"
+                INNER JOIN user_events_event uee ON uee."userId"=u.id
+                WHERE uee."eventId"=$1
+                ) obs
+            `,
+                [EVENT_ID]
+            );
+        } else {
+            observations = await repObservations
+                .createQueryBuilder('observation')
+                .innerJoinAndSelect('observation.owner', 'owner')
+                .innerJoinAndSelect(
+                    'user_events_event',
+                    'uee',
+                    'uee."userId"=owner.id'
+                )
+                .where('uee."eventId"=:eventID', { eventID: EVENT_ID })
+                .getMany();
+        }
 
         return res.status(200).send(observations);
     });
@@ -166,9 +188,9 @@ export class ObservationController {
                     await observation.deleteImage();
                     return res.status(204).json({});
                 } catch (err) {
-                    return res                        
-                        .status(206)                        
-                        .json({  error: OBSERVATION_FILE_404  });
+                    return res
+                        .status(206)
+                        .json({ error: OBSERVATION_FILE_404 });
                 }
             } else throw new Error(OBSERVATION404);
         } catch (err) {
