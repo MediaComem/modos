@@ -12,4 +12,5 @@ eventRouter.put('/:id', authenticateUser, eventController.updateEvent);
 eventRouter.delete('/:id', authenticateUser, eventController.deleteEvent);
 
 eventRouter.get('/:id/users', eventController.getParticipants);
+eventRouter.post('/:id/users', eventController.addParticipants);
 eventRouter.get('/:id/observations', eventController.getObservations);

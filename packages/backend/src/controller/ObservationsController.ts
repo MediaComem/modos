@@ -8,12 +8,31 @@ import { Description, FrontendObstacle, Obstacle } from '../entity/Description';
 import { Location } from '../entity/Location';
 
 const OBSERVATION404 = 'Observation does not exist';
+const OBSERVATION_FILE_404 = 'Observation image not found';
 const EVENT404 = 'Event does not exist';
 
 export class ObservationController {
     public getObservations = createAsyncRoute(async (req, res) => {
         const repository = getRepository(Observation);
-        const observations = await repository.find({ relations: ['owner'] });
+        let observations = undefined;
+
+        if (req.query.geojson === 'true') {
+            const geojsonObservations = await repository.query(`
+            SELECT json_build_object(
+                'type', 'FeatureCollection',
+                'features', json_agg(ST_AsGeoJSON(obs.*)::json)
+                ) as observations 
+            FROM (
+                SELECT o.*, u.email, u.pseudonym
+                FROM observation o
+                INNER JOIN modos.user u on u.id=o."ownerId" 
+                ) obs;
+            `);
+            observations = geojsonObservations[0];
+        } else {
+            observations = await repository.find({ relations: ['owner'] });
+        }
+
         return res.status(200).json(observations);
     });
 
@@ -28,12 +47,13 @@ export class ObservationController {
      * Get all observations that are owned by an event trough an user
      */
     public getObservationByOwnerEvent = createAsyncRoute(async (req, res) => {
-        if (!req.params.eventID) {
+        const EVENT_ID = req.params.eventID;
+        if (!EVENT_ID) {
             return res.status(404).send('No events found for this id');
         }
 
         const repEvents = getRepository(Event);
-        const event = await repEvents.findOne(req.params.eventID, {
+        const event = await repEvents.findOne(EVENT_ID, {
             relations: ['participants']
         });
         if (event.participants.length === 0) {
@@ -43,16 +63,33 @@ export class ObservationController {
         let observations = [];
         const repObservations = getRepository(Observation);
 
-        for (const participant of event.participants) {
-            // will prevent memory overload if too many points exist in db
-            if (observations.length > 1000) break;
-
-            const observationFromParticipant = await repObservations.find({
-                where: { owner: participant },
-                relations: ['owner']
-            });
-
-            observations = [...observations, ...observationFromParticipant];
+        if (req.query.geojson === 'true') {
+            observations = await repObservations.query(
+                `
+            SELECT json_build_object(
+                'type', 'FeatureCollection',
+                'features', json_agg(ST_AsGeoJSON(obs.*)::json)
+                ) as observations 
+            FROM (
+                SELECT o.*, u.email, u.pseudonym from observation o 
+                INNER JOIN modos.user u ON u.id=o."ownerId"
+                INNER JOIN user_events_event uee ON uee."userId"=u.id
+                WHERE uee."eventId"=$1
+                ) obs
+            `,
+                [EVENT_ID]
+            );
+        } else {
+            observations = await repObservations
+                .createQueryBuilder('observation')
+                .innerJoinAndSelect('observation.owner', 'owner')
+                .innerJoinAndSelect(
+                    'user_events_event',
+                    'uee',
+                    'uee."userId"=owner.id'
+                )
+                .where('uee."eventId"=:eventID', { eventID: EVENT_ID })
+                .getMany();
         }
 
         return res.status(200).send(observations);
@@ -113,7 +150,7 @@ export class ObservationController {
             if (bodyDescr.obstacle) description.obstacle = bodyDescr.obstacle;
             if (bodyDescr.impact) description.impact = bodyDescr.impact;
 
-            await validate(description);
+            await validate(description, { skipMissingProperties: true });
 
             observation.description = description;
         }
@@ -125,7 +162,7 @@ export class ObservationController {
             if (bodyLoc.longitude) location.longitude = bodyLoc.longitude;
             if (bodyLoc.altitude) location.altitude = bodyLoc.altitude;
 
-            await validate(location);
+            await validate(location, { skipMissingProperties: true });
 
             observation.location = location;
         }
@@ -138,10 +175,27 @@ export class ObservationController {
     });
 
     public deleteObservation = createAsyncRoute(async (req, res) => {
+        const OBSERVATION_ID = req.params.id;
+
         const repository = getRepository(Observation);
-        const result = await repository.delete(req.params.id);
-        if (result.affected > 0) return res.status(204).json({});
-        return sendError(res, 404, OBSERVATION404);
+
+        try {
+            const observation = await repository.findOneOrFail(OBSERVATION_ID);
+            const result = await repository.delete(req.params.id);
+
+            if (result.affected > 0) {
+                try {
+                    await observation.deleteImage();
+                    return res.status(204).json({});
+                } catch (err) {
+                    return res
+                        .status(206)
+                        .json({ error: OBSERVATION_FILE_404 });
+                }
+            } else throw new Error(OBSERVATION404);
+        } catch (err) {
+            return sendError(res, 404, OBSERVATION404);
+        }
     });
 
     public getObstacles = createAsyncRoute(async (req, res) => {

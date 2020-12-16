@@ -1,17 +1,32 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, ManyToMany } from "typeorm";
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    ManyToOne,
+    OneToMany,
+    ManyToMany
+} from 'typeorm';
 import { User } from "./User";
 import { Observation } from "./Observation";
-import { IsDate, IsString, MinLength, IsInt, IsPositive } from 'class-validator'
+import {
+    IsDate,
+    IsString,
+    MinLength,
+    IsInt,
+    IsPositive,
+    IsOptional,
+    Min
+} from 'class-validator';
 
 @Entity({
     schema: 'modos'
 })
 export class Event {
-
     @PrimaryGeneratedColumn()
     id: number;
 
     @ManyToOne(type => User)
+    @IsOptional()
     owner: User;
 
     @Column()
@@ -21,6 +36,7 @@ export class Event {
     @Column({ nullable: true })
     @IsString()
     @MinLength(8)
+    @IsOptional()
     password: string;
 
     @Column()
@@ -33,11 +49,12 @@ export class Event {
 
     @Column()
     @IsString()
+    @IsOptional()
     objective: string;
 
     @Column()
     @IsInt()
-    @IsPositive()
+    @Min(0)
     numberOfImages: number;
 
     @OneToMany(type => Observation, observation => observation.event, {
