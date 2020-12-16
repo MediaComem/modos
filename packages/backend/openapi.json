@@ -795,6 +795,50 @@
             }
           }
         }
+      },
+      "post": {
+          "tags": ["events"],
+          "summary": "Add the participants to an event",
+          "operationId": "addParticipants",
+          "parameters": [
+              {
+                  "name": "id",
+                  "in": "path",
+                  "description": "id of the event the user is updating",
+                  "required": true,
+                  "style": "simple",
+                  "explode": false,
+                  "schema": {
+                      "type": "integer"
+                  }
+              }
+          ],
+          "requestBody": {
+              "description": "A an array of participant id",
+              "content": {
+                  "applicatio/json": {
+                      "schema": {
+                          "type": "array",
+                          "example": "[1,2,3]"
+                      }
+                  }
+              }
+          },
+          "responses": {
+              "200": {
+                  "description": "participants list",
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
       }
     },
     "/events/{id}/observations": {
@@ -842,6 +886,13 @@
         ],
         "summary": "list all the observations",
         "operationId": "getObservations",
+        "parameters": [
+          {
+            "name":"geojson",
+            "type":"boolean",
+            "description":"if the returned format must be a geojson"
+          }
+        ],
         "responses": {
           "200": {
             "description": "observations list",
@@ -951,6 +1002,43 @@
             "bearerAuth": []
           }
         ]
+      }
+    },
+    "/observations/event-participants/{eventID}": {
+      "get": {
+        "tags": [
+          "observations"
+        ],
+        "summary": "get observations from participants from the given event",
+        "operationId": "getObservationsFromEventParticipants",
+        "parameters": [
+          {
+            "name": "eventID",
+            "in": "path",
+            "description": "id of the event",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "observations list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Observation"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/observations/{id}": {
