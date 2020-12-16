@@ -16,7 +16,7 @@ export class ObservationController {
         const repository = getRepository(Observation);
         let observations = undefined;
 
-        if (req.query.geojson) {
+        if (req.query.geojson === 'true') {
             const geojsonObservations = await repository.query(`
             SELECT json_build_object(
                 'type', 'FeatureCollection',
@@ -43,12 +43,13 @@ export class ObservationController {
      * Get all observations that are owned by an event trough an user
      */
     public getObservationByOwnerEvent = createAsyncRoute(async (req, res) => {
-        if (!req.params.eventID) {
+        const EVENT_ID = req.params.eventID;
+        if (!EVENT_ID) {
             return res.status(404).send('No events found for this id');
         }
 
         const repEvents = getRepository(Event);
-        const event = await repEvents.findOne(req.params.eventID, {
+        const event = await repEvents.findOne(EVENT_ID, {
             relations: ['participants']
         });
         if (event.participants.length === 0) {
@@ -58,17 +59,16 @@ export class ObservationController {
         let observations = [];
         const repObservations = getRepository(Observation);
 
-        for (const participant of event.participants) {
-            // will prevent memory overload if too many points exist in db
-            if (observations.length > 1000) break;
-
-            const observationFromParticipant = await repObservations.find({
-                where: { owner: participant },
-                relations: ['owner']
-            });
-
-            observations = [...observations, ...observationFromParticipant];
-        }
+        observations = await repObservations
+            .createQueryBuilder('observation')
+            .innerJoinAndSelect('observation.owner', 'owner')
+            .innerJoinAndSelect(
+                'user_events_event',
+                'uee',
+                'uee."userId"=owner.id'
+            )
+            .where('uee."eventId"=:eventID', { eventID: EVENT_ID })
+            .getMany();
 
         return res.status(200).send(observations);
     });
