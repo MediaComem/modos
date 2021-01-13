@@ -81,7 +81,8 @@ const About = () => {
         openGraph={{
           url: 'https://modos.heig-vd.ch/about',
           title: 'About MoDos',
-          description: 'Le projet modos cherche à développer de nouveaux procédés pour accompagner les seniors en mobilité...'
+          description:
+            'Le projet modos cherche à développer de nouveaux procédés pour accompagner les seniors en mobilité...'
         }}
       />
 
@@ -91,34 +92,32 @@ const About = () => {
 
       <ContainerWithMargin
         id={styles['about-intro-mobile']}
-        className={styles.section}
-      >
+        className={styles.section}>
         <div>
           <ReactMarkdown>{i18n('intro')}</ReactMarkdown>
         </div>
-        <Button>{i18n('intro-btn')}</Button>
+        {/* <Button>{i18n('intro-btn')}</Button> */}
       </ContainerWithMargin>
 
       <ContainerWithMargin
         id={styles['about-intro-desktop']}
         className={styles.section}
         mainColClassName={styles['about-intro-desktop-maincol']}
-        rowClassName={styles['about-intro-desktop-row']}
-      >
+        rowClassName={styles['about-intro-desktop-row']}>
         <h1>{i18n('title')}</h1>
         <div>
           <ReactMarkdown>{i18n('intro')}</ReactMarkdown>
         </div>
-        <Button>{i18n('intro-btn')}</Button>
+        {/* <Button>{i18n('intro-btn')}</Button> */}
       </ContainerWithMargin>
 
       <ContainerWithMargin
         id={styles['about-conception']}
-        className={styles.section}
-      >
+        className={styles.section}>
         <h2>{i18n('conception-title')}</h2>
         <div className={styles['conception-description']}>
-          <ReactMarkdown source={i18n('conception-description')}></ReactMarkdown>
+          <ReactMarkdown
+            source={i18n('conception-description')}></ReactMarkdown>
         </div>
         <Image
           className={styles['about-conception-img-desktop']}
@@ -131,8 +130,7 @@ const About = () => {
         <Row>
           <Col>
             <SliderModosContainer
-              items={SLIDER_TECH_SCHEM}
-            ></SliderModosContainer>
+              items={SLIDER_TECH_SCHEM}></SliderModosContainer>
           </Col>
         </Row>
       </Container>
@@ -144,29 +142,41 @@ const About = () => {
 
       <ContainerWithMargin
         id={styles['about-codac']}
-        className={styles.section}
-      >
+        className={styles.section}>
         <p>{i18n('codac-intro')}</p>
 
         <div className={styles['about-universities']}>
           <a href='https://heig-vd.ch'>
-            <img className='lazyload' data-src={require('../images/heig-logo.png')} alt='Logo HEIG-VD' />
+            <img
+              className='lazyload'
+              data-src={require('../images/heig-logo.png')}
+              alt='Logo HEIG-VD'
+            />
           </a>
           <a href='https://he-arc.ch'>
-            <img className='lazyload' data-src={require('../images/hearc-logo.png')} alt='Logo HEARC' />
+            <img
+              className='lazyload'
+              data-src={require('../images/hearc-logo.png')}
+              alt='Logo HEARC'
+            />
           </a>
           <a href='https://heia-fr.ch'>
-            <img className='lazyload' data-src={require('../images/heia-logo.png')} alt='Logo HEIA-FR' />
+            <img
+              className='lazyload'
+              data-src={require('../images/heia-logo.png')}
+              alt='Logo HEIA-FR'
+            />
           </a>
         </div>
 
         <h2>{i18n('codac-title')}</h2>
         <p>{i18n('codac-descr')}</p>
         <div className={styles['about-members']}>
-          {MEMBERS.map((member, index) =>
+          {MEMBERS.map((member, index) => (
             <div key={index} className={styles['about-members-item']}>
               <span>{member}</span>
-            </div>)}
+            </div>
+          ))}
         </div>
       </ContainerWithMargin>
 
