@@ -2,7 +2,15 @@
 ## Requirements
 * Docker
 * [Python 3.7.9](https://www.python.org/downloads/release/python-379/)
-## Setting up the environment
+
+## Run project with docker-compose
+You can simply run the project with the following command (need docker-compose)
+```
+docker-compose up
+```
+You can then access ``localhost:5000`` to see the project running
+
+## Setting up the environment locally
 Inside the folder ml-deploy
 ### Create the venv
 ```bash

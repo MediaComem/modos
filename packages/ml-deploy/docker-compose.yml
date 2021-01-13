@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - tanserflow
+    environment:
+      TANSERFLOW_SERVE_URI: 'http://tanserflow:8501'
+    ports:
+      - "5000:5000"
+
+  tanserflow:
+    image: tensorflow/serving
+    ports:
+      - "8501:8501"
+    volumes:
+      - "./models/:/models/"
+    command: [ 
+      "--model_config_file=/models/models.config" , 
+      "--model_config_file_poll_wait_seconds=60"
+      ]
+

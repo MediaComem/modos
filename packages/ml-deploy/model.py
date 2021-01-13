@@ -1,11 +1,13 @@
+import os
 import tensorflow as tf
 import numpy as np
 import json
 import requests
 
 SIZE=160
-BINARY_URI='http://localhost:8501/v1/models/binary:predict'
-CATEGORICAL_URI='http://localhost:8501/v1/models/categorical:predict'
+TANSERFLOW_SERVE_URI= os.environ.get('TANSERFLOW_SERVE_URI') or 'http://localhost:8501'
+BINARY_URI=TANSERFLOW_SERVE_URI + '/v1/models/binary:predict'
+CATEGORICAL_URI=TANSERFLOW_SERVE_URI + '/v1/models/categorical:predict'
 
 problem_categories = ["Curb Ramp", "Missing Curb Ramp", "Obstacle", "Surface Problem", "Width", "Security", "Slope", "Other"]
 
