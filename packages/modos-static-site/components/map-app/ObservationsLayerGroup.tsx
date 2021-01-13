@@ -72,7 +72,7 @@ const ObservationsLayerGroup = (props: IProps) => {
   }, [observations, router.query.observationID]);
 
   return (
-    <MarkerClusterGroup>
+    <MarkerClusterGroup maxClusterRadius={30}>
       {observations?.map((observation, index) => {
         if (
           !observation?.location?.latitude ||
