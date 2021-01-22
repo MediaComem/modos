@@ -1,5 +1,6 @@
 import os
 
+import mlflow
 import seaborn as sn
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -32,6 +33,11 @@ class Trainer():
                                     #                                          save_best_only=True),
                                     #       tf.keras.callbacks.TensorBoard(log_dir=f"./logs/test/{model_name}")]
                                       )
+
+    def train_all(self):
+        self.model.fit(self.dataset.validation,
+                       epochs=self.config.num_epochs//2)
+        return self.model
 
     def print_classification_report(self):
         y_pred = self.model.predict(self.dataset.validation)

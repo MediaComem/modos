@@ -4,6 +4,8 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 import click
+import mlflow
+from datetime import datetime
 from src.data.make_dataset import MakeDataset
 from src.models.binary_model import BinaryModel
 from src.models.categorical_model import CategoricalModel
@@ -26,6 +28,7 @@ def train(model, dataset, config):
     trainer.train()
     click.echo("Theses are the results for the training")
     trainer.print_classification_report()
+    return trainer
 
 def pipeline(config_path, data_path, Model, title, verbose):
     if verbose:
@@ -37,10 +40,16 @@ def pipeline(config_path, data_path, Model, title, verbose):
     model = Model(config)
     if verbose:
         click.echo(f"Training {title} model")
-    train(model, dataset, config)
 
-    if click.confirm('Do you want to train on the full data?'):
-        pass
+    mlflow.set_experiment(title)
+    
+    mlflow.keras.autolog()
+    run_name = datetime.today().strftime('%Y-%m-%d_%H-%M-%S')
+    with mlflow.start_run(run_name=run_name):
+        trainer = train(model, dataset, config)
+        if click.confirm('Are you satisfied with this result? (Saying yes will train the model on the remaining data during (validation set) for half the number of epoch used to get these results)'):
+            fully_trained_model = trainer.train_all()
+            fully_trained_model.save(os.path.join("models", title, run_name))
 
 @click.command()
 @click.option('--ignore',
