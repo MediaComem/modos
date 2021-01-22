@@ -3,12 +3,12 @@
 * Docker
 * [Python 3.7.9](https://www.python.org/downloads/release/python-379/)
 ## Setting up the environment
-Inside the folder ml-deploy
+Inside the ml-deploy folder
 ### Create the venv
 ```bash
 python3 -m venv venv
 ```
-If you are using a system where python 3.6+ is the only python environment, you can use python instead of python3
+If you are using a system where python is the only python environment, you can use python instead of python3
 
 ### Activate the venv
 #### Windows
