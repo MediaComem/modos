@@ -33,3 +33,11 @@ see the [api readme](packages/backend/README.md)
 ### ... mobile-app
 
 see the [Mobile app Readme](packages/mobile-app)
+
+### ... ml-deploy
+
+see the [ml-deploy readme](packages/ml-deploy/README.md)
+
+### ... ml-train
+
+see the [ml-train readme](packages/ml-train/README.md)
