@@ -137,7 +137,7 @@ An example of correct hierarchy:
 
 With the *YverdonDataset.csv* containing:
 
-![image-20210128092617921](.\docs\images\image-20210128092617921.png)
+![image-20210128092617921](./docs/images/image-20210128092617921.png)
 
 ### Train the model
 
@@ -250,25 +250,25 @@ If the folder is on a remote server, to access it from your PC.
 
 You can now access to the server adress / localhost on port 5000 with your browser.
 
-![image-20210128102245493](.\docs\images\image-20210128102245493.png)
+![image-20210128102245493](./docs/images/image-20210128102245493.png)
 
 
 
 On the left you can access to the logs for the binary or categorical model. When binary or categorical is selected, you can see every runs that have been logged. You can click on the *Start Time* of an experiment to consult the logs. What interest us are the different metrics:
 
-![image-20210128102536616](.\docs\images\image-20210128102536616.png)
+![image-20210128102536616](./docs/images/image-20210128102536616.png)
 
 The interesting one is the *val_f1-score*. It should be better than the previous model. 
 
 Another interesting log is under *Artifacts*, the *metrics_plot_binary.png* or *metrics_plot_categorical.png*. You can see the evolution of the *Loss*, *Accuracy* and *f1-score* depending on the number of epochs. It might be useful to adjust the number of epochs on the following trains when more epochs does not improve the model.
 
-![image-20210128112711746](.\docs\images\image-20210128112711746.png)
+![image-20210128112711746](./docs/images/image-20210128112711746.png)
 
 Here for instance, we could reduce the number of epochs to 3000 and still have similar results.
 
 It is also possible to consult the classification report by clicking on *classification_report_binary.txt* or *classification_report_categorical.txt* 
 
-![image-20210128114129256](.\docs\images\image-20210128114129256.png)
+![image-20210128114129256](./docs/images/image-20210128114129256.png)
 
 After training the model on the full dataset, you can find the saved model under *models/binary/{run_name}* or *models/categorical/{run_name}* where run_name is the name of the experiment in ml-flow. You can copy the folder and use them in the deployed app.
 
