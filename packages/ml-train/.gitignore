@@ -1,4 +1,13 @@
-/data
+/data/binary/
+
+/data/categorical/
+
+/data/raw/YverdonDatasetpart1.zip
+
+/data/raw/YverdonDatasetpart2.zip
+
+/data/raw/YverdonDatasetpart3.zip
+
 /mlruns
 /.vscode
 /models
