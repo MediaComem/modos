@@ -3,9 +3,11 @@ import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-import click
-import mlflow
 from datetime import datetime
+
+import click
+import matplotlib.pyplot as plt
+import mlflow
 from src.data.make_dataset import MakeDataset
 from src.models.binary_model import BinaryModel
 from src.models.categorical_model import CategoricalModel
@@ -47,6 +49,9 @@ def pipeline(config_path, data_path, Model, title, verbose):
     run_name = datetime.today().strftime('%Y-%m-%d_%H-%M-%S')
     with mlflow.start_run(run_name=run_name):
         trainer = train(model, dataset, config)
+        plot_metrics(trainer.history)
+        mlflow.log_figure(plt.gcf(), f"metrics_plot_{title}.png")
+        mlflow.log_text(trainer.get_classification_report(), f"classification_report_{title}.txt")
         if click.confirm('Are you satisfied with this result? (Saying yes will train the model on the remaining data during (validation set) for half the number of epoch used to get these results)'):
             fully_trained_model = trainer.train_all()
             fully_trained_model.save(os.path.join("models", title, run_name))

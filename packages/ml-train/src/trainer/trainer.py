@@ -39,14 +39,18 @@ class Trainer():
                        epochs=self.config.num_epochs//2)
         return self.model
 
-    def print_classification_report(self):
+    def get_classification_report(self):
         y_pred = self.model.predict(self.dataset.validation)
         y_pred = np.argmax(y_pred, axis=1)
         y_true = []
         for _, label in self.dataset.validation.take(-1):
             y_true.extend(label.numpy())
         y_true = np.argmax(np.array(y_true), axis=1)
-        return print(classification_report(y_true, y_pred, zero_division=0))
+        return classification_report(y_true, y_pred, zero_division=0)
+
+    def print_classification_report(self):
+       
+        return print(self.get_classification_report())
 
     def plot_matrix(self):
         y_pred = self.model.predict(self.dataset.validation)
