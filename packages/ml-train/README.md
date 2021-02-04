@@ -40,7 +40,7 @@ In this doc you will come accross the term *binary* and *categorical*.
 
 *Binary*
 
-Model that put images in two classes. Images with and without problem. In the definition of the project, image without problem is defined as the class 5. Image with problems are defined as class 1, 3, 4, 6, 7, 8, 9. In the binary dataset, class 5 will become class 0. The other classes will be defined as class 1. (see the folder hierarchy on [chapter Create the dataset](#create-the-dataset) for a better understanding)
+Model that put images in two classes. Images with and without problem. In the definition of the project, images without problem are defined as the class 5. Images with problems are defined as class 1, 3, 4, 6, 7, 8, 9. In the binary dataset, class 5 will become class 0. The other classes will be defined as class 1. (see the folder hierarchy on [chapter Create the dataset](#create-the-dataset) for a better understanding)
 
 *Categorical*
 
