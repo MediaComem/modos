@@ -55,12 +55,15 @@ def zip_data_parser(zip_fname, labels, binary_path, categorical_path, category_c
             shutil.rmtree(f.namelist()[0])
 
 def save_file(output_dir, category, name, file):
-    save_folder = os.path.join(output_dir, str(category))
-    extracted_path = file.extract(name)
-    image = Image.open(extracted_path)
-    image = image.resize((160, 160))
-    image.save(extracted_path)
-    shutil.move(extracted_path, os.path.join(save_folder, os.path.basename(name)))
+    try:
+        save_folder = os.path.join(output_dir, str(category))
+        extracted_path = file.extract(name)
+        image = Image.open(extracted_path)
+        image = image.resize((160, 160))
+        image.save(extracted_path)
+        shutil.move(extracted_path, os.path.join(save_folder, os.path.basename(name)))
+    except zipfile.BadZipFile as e:
+        print(f"The format of {name} is invalid. The zip file might be corrupted")
 
 def create_folders(labels, binary_path, categorical_path, category_col):
     categories = labels[category_col].unique()
