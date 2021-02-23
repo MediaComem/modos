@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToMany, JoinTable } from "typeorm";
 import { Profile } from './Profile';
+import { SofaProfile } from './SofaProfile';
 import { Event } from "./Event";
 import { IsEmail, IsString } from 'class-validator'
 import * as bcrypt from "bcrypt";
@@ -28,6 +29,10 @@ export class User {
     @OneToOne(type => Profile)
     @JoinColumn()
     profile: Profile;
+
+    @OneToOne(type => SofaProfile)
+    @JoinColumn()
+    sofaProfile: SofaProfile;
 
     @ManyToMany(type => Event, event => event.participants, { nullable: true })
     @JoinTable()

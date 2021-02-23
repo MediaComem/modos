@@ -5,6 +5,12 @@ import { getRepository, getManager } from "typeorm";
 import { User } from "../entity/User";
 import { Event } from "../entity/Event";
 import { Observation } from "../entity/Observation";
+import { ObservationEvaluation } from "../entity/ObservationEvaluation";
+import { ObservationLabelisation } from "../entity/ObservationLabelisation";
+import { ObservationValidation } from "../entity/ObservationValidation";
+import { DailyChallenge } from "../entity/DailyChallenge"
+import { today } from "./utils"
+import { ConnectionLog } from "../entity/ConnectionLog";
 
 const USER404 = "User does not exist";
 const EVENT404 = "Event does not exist";
@@ -27,6 +33,17 @@ export class UserController {
 
     return sendError(res, 401, "Unauthorized");
   });
+
+  public addConnectionLog = async function(userid){
+    const manager = getManager();
+
+    const connectionLog = new ConnectionLog();
+    connectionLog.user = userid;
+    connectionLog.loggedAt = new Date();
+
+    await validate(connectionLog);
+    await manager.insert(ConnectionLog, connectionLog);
+  }
 
   public getUser = createAsyncRoute(async (req, res) => {
     const userRepository = getRepository(User);
@@ -97,6 +114,41 @@ export class UserController {
     });
     if (observations) return res.status(200).json(observations);
     return sendError(res, 404, USER404);
+  });
+
+  public getUserLabelisations = createAsyncRoute(async (req, res) => {
+    const labelisationRepository = getRepository(ObservationLabelisation);
+    const labelisations = await labelisationRepository.find({ where: { owner: req.body.userId }, relations: ["observation"] });
+    if (labelisations) return res.status(200).json(labelisations);
+    return sendError(res, 404, USER404);
+  });
+
+  public getUserEvaluations = createAsyncRoute(async (req, res) => {
+      const evaluationRepository = getRepository(ObservationEvaluation);
+      const evaluations = await evaluationRepository.find({ where: { owner: req.body.userId }, relations: ["observation"] });
+      if (evaluations) return res.status(200).json(evaluations);
+      return sendError(res, 404, USER404);
+  });
+
+  public getUserValidations = createAsyncRoute(async (req, res) => {
+      const validationRepository = getRepository(ObservationValidation);
+      const validations = await validationRepository.find({ where: { owner: req.body.userId }, relations: ["observation"] });
+      if (validations) return res.status(200).json(validations);
+      return sendError(res, 404, USER404);
+  });
+
+  public getUserChallenges = createAsyncRoute(async (req, res) => {
+      const challengeRepository = getRepository(DailyChallenge);
+      const challenges = await challengeRepository.find({ where: { owner: req.body.userId } });
+      if (challenges) return res.status(200).json(challenges);
+      return sendError(res, 404, USER404);
+  });
+
+  public getOrCreateUserTodayChallenge = createAsyncRoute(async (req, res) => {
+      const challengeRepository = getRepository(DailyChallenge);
+      const challenges = await challengeRepository.find({ where: { owner: req.body.userId, date: today() } });
+      if (challenges) return res.status(200).json(challenges);
+      return sendError(res, 404, USER404);
   });
 
   public joinEvent = createAsyncRoute(async (req, res) => {

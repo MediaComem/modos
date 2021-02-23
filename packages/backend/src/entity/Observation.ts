@@ -4,6 +4,7 @@ import {
     OneToOne,
     JoinColumn,
     ManyToOne,
+    OneToMany,
     Column,
     AfterLoad
 } from 'typeorm';
@@ -12,6 +13,9 @@ import { Description } from './Description';
 import { Image } from './Image';
 import { Location } from './Location';
 import { Event } from './Event';
+import { ObservationValidation } from "./ObservationValidation";
+import { ObservationEvaluation } from "./ObservationEvaluation";
+import { ObservationLabelisation } from "./ObservationLabelisation";
 import * as config from '../config/config';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -39,6 +43,21 @@ export class Observation {
 
     @ManyToOne(type => Event, event => event.observations, { cascade: true })
     event: Event;
+
+    @OneToMany(type => ObservationValidation, validation => validation.observation, {
+        nullable: true
+    })
+    validations: Array<ObservationValidation>;
+
+    @OneToMany(type => ObservationEvaluation, evaluation => evaluation.observation, {
+        nullable: true
+    })
+    evaluations: Array<ObservationEvaluation>;
+
+    @OneToMany(type => ObservationLabelisation, labelisation => labelisation.observation, {
+        nullable: true
+    })
+    labelisations: Array<ObservationLabelisation>;
 
     @AfterLoad()
     setAPIImageLink() {

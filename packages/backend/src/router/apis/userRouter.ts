@@ -14,3 +14,5 @@ userRouter.get('/events', authenticateUser, userController.getUserEvents);
 userRouter.post('/join/:eventId', authenticateUser, userController.joinEvent);
 
 userRouter.get('/observations', authenticateUser, userController.getUserObservations);
+userRouter.get('/evaluations', authenticateUser, userController.getUserEvaluations);
+userRouter.get('/validations', authenticateUser, userController.getUserValidations); 

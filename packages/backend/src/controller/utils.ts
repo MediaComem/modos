@@ -27,3 +27,16 @@ export const validate = async function(object: Object, options?: ValidatorOption
     const errors = await validateClass(object, options);
     if (errors.length > 0) throw new ClassValidationError(errors);
 };
+
+export const today = function() {
+    var d = new Date();
+    d.setHours(0);
+    d.setMinutes(0);
+    d.setSeconds(0);
+    d.setMilliseconds(0);
+    return d;
+}
+
+export const getRandomInt = function(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}

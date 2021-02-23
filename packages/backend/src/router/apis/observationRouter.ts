@@ -21,7 +21,14 @@ observationRouter.get(
     '/event-participants/:eventID',
     observationController.getObservationByOwnerEvent
 );
+
+observationRouter.get('/to_evaluate',authenticateUser, observationController.getObstaclesToEvaluate);
+observationRouter.get('/to_validate',authenticateUser, observationController.getObstaclesToValidate);
+observationRouter.get('/to_labelise',authenticateUser, observationController.getObstaclesToLabelise);
 observationRouter.get('/:id', observationController.getObservationById);
+
+observationRouter.get('/:id/evaluations', authenticateUser, observationController.getEvaluations);
+observationRouter.get('/:id/validations', authenticateUser, observationController.getValidations);
 observationRouter.put(
     '/:id',
     authenticateUser,
