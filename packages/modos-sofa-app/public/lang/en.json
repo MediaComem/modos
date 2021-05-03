@@ -1,0 +1,72 @@
+{
+    "header": {
+        "title": "Contribuez depuis chez vous",
+        "subtitle": "Pour améliorer la mobilité piétonne de votre ville"
+    },
+    "footer": {
+        "modos_project": "plus d'information sur le projet"
+    },
+    "index": {
+        "mail_placeholder": "Addresse e-mail",
+        "pass_placeholder": "Mot de passe",
+        "login_bt": "S’identifier",
+        "without_account": "Continuer sans compte"
+    },
+    "menu": {
+        "obstacle_label_title": "Labélisation d'obstacles",
+        "obstacle_evaluate_title": "Evaluation d'obstacles",
+        "obstacle_validate_title": "Validation d'obstacles",
+        "obstacle_label_subtitle": "Analysez des photographies pour identifier d'éventuels obstacles à la mobilité piétonne",
+        "obstacle_evaluate_subtitle": "Évaluez l'impact de plusieurs obstacles en fonction du profil de mobilité des usagers",
+        "obstacle_validate_subtitle": "Parcourez les obstacles déjà évalués par d'autres utilisateur·rice·s, et validez leurs observations",
+        "info": "Informations",
+        "logout": "Deconnexion",
+        "back": "Retour à l'accueil",
+        "pass": "Évaluer un autre obstacle (passer)",
+        "submit": "Valider mon évaluation",
+        "labelisation": "Labeliser",
+        "evaluation": "Evaluer",
+        "validation": "Valider"
+    },
+    "errors": {
+        "network_error": "Erreur réseau",
+        "login_error": "Erreur: email ou mot de passe erroné"
+    },
+    "obstacles": {
+        "impact_0": "Inexistant",
+        "impact_0_description": "Je peux passer sans difficulté",
+        "impact_1": "Faible",
+        "impact_1_description": "Je peux quand même passer",
+        "impact_2": "Modéré",
+        "impact_2_description": "Je dois passer avec précaution",
+        "impact_3": "Marqué",
+        "impact_3_description": "J'ai du mal à passer",
+        "impact_4": "Sévère",
+        "impact_4_description": "J'ai beaucoup de mal à passer",
+        "impact_5": "Bloquant",
+        "impact_5_description": "Je ne peux pas passer du tout",
+
+        "coating": "Problème de revêtement",
+        "obstacle": "Obstacle sur le passage",
+        "security": "Sécurité, danger",
+        "passability": "Franchissabilité",
+        "slope": "Forte pente",
+        "width": "Largeur trottoir",
+        "other": "Autre observation"
+    },
+    "helper": {
+        "nohelper": "à mobilité complète",
+        "cane": "aidées d'une canne",
+        "walker": "aidées d'un déambulateur",
+        "wheelchair": "en chaise roulante"
+    },
+    "map": {
+        "coating": "Problème de revêtement",
+        "obstacle": "Obstacle sur le passage",
+        "security": "Sécurité / Danger",
+        "passability": "Franchissabilité",
+        "slope": "Forte pente",
+        "width": "Largeur du trottoir",
+        "other": "Autre observation"
+      }
+}

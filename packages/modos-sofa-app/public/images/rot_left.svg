@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="48"
+   height="48"
+   viewBox="0 0 48 48"
+   fill="none"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="rot_left.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata12">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview8"
+     showgrid="false"
+     inkscape:zoom="5.5684705"
+     inkscape:cx="-26.647462"
+     inkscape:cy="38.138433"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <circle
+     cx="24"
+     cy="24"
+     r="24"
+     fill="white"
+     id="circle2"
+     style="fill:#ffffff" />
+  <path
+     style="fill:#826dae;fill-opacity:1;stroke-width:0.103533"
+     d="m 39.688964,37.500583 c -0.33711,-5.282661 -2.06413,-9.922666 -5.26969,-14.158149 -0.85652,-1.131708 -2.90399,-3.211625 -4.15729,-4.223163 -2.45985,-1.985346 -5.39472,-3.556766 -8.3589,-4.475596 l -0.90451,-0.28038 -0.0273,-3.37396 -0.0273,-3.3739599 -6.08814,5.6208299 c -3.348486,3.09146 -6.0739951,5.658965 -6.0566921,5.705569 0.0173,0.04661 2.7569711,2.496397 6.0881521,5.443985 l 6.05668,5.359241 0.0274,-3.123632 c 0.0151,-1.717998 0.0513,-3.123632 0.0806,-3.123632 0.0293,0 0.34002,0.144779 0.69056,0.321736 4.40566,2.223964 7.56215,6.098397 8.81626,10.821493 0.2288,0.861659 0.36848,1.740412 0.53685,3.377284 l 0.0612,0.595314 h 4.30153 4.30154 z"
+     id="path24" />
+</svg>

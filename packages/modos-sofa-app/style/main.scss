@@ -1,0 +1,713 @@
+$grid-columns: 15;
+
+body {
+    font-family: 'Gotham Pro';
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+p {
+    font-family: 'Gotham Pro';
+    font-weight: 100;
+    font-size: 1.2em;
+    text-align: left;
+    line-height: 1.4;
+    color: var(--primary-text-color);
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Gotham Pro Medium';
+    margin-bottom: 5px;
+    color: var(--primary-text-color);
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2.5em;
+}
+
+h3 {
+    font-size: 2em;
+}
+
+@media (min-width: 992px) {
+    h1 {
+        font-size: 2.8em;
+    }
+    h2 {
+        font-size: 2.8em;
+    }
+    h3 {
+        font-size: 1.8em;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+strong {
+    font-family: 'Gotham Pro Bold';
+}
+
+// BOOTSRAP OVERRIDE
+.btn_classic {
+    font-family: 'Gotham Pro Medium';
+    height: 60px;
+    border-radius: 0;
+}
+
+.background-impact--1 {
+    background-color: #e5e5e5;
+}
+
+.background-impact-0 {
+    background-color: #e5e5e5;
+}
+
+.background-impact-1 {
+    background-color: #b8fffb;
+}
+
+.background-impact-2 {
+    background-color: #fffcbc;
+}
+
+.background-impact-3 {
+    background-color: #ffdeb8;
+}
+
+.background-impact-4 {
+    background-color: #ffc6be;
+}
+
+.background-impact-5 {
+    background-color: #ff9b9b;
+}
+
+.impact-row {
+    height: 60px;
+}
+
+.impact-chooser-col {
+    border-color: white;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.impact-chooser-remove {
+    border-color: white;
+    border-width: 2px;
+    border-style: solid;
+    width: 60px;
+}
+
+.center {
+    text-align: center;
+}
+
+.impact-name {
+    font-size: 18px;
+    font-variant: small-caps;
+    font-weight: 400;
+}
+
+.impact-description {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.helper-name {
+    font-size: 18px;
+}
+
+.impact-radio {
+    height: 24px;
+    width: 24px;
+    margin-top: 15px;
+}
+
+input[type="radio"] {
+    width: 24px;
+    height: 24px;
+}
+
+.category-img{
+    float: left;
+}
+
+.category-name{
+    display: table-cell;
+    vertical-align: middle;
+    height: 55px;
+}
+
+.obstacle-img{
+    height: 450px;
+}
+
+.small-text {
+    font-size: 13px;
+    font-style: italic;
+    line-height: 15px;
+}
+
+.page-title{
+    font-size: 24px;
+    font-variant: small-caps;
+    font-weight: 400;
+}
+
+.progress-bar {
+    background: #2B9B56 !important;
+}
+
+.my-progress-bar {
+    background: #BBDFC9 !important;
+    width: 50%;
+    height: 24px;
+    margin-bottom: 20px;
+}
+
+.my-progress-bar span {
+    position: absolute;
+    display: block;
+    width: 50%;
+    color: white;
+    font-size: 18px;
+}
+
+.tooltip{
+    background: white !important;
+}
+
+.bottom-row{
+    margin-top: 20px;
+}
+
+
+
+  .loginFormTitle{
+    color: white;
+    text-transform: uppercase;
+    font-size: 24px;
+  }
+  
+  .loginFormSubtitle{
+    color: white;
+    font-size: 18px;
+  }
+
+  .loginBt {
+      width: 200px;
+      float: right;
+  }
+
+  button img{
+      padding-left: 15px;
+  }
+
+  .NoAccountBt{
+    width: 300px;
+  }
+
+  html{
+      height: 100%;
+  }
+  body{
+    height: 100%;
+  }
+
+  .fullheight {
+      height: 100%;
+  }
+
+  #__next{
+    height: 100%;
+  }
+
+  .layout {
+      height: 100%;
+  }
+
+  main{
+      height: 100%;
+  }
+
+.profilInfo{
+    height: 80px;
+    width: 400px;
+    position: absolute;
+    right: 40px;
+    top: 30px;
+}
+
+.dailyObj{
+    height: 210px;
+    width: 350px;
+    position: absolute;
+    right: 90px;
+    top: 140px;
+    background: #FFFFFF;
+    border-color: #826DAE;
+    border-style: solid;
+    border-width: 1px;
+    text-align: left;
+}
+
+.dailyObjHrTitle{
+    border-color: #826DAE;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+.dailyObjTitle{
+    font-size: 24px;
+    color: #826DAE;
+    padding-left: 10px;
+    font-weight: 600;
+}
+
+.dailyObjHrSeparator{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.profilUsername{
+    padding-left: 15px;
+    font-size: 24px;
+    font-weight: 600;
+    vertical-align: bottom;
+}
+
+.profilPts{
+    padding-left: 15px;
+    font-size: 36px;
+    font-weight: 600;
+    vertical-align: bottom;
+}
+
+.dailyObjName {
+    padding-left: 15px;
+    font-size: 18px;
+}
+
+.dailyObjVal{
+    font-size: 18px;
+    float: right;
+    padding-right: 15px;
+}
+
+.dailyObjDone{
+    color: #038600;
+}
+
+.contentMenu {
+    width: auto;
+    margin-left: 40px;
+    margin-right: 40px;
+    text-align: left;
+}
+
+.menuTitle {
+    color: #192145;
+    font-size: 24px;
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+.menuErr {
+    color: #BF0000;
+    font-size: 24px;
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+.menuCategory{
+    margin-top: 20px;
+    background: white;
+    border-color: #826DAE;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+}
+
+.menuCategoryTitle{
+    color: #192145;
+    font-size: 24px;
+    font-weight: 600;
+    height: 130px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.menuCategorySubtitle {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.myObservationsTitleDiv{
+    background: #826DAE66;
+}
+
+.myObservationsIconsDiv{
+    background: #FFFFFF;
+}
+
+.myObservations{
+    margin-top: 20px;
+}
+
+.okButton {
+    background: white;
+    border-color: black;
+    border-width: 1px;
+    color: black;
+}
+
+.okButton:hover {
+    background: white;
+    border-color: black;
+    border-width: 1px;
+    color: black;
+}
+.okButton:focus {
+    background: white;
+    border-color: black;
+    border-width: 1px;
+    color: black;
+}
+
+.nokButton {
+    background: white;
+    border-color: black;
+    border-width: 1px;
+    color: black;
+}
+
+.nokButton:hover {
+    background: white;
+    border-color: black;
+    border-width: 1px;
+    color: black;
+}
+
+.nokButton:focus {
+    background: white;
+    border-color: black;
+    border-width: 1px;
+    color: black;
+}
+
+.buttonNotKnow{
+    background: white;
+    border-color: black;
+    border-width: 1px;
+    color: black;
+}
+
+.buttonNotKnow:hover{
+    background: white;
+    border-color: black;
+    border-width: 1px;
+    color: black;
+}
+
+.buttonNotKnow:focus{
+    background: white;
+    border-color: black;
+    border-width: 1px;
+    color: black;
+}
+
+.okButtonChecked {
+    background: #024700;
+    border-color: #024700;
+    border-width: 1px;
+    color: white;
+}
+
+.okButtonChecked:hover {
+    background: #024700;
+    border-color: #024700;
+    border-width: 1px;
+    color: white;
+}
+.okButtonChecked:focus {
+    background: #024700;
+    border-color: #024700;
+    border-width: 1px;
+    color: white;
+}
+
+.nokButtonChecked {
+    background: #BF0000;
+    border-color: #BF0000;
+    border-width: 1px;
+    color: white;
+}
+
+.nokButtonChecked:hover{
+    background: #BF0000;
+    border-color: #BF0000;
+    border-width: 1px;
+    color: white;
+}
+
+.nokButtonChecked:focus{
+    background: #BF0000;
+    border-color: #BF0000;
+    border-width: 1px;
+    color: white;
+}
+
+.tooltipimg{
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.purpleBackground{
+    background-color: #826DAE;
+    color: white;
+}
+
+.whiteTitle{
+    font-size: 24px;
+    color: white;
+}
+
+.categoryChooserBt {
+    height: 200px;
+}
+
+.selectedCategoryChooserBt{
+    background-color: #826DAE !important;
+    color: white !important;
+}
+
+.red{
+    color:red;
+}
+
+.textAreaFreeText{
+    width: 100%;
+    height: 174px;
+}
+
+.backLabelBt{
+    margin-top: 135px;
+}
+
+.modal-90w{
+    width: 90%;
+    max-width: none !important;
+}
+
+.row {
+    min-height: 24px;
+}
+
+.whitebg-button{
+    background-color: white;
+}
+
+.whitebg-button:hover{
+    background-color: #826DAE;
+    border-color: white;
+    color: white;
+}
+.whitebg-button:focus{
+    background-color: #826DAE;
+    border-color: white;
+    color:white;
+}
+.whitebg-button:active{
+    background-color: #826DAE;
+    border-color: white;
+    color:white;
+}
+
+
+.max700{
+    width: 750px;
+    height: 750px;
+    min-width: 750px;
+    min-height: 750px;
+}
+
+.modalImg{
+    max-width: 700px;
+    max-height: 700px;
+}
+
+.rotate0 {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
+.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.rotate180 {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.rotate270 {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+.centerImage{
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.cursorPointer{
+    cursor: pointer;
+}
+
+.btn_location {
+        display: inline-block;
+        font-weight: 400;
+        color: #606fc7;
+        border-color: #606fc7;
+        text-align: center;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-color: transparent;
+        border: 1px solid transparent;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: .25rem;
+        -moz-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+.blueLeft{
+    border-left-color: blue;
+}
+
+.redLeft{
+    border-left-color: red;
+}
+
+.itinaryDetails{
+    width: 100%;
+    border-width: 1px 1px 1px 10px;
+    border-style: solid;
+    cursor:pointer;
+    height: 50px;
+    margin: 10px 10px 10px 0;
+    padding: 10px;
+}
+
+.itinaryDetails:hover{
+    background-color: grey;
+}
+
+.purpleBorder{
+    border-color: #826DAE ;
+    border-style: solid;
+    border-width: 20px;
+}
+
+.transparentBorder{
+    border-color: #826DAE00 ;
+    border-style: solid;
+    border-width: 20px;
+}
+
+.btn-outline-primary{
+    background-color: white;
+}
+
+.btn-outline-primary:hover{
+    border-color: white;
+}
+
+.btn-primary{
+    border-color: #624d8f !important;
+}
+
+.obstacleName{
+    font-size: 24px;
+}
+
+.full_img{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 30px;
+    left: 200px;
+}
+
+.full_img_landscape{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 120px;
+    left: 290px;
+}
+
+.rot_left{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 380px;
+    left: 30px;
+}
+
+.rot_left_landscape{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 290px;
+    left: -60px;
+}
+
+.rot_right{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 380px;
+    left: 200px;
+}
+
+.rot_right_landscape{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 290px;
+    left: 290px;
+}
