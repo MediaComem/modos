@@ -251,6 +251,7 @@ export class ObservationController {
     });
 
     public getObstaclesToLabelise = createAsyncRoute(async (req, res) => {
+        var nb = Number(req.params.nb);
         const observations = await getRepository(Observation)
             .createQueryBuilder("o")
             .addSelect("COUNT(l.id) labelisation_nb")
@@ -258,7 +259,7 @@ export class ObservationController {
             .where('(SELECT COUNT(l2.id) FROM "observation_labelisation" l2 WHERE l2."observationId"=o.id AND l2."ownerId"=' + req.body.userId + ' )=0')
             .groupBy("o.id")
             .orderBy("labelisation_nb")
-            .limit(10)
+            .limit(nb)
             .getMany();
         return res.status(200).json(observations)
     });

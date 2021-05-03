@@ -28,9 +28,129 @@ export class ChangesForSofaApp1609326210483 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "modos"."connection_log" ADD CONSTRAINT "FK_d78cc8526375ec2aec7fb893278" FOREIGN KEY ("userId") REFERENCES "modos"."user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "sofa_profile" ADD "disabledProfilesMask" integer NOT NULL DEFAULT 1`);
         await queryRunner.query(`ALTER TABLE "sofa_profile" ADD "hidePassModal" boolean NOT NULL DEFAULT false`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_nohelper1" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_nohelper2" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_nohelper3" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_nohelper4" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_nohelper5" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_cane1" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_cane2" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_cane3" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_cane4" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_cane5" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_walker1" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_walker2" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_walker3" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_walker4" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_walker5" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_wheelchair1" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_wheelchair2" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_wheelchair3" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_wheelchair4" REAL NOT NULL DEFAULT 1.0`);
+        await queryRunner.query(`ALTER TABLE "edges" ADD "nb_wheelchair5" REAL NOT NULL DEFAULT 1.0`);
+
+        await queryRunner.query(`
+            CREATE OR REPLACE FUNCTION "modos"."mds_simple_mobility_routing"(
+                    IN source TEXT,
+                    IN target TEXT,
+                    IN uw FLOAT4[],
+                    OUT seq INTEGER,
+                    OUT gid BIGINT,
+                    OUT name TEXT,
+                    OUT cost FLOAT,
+                    OUT azimuth FLOAT,
+                    OUT route_readable TEXT,
+                    OUT route_geom GEOMETRY
+                )
+                RETURNS SETOF record AS
+            $BODY$
+                WITH
+                dijkstra AS (
+                    SELECT * FROM pgr_dijkstra(
+                        FORMAT('SELECT
+                        id AS id,
+                        "source"::bigint as source,
+                        "target"::bigint as target,
+                        (length+
+                        %s*(%s*nb_nohelper1+%s*nb_nohelper2+%s*nb_nohelper3+%s*nb_nohelper4+%s*nb_nohelper5)+
+                        %s*(%s*nb_cane1+%s*nb_cane2+%s*nb_cane3+%s*nb_cane4+%s*nb_cane5)+
+                        %s*(%s*nb_walker1+%s*nb_walker2+%s*nb_walker3+%s*nb_walker4+%s*nb_walker5)+
+                        %s*(%s*nb_wheelchair1+%s*nb_wheelchair2+%s*nb_wheelchair3+%s*nb_wheelchair4+%s*nb_wheelchair5)
+                        )::float4 as cost
+                        FROM "modos"."edges"',
+                        $3[1],$3[5],$3[6],$3[7],$3[8],$3[9],
+                        $3[2],$3[5],$3[6],$3[7],$3[8],$3[9],
+                        $3[3],$3[5],$3[6],$3[7],$3[8],$3[9],
+                        $3[4],$3[5],$3[6],$3[7],$3[8],$3[9]),
+                        (
+                        SELECT osmid
+                        FROM "modos"."nodes"
+                        ORDER BY
+                            ST_Distance(
+                                ST_Transform(geom, 2056),
+                                ST_Transform(ST_GeomFromText($1, 4326), 2056)
+                            ) ASC
+                        LIMIT 1
+                        ),
+                        (
+                        SELECT osmid
+                        FROM "modos"."nodes"
+                        ORDER BY
+                            ST_Distance(
+                                ST_Transform(geom, 2056),
+                                ST_Transform(ST_GeomFromText($2, 4326), 2056)
+                            ) ASC
+                        LIMIT 1
+                        ),
+                        directed:=false)
+                ),
+                get_geom AS (
+                    SELECT dijkstra.*, modos.edges.name,
+                        CASE
+                            WHEN dijkstra.node = modos.edges.source::bigint THEN geom
+                            ELSE ST_Reverse(geom)
+                        END AS route_geom
+                    FROM dijkstra JOIN modos.edges ON (edge = id)
+                    ORDER BY seq
+                )
+                SELECT
+                    seq,
+                    edge,
+                    name,
+                    cost,
+                    degrees(ST_azimuth(ST_StartPoint(route_geom), ST_EndPoint(route_geom)))
+                    AS azimuth,
+                    ST_AsText(route_geom),
+                    route_geom
+                FROM get_geom
+                ORDER BY seq;
+            $BODY$
+            LANGUAGE 'sql';
+        `, undefined);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`DROP FUNCTION IF EXISTS mds_simple_mobility_routing(text, text, float4[]);`, undefined);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_nohelper1"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_nohelper2"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_nohelper3"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_nohelper4"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_nohelper5"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_cane1"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_cane2"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_cane3"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_cane4"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_cane5"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_walker1"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_walker2"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_walker3"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_walker4"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_walker5"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_wheelchair1"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_wheelchair2"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_wheelchair3"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_wheelchair4"`);
+        await queryRunner.query(`ALTER TABLE "edges" DROP COLUMN "nb_wheelchair5"`);
         await queryRunner.query(`ALTER TABLE "sofa_profile" DROP COLUMN "hidePassModal"`);
         await queryRunner.query(`ALTER TABLE "sofa_profile" DROP COLUMN "disabledProfilesMask"`);
         await queryRunner.query(`ALTER TABLE "modos"."connection_log" DROP CONSTRAINT "FK_d78cc8526375ec2aec7fb893278"`);
@@ -55,6 +175,6 @@ export class ChangesForSofaApp1609326210483 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE "sofa_profile"`);
         await queryRunner.query(`DROP TYPE "sofa_profile_agerange_enum"`);
         await queryRunner.query(`DROP TYPE "sofa_profile_helper_enum"`);
-    }
 
+    }
 }

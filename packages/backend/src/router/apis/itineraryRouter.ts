@@ -5,3 +5,4 @@ import { itineraryController } from "../../controller";
 export const itineraryRouter = express.Router();
 
 itineraryRouter.get('/simple', itineraryController.getSimpleItinerary);
+itineraryRouter.get('/simpleProfile', itineraryController.getItineraryForProfile);

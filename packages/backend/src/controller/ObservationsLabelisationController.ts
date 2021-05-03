@@ -34,16 +34,52 @@ export class ObservationLabelisationController {
         labelisation.createdAt = new Date();
         labelisation.freeText = req.body.freeText;
 
-        const observation = await manager.findOne(Observation, req.body.observation);
-        if (!observation) return sendError(res, 404, OBSERVATION404);
-        labelisation.observation = observation;
+        if("observation" in req.body){
+            const observation = await manager.findOne(Observation, req.body.observation);
+            if (!observation) return sendError(res, 404, OBSERVATION404);
+            labelisation.observation = observation;
 
-        await validate(labelisation);
-        await manager.insert(ObservationLabelisation, labelisation);
-        await dailyChallengeController.incChallenges(req.body.userId, ChallengeType.LABELISATION);
-        return res.status(201)
-            .location(`api/v1/labelisations/${labelisation.id}`)
-            .json(labelisation);
+            await validate(labelisation);
+            await manager.insert(ObservationLabelisation, labelisation);
+            await dailyChallengeController.incChallenges(req.body.userId, ChallengeType.LABELISATION);
+            return res.status(201)
+                .location(`api/v1/labelisations/${labelisation.id}`)
+                .json(labelisation);
+        }else{
+            var results = []
+            if(req.body.observation1>0){
+                const observation = await manager.findOne(Observation, req.body.observation1);
+                if (!observation) return sendError(res, 404, OBSERVATION404);
+                labelisation.observation = observation;
+
+                await validate(labelisation);
+                await manager.insert(ObservationLabelisation, labelisation);
+                await dailyChallengeController.incChallenges(req.body.userId, ChallengeType.LABELISATION);
+                results.push(labelisation);
+            }
+            if(req.body.observation2>0){
+                const observation = await manager.findOne(Observation, req.body.observation2);
+                if (!observation) return sendError(res, 404, OBSERVATION404);
+                labelisation.observation = observation;
+
+                await validate(labelisation);
+                await manager.insert(ObservationLabelisation, labelisation);
+                await dailyChallengeController.incChallenges(req.body.userId, ChallengeType.LABELISATION);
+                results.push(labelisation);
+            }
+            if(req.body.observation3>0){
+                const observation = await manager.findOne(Observation, req.body.observation3);
+                if (!observation) return sendError(res, 404, OBSERVATION404);
+                labelisation.observation = observation;
+
+                await validate(labelisation);
+                await manager.insert(ObservationLabelisation, labelisation);
+                await dailyChallengeController.incChallenges(req.body.userId, ChallengeType.LABELISATION);
+                results.push(labelisation);
+            }
+
+            return res.status(201).location(`api/v1/labelisations/`).json(results);
+        }
     });
 
     public deleteLabelisation = createAsyncRoute(async (req, res) => {

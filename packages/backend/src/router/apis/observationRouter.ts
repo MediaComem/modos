@@ -24,7 +24,7 @@ observationRouter.get(
 
 observationRouter.get('/to_evaluate',authenticateUser, observationController.getObstaclesToEvaluate);
 observationRouter.get('/to_validate',authenticateUser, observationController.getObstaclesToValidate);
-observationRouter.get('/to_labelise',authenticateUser, observationController.getObstaclesToLabelise);
+observationRouter.get('/to_labelise/:nb',authenticateUser, observationController.getObstaclesToLabelise);
 observationRouter.get('/:id', observationController.getObservationById);
 
 observationRouter.get('/:id/evaluations', authenticateUser, observationController.getEvaluations);
