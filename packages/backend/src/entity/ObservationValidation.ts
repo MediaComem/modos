@@ -24,9 +24,9 @@ export class ObservationValidation {
     oldWeight: number;
 
     @Column()
+    @IsInt()
     @Min(-1)
     @Max(5)
-    @IsPositive()
     newWeight: number;
 
     @Column("bool")
