@@ -7,7 +7,7 @@ const ModosFootpathLayer = () => {
   useEffect(() => {
     const cartoClient = new carto.Client({
       apiKey: 'default_public',
-      username: 'verdonarthur'
+      username: 'media-engineering'
     });
     const modosWalknetSource = new carto.source.SQL(
       'SELECT * FROM modos_walknet'
