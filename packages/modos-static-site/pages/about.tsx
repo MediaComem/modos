@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable jsx-quotes */
 /* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable max-lines-per-function */
 import React from 'react';
@@ -16,6 +18,7 @@ import { NextSeo } from 'next-seo';
 
 const About = () => {
   const i18n = useI18N('about');
+  const i18nG = useI18N('global');
 
   const SLIDER_TECH_SCHEM: ISliderItemModos[] = [
     {
@@ -141,8 +144,56 @@ const About = () => {
       </ContainerWithMargin>
 
       <ContainerWithMargin
+        id={styles['about-publications']}
+        className={styles.section}>
+        <h2 id='about-publications' className={styles['about-publications']}>{i18n('publications-title-1')}</h2>
+        <h3>Smart Data Smart Cities (SDSC) 2021</h3>
+        <p>Citizen participation & digital tools to improve pedestrian mobility in cities -
+           Ertz, O., Sandoz, R. : 6th international Conference on Smart Data and Smart Cities (SDSC´21),
+           September 15-17 2021, Stuttgart, Germany</p>
+        <p><a href="/documents/20210917_modos_SDSC-OEZ_EN.pdf" target="_blank" rel="noreferrer">{i18nG('link-open-presentation')}</a></p>
+        <p>Ertz, O., Fischer, A., Ghorbel, H., Hüsser, O., Sandoz, R., and Scius-Bertrand, A.: CITIZEN PARTICIPATION & DIGITAL TOOLS TO IMPROVE PEDESTRIAN MOBILITY IN CITIES, Int. Arch. Photogramm. Remote Sens. Spatial Inf. Sci., XLVI-4/W1-2021, 29–34, <a href='https://doi.org/10.5194/isprs-archives-XLVI-4-W1-2021-29-2021' target='_blank' rel='noreferrer'>https://doi.org/10.5194/isprs-archives-XLVI-4-W1-2021-29-2021</a>, 2021.</p>
+        <h3>5th International Conference on Urban e-Planning</h3>
+        <p>The modos project - A framework to assess Soft Mobility of the Elders -
+         Blanc, N. : 5th International Conference “Urban e-Planning”, 2021.09.10,
+           Online conference, Institute of Geography and Spatial Planning, University of Lisbon, Portugal</p>
+        <p><a href="/documents/20210910_modos_IJEPR_presented.pdf" target="_blank" rel="noreferrer">{i18nG('link-open-presentation')}</a></p>
+        <h3>Journée Romande de la géoinformation 2021</h3>
+        <p>Projet modos - mobilité douce pour les séniors - Participation citoyenne et outils numériques pour améliorer la
+          mobilité piétonne dans les villes - Ertz, O., Sandoz, R., JRG2021, 2021.11.23, Lausanne, Switzerland</p>
+        <p><a href="/documents/JRG2021_SessionF_Ertz.pdf" target="_blank" rel="noreferrer">{i18nG('link-open-presentation')}</a></p>
+        <h3>Citizen Science Helvetia 21</h3>
+        <p>Workshop – Outils de crowdsourcing pour améliorer la mobilité douce des villes - Ertz, O., Sandoz, R., CitSciHelvetia 2021,
+           Online conference, 2021.01.15</p>
+        <h3>Semaine de la mobilité du Senior-lab</h3>
+        <p>Projet modos - Sandoz., R., Semaine de la mobilité du Senior-lab, 2021.09.17, Lausanne, Switzerland</p>
+        <p><a href="https://senior-lab.ch/2019/09/09/mobilite-douce-des-seniors-modos-une-premiere-etape-reussie/" target="_blank" rel="noreferrer">{i18n('publications-external-link-SeniorLab1')}</a></p>
+        <p><a href="https://www.youtube.com/watch?v=sr899DE2UWE" target="_blank" rel="noreferrer" >{i18n('publications-external-link-SeniorLab2')}</a></p>
+
+        <h2 className={styles['about-publications']}>{i18n('publications-title-3')}</h2>
+        <h3>ça roule ! TCS - Février 2022</h3>
+        <p><a href="https://issuu.com/tcsvaud/docs/0322_vd_high/8" target="_blank" rel="noreferrer">{i18nG('link-open-article')}</a></p>
+
+        <h2 className={styles['about-publications']}>{i18n('publications-title-2')}</h2>
+        <h3>Label "Qualité de la vie" de la fondation Dalle Molle 2021</h3>
+        <div className={styles['about-logo']}>
+          <a href="https://dallemolle.ch" target="_blank" rel="noreferrer">
+            <img
+              className='lazyload'
+              data-src={require('../images/DalleMolle-logo.png')}
+              alt='Logo Dalle Molle'
+            />
+          </a>
+        </div>
+        <p><a href="https://dallemolle.ch/concours-2021/" target="_blank" rel="noreferrer">{i18n('publications-external-link-DalleMolle1')}</a></p>
+        <p><a href="https://portal.klewel.com/watch/webcast/dalle-molle-ceremonie-de-remise-des-prix-2021/talk/X3bpuWWnbkgjWRo9QGmT7E/" target="_blank" rel="noreferrer">{i18n('publications-external-link-DalleMolle2')}</a></p>
+      </ContainerWithMargin>
+
+      <ContainerWithMargin
         id={styles['about-codac']}
         className={styles.section}>
+        <h2>Une approche globale et interdisciplinaire</h2>
+        <br></br>
         <p>{i18n('codac-intro')}</p>
 
         <div className={styles['about-universities']}>
@@ -169,7 +220,8 @@ const About = () => {
           </a>
         </div>
 
-        <h2>{i18n('codac-title')}</h2>
+        <h3>{i18n('codac-title')}</h3>
+        <br></br>
         <p>{i18n('codac-descr')}</p>
         <div className={styles['about-members']}>
           {MEMBERS.map((member, index) => (

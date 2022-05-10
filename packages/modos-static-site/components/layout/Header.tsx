@@ -30,7 +30,7 @@ export const Header = (props: IProps) => {
   return (
     <>
       <Head>
-        <title>MoDos</title>
+        <title>modos</title>
         <link rel='icon' href='/favicon.ico' />
 
         <link
@@ -46,7 +46,9 @@ export const Header = (props: IProps) => {
         </div>
 
         <div className={styles.logo}>
-          <SVGLogo />
+          <a href='/'>
+            <SVGLogo />
+          </a>
         </div>
 
         <div className={styles.language}></div>

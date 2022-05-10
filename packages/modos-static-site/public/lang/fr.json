@@ -14,14 +14,15 @@
     "follow-us": "Follow us on Social Network",
     "partners": "Our Partners",
     "contact": "Contact",
-    "moreinfo": "Besoin d'informations supplémentaires ?",
+    "moreinfo": "Vous désirez contribuer ou collaborer ? Besoin d'informations supplémentaires ?",
     "takecontact": "Je prends contact"
   },
   "homepage": {
     "title": "Améliorer la mobilité douce des seniors au quotidien",
     "project-title": "Projet modos",
     "project-description": "Comment améliorer la mobilité piétonne des villes ? Comment la rendre plus facile et agréable pour tous dans ses déplacements quotidiens ? Comment prendre en compte les contraintes et capacités de chacun, mais aussi les contraintes imposées par l'espace public.\n\nCombinant **innovation technologique et sociale**, le projet de recherche **modos** combine participation citoyenne, géoinformation et apprentissage automatique pour faire avancer l'état de l'art sur ces questions.\n\nL'objectif est d'expérimenter une combinaison d'outils pour cartographier les entraves à la mobilité piétonne et offrir une planification d'itinéraires sur mesure.\n\nLa solution proposée est une plateforme autant au bénéfice des seniors, cible première du projet, que toute personne contrainte d’une manière ou d’une autre dans sa mobilité piétonne. Si cette solution doit permettre de contourner les difficultés, l'**approche participative** offre aussi aux décideurs (ex. communes) un outil pour améliorer l'aménagement urbain grâce à des données de terrain produites par les citoyennes et citoyens.",
-    "project-link-descr": "Voir la page du projet",
+    "project-link-descr": "En savoir plus sur le projet",
+    "project-link-publications":"Publications & Conférences",
 
     "discover-map": "découvrir la carte",
 
@@ -58,11 +59,17 @@
     "competence-ux": "User-centered design",
     "competence-geoinf": "Geoinformatics",
 
+    "publications-title-1":"Publications & conférences",
+    "publications-title-2":"Récompenses",
+    "publications-title-3":"Médias & presse",
+    "publications-external-link-DalleMolle1":"Site web Dalle Molle - Concours 2021",
+    "publications-external-link-DalleMolle2":"Voir la présentation lors de la remise des prix",
+    "publications-external-link-SeniorLab1":"Article du Senior-lab",
+    "publications-external-link-SeniorLab2":"Voir la vidéo de présentation",
+  
     "codac-intro": "Le projet de recherche MoDoS (mobilité douce des seniors), financé par la HES-SO, regroupe des chercheurs de la HEIG-VD (Yverdon-les-Bains), de la HE-Arc (Neuchâtel) et de la EIA-FR (Fribourg), en ingénierie informatique, ingénierie des médias numériques et ingénierie du territoire, lui conférant un fort caractère interdisciplinaire.",
     "codac-title": "Comité d’accompagnement (CODAC)",
-    "codac-descr": "",
-
-    "publication-title": "Publications et conférences"
+    "codac-descr": "Avec l'aide d'un comité d'accompagnement composé de spécialistes du terrain et d'usagers impactés par la problématique, le projet adopte une approche centrée sur les utilisateurs et utilisatrices. Leur accompagnement est précieux pour comprendre la réalité du terrain et pouvoir y répondre de manière adaptée et cohérente. Merci pour leur soutien et leur disponibilité !"
   },
   "map": {
     "coating": "Problème de revêtement",
@@ -72,5 +79,11 @@
     "slope": "Forte pente",
     "width": "Largeur du trottoir",
     "other": "Autre observation"
+  },
+  "global":{
+    "link-open-presentation":"Voir la présentation",
+    "link-open-website":"Voir le site web",
+    "link-open-publication":"Voir la publication",
+    "link-open-article":"Lire l'article"
   }
 }

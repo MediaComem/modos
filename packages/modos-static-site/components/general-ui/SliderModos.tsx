@@ -22,16 +22,6 @@ export const SliderModosContainer = (props: IProps) => {
 
   return (
     <div className={`${props.className}`} id={props.id}>
-      <div className='custom-carousel-indicators'>
-        {props.items.map((card, index) =>
-          <a key={index} onClick={() => setSliderActiveIndex(index)}>
-            <div
-              className={`custom-carousel-indicator ${
-                sliderActiveIndex === index ? 'active' : ''
-              }`}
-            ></div>
-          </a>)}
-      </div>
 
       <Carousel
         className={props.carouselClassName}
@@ -57,7 +47,16 @@ export const SliderModosContainer = (props: IProps) => {
           </Carousel.Item>)}
       </Carousel>
 
-
+      <div className='custom-carousel-indicators'>
+        {props.items.map((card, index) =>
+          <a key={index} onClick={() => setSliderActiveIndex(index)}>
+            <div
+              className={`custom-carousel-indicator ${
+                sliderActiveIndex === index ? 'active' : ''
+              }`}
+            ></div>
+          </a>)}
+      </div>
       <style jsx>{`
         .custom-carousel-indicators {
           display: flex;

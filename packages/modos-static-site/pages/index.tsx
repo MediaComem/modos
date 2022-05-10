@@ -66,7 +66,7 @@ const Home = () => {
         canonical='https://modos.heig-vd.ch'
         openGraph={{
           url: 'https://modos.heig-vd.ch',
-          title: 'MoDos homepage',
+          title: 'modos homepage',
           description: 'Améliorer la mobilité douce des seniors au quotidien'
         }}
       />
@@ -86,8 +86,13 @@ const Home = () => {
         <h2>{i18n('project-title')}</h2>
         <ReactMarkdown>{i18n('project-description')}</ReactMarkdown>
         <Link href='/about'>
-          <Button id={styles['project-link']} className={styles['btn-primary']}>
+          <Button id={styles['project-link']} className={styles['btn-secondary']}>
             {i18n('project-link-descr')}
+          </Button>
+        </Link>
+        <Link href='/about#about-publications'>
+          <Button id={styles['project-link']} className={styles['btn-secondary-neg']}>
+            {i18n('project-link-publications')}
           </Button>
         </Link>
       </ContainerWithMargin>
@@ -119,7 +124,7 @@ const Home = () => {
         <Row className={styles['contribute-desktop-flow']}>
           <img
             className='lazyload'
-            alt='Schema describing how MoDos work'
+            alt='Schema describing how modos work'
             data-src={require('../images/desktop/home-schema-desktop.png')}></img>
           <div>
             <p>{i18n('contribute-schema-1')}</p>

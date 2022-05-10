@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps, router }) {
     return (
       <>
         <Head>
-          <title>MoDos</title>
+          <title>modos</title>
           <link rel='icon' href='/favicon.ico' />
           <link
             href='https://fonts.googleapis.com/icon?family=Material+Icons'
@@ -29,12 +29,12 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <>
       <DefaultSeo
-        titleTemplate='MoDos | %s'
+        titleTemplate='modos | %s'
         openGraph={{
           type: 'website',
           locale: 'fr_CH',
           url: 'https://www.modos.heig-vd.ch/',
-          site_name: 'MoDos'
+          site_name: 'modos'
         }}
       />
 

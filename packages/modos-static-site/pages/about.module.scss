@@ -44,11 +44,20 @@
 
 }
 
-.about-conception-img-mobile {
+#about-publications {
+  background-color: var(--secondary-bg-color);
 }
 
+.about-publications {
+  margin-bottom:20px!important;
+  margin-top:60px!important;
+}
+
+.about-logo{
+  max-width: 400px;
+}
 #about-codac {
-  background-color: var(--secondary-bg-color);
+  background-color: var(--primary-bg-color);
   
   .about-universities {
     display:flex;

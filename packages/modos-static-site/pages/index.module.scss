@@ -137,6 +137,35 @@
   border-color: var(--primary-btn-color);
 }
 
+.btn-primary:hover {
+  background-color: var(--primary-btn-color-hover)!important;
+  border-color: var(--primary-btn-color)!important;
+}
+
+.btn-secondary {
+  text-transform: uppercase;
+  background-color: var(--secondary-btn-color)!important;
+  border-color: var(--secondary-btn-color);  
+}
+
+.btn-secondary:hover{
+  background-color:var(--secondary-btn-color-hover)!important;
+  border-color:var(--secondary-btn-color)!important;
+}
+
+.btn-secondary-neg {
+  text-transform: uppercase;
+  background-color: var(--secondary-bg-color)!important;
+  border-color: var(--secondary-btn-color);  
+  color:var(--secondary-btn-color);
+}
+
+.btn-secondary-neg:hover{
+  background-color:var(--secondary-btn-color-hover)!important;
+  border-color:var(--secondary-btn-color)!important;
+}
+
+
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
   #homepage-title {
